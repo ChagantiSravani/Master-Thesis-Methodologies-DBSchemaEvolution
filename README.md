@@ -4,11 +4,12 @@ This repository outlines an empirical study focused on methodologies for the evo
 
 
 *Note:* 
-- After cloning the [project repositories](#clone), we can proceed to build and run the Docker container(as described in the __Instructions to run the project in docker container__ section). The container will navigate to Jupyter Notebook, where all the required files for analysis are available (__Code, Datasets, MySQLDiff__). No other external resources are necessary.
 
-- After cloning the [project repositories](#clone), If we want to reproduce the database migration files and apply mysqldiff tool follow [Generate Database Migration Files and Apply mysqldiff Tool](#generate-database-migration-files-and-apply-mysqldiff-tool) section.  
+- After cloning the project repositories, we can proceed to build and run the Docker container(as described in the __Instructions to run the project in docker container__ section). The container will navigate to Jupyter Notebook, where all the required files for analysis are available (__Code, Datasets, MySQLDiff__). No other external resources are necessary.
 
-## Clone the repository {#clone}
+- After cloning the project repositories, If we want to reproduce the database migration files and apply mysqldiff tool follow __Generate Database Migration Files and Apply mysqldiff Tool__ section.  
+
+## Clone the repositories 
 
         git clone https://github.com/ChagantiSravani/Master-Thesis-Methodologies-DBSchemaEvolution.git
 
@@ -28,7 +29,7 @@ This repository outlines an empirical study focused on methodologies for the evo
 - requirement.txt contains list of libraries used for this project.
 - Before runing the notebook please run "pip install -r requirements.txt" to install the required libraries.
 
-## Instructions to run the project in docker container {#docker-instructions}
+## Instructions to run the project in docker container 
 - Before running the Dockerfile, please ensure that you have copied the required folders (Code, Datasets, and MySQLDiff) and the file (dockerfile_jupyternotebook) locally. 
 
 - Dockerfile Containes:
@@ -96,7 +97,7 @@ http://127.0.0.1:8888/tree?token=d55bb824067c491aacce23ec58ce544877dbefbc910c322
         Code  Datasets  MySQLDiff
 
 
-## Generate Database Migration Files and Apply mysqldiff Tool {#Generate_Database_Migration_Files}
+## Generate Database Migration Files and Apply mysqldiff Tool 
 
 - __Step 1:__  First, upload the initial migration file into the database, and then apply the patch files. Each patch file corresponds to a SQL dump file, which serves as the migration file. For more details, refer to the documentation in the [README.md](https://github.com/ChagantiSravani/Master-Thesis-Methodologies-DBSchemaEvolution/blob/master/MySQLDiff/Database_Migration_Files/Generate_Migration_Files/README.md) file. 
 
@@ -104,7 +105,7 @@ http://127.0.0.1:8888/tree?token=d55bb824067c491aacce23ec58ce544877dbefbc910c322
 - __Step 2:__ Using the mysqldiff tool to compare the migration files and generate output in TXT and CSV formats (__MySQLDiff/Database_Migration_Files/Docker_Mysqldiff/{projectname}/Output__). Refer to the details in [README.md](https://github.com/ChagantiSravani/Master-Thesis-Methodologies-DBSchemaEvolution/blob/master/MySQLDiff/Database_Migration_Files/Docker_Mysqldiff/README.md) file.
 
 
-- __Step 3:__  Finally, we analyze the similarities and differences between patch files and migration files in the __Code__ folder. To run the code, follow the procedure [Instructions to run the project in docker container](#docker-instructions) section.
+- __Step 3:__  Finally, we analyze the similarities and differences between patch files and migration files in the __Code__ folder. To run the code, follow the procedure __Instructions to run the project in docker container__ section.
 
 
 
