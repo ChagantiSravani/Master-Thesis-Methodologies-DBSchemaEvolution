@@ -1,0 +1,370 @@
+Diff between Roundcube/Input/roundcubemail-1.0-beta-mysql.initial_mod.sql and Roundcube/Input/roundcubemail-1.0-rc-mysql.initial_mod.sql:
+
+Diff between Roundcube/Input/roundcubemail-1.0-rc-mysql.initial_mod.sql and Roundcube/Input/roundcubemail-1.0.0-mysql.initial_mod.sql:
+
+Diff between Roundcube/Input/roundcubemail-1.0.0-mysql.initial_mod.sql and Roundcube/Input/roundcubemail-1.0.1-mysql.initial_mod.sql:
+## mysqldiff 0.60
+## 
+## Run on Sat Jun  3 19:40:20 2023
+## Options: user=root, port=3306, ignore_tables=(?^:^schema_migrations$), password=, host=localhost
+##
+## --- file: Roundcube/Input/roundcubemail-1.0.0-mysql.initial_mod.sql
+## +++ file: Roundcube/Input/roundcubemail-1.0.1-mysql.initial_mod.sql
+
+ALTER TABLE users CHANGE COLUMN preferences preferences longtext; # was text
+
+Diff between Roundcube/Input/roundcubemail-1.0.1-mysql.initial_mod.sql and Roundcube/Input/roundcubemail-1.0.2-mysql.initial_mod.sql:
+
+Diff between Roundcube/Input/roundcubemail-1.0.2-mysql.initial_mod.sql and Roundcube/Input/roundcubemail-1.0.3-mysql.initial_mod.sql:
+
+Diff between Roundcube/Input/roundcubemail-1.0.3-mysql.initial_mod.sql and Roundcube/Input/roundcubemail-1.0.4-mysql.initial_mod.sql:
+
+Diff between Roundcube/Input/roundcubemail-1.0.4-mysql.initial_mod.sql and Roundcube/Input/roundcubemail-1.0.5-mysql.initial_mod.sql:
+
+Diff between Roundcube/Input/roundcubemail-1.0.5-mysql.initial_mod.sql and Roundcube/Input/roundcubemail-1.0.6-mysql.initial_mod.sql:
+
+Diff between Roundcube/Input/roundcubemail-1.0.6-mysql.initial_mod.sql and Roundcube/Input/roundcubemail-1.0.7-mysql.initial_mod.sql:
+
+Diff between Roundcube/Input/roundcubemail-1.0.7-mysql.initial_mod.sql and Roundcube/Input/roundcubemail-1.0.8-mysql.initial_mod.sql:
+
+Diff between Roundcube/Input/roundcubemail-1.0.8-mysql.initial_mod.sql and Roundcube/Input/roundcubemail-1.0.9-mysql.initial_mod.sql:
+
+Diff between Roundcube/Input/roundcubemail-1.0.9-mysql.initial_mod.sql and Roundcube/Input/roundcubemail-1.0.10-mysql.initial_mod.sql:
+
+Diff between Roundcube/Input/roundcubemail-1.0.10-mysql.initial_mod.sql and Roundcube/Input/roundcubemail-1.0.11-mysql.initial_mod.sql:
+
+Diff between Roundcube/Input/roundcubemail-1.0.11-mysql.initial_mod.sql and Roundcube/Input/roundcubemail-1.0.12-mysql.initial_mod.sql:
+
+Diff between Roundcube/Input/roundcubemail-1.0.12-mysql.initial_mod.sql and Roundcube/Input/roundcubemail-1.1-beta-mysql.initial_mod.sql:
+
+Diff between Roundcube/Input/roundcubemail-1.1-beta-mysql.initial_mod.sql and Roundcube/Input/roundcubemail-1.1-rc-mysql.initial_mod.sql:
+
+Diff between Roundcube/Input/roundcubemail-1.1-rc-mysql.initial_mod.sql and Roundcube/Input/roundcubemail-1.1.0-mysql.initial_mod.sql:
+
+Diff between Roundcube/Input/roundcubemail-1.1.0-mysql.initial_mod.sql and Roundcube/Input/roundcubemail-1.1.1-mysql.initial_mod.sql:
+## mysqldiff 0.60
+## 
+## Run on Sat Jun  3 19:41:38 2023
+## Options: user=root, port=3306, ignore_tables=(?^:^schema_migrations$), password=, host=localhost
+##
+## --- file: Roundcube/Input/roundcubemail-1.1.0-mysql.initial_mod.sql
+## +++ file: Roundcube/Input/roundcubemail-1.1.1-mysql.initial_mod.sql
+
+ALTER TABLE identities CHANGE COLUMN signature signature longtext; # was text
+
+Diff between Roundcube/Input/roundcubemail-1.1.1-mysql.initial_mod.sql and Roundcube/Input/roundcubemail-1.1.2-mysql.initial_mod.sql:
+
+Diff between Roundcube/Input/roundcubemail-1.1.2-mysql.initial_mod.sql and Roundcube/Input/roundcubemail-1.1.3-mysql.initial_mod.sql:
+
+Diff between Roundcube/Input/roundcubemail-1.1.3-mysql.initial_mod.sql and Roundcube/Input/roundcubemail-1.1.4-mysql.initial_mod.sql:
+
+Diff between Roundcube/Input/roundcubemail-1.1.4-mysql.initial_mod.sql and Roundcube/Input/roundcubemail-1.1.5-mysql.initial_mod.sql:
+
+Diff between Roundcube/Input/roundcubemail-1.1.5-mysql.initial_mod.sql and Roundcube/Input/roundcubemail-1.1.6-mysql.initial_mod.sql:
+
+Diff between Roundcube/Input/roundcubemail-1.1.6-mysql.initial_mod.sql and Roundcube/Input/roundcubemail-1.1.7-mysql.initial_mod.sql:
+
+Diff between Roundcube/Input/roundcubemail-1.1.7-mysql.initial_mod.sql and Roundcube/Input/roundcubemail-1.1.8-mysql.initial_mod.sql:
+
+Diff between Roundcube/Input/roundcubemail-1.1.8-mysql.initial_mod.sql and Roundcube/Input/roundcubemail-1.1.9-mysql.initial_mod.sql:
+
+Diff between Roundcube/Input/roundcubemail-1.1.9-mysql.initial_mod.sql and Roundcube/Input/roundcubemail-1.1.10-mysql.initial_mod.sql:
+
+Diff between Roundcube/Input/roundcubemail-1.1.10-mysql.initial_mod.sql and Roundcube/Input/roundcubemail-1.1.11-mysql.initial_mod.sql:
+
+Diff between Roundcube/Input/roundcubemail-1.1.11-mysql.initial_mod.sql and Roundcube/Input/roundcubemail-1.1.12-mysql.initial_mod.sql:
+
+Diff between Roundcube/Input/roundcubemail-1.1.12-mysql.initial_mod.sql and Roundcube/Input/roundcubemail-1.2-beta-mysql.initial_mod.sql:
+## mysqldiff 0.60
+## 
+## Run on Sat Jun  3 19:42:49 2023
+## Options: user=root, port=3306, ignore_tables=(?^:^schema_migrations$), password=, host=localhost
+##
+## --- file: Roundcube/Input/roundcubemail-1.1.12-mysql.initial_mod.sql
+## +++ file: Roundcube/Input/roundcubemail-1.2-beta-mysql.initial_mod.sql
+
+ALTER TABLE users ADD COLUMN failed_login datetime DEFAULT NULL;
+ALTER TABLE users ADD COLUMN failed_login_counter int unsigned DEFAULT NULL;
+
+Diff between Roundcube/Input/roundcubemail-1.2-beta-mysql.initial_mod.sql and Roundcube/Input/roundcubemail-1.2-rc-mysql.initial_mod.sql:
+
+Diff between Roundcube/Input/roundcubemail-1.2-rc-mysql.initial_mod.sql and Roundcube/Input/roundcubemail-1.2.0-mysql.initial_mod.sql:
+
+Diff between Roundcube/Input/roundcubemail-1.2.0-mysql.initial_mod.sql and Roundcube/Input/roundcubemail-1.2.1-mysql.initial_mod.sql:
+
+Diff between Roundcube/Input/roundcubemail-1.2.1-mysql.initial_mod.sql and Roundcube/Input/roundcubemail-1.2.2-mysql.initial_mod.sql:
+
+Diff between Roundcube/Input/roundcubemail-1.2.2-mysql.initial_mod.sql and Roundcube/Input/roundcubemail-1.2.3-mysql.initial_mod.sql:
+
+Diff between Roundcube/Input/roundcubemail-1.2.3-mysql.initial_mod.sql and Roundcube/Input/roundcubemail-1.2.4-mysql.initial_mod.sql:
+
+Diff between Roundcube/Input/roundcubemail-1.2.4-mysql.initial_mod.sql and Roundcube/Input/roundcubemail-1.2.5-mysql.initial_mod.sql:
+
+Diff between Roundcube/Input/roundcubemail-1.2.5-mysql.initial_mod.sql and Roundcube/Input/roundcubemail-1.2.6-mysql.initial_mod.sql:
+
+Diff between Roundcube/Input/roundcubemail-1.2.6-mysql.initial_mod.sql and Roundcube/Input/roundcubemail-1.2.7-mysql.initial_mod.sql:
+
+Diff between Roundcube/Input/roundcubemail-1.2.7-mysql.initial_mod.sql and Roundcube/Input/roundcubemail-1.2.8-mysql.initial_mod.sql:
+
+Diff between Roundcube/Input/roundcubemail-1.2.8-mysql.initial_mod.sql and Roundcube/Input/roundcubemail-1.2.9-mysql.initial_mod.sql:
+
+Diff between Roundcube/Input/roundcubemail-1.2.9-mysql.initial_mod.sql and Roundcube/Input/roundcubemail-1.2.10-mysql.initial_mod.sql:
+
+Diff between Roundcube/Input/roundcubemail-1.2.10-mysql.initial_mod.sql and Roundcube/Input/roundcubemail-1.2.11-mysql.initial_mod.sql:
+
+Diff between Roundcube/Input/roundcubemail-1.2.11-mysql.initial_mod.sql and Roundcube/Input/roundcubemail-1.2.12-mysql.initial_mod.sql:
+
+Diff between Roundcube/Input/roundcubemail-1.2.12-mysql.initial_mod.sql and Roundcube/Input/roundcubemail-1.2.13-mysql.initial_mod.sql:
+
+Diff between Roundcube/Input/roundcubemail-1.2.13-mysql.initial_mod.sql and Roundcube/Input/roundcubemail-1.3-beta-mysql.initial_mod.sql:
+## mysqldiff 0.60
+## 
+## Run on Sat Jun  3 19:44:14 2023
+## Options: user=root, port=3306, ignore_tables=(?^:^schema_migrations$), password=, host=localhost
+##
+## --- file: Roundcube/Input/roundcubemail-1.2.13-mysql.initial_mod.sql
+## +++ file: Roundcube/Input/roundcubemail-1.3-beta-mysql.initial_mod.sql
+
+ALTER TABLE cache DROP COLUMN created; # was datetime NOT NULL
+ALTER TABLE cache DROP INDEX user_cache_index; # was INDEX (user_id,cache_key)
+ALTER TABLE cache ADD PRIMARY KEY (user_id,cache_key);
+ALTER TABLE cache_shared DROP COLUMN created; # was datetime NOT NULL
+ALTER TABLE cache_shared DROP INDEX cache_key_index; # was INDEX (cache_key)
+ALTER TABLE cache_shared ADD PRIMARY KEY (cache_key);
+ALTER TABLE dictionary ADD COLUMN id int unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY;
+ALTER TABLE session DROP COLUMN created; # was datetime NOT NULL
+
+Diff between Roundcube/Input/roundcubemail-1.3-beta-mysql.initial_mod.sql and Roundcube/Input/roundcubemail-1.3-rc-mysql.initial_mod.sql:
+
+Diff between Roundcube/Input/roundcubemail-1.3-rc-mysql.initial_mod.sql and Roundcube/Input/roundcubemail-1.3.0-mysql.initial_mod.sql:
+
+Diff between Roundcube/Input/roundcubemail-1.3.0-mysql.initial_mod.sql and Roundcube/Input/roundcubemail-1.3.1-mysql.initial_mod.sql:
+
+Diff between Roundcube/Input/roundcubemail-1.3.1-mysql.initial_mod.sql and Roundcube/Input/roundcubemail-1.3.2-mysql.initial_mod.sql:
+
+Diff between Roundcube/Input/roundcubemail-1.3.2-mysql.initial_mod.sql and Roundcube/Input/roundcubemail-1.3.3-mysql.initial_mod.sql:
+
+Diff between Roundcube/Input/roundcubemail-1.3.3-mysql.initial_mod.sql and Roundcube/Input/roundcubemail-1.3.4-mysql.initial_mod.sql:
+
+Diff between Roundcube/Input/roundcubemail-1.3.4-mysql.initial_mod.sql and Roundcube/Input/roundcubemail-1.3.5-mysql.initial_mod.sql:
+
+Diff between Roundcube/Input/roundcubemail-1.3.5-mysql.initial_mod.sql and Roundcube/Input/roundcubemail-1.3.6-mysql.initial_mod.sql:
+
+Diff between Roundcube/Input/roundcubemail-1.3.6-mysql.initial_mod.sql and Roundcube/Input/roundcubemail-1.3.7-mysql.initial_mod.sql:
+
+Diff between Roundcube/Input/roundcubemail-1.3.7-mysql.initial_mod.sql and Roundcube/Input/roundcubemail-1.3.8-mysql.initial_mod.sql:
+
+Diff between Roundcube/Input/roundcubemail-1.3.8-mysql.initial_mod.sql and Roundcube/Input/roundcubemail-1.3.9-mysql.initial_mod.sql:
+
+Diff between Roundcube/Input/roundcubemail-1.3.9-mysql.initial_mod.sql and Roundcube/Input/roundcubemail-1.3.10-mysql.initial_mod.sql:
+
+Diff between Roundcube/Input/roundcubemail-1.3.10-mysql.initial_mod.sql and Roundcube/Input/roundcubemail-1.3.11-mysql.initial_mod.sql:
+
+Diff between Roundcube/Input/roundcubemail-1.3.11-mysql.initial_mod.sql and Roundcube/Input/roundcubemail-1.3.12-mysql.initial_mod.sql:
+
+Diff between Roundcube/Input/roundcubemail-1.3.12-mysql.initial_mod.sql and Roundcube/Input/roundcubemail-1.3.13-mysql.initial_mod.sql:
+
+Diff between Roundcube/Input/roundcubemail-1.3.13-mysql.initial_mod.sql and Roundcube/Input/roundcubemail-1.3.14-mysql.initial_mod.sql:
+
+Diff between Roundcube/Input/roundcubemail-1.3.14-mysql.initial_mod.sql and Roundcube/Input/roundcubemail-1.3.15-mysql.initial_mod.sql:
+
+Diff between Roundcube/Input/roundcubemail-1.3.15-mysql.initial_mod.sql and Roundcube/Input/roundcubemail-1.3.16-mysql.initial_mod.sql:
+
+Diff between Roundcube/Input/roundcubemail-1.3.16-mysql.initial_mod.sql and Roundcube/Input/roundcubemail-1.3.17-mysql.initial_mod.sql:
+
+Diff between Roundcube/Input/roundcubemail-1.3.17-mysql.initial_mod.sql and Roundcube/Input/roundcubemail-1.4-beta-mysql.initial_mod.sql:
+## mysqldiff 0.60
+## 
+## Run on Sat Jun  3 19:45:56 2023
+## Options: user=root, port=3306, ignore_tables=(?^:^schema_migrations$), password=, host=localhost
+##
+## --- file: Roundcube/Input/roundcubemail-1.3.17-mysql.initial_mod.sql
+## +++ file: Roundcube/Input/roundcubemail-1.4-beta-mysql.initial_mod.sql
+
+CREATE TABLE filestore (
+  file_id int unsigned NOT NULL AUTO_INCREMENT,
+  user_id int unsigned NOT NULL,
+  filename varchar(128) NOT NULL,
+  mtime int NOT NULL,
+  data longtext NOT NULL,
+  PRIMARY KEY (file_id),
+  UNIQUE KEY uniqueness (user_id,filename),
+  CONSTRAINT user_id_fk_filestore FOREIGN KEY (user_id) REFERENCES users (user_id) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+Diff between Roundcube/Input/roundcubemail-1.4-beta-mysql.initial_mod.sql and Roundcube/Input/roundcubemail-1.4-rc1-mysql.initial_mod.sql:
+## mysqldiff 0.60
+## 
+## Run on Sat Jun  3 19:46:01 2023
+## Options: user=root, port=3306, ignore_tables=(?^:^schema_migrations$), password=, host=localhost
+##
+## --- file: Roundcube/Input/roundcubemail-1.4-beta-mysql.initial_mod.sql
+## +++ file: Roundcube/Input/roundcubemail-1.4-rc1-mysql.initial_mod.sql
+
+ALTER TABLE filestore ADD COLUMN context varchar(32) NOT NULL;
+ALTER TABLE filestore DROP INDEX uniqueness; # was UNIQUE (user_id,filename)
+ALTER TABLE filestore ADD UNIQUE uniqueness (user_id,context,filename);
+
+Diff between Roundcube/Input/roundcubemail-1.4-rc1-mysql.initial_mod.sql and Roundcube/Input/roundcubemail-1.4-rc2-mysql.initial_mod.sql:
+
+Diff between Roundcube/Input/roundcubemail-1.4-rc2-mysql.initial_mod.sql and Roundcube/Input/roundcubemail-1.4.0-mysql.initial_mod.sql:
+## mysqldiff 0.60
+## 
+## Run on Sat Jun  3 19:46:11 2023
+## Options: user=root, port=3306, ignore_tables=(?^:^schema_migrations$), password=, host=localhost
+##
+## --- file: Roundcube/Input/roundcubemail-1.4-rc2-mysql.initial_mod.sql
+## +++ file: Roundcube/Input/roundcubemail-1.4.0-mysql.initial_mod.sql
+
+ALTER TABLE cache CHANGE COLUMN cache_key cache_key varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL; # was varchar(128) NOT NULL
+ALTER TABLE cache_shared CHANGE COLUMN cache_key cache_key varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL; # was varchar(255) NOT NULL
+
+Diff between Roundcube/Input/roundcubemail-1.4.0-mysql.initial_mod.sql and Roundcube/Input/roundcubemail-1.4.1-mysql.initial_mod.sql:
+
+Diff between Roundcube/Input/roundcubemail-1.4.1-mysql.initial_mod.sql and Roundcube/Input/roundcubemail-1.4.2-mysql.initial_mod.sql:
+
+Diff between Roundcube/Input/roundcubemail-1.4.2-mysql.initial_mod.sql and Roundcube/Input/roundcubemail-1.4.3-mysql.initial_mod.sql:
+
+Diff between Roundcube/Input/roundcubemail-1.4.3-mysql.initial_mod.sql and Roundcube/Input/roundcubemail-1.4.4-mysql.initial_mod.sql:
+
+Diff between Roundcube/Input/roundcubemail-1.4.4-mysql.initial_mod.sql and Roundcube/Input/roundcubemail-1.4.5-mysql.initial_mod.sql:
+
+Diff between Roundcube/Input/roundcubemail-1.4.5-mysql.initial_mod.sql and Roundcube/Input/roundcubemail-1.4.6-mysql.initial_mod.sql:
+
+Diff between Roundcube/Input/roundcubemail-1.4.6-mysql.initial_mod.sql and Roundcube/Input/roundcubemail-1.4.7-mysql.initial_mod.sql:
+
+Diff between Roundcube/Input/roundcubemail-1.4.7-mysql.initial_mod.sql and Roundcube/Input/roundcubemail-1.4.8-mysql.initial_mod.sql:
+
+Diff between Roundcube/Input/roundcubemail-1.4.8-mysql.initial_mod.sql and Roundcube/Input/roundcubemail-1.4.9-mysql.initial_mod.sql:
+
+Diff between Roundcube/Input/roundcubemail-1.4.9-mysql.initial_mod.sql and Roundcube/Input/roundcubemail-1.4.10-mysql.initial_mod.sql:
+
+Diff between Roundcube/Input/roundcubemail-1.4.10-mysql.initial_mod.sql and Roundcube/Input/roundcubemail-1.4.11-mysql.initial_mod.sql:
+
+Diff between Roundcube/Input/roundcubemail-1.4.11-mysql.initial_mod.sql and Roundcube/Input/roundcubemail-1.4.12-mysql.initial_mod.sql:
+
+Diff between Roundcube/Input/roundcubemail-1.4.12-mysql.initial_mod.sql and Roundcube/Input/roundcubemail-1.4.13-mysql.initial_mod.sql:
+
+Diff between Roundcube/Input/roundcubemail-1.4.13-mysql.initial_mod.sql and Roundcube/Input/roundcubemail-1.5-beta-mysql.initial_mod.sql:
+## mysqldiff 0.60
+## 
+## Run on Sat Jun  3 19:47:21 2023
+## Options: user=root, port=3306, ignore_tables=(?^:^schema_migrations$), password=, host=localhost
+##
+## --- file: Roundcube/Input/roundcubemail-1.4.13-mysql.initial_mod.sql
+## +++ file: Roundcube/Input/roundcubemail-1.5-beta-mysql.initial_mod.sql
+
+ALTER TABLE dictionary CHANGE COLUMN language language varchar(16) NOT NULL; # was varchar(5) NOT NULL
+ALTER TABLE users CHANGE COLUMN language language varchar(16) DEFAULT NULL; # was varchar(5) DEFAULT NULL
+CREATE TABLE collected_addresses (
+  address_id int unsigned NOT NULL AUTO_INCREMENT,
+  changed datetime NOT NULL,
+  name varchar(255) NOT NULL,
+  email varchar(255) NOT NULL,
+  user_id int unsigned NOT NULL,
+  type int unsigned NOT NULL,
+  PRIMARY KEY (address_id),
+  UNIQUE KEY user_email_collected_addresses_index (user_id,type,email),
+  CONSTRAINT user_id_fk_collected_addresses FOREIGN KEY (user_id) REFERENCES users (user_id) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+Diff between Roundcube/Input/roundcubemail-1.5-beta-mysql.initial_mod.sql and Roundcube/Input/roundcubemail-1.5-rc-mysql.initial_mod.sql:
+
+Diff between Roundcube/Input/roundcubemail-1.5-rc-mysql.initial_mod.sql and Roundcube/Input/roundcubemail-1.5.0-mysql.initial_mod.sql:
+
+Diff between Roundcube/Input/roundcubemail-1.5.0-mysql.initial_mod.sql and Roundcube/Input/roundcubemail-1.5.1-mysql.initial_mod.sql:
+## mysqldiff 0.60
+## 
+## Run on Sat Jun  3 19:47:37 2023
+## Options: user=root, port=3306, ignore_tables=(?^:^schema_migrations$), password=, host=localhost
+##
+## --- file: Roundcube/Input/roundcubemail-1.5.0-mysql.initial_mod.sql
+## +++ file: Roundcube/Input/roundcubemail-1.5.1-mysql.initial_mod.sql
+
+ALTER TABLE cache CHANGE COLUMN data data longtext COLLATE utf8mb4_unicode_ci NOT NULL; # was longtext NOT NULL
+ALTER TABLE cache ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC; # was ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+ALTER TABLE cache_index CHANGE COLUMN data data longtext COLLATE utf8mb4_unicode_ci NOT NULL; # was longtext NOT NULL
+ALTER TABLE cache_index ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC; # was ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+ALTER TABLE cache_messages CHANGE COLUMN data data longtext COLLATE utf8mb4_unicode_ci NOT NULL; # was longtext NOT NULL
+ALTER TABLE cache_messages ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC; # was ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+ALTER TABLE cache_shared CHANGE COLUMN data data longtext COLLATE utf8mb4_unicode_ci NOT NULL; # was longtext NOT NULL
+ALTER TABLE cache_shared ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC; # was ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+ALTER TABLE cache_thread CHANGE COLUMN data data longtext COLLATE utf8mb4_unicode_ci NOT NULL; # was longtext NOT NULL
+ALTER TABLE cache_thread ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC; # was ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+ALTER TABLE collected_addresses CHANGE COLUMN email email varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL; # was varchar(255) NOT NULL
+ALTER TABLE collected_addresses CHANGE COLUMN name name varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL; # was varchar(255) NOT NULL
+ALTER TABLE collected_addresses ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC; # was ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+ALTER TABLE contactgroupmembers ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci ROW_FORMAT=DYNAMIC; # was ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+ALTER TABLE contactgroups CHANGE COLUMN name name varchar(128) COLLATE utf8mb4_unicode_ci NOT NULL; # was varchar(128) NOT NULL
+ALTER TABLE contactgroups ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC; # was ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+ALTER TABLE contacts CHANGE COLUMN name name varchar(128) COLLATE utf8mb4_unicode_ci NOT NULL; # was varchar(128) NOT NULL
+ALTER TABLE contacts CHANGE COLUMN firstname firstname varchar(128) COLLATE utf8mb4_unicode_ci NOT NULL; # was varchar(128) NOT NULL
+ALTER TABLE contacts CHANGE COLUMN words words text COLLATE utf8mb4_unicode_ci; # was text
+ALTER TABLE contacts CHANGE COLUMN vcard vcard longtext COLLATE utf8mb4_unicode_ci; # was longtext
+ALTER TABLE contacts CHANGE COLUMN surname surname varchar(128) COLLATE utf8mb4_unicode_ci NOT NULL; # was varchar(128) NOT NULL
+ALTER TABLE contacts CHANGE COLUMN email email text COLLATE utf8mb4_unicode_ci NOT NULL; # was text NOT NULL
+ALTER TABLE contacts ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC; # was ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+ALTER TABLE dictionary CHANGE COLUMN data data longtext COLLATE utf8mb4_unicode_ci NOT NULL; # was longtext NOT NULL
+ALTER TABLE dictionary CHANGE COLUMN language language varchar(16) COLLATE utf8mb4_unicode_ci NOT NULL; # was varchar(16) NOT NULL
+ALTER TABLE dictionary ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC; # was ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+ALTER TABLE filestore CHANGE COLUMN data data longtext COLLATE utf8mb4_unicode_ci NOT NULL; # was longtext NOT NULL
+ALTER TABLE filestore CHANGE COLUMN context context varchar(32) COLLATE utf8mb4_unicode_ci NOT NULL; # was varchar(32) NOT NULL
+ALTER TABLE filestore CHANGE COLUMN filename filename varchar(128) COLLATE utf8mb4_unicode_ci NOT NULL; # was varchar(128) NOT NULL
+ALTER TABLE filestore ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC; # was ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+ALTER TABLE identities CHANGE COLUMN name name varchar(128) COLLATE utf8mb4_unicode_ci NOT NULL; # was varchar(128) NOT NULL
+ALTER TABLE identities CHANGE COLUMN organization organization varchar(128) COLLATE utf8mb4_unicode_ci NOT NULL; # was varchar(128) NOT NULL
+ALTER TABLE identities CHANGE COLUMN signature signature longtext COLLATE utf8mb4_unicode_ci; # was longtext
+ALTER TABLE identities CHANGE COLUMN reply-to reply-to varchar(128) COLLATE utf8mb4_unicode_ci NOT NULL; # was varchar(128) NOT NULL
+ALTER TABLE identities CHANGE COLUMN email email varchar(128) COLLATE utf8mb4_unicode_ci NOT NULL; # was varchar(128) NOT NULL
+ALTER TABLE identities CHANGE COLUMN bcc bcc varchar(128) COLLATE utf8mb4_unicode_ci NOT NULL; # was varchar(128) NOT NULL
+ALTER TABLE identities ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC; # was ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+ALTER TABLE searches CHANGE COLUMN data data text COLLATE utf8mb4_unicode_ci; # was text
+ALTER TABLE searches CHANGE COLUMN name name varchar(128) COLLATE utf8mb4_unicode_ci NOT NULL; # was varchar(128) NOT NULL
+ALTER TABLE searches ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC; # was ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+ALTER TABLE session CHANGE COLUMN sess_id sess_id varchar(128) COLLATE utf8mb4_unicode_ci NOT NULL; # was varchar(128) NOT NULL
+ALTER TABLE session CHANGE COLUMN ip ip varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL; # was varchar(40) NOT NULL
+ALTER TABLE session CHANGE COLUMN vars vars mediumtext COLLATE utf8mb4_unicode_ci NOT NULL; # was mediumtext NOT NULL
+ALTER TABLE session ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC; # was ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+ALTER TABLE system CHANGE COLUMN value value mediumtext COLLATE utf8mb4_unicode_ci; # was mediumtext
+ALTER TABLE system CHANGE COLUMN name name varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL; # was varchar(64) NOT NULL
+ALTER TABLE system ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC; # was ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+ALTER TABLE users CHANGE COLUMN language language varchar(16) COLLATE utf8mb4_unicode_ci DEFAULT NULL; # was varchar(16) DEFAULT NULL
+ALTER TABLE users CHANGE COLUMN preferences preferences longtext COLLATE utf8mb4_unicode_ci; # was longtext
+ALTER TABLE users CHANGE COLUMN mail_host mail_host varchar(128) COLLATE utf8mb4_unicode_ci NOT NULL; # was varchar(128) NOT NULL
+ALTER TABLE users ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC; # was ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+
+Diff between Roundcube/Input/roundcubemail-1.5.1-mysql.initial_mod.sql and Roundcube/Input/roundcubemail-1.5.2-mysql.initial_mod.sql:
+
+Diff between Roundcube/Input/roundcubemail-1.5.2-mysql.initial_mod.sql and Roundcube/Input/roundcubemail-1.5.3-mysql.initial_mod.sql:
+
+Diff between Roundcube/Input/roundcubemail-1.5.3-mysql.initial_mod.sql and Roundcube/Input/roundcubemail-1.6-beta-mysql.initial_mod.sql:
+## mysqldiff 0.60
+## 
+## Run on Sat Jun  3 19:47:52 2023
+## Options: user=root, port=3306, ignore_tables=(?^:^schema_migrations$), password=, host=localhost
+##
+## --- file: Roundcube/Input/roundcubemail-1.5.3-mysql.initial_mod.sql
+## +++ file: Roundcube/Input/roundcubemail-1.6-beta-mysql.initial_mod.sql
+
+CREATE TABLE responses (
+  response_id int unsigned NOT NULL AUTO_INCREMENT,
+  user_id int unsigned NOT NULL,
+  name varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  data longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  is_html tinyint(1) NOT NULL,
+  changed datetime NOT NULL,
+  del tinyint(1) NOT NULL,
+  PRIMARY KEY (response_id),
+  KEY user_responses_index (user_id,del),
+  CONSTRAINT user_id_fk_responses FOREIGN KEY (user_id) REFERENCES users (user_id) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+
+Diff between Roundcube/Input/roundcubemail-1.6-beta-mysql.initial_mod.sql and Roundcube/Input/roundcubemail-1.6-rc-mysql.initial_mod.sql:
+
+Diff between Roundcube/Input/roundcubemail-1.6-rc-mysql.initial_mod.sql and Roundcube/Input/roundcubemail-1.6.0-mysql.initial_mod.sql:
+
+Diff between Roundcube/Input/roundcubemail-1.6.0-mysql.initial_mod.sql and Roundcube/Input/roundcubemail-1.6.1-mysql.initial_mod.sql:
+

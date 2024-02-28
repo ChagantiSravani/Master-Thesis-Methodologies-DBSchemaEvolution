@@ -1,0 +1,538 @@
+Diff between Roundcube/Input/Roundcube_2007101000_mod_sort.sql and Roundcube/Input/Roundcube_2008030300_mod_sort.sql:
+
+Diff between Roundcube/Input/Roundcube_2008030300_mod_sort.sql and Roundcube/Input/Roundcube_2008040500_mod_sort.sql:
+## mysqldiff 0.60
+## 
+## Run on Tue Feb 27 17:35:14 2024
+## Options: ignore_tables=(?^:^schema_migrations$), password=, host=localhost, user=root, port=3306
+##
+## --- file: Roundcube/Input/Roundcube_2008030300_mod_sort.sql
+## +++ file: Roundcube/Input/Roundcube_2008040500_mod_sort.sql
+
+ALTER TABLE identities CHANGE COLUMN name name varchar(128) NOT NULL; # was varchar(128) NOT NULL DEFAULT ''
+ALTER TABLE identities CHANGE COLUMN signature signature text; # was text NOT NULL
+ALTER TABLE identities CHANGE COLUMN email email varchar(128) NOT NULL; # was varchar(128) NOT NULL DEFAULT ''
+
+Diff between Roundcube/Input/Roundcube_2008040500_mod_sort.sql and Roundcube/Input/Roundcube_2008060900_mod_sort.sql:
+
+Use of uninitialized value in pattern match (m//) at /usr/local/share/perl/5.34.0/MySQL/Diff.pm line 434.
+Diff between Roundcube/Input/Roundcube_2008060900_mod_sort.sql and Roundcube/Input/Roundcube_2008092100_mod_sort.sql:
+## mysqldiff 0.60
+## 
+## Run on Tue Feb 27 17:35:18 2024
+## Options: ignore_tables=(?^:^schema_migrations$), password=, host=localhost, user=root, port=3306
+##
+## --- file: Roundcube/Input/Roundcube_2008060900_mod_sort.sql
+## +++ file: Roundcube/Input/Roundcube_2008092100_mod_sort.sql
+
+ALTER TABLE cache DROP COLUMN session_id; # was varchar(40) DEFAULT NULL
+ALTER TABLE cache DROP INDEX session_id; # was INDEX (session_id)
+ALTER TABLE users CHANGE COLUMN language language varchar(5) DEFAULT NULL; # was varchar(5) NOT NULL DEFAULT 'en'
+
+Diff between Roundcube/Input/Roundcube_2008092100_mod_sort.sql and Roundcube/Input/Roundcube_2009090400_mod_sort.sql:
+## mysqldiff 0.60
+## 
+## Run on Tue Feb 27 17:35:20 2024
+## Options: ignore_tables=(?^:^schema_migrations$), password=, host=localhost, user=root, port=3306
+##
+## --- file: Roundcube/Input/Roundcube_2008092100_mod_sort.sql
+## +++ file: Roundcube/Input/Roundcube_2009090400_mod_sort.sql
+
+ALTER TABLE session CHANGE COLUMN vars vars mediumtext NOT NULL; # was text NOT NULL
+
+Diff between Roundcube/Input/Roundcube_2009090400_mod_sort.sql and Roundcube/Input/Roundcube_2009103100_mod_sort.sql:
+## mysqldiff 0.60
+## 
+## Run on Tue Feb 27 17:35:23 2024
+## Options: ignore_tables=(?^:^schema_migrations$), password=, host=localhost, user=root, port=3306
+##
+## --- file: Roundcube/Input/Roundcube_2009090400_mod_sort.sql
+## +++ file: Roundcube/Input/Roundcube_2009103100_mod_sort.sql
+
+ALTER TABLE identities ADD COLUMN changed datetime NOT NULL;
+CREATE TABLE contactgroupmembers (
+  contactgroup_id int unsigned NOT NULL,
+  contact_id int unsigned NOT NULL DEFAULT '0',
+  created datetime NOT NULL,
+  PRIMARY KEY (contactgroup_id,contact_id),
+  KEY contact_id_fk_contacts (contact_id),
+  CONSTRAINT contact_id_fk_contacts FOREIGN KEY (contact_id) REFERENCES contacts (contact_id) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT contactgroup_id_fk_contactgroups FOREIGN KEY (contactgroup_id) REFERENCES contactgroups (contactgroup_id) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE contactgroups (
+  contactgroup_id int unsigned NOT NULL AUTO_INCREMENT,
+  user_id int unsigned NOT NULL DEFAULT '0',
+  changed datetime NOT NULL,
+  del tinyint(1) NOT NULL DEFAULT '0',
+  name varchar(128) NOT NULL DEFAULT '',
+  PRIMARY KEY (contactgroup_id),
+  KEY contactgroups_user_index (user_id,del),
+  CONSTRAINT user_id_fk_contactgroups FOREIGN KEY (user_id) REFERENCES users (user_id) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+Diff between Roundcube/Input/Roundcube_2009103100_mod_sort.sql and Roundcube/Input/Roundcube_2010042300_mod_sort.sql:
+## mysqldiff 0.60
+## 
+## Run on Tue Feb 27 17:35:26 2024
+## Options: ignore_tables=(?^:^schema_migrations$), password=, host=localhost, user=root, port=3306
+##
+## --- file: Roundcube/Input/Roundcube_2009103100_mod_sort.sql
+## +++ file: Roundcube/Input/Roundcube_2010042300_mod_sort.sql
+
+ALTER TABLE users CHANGE COLUMN last_login last_login datetime DEFAULT NULL; # was datetime NOT NULL
+
+Diff between Roundcube/Input/Roundcube_2010042300_mod_sort.sql and Roundcube/Input/Roundcube_2010100600_mod_sort.sql:
+## mysqldiff 0.60
+## 
+## Run on Tue Feb 27 17:35:30 2024
+## Options: ignore_tables=(?^:^schema_migrations$), password=, host=localhost, user=root, port=3306
+##
+## --- file: Roundcube/Input/Roundcube_2010042300_mod_sort.sql
+## +++ file: Roundcube/Input/Roundcube_2010100600_mod_sort.sql
+
+ALTER TABLE contacts CHANGE COLUMN email email varchar(255) NOT NULL; # was varchar(128) NOT NULL DEFAULT ''
+ALTER TABLE users ADD UNIQUE username (username,mail_host);
+
+Diff between Roundcube/Input/Roundcube_2010100600_mod_sort.sql and Roundcube/Input/Roundcube_2011011200_mod_sort.sql:
+## mysqldiff 0.60
+## 
+## Run on Tue Feb 27 17:35:33 2024
+## Options: ignore_tables=(?^:^schema_migrations$), password=, host=localhost, user=root, port=3306
+##
+## --- file: Roundcube/Input/Roundcube_2010100600_mod_sort.sql
+## +++ file: Roundcube/Input/Roundcube_2011011200_mod_sort.sql
+
+ALTER TABLE contacts CHANGE COLUMN vcard vcard longtext; # was text NOT NULL
+ALTER TABLE contacts ADD COLUMN words text;
+
+Diff between Roundcube/Input/Roundcube_2011011200_mod_sort.sql and Roundcube/Input/Roundcube_2011092800_mod_sort.sql:
+## mysqldiff 0.60
+## 
+## Run on Tue Feb 27 17:35:36 2024
+## Options: ignore_tables=(?^:^schema_migrations$), password=, host=localhost, user=root, port=3306
+##
+## --- file: Roundcube/Input/Roundcube_2011011200_mod_sort.sql
+## +++ file: Roundcube/Input/Roundcube_2011092800_mod_sort.sql
+
+DROP TABLE messages;
+
+ALTER TABLE users CHANGE COLUMN alias alias varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL; # was varchar(128) NOT NULL DEFAULT ''
+ALTER TABLE users CHANGE COLUMN username username varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL; # was varchar(128) NOT NULL DEFAULT ''
+CREATE TABLE cache_index (
+  user_id int unsigned NOT NULL DEFAULT '0',
+  mailbox varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
+  changed datetime NOT NULL,
+  valid tinyint(1) NOT NULL DEFAULT '0',
+  data longtext NOT NULL,
+  PRIMARY KEY (user_id,mailbox),
+  KEY changed_index (changed),
+  CONSTRAINT user_id_fk_cache_index FOREIGN KEY (user_id) REFERENCES users (user_id) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE cache_messages (
+  user_id int unsigned NOT NULL DEFAULT '0',
+  mailbox varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
+  uid int unsigned NOT NULL DEFAULT '0',
+  changed datetime NOT NULL,
+  data longtext NOT NULL,
+  flags int NOT NULL DEFAULT '0',
+  PRIMARY KEY (user_id,mailbox,uid),
+  KEY changed_index (changed),
+  CONSTRAINT user_id_fk_cache_messages FOREIGN KEY (user_id) REFERENCES users (user_id) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE cache_thread (
+  user_id int unsigned NOT NULL DEFAULT '0',
+  mailbox varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
+  changed datetime NOT NULL,
+  data longtext NOT NULL,
+  PRIMARY KEY (user_id,mailbox),
+  KEY changed_index (changed),
+  CONSTRAINT user_id_fk_cache_thread FOREIGN KEY (user_id) REFERENCES users (user_id) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE dictionary (
+  user_id int unsigned DEFAULT NULL,
+  language varchar(5) NOT NULL,
+  data longtext NOT NULL,
+  UNIQUE KEY uniqueness (user_id,language),
+  CONSTRAINT user_id_fk_dictionary FOREIGN KEY (user_id) REFERENCES users (user_id) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE searches (
+  search_id int unsigned NOT NULL AUTO_INCREMENT,
+  user_id int unsigned NOT NULL DEFAULT '0',
+  type int NOT NULL DEFAULT '0',
+  name varchar(128) NOT NULL,
+  data text,
+  PRIMARY KEY (search_id),
+  UNIQUE KEY uniqueness (user_id,type,name),
+  CONSTRAINT user_id_fk_searches FOREIGN KEY (user_id) REFERENCES users (user_id) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+Diff between Roundcube/Input/Roundcube_2011092800_mod_sort.sql and Roundcube/Input/Roundcube_2011111600_mod_sort.sql:
+## mysqldiff 0.60
+## 
+## Run on Tue Feb 27 17:35:40 2024
+## Options: ignore_tables=(?^:^schema_migrations$), password=, host=localhost, user=root, port=3306
+##
+## --- file: Roundcube/Input/Roundcube_2011092800_mod_sort.sql
+## +++ file: Roundcube/Input/Roundcube_2011111600_mod_sort.sql
+
+ALTER TABLE session CHANGE COLUMN sess_id sess_id varchar(128) NOT NULL; # was varchar(40) NOT NULL DEFAULT ''
+
+Diff between Roundcube/Input/Roundcube_2011111600_mod_sort.sql and Roundcube/Input/Roundcube_2011121400_mod_sort.sql:
+## mysqldiff 0.60
+## 
+## Run on Tue Feb 27 17:35:44 2024
+## Options: ignore_tables=(?^:^schema_migrations$), password=, host=localhost, user=root, port=3306
+##
+## --- file: Roundcube/Input/Roundcube_2011111600_mod_sort.sql
+## +++ file: Roundcube/Input/Roundcube_2011121400_mod_sort.sql
+
+ALTER TABLE cache CHANGE COLUMN user_id user_id int unsigned NOT NULL; # was int unsigned NOT NULL DEFAULT '0'
+ALTER TABLE cache_index CHANGE COLUMN user_id user_id int unsigned NOT NULL; # was int unsigned NOT NULL DEFAULT '0'
+ALTER TABLE cache_messages CHANGE COLUMN user_id user_id int unsigned NOT NULL; # was int unsigned NOT NULL DEFAULT '0'
+ALTER TABLE cache_thread CHANGE COLUMN user_id user_id int unsigned NOT NULL; # was int unsigned NOT NULL DEFAULT '0'
+ALTER TABLE contactgroupmembers CHANGE COLUMN contact_id contact_id int unsigned NOT NULL; # was int unsigned NOT NULL DEFAULT '0'
+ALTER TABLE contactgroups CHANGE COLUMN user_id user_id int unsigned NOT NULL; # was int unsigned NOT NULL DEFAULT '0'
+ALTER TABLE contacts CHANGE COLUMN email email text NOT NULL; # was varchar(255) NOT NULL
+ALTER TABLE contacts CHANGE COLUMN user_id user_id int unsigned NOT NULL; # was int unsigned NOT NULL DEFAULT '0'
+ALTER TABLE identities CHANGE COLUMN user_id user_id int unsigned NOT NULL; # was int unsigned NOT NULL DEFAULT '0'
+ALTER TABLE searches CHANGE COLUMN user_id user_id int unsigned NOT NULL; # was int unsigned NOT NULL DEFAULT '0'
+
+Diff between Roundcube/Input/Roundcube_2011121400_mod_sort.sql and Roundcube/Input/Roundcube_2012080700_mod_sort.sql:
+## mysqldiff 0.60
+## 
+## Run on Tue Feb 27 17:35:48 2024
+## Options: ignore_tables=(?^:^schema_migrations$), password=, host=localhost, user=root, port=3306
+##
+## --- file: Roundcube/Input/Roundcube_2011121400_mod_sort.sql
+## +++ file: Roundcube/Input/Roundcube_2012080700_mod_sort.sql
+
+ALTER TABLE cache DROP COLUMN cache_id; # was int unsigned NOT NULL AUTO_INCREMENT
+ALTER TABLE cache ADD INDEX ((cache_id)); # auto columns must always be indexed
+ALTER TABLE cache DROP PRIMARY KEY; # was (cache_id)
+ALTER TABLE users DROP COLUMN alias; # was varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL
+
+Diff between Roundcube/Input/Roundcube_2012080700_mod_sort.sql and Roundcube/Input/Roundcube_2013011000_mod_sort.sql:
+## mysqldiff 0.60
+## 
+## Run on Tue Feb 27 17:35:53 2024
+## Options: ignore_tables=(?^:^schema_migrations$), password=, host=localhost, user=root, port=3306
+##
+## --- file: Roundcube/Input/Roundcube_2012080700_mod_sort.sql
+## +++ file: Roundcube/Input/Roundcube_2013011000_mod_sort.sql
+
+CREATE TABLE system (
+  name varchar(64) NOT NULL,
+  value mediumtext,
+  PRIMARY KEY (name)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+Diff between Roundcube/Input/Roundcube_2013011000_mod_sort.sql and Roundcube/Input/Roundcube_2013042700_mod_sort.sql:
+
+Diff between Roundcube/Input/Roundcube_2013042700_mod_sort.sql and Roundcube/Input/Roundcube_2013052500_mod_sort.sql:
+## mysqldiff 0.60
+## 
+## Run on Tue Feb 27 17:36:02 2024
+## Options: ignore_tables=(?^:^schema_migrations$), password=, host=localhost, user=root, port=3306
+##
+## --- file: Roundcube/Input/Roundcube_2013042700_mod_sort.sql
+## +++ file: Roundcube/Input/Roundcube_2013052500_mod_sort.sql
+
+CREATE TABLE cache_shared (
+  cache_key varchar(255) NOT NULL,
+  created datetime NOT NULL,
+  data longtext NOT NULL,
+  KEY created_index (created),
+  KEY cache_key_index (cache_key)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+Use of uninitialized value in pattern match (m//) at /usr/local/share/perl/5.34.0/MySQL/Diff.pm line 434.
+Use of uninitialized value in pattern match (m//) at /usr/local/share/perl/5.34.0/MySQL/Diff.pm line 434.
+Use of uninitialized value in pattern match (m//) at /usr/local/share/perl/5.34.0/MySQL/Diff.pm line 434.
+Diff between Roundcube/Input/Roundcube_2013052500_mod_sort.sql and Roundcube/Input/Roundcube_2013061000_mod_sort.sql:
+## mysqldiff 0.60
+## 
+## Run on Tue Feb 27 17:36:07 2024
+## Options: ignore_tables=(?^:^schema_migrations$), password=, host=localhost, user=root, port=3306
+##
+## --- file: Roundcube/Input/Roundcube_2013052500_mod_sort.sql
+## +++ file: Roundcube/Input/Roundcube_2013061000_mod_sort.sql
+
+ALTER TABLE cache ADD COLUMN expires datetime DEFAULT NULL;
+ALTER TABLE cache_index DROP COLUMN changed; # was datetime NOT NULL
+ALTER TABLE cache_index ADD COLUMN expires datetime DEFAULT NULL;
+ALTER TABLE cache_index DROP INDEX changed_index; # was INDEX (changed)
+ALTER TABLE cache_messages DROP COLUMN changed; # was datetime NOT NULL
+ALTER TABLE cache_messages ADD COLUMN expires datetime DEFAULT NULL;
+ALTER TABLE cache_messages DROP INDEX changed_index; # was INDEX (changed)
+ALTER TABLE cache_shared ADD COLUMN expires datetime DEFAULT NULL;
+ALTER TABLE cache_thread DROP COLUMN changed; # was datetime NOT NULL
+ALTER TABLE cache_thread ADD COLUMN expires datetime DEFAULT NULL;
+ALTER TABLE cache_thread DROP INDEX changed_index; # was INDEX (changed)
+
+Diff between Roundcube/Input/Roundcube_2013061000_mod_sort.sql and Roundcube/Input/Roundcube_2014042900_mod_sort.sql:
+## mysqldiff 0.60
+## 
+## Run on Tue Feb 27 17:36:12 2024
+## Options: ignore_tables=(?^:^schema_migrations$), password=, host=localhost, user=root, port=3306
+##
+## --- file: Roundcube/Input/Roundcube_2013061000_mod_sort.sql
+## +++ file: Roundcube/Input/Roundcube_2014042900_mod_sort.sql
+
+ALTER TABLE users CHANGE COLUMN preferences preferences longtext; # was text
+
+Diff between Roundcube/Input/Roundcube_2014042900_mod_sort.sql and Roundcube/Input/Roundcube_2015030800_mod_sort.sql:
+## mysqldiff 0.60
+## 
+## Run on Tue Feb 27 17:36:16 2024
+## Options: ignore_tables=(?^:^schema_migrations$), password=, host=localhost, user=root, port=3306
+##
+## --- file: Roundcube/Input/Roundcube_2014042900_mod_sort.sql
+## +++ file: Roundcube/Input/Roundcube_2015030800_mod_sort.sql
+
+ALTER TABLE identities CHANGE COLUMN signature signature longtext; # was text
+
+Diff between Roundcube/Input/Roundcube_2015030800_mod_sort.sql and Roundcube/Input/Roundcube_2015111100_mod_sort.sql:
+## mysqldiff 0.60
+## 
+## Run on Tue Feb 27 17:36:21 2024
+## Options: ignore_tables=(?^:^schema_migrations$), password=, host=localhost, user=root, port=3306
+##
+## --- file: Roundcube/Input/Roundcube_2015030800_mod_sort.sql
+## +++ file: Roundcube/Input/Roundcube_2015111100_mod_sort.sql
+
+ALTER TABLE users ADD COLUMN failed_login datetime DEFAULT NULL;
+ALTER TABLE users ADD COLUMN failed_login_counter int unsigned DEFAULT NULL;
+
+Diff between Roundcube/Input/Roundcube_2015111100_mod_sort.sql and Roundcube/Input/Roundcube_2016081200_mod_sort.sql:
+## mysqldiff 0.60
+## 
+## Run on Tue Feb 27 17:36:26 2024
+## Options: ignore_tables=(?^:^schema_migrations$), password=, host=localhost, user=root, port=3306
+##
+## --- file: Roundcube/Input/Roundcube_2015111100_mod_sort.sql
+## +++ file: Roundcube/Input/Roundcube_2016081200_mod_sort.sql
+
+ALTER TABLE session DROP COLUMN created; # was datetime NOT NULL
+
+Diff between Roundcube/Input/Roundcube_2016081200_mod_sort.sql and Roundcube/Input/Roundcube_2016100900_mod_sort.sql:
+## mysqldiff 0.60
+## 
+## Run on Tue Feb 27 17:36:31 2024
+## Options: ignore_tables=(?^:^schema_migrations$), password=, host=localhost, user=root, port=3306
+##
+## --- file: Roundcube/Input/Roundcube_2016081200_mod_sort.sql
+## +++ file: Roundcube/Input/Roundcube_2016100900_mod_sort.sql
+
+ALTER TABLE session CHANGE COLUMN ip ip varchar(40) NOT NULL; # was varchar(40) NOT NULL DEFAULT ''
+
+Use of uninitialized value in pattern match (m//) at /usr/local/share/perl/5.34.0/MySQL/Diff.pm line 434.
+Diff between Roundcube/Input/Roundcube_2016100900_mod_sort.sql and Roundcube/Input/Roundcube_2016112200_mod_sort.sql:
+## mysqldiff 0.60
+## 
+## Run on Tue Feb 27 17:36:35 2024
+## Options: ignore_tables=(?^:^schema_migrations$), password=, host=localhost, user=root, port=3306
+##
+## --- file: Roundcube/Input/Roundcube_2016100900_mod_sort.sql
+## +++ file: Roundcube/Input/Roundcube_2016112200_mod_sort.sql
+
+ALTER TABLE cache DROP COLUMN created; # was datetime NOT NULL
+ALTER TABLE cache ADD PRIMARY KEY (user_id,cache_key);
+ALTER TABLE cache_shared DROP COLUMN created; # was datetime NOT NULL
+ALTER TABLE cache_shared DROP INDEX created_index; # was INDEX (created)
+ALTER TABLE cache_shared ADD PRIMARY KEY (cache_key);
+ALTER TABLE dictionary ADD COLUMN id int unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY;
+
+Diff between Roundcube/Input/Roundcube_2016112200_mod_sort.sql and Roundcube/Input/Roundcube_2018021600_mod_sort.sql:
+## mysqldiff 0.60
+## 
+## Run on Tue Feb 27 17:36:40 2024
+## Options: ignore_tables=(?^:^schema_migrations$), password=, host=localhost, user=root, port=3306
+##
+## --- file: Roundcube/Input/Roundcube_2016112200_mod_sort.sql
+## +++ file: Roundcube/Input/Roundcube_2018021600_mod_sort.sql
+
+CREATE TABLE filestore (
+  file_id int unsigned NOT NULL AUTO_INCREMENT,
+  user_id int unsigned NOT NULL,
+  filename varchar(128) NOT NULL,
+  mtime int NOT NULL,
+  data longtext NOT NULL,
+  PRIMARY KEY (file_id),
+  UNIQUE KEY uniqueness (user_id,filename),
+  CONSTRAINT user_id_fk_filestore FOREIGN KEY (user_id) REFERENCES users (user_id) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+Diff between Roundcube/Input/Roundcube_2018021600_mod_sort.sql and Roundcube/Input/Roundcube_2018122300_mod_sort.sql:
+## mysqldiff 0.60
+## 
+## Run on Tue Feb 27 17:36:45 2024
+## Options: ignore_tables=(?^:^schema_migrations$), password=, host=localhost, user=root, port=3306
+##
+## --- file: Roundcube/Input/Roundcube_2018021600_mod_sort.sql
+## +++ file: Roundcube/Input/Roundcube_2018122300_mod_sort.sql
+
+ALTER TABLE filestore ADD COLUMN context varchar(32) NOT NULL;
+
+Diff between Roundcube/Input/Roundcube_2018122300_mod_sort.sql and Roundcube/Input/Roundcube_2019092900_mod_sort.sql:
+## mysqldiff 0.60
+## 
+## Run on Tue Feb 27 17:36:51 2024
+## Options: ignore_tables=(?^:^schema_migrations$), password=, host=localhost, user=root, port=3306
+##
+## --- file: Roundcube/Input/Roundcube_2018122300_mod_sort.sql
+## +++ file: Roundcube/Input/Roundcube_2019092900_mod_sort.sql
+
+ALTER TABLE cache CHANGE COLUMN cache_key cache_key varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL; # was varchar(128) NOT NULL DEFAULT ''
+ALTER TABLE cache_shared CHANGE COLUMN cache_key cache_key varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL; # was varchar(255) NOT NULL
+
+Diff between Roundcube/Input/Roundcube_2019092900_mod_sort.sql and Roundcube/Input/Roundcube_2020020100_mod_sort.sql:
+## mysqldiff 0.60
+## 
+## Run on Tue Feb 27 17:36:56 2024
+## Options: ignore_tables=(?^:^schema_migrations$), password=, host=localhost, user=root, port=3306
+##
+## --- file: Roundcube/Input/Roundcube_2019092900_mod_sort.sql
+## +++ file: Roundcube/Input/Roundcube_2020020100_mod_sort.sql
+
+ALTER TABLE dictionary CHANGE COLUMN language language varchar(16) NOT NULL; # was varchar(5) NOT NULL
+ALTER TABLE users CHANGE COLUMN language language varchar(16) DEFAULT NULL; # was varchar(5) DEFAULT NULL
+
+Diff between Roundcube/Input/Roundcube_2020020100_mod_sort.sql and Roundcube/Input/Roundcube_2020020101_mod_sort.sql:
+## mysqldiff 0.60
+## 
+## Run on Tue Feb 27 17:37:01 2024
+## Options: ignore_tables=(?^:^schema_migrations$), password=, host=localhost, user=root, port=3306
+##
+## --- file: Roundcube/Input/Roundcube_2020020100_mod_sort.sql
+## +++ file: Roundcube/Input/Roundcube_2020020101_mod_sort.sql
+
+ALTER TABLE cache CHANGE COLUMN data data longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL; # was longtext NOT NULL
+ALTER TABLE cache ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC; # was ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+ALTER TABLE cache_index CHANGE COLUMN data data longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL; # was longtext NOT NULL
+ALTER TABLE cache_index ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC; # was ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+ALTER TABLE cache_messages CHANGE COLUMN data data longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL; # was longtext NOT NULL
+ALTER TABLE cache_messages ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC; # was ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+ALTER TABLE cache_shared CHANGE COLUMN data data longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL; # was longtext NOT NULL
+ALTER TABLE cache_shared ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC; # was ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+ALTER TABLE cache_thread CHANGE COLUMN data data longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL; # was longtext NOT NULL
+ALTER TABLE cache_thread ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC; # was ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+ALTER TABLE contactgroupmembers ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci ROW_FORMAT=DYNAMIC; # was ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+ALTER TABLE contactgroups CHANGE COLUMN name name varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT ''; # was varchar(128) NOT NULL DEFAULT ''
+ALTER TABLE contactgroups ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC; # was ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+ALTER TABLE contacts CHANGE COLUMN surname surname varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT ''; # was varchar(128) NOT NULL DEFAULT ''
+ALTER TABLE contacts CHANGE COLUMN firstname firstname varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT ''; # was varchar(128) NOT NULL DEFAULT ''
+ALTER TABLE contacts CHANGE COLUMN name name varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT ''; # was varchar(128) NOT NULL DEFAULT ''
+ALTER TABLE contacts CHANGE COLUMN vcard vcard longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci; # was longtext
+ALTER TABLE contacts CHANGE COLUMN words words text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci; # was text
+ALTER TABLE contacts CHANGE COLUMN email email text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL; # was text NOT NULL
+ALTER TABLE contacts ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC; # was ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+ALTER TABLE dictionary CHANGE COLUMN language language varchar(16) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL; # was varchar(16) NOT NULL
+ALTER TABLE dictionary CHANGE COLUMN data data longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL; # was longtext NOT NULL
+ALTER TABLE dictionary ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC; # was ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+ALTER TABLE filestore CHANGE COLUMN data data longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL; # was longtext NOT NULL
+ALTER TABLE filestore CHANGE COLUMN filename filename varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL; # was varchar(128) NOT NULL
+ALTER TABLE filestore CHANGE COLUMN context context varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL; # was varchar(32) NOT NULL
+ALTER TABLE filestore ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC; # was ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+ALTER TABLE identities CHANGE COLUMN name name varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL; # was varchar(128) NOT NULL
+ALTER TABLE identities CHANGE COLUMN organization organization varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT ''; # was varchar(128) NOT NULL DEFAULT ''
+ALTER TABLE identities CHANGE COLUMN signature signature longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci; # was longtext
+ALTER TABLE identities CHANGE COLUMN reply-to reply-to varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT ''; # was varchar(128) NOT NULL DEFAULT ''
+ALTER TABLE identities CHANGE COLUMN email email varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL; # was varchar(128) NOT NULL
+ALTER TABLE identities CHANGE COLUMN bcc bcc varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT ''; # was varchar(128) NOT NULL DEFAULT ''
+ALTER TABLE identities ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC; # was ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+ALTER TABLE searches CHANGE COLUMN data data text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci; # was text
+ALTER TABLE searches CHANGE COLUMN name name varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL; # was varchar(128) NOT NULL
+ALTER TABLE searches ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC; # was ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+ALTER TABLE session CHANGE COLUMN sess_id sess_id varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL; # was varchar(128) NOT NULL
+ALTER TABLE session CHANGE COLUMN vars vars mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL; # was mediumtext NOT NULL
+ALTER TABLE session CHANGE COLUMN ip ip varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL; # was varchar(40) NOT NULL
+ALTER TABLE session ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC; # was ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+ALTER TABLE system CHANGE COLUMN value value mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci; # was mediumtext
+ALTER TABLE system CHANGE COLUMN name name varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL; # was varchar(64) NOT NULL
+ALTER TABLE system ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC; # was ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+ALTER TABLE users CHANGE COLUMN language language varchar(16) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL; # was varchar(16) DEFAULT NULL
+ALTER TABLE users CHANGE COLUMN preferences preferences longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci; # was longtext
+ALTER TABLE users CHANGE COLUMN mail_host mail_host varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT ''; # was varchar(128) NOT NULL DEFAULT ''
+ALTER TABLE users ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC; # was ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+
+Diff between Roundcube/Input/Roundcube_2020020101_mod_sort.sql and Roundcube/Input/Roundcube_2020091000_mod_sort.sql:
+## mysqldiff 0.60
+## 
+## Run on Tue Feb 27 17:37:06 2024
+## Options: ignore_tables=(?^:^schema_migrations$), password=, host=localhost, user=root, port=3306
+##
+## --- file: Roundcube/Input/Roundcube_2020020101_mod_sort.sql
+## +++ file: Roundcube/Input/Roundcube_2020091000_mod_sort.sql
+
+CREATE TABLE collected_addresses (
+  address_id int unsigned NOT NULL AUTO_INCREMENT,
+  changed datetime NOT NULL,
+  name varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  email varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  user_id int unsigned NOT NULL,
+  type int unsigned NOT NULL,
+  PRIMARY KEY (address_id),
+  UNIQUE KEY user_email_collected_addresses_index (user_id,type,email),
+  CONSTRAINT user_id_fk_collected_addresses FOREIGN KEY (user_id) REFERENCES users (user_id) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+
+Diff between Roundcube/Input/Roundcube_2020091000_mod_sort.sql and Roundcube/Input/Roundcube_2020122900_mod_sort.sql:
+
+Diff between Roundcube/Input/Roundcube_2020122900_mod_sort.sql and Roundcube/Input/Roundcube_2021081000_mod_sort.sql:
+## mysqldiff 0.60
+## 
+## Run on Tue Feb 27 17:37:17 2024
+## Options: ignore_tables=(?^:^schema_migrations$), password=, host=localhost, user=root, port=3306
+##
+## --- file: Roundcube/Input/Roundcube_2020122900_mod_sort.sql
+## +++ file: Roundcube/Input/Roundcube_2021081000_mod_sort.sql
+
+CREATE TABLE responses (
+  response_id int unsigned NOT NULL AUTO_INCREMENT,
+  user_id int unsigned NOT NULL,
+  name varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  data longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  is_html tinyint(1) NOT NULL DEFAULT '0',
+  changed datetime NOT NULL,
+  del tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (response_id),
+  KEY user_responses_index (user_id,del),
+  CONSTRAINT user_id_fk_responses FOREIGN KEY (user_id) REFERENCES users (user_id) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+
+Diff between Roundcube/Input/Roundcube_2021081000_mod_sort.sql and Roundcube/Input/Roundcube_2021100300_mod_sort.sql:
+
+Diff between Roundcube/Input/Roundcube_2021100300_mod_sort.sql and Roundcube/Input/Roundcube_2022081200_mod_sort.sql:
+
+Diff between Roundcube/Input/Roundcube_2022081200_mod_sort.sql and Roundcube/Input/Roundcube_2022100100_mod_sort.sql:
+## mysqldiff 0.60
+## 
+## Run on Tue Feb 27 17:37:35 2024
+## Options: ignore_tables=(?^:^schema_migrations$), password=, host=localhost, user=root, port=3306
+##
+## --- file: Roundcube/Input/Roundcube_2022081200_mod_sort.sql
+## +++ file: Roundcube/Input/Roundcube_2022100100_mod_sort.sql
+
+CREATE TABLE uploads (
+  upload_id varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  session_id varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  group varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  metadata mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  created datetime NOT NULL DEFAULT '1000-01-01 00:00:00',
+  PRIMARY KEY (upload_id),
+  KEY uploads_session_group_index (session_id,group,created)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+

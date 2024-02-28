@@ -1,0 +1,1804 @@
+Diff between Weberp/Input/Weberp-3.0-demo_mod_sort.sql and Weberp/Input/Weberp-3.01-demo_mod_sort.sql:
+## mysqldiff 0.60
+## 
+## Run on Tue Feb 27 18:49:25 2024
+## Options: user=root, ignore_tables=(?^:^schema_migrations$), port=3306, password=, host=localhost
+##
+## --- file: Weberp/Input/Weberp-3.0-demo_mod_sort.sql
+## +++ file: Weberp/Input/Weberp-3.01-demo_mod_sort.sql
+
+ALTER TABLE www_users CHANGE COLUMN language language char(5) NOT NULL DEFAULT 'en_GB'; # was varchar(5) NOT NULL DEFAULT 'en_gb'
+
+Use of uninitialized value in pattern match (m//) at /usr/local/share/perl/5.34.0/MySQL/Diff.pm line 434.
+Use of uninitialized value in pattern match (m//) at /usr/local/share/perl/5.34.0/MySQL/Diff.pm line 434.
+Diff between Weberp/Input/Weberp-3.01-demo_mod_sort.sql and Weberp/Input/Weberp-3.02-demo_mod_sort.sql:
+## mysqldiff 0.60
+## 
+## Run on Tue Feb 27 18:50:02 2024
+## Options: user=root, ignore_tables=(?^:^schema_migrations$), port=3306, password=, host=localhost
+##
+## --- file: Weberp/Input/Weberp-3.01-demo_mod_sort.sql
+## +++ file: Weberp/Input/Weberp-3.02-demo_mod_sort.sql
+
+ALTER TABLE custbranch DROP COLUMN taxauthority; # was tinyint NOT NULL DEFAULT '1'
+ALTER TABLE custbranch ADD COLUMN taxgroupid tinyint NOT NULL DEFAULT '1';
+ALTER TABLE custbranch DROP INDEX area_2; # was INDEX (area)
+ALTER TABLE custbranch DROP INDEX taxauthority; # was INDEX (taxauthority)
+ALTER TABLE custbranch ADD INDEX taxgroupid (taxgroupid);
+ALTER TABLE locations DROP COLUMN taxauthority; # was tinyint NOT NULL DEFAULT '1'
+ALTER TABLE locations ADD COLUMN taxprovinceid tinyint NOT NULL DEFAULT '1';
+ALTER TABLE locations ADD COLUMN managed tinyint NOT NULL DEFAULT '0';
+ALTER TABLE locations ADD INDEX taxprovinceid (taxprovinceid);
+ALTER TABLE salesorderdetails ADD COLUMN orderlineno int NOT NULL DEFAULT '0';
+ALTER TABLE salesorderdetails ADD INDEX ((orderno,stkcode)); # auto columns must always be indexed
+ALTER TABLE salesorderdetails DROP PRIMARY KEY; # was (orderno,stkcode)
+ALTER TABLE stockmaster DROP COLUMN taxlevel; # was tinyint NOT NULL DEFAULT '1'
+ALTER TABLE stockmaster ADD COLUMN taxcatid tinyint NOT NULL DEFAULT '1';
+ALTER TABLE stockmaster ADD INDEX taxcatid (taxcatid);
+ALTER TABLE stockmoves DROP COLUMN taxrate; # was double NOT NULL DEFAULT '0'
+ALTER TABLE suppliers DROP COLUMN taxauthority; # was tinyint NOT NULL DEFAULT '1'
+ALTER TABLE suppliers ADD COLUMN taxgroupid tinyint NOT NULL DEFAULT '1';
+ALTER TABLE suppliers DROP INDEX taxauthority; # was INDEX (taxauthority)
+ALTER TABLE suppliers ADD INDEX taxgroupid (taxgroupid);
+DROP TABLE taxauthlevels;
+
+CREATE TABLE debtortranstaxes (
+  debtortransid int NOT NULL,
+  taxauthid tinyint NOT NULL,
+  taxamount double NOT NULL,
+  PRIMARY KEY (debtortransid,taxauthid),
+  KEY taxauthid (taxauthid)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE stockmovestaxes (
+  stkmoveno int NOT NULL,
+  taxauthid tinyint NOT NULL,
+  taxontax tinyint NOT NULL DEFAULT '0',
+  taxcalculationorder tinyint NOT NULL,
+  taxrate double NOT NULL DEFAULT '0',
+  PRIMARY KEY (stkmoveno,taxauthid),
+  KEY taxauthid (taxauthid),
+  KEY taxcalculationorder (taxcalculationorder)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE supptranstaxes (
+  supptransid int NOT NULL DEFAULT '0',
+  taxauthid tinyint NOT NULL DEFAULT '0',
+  taxamount double NOT NULL DEFAULT '0',
+  PRIMARY KEY (supptransid,taxauthid),
+  KEY taxauthid (taxauthid)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE taxauthrates (
+  taxauthority tinyint NOT NULL DEFAULT '1',
+  dispatchtaxprovince tinyint NOT NULL DEFAULT '1',
+  taxcatid tinyint NOT NULL DEFAULT '0',
+  taxrate double NOT NULL DEFAULT '0',
+  PRIMARY KEY (taxauthority,dispatchtaxprovince,taxcatid),
+  KEY taxauthority (taxauthority),
+  KEY dispatchtaxprovince (dispatchtaxprovince),
+  KEY taxcatid (taxcatid)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE taxcategories (
+  taxcatid tinyint NOT NULL AUTO_INCREMENT,
+  taxcatname varchar(30) NOT NULL,
+  PRIMARY KEY (taxcatid)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE taxgroups (
+  taxgroupid tinyint NOT NULL AUTO_INCREMENT,
+  taxgroupdescription varchar(30) NOT NULL,
+  PRIMARY KEY (taxgroupid)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE taxgrouptaxes (
+  taxgroupid tinyint NOT NULL,
+  taxauthid tinyint NOT NULL,
+  calculationorder tinyint NOT NULL,
+  taxontax tinyint NOT NULL DEFAULT '0',
+  PRIMARY KEY (taxgroupid,taxauthid),
+  KEY taxgroupid (taxgroupid),
+  KEY taxauthid (taxauthid)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE taxprovinces (
+  taxprovinceid tinyint NOT NULL AUTO_INCREMENT,
+  taxprovincename varchar(30) NOT NULL,
+  PRIMARY KEY (taxprovinceid)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+Diff between Weberp/Input/Weberp-3.02-demo_mod_sort.sql and Weberp/Input/Weberp-3.03-demo_mod_sort.sql:
+## mysqldiff 0.60
+## 
+## Run on Tue Feb 27 18:50:41 2024
+## Options: user=root, ignore_tables=(?^:^schema_migrations$), port=3306, password=, host=localhost
+##
+## --- file: Weberp/Input/Weberp-3.02-demo_mod_sort.sql
+## +++ file: Weberp/Input/Weberp-3.03-demo_mod_sort.sql
+
+ALTER TABLE companies CHANGE COLUMN regoffice2 regoffice2 varchar(40) NOT NULL; # was varchar(50) NOT NULL DEFAULT ''
+ALTER TABLE companies CHANGE COLUMN regoffice1 regoffice1 varchar(40) NOT NULL; # was varchar(50) NOT NULL DEFAULT ''
+ALTER TABLE companies CHANGE COLUMN regoffice3 regoffice3 varchar(40) NOT NULL; # was varchar(50) NOT NULL DEFAULT ''
+ALTER TABLE companies DROP COLUMN postaladdress; # was varchar(50) NOT NULL DEFAULT ''
+ALTER TABLE companies ADD COLUMN regoffice4 varchar(40) NOT NULL;
+ALTER TABLE companies ADD COLUMN regoffice6 varchar(15) NOT NULL DEFAULT '';
+ALTER TABLE companies ADD COLUMN regoffice5 varchar(20) NOT NULL DEFAULT '';
+ALTER TABLE custbranch ADD COLUMN brpostaddr5 varchar(20) NOT NULL DEFAULT '';
+ALTER TABLE custbranch ADD COLUMN braddress5 varchar(20) NOT NULL DEFAULT '';
+ALTER TABLE custbranch ADD COLUMN braddress6 varchar(15) NOT NULL DEFAULT '';
+ALTER TABLE custbranch ADD COLUMN brpostaddr6 varchar(15) NOT NULL DEFAULT '';
+ALTER TABLE debtorsmaster ADD COLUMN address6 varchar(15) NOT NULL;
+ALTER TABLE debtorsmaster ADD COLUMN address5 varchar(20) NOT NULL;
+ALTER TABLE locations ADD COLUMN deladd5 varchar(20) NOT NULL DEFAULT '';
+ALTER TABLE locations ADD COLUMN deladd6 varchar(15) NOT NULL DEFAULT '';
+ALTER TABLE locations ADD COLUMN deladd4 varchar(40) NOT NULL DEFAULT '';
+ALTER TABLE purchorders ADD COLUMN contact varchar(30) NOT NULL DEFAULT '';
+ALTER TABLE purchorders ADD COLUMN deladd6 varchar(15) NOT NULL DEFAULT '';
+ALTER TABLE purchorders ADD COLUMN deladd5 varchar(20) NOT NULL DEFAULT '';
+ALTER TABLE recurringsalesorders CHANGE COLUMN deladd3 deladd3 varchar(40) NOT NULL; # was varchar(15) NOT NULL DEFAULT ''
+ALTER TABLE recurringsalesorders CHANGE COLUMN deladd2 deladd2 varchar(40) NOT NULL; # was varchar(20) NOT NULL DEFAULT ''
+ALTER TABLE recurringsalesorders CHANGE COLUMN deladd4 deladd4 varchar(40) DEFAULT NULL; # was varchar(15) DEFAULT NULL
+ALTER TABLE recurringsalesorders ADD COLUMN deladd6 varchar(15) NOT NULL DEFAULT '';
+ALTER TABLE recurringsalesorders ADD COLUMN deladd5 varchar(20) NOT NULL DEFAULT '';
+ALTER TABLE salesorders CHANGE COLUMN deladd4 deladd4 varchar(40) DEFAULT NULL; # was varchar(15) DEFAULT NULL
+ALTER TABLE salesorders CHANGE COLUMN deladd2 deladd2 varchar(40) NOT NULL; # was varchar(20) NOT NULL DEFAULT ''
+ALTER TABLE salesorders CHANGE COLUMN deladd3 deladd3 varchar(40) NOT NULL; # was varchar(15) NOT NULL DEFAULT ''
+ALTER TABLE salesorders ADD COLUMN deladd6 varchar(15) NOT NULL DEFAULT '';
+ALTER TABLE salesorders ADD COLUMN deladd5 varchar(20) NOT NULL DEFAULT '';
+ALTER TABLE suppliers ADD COLUMN address6 varchar(15) NOT NULL DEFAULT '';
+ALTER TABLE suppliers ADD COLUMN address5 varchar(20) NOT NULL DEFAULT '';
+
+Diff between Weberp/Input/Weberp-3.03-demo_mod_sort.sql and Weberp/Input/Weberp-3.04-demo_mod_sort.sql:
+## mysqldiff 0.60
+## 
+## Run on Tue Feb 27 18:51:17 2024
+## Options: user=root, ignore_tables=(?^:^schema_migrations$), port=3306, password=, host=localhost
+##
+## --- file: Weberp/Input/Weberp-3.03-demo_mod_sort.sql
+## +++ file: Weberp/Input/Weberp-3.04-demo_mod_sort.sql
+
+ALTER TABLE suppliers CHANGE COLUMN bankact bankact varchar(30) NOT NULL; # was char(16) NOT NULL DEFAULT ''
+
+Diff between Weberp/Input/Weberp-3.04-demo_mod_sort.sql and Weberp/Input/Weberp-3.05-demo_mod_sort.sql:
+## mysqldiff 0.60
+## 
+## Run on Tue Feb 27 18:51:54 2024
+## Options: user=root, ignore_tables=(?^:^schema_migrations$), port=3306, password=, host=localhost
+##
+## --- file: Weberp/Input/Weberp-3.04-demo_mod_sort.sql
+## +++ file: Weberp/Input/Weberp-3.05-demo_mod_sort.sql
+
+ALTER TABLE custbranch DROP INDEX branchcode; # was INDEX (branchcode)
+ALTER TABLE grns ADD COLUMN stdcostunit double NOT NULL DEFAULT '0';
+ALTER TABLE stockcheckfreeze DROP PRIMARY KEY; # was (stockid)
+ALTER TABLE stockcheckfreeze ADD PRIMARY KEY (stockid,loccode);
+ALTER TABLE stockserialitems ADD INDEX serialno (serialno);
+ALTER TABLE stockserialmoves ADD INDEX serialno (serialno);
+CREATE TABLE reportfields (
+  id int NOT NULL AUTO_INCREMENT,
+  reportid int NOT NULL DEFAULT '0',
+  entrytype varchar(15) NOT NULL DEFAULT '',
+  seqnum int NOT NULL DEFAULT '0',
+  fieldname varchar(35) NOT NULL DEFAULT '',
+  displaydesc varchar(25) NOT NULL DEFAULT '',
+  visible enum('1','0') NOT NULL DEFAULT '1',
+  columnbreak enum('1','0') NOT NULL DEFAULT '1',
+  params text,
+  PRIMARY KEY (id),
+  KEY reportid (reportid)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE reportlinks (
+  table1 varchar(25) NOT NULL DEFAULT '',
+  table2 varchar(25) NOT NULL DEFAULT '',
+  equation varchar(75) NOT NULL DEFAULT ''
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE reports (
+  id int NOT NULL AUTO_INCREMENT,
+  reportname varchar(30) NOT NULL DEFAULT '',
+  reporttype char(3) NOT NULL DEFAULT 'rpt',
+  groupname varchar(9) NOT NULL DEFAULT 'misc',
+  defaultreport enum('1','0') NOT NULL DEFAULT '0',
+  papersize varchar(15) NOT NULL DEFAULT 'A4,210,297',
+  paperorientation enum('P','L') NOT NULL DEFAULT 'P',
+  margintop int NOT NULL DEFAULT '10',
+  marginbottom int NOT NULL DEFAULT '10',
+  marginleft int NOT NULL DEFAULT '10',
+  marginright int NOT NULL DEFAULT '10',
+  coynamefont varchar(20) NOT NULL DEFAULT 'Helvetica',
+  coynamefontsize int NOT NULL DEFAULT '12',
+  coynamefontcolor varchar(11) NOT NULL DEFAULT '0,0,0',
+  coynamealign enum('L','C','R') NOT NULL DEFAULT 'C',
+  coynameshow enum('1','0') NOT NULL DEFAULT '1',
+  title1desc varchar(50) NOT NULL DEFAULT '%reportname%',
+  title1font varchar(20) NOT NULL DEFAULT 'Helvetica',
+  title1fontsize int NOT NULL DEFAULT '10',
+  title1fontcolor varchar(11) NOT NULL DEFAULT '0,0,0',
+  title1fontalign enum('L','C','R') NOT NULL DEFAULT 'C',
+  title1show enum('1','0') NOT NULL DEFAULT '1',
+  title2desc varchar(50) NOT NULL DEFAULT 'Report Generated %date%',
+  title2font varchar(20) NOT NULL DEFAULT 'Helvetica',
+  title2fontsize int NOT NULL DEFAULT '10',
+  title2fontcolor varchar(11) NOT NULL DEFAULT '0,0,0',
+  title2fontalign enum('L','C','R') NOT NULL DEFAULT 'C',
+  title2show enum('1','0') NOT NULL DEFAULT '1',
+  filterfont varchar(10) NOT NULL DEFAULT 'Helvetica',
+  filterfontsize int NOT NULL DEFAULT '8',
+  filterfontcolor varchar(11) NOT NULL DEFAULT '0,0,0',
+  filterfontalign enum('L','C','R') NOT NULL DEFAULT 'L',
+  datafont varchar(10) NOT NULL DEFAULT 'Helvetica',
+  datafontsize int NOT NULL DEFAULT '10',
+  datafontcolor varchar(10) NOT NULL DEFAULT 'black',
+  datafontalign enum('L','C','R') NOT NULL DEFAULT 'L',
+  totalsfont varchar(10) NOT NULL DEFAULT 'Helvetica',
+  totalsfontsize int NOT NULL DEFAULT '10',
+  totalsfontcolor varchar(11) NOT NULL DEFAULT '0,0,0',
+  totalsfontalign enum('L','C','R') NOT NULL DEFAULT 'L',
+  col1width int NOT NULL DEFAULT '25',
+  col2width int NOT NULL DEFAULT '25',
+  col3width int NOT NULL DEFAULT '25',
+  col4width int NOT NULL DEFAULT '25',
+  col5width int NOT NULL DEFAULT '25',
+  col6width int NOT NULL DEFAULT '25',
+  col7width int NOT NULL DEFAULT '25',
+  col8width int NOT NULL DEFAULT '25',
+  table1 varchar(25) NOT NULL DEFAULT '',
+  table2 varchar(25) DEFAULT NULL,
+  table2criteria varchar(75) DEFAULT NULL,
+  table3 varchar(25) DEFAULT NULL,
+  table3criteria varchar(75) DEFAULT NULL,
+  table4 varchar(25) DEFAULT NULL,
+  table4criteria varchar(75) DEFAULT NULL,
+  table5 varchar(25) DEFAULT NULL,
+  table5criteria varchar(75) DEFAULT NULL,
+  table6 varchar(25) DEFAULT NULL,
+  table6criteria varchar(75) DEFAULT NULL,
+  PRIMARY KEY (id),
+  KEY name (reportname,groupname)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+Diff between Weberp/Input/Weberp-3.05-demo_mod_sort.sql and Weberp/Input/Weberp-3.06-demo_mod_sort.sql:
+## mysqldiff 0.60
+## 
+## Run on Tue Feb 27 18:52:32 2024
+## Options: user=root, ignore_tables=(?^:^schema_migrations$), port=3306, password=, host=localhost
+##
+## --- file: Weberp/Input/Weberp-3.05-demo_mod_sort.sql
+## +++ file: Weberp/Input/Weberp-3.06-demo_mod_sort.sql
+
+ALTER TABLE accountgroups ADD COLUMN parentgroupname varchar(30) NOT NULL DEFAULT '';
+ALTER TABLE bom ADD COLUMN autoissue tinyint NOT NULL DEFAULT '0';
+ALTER TABLE custbranch ADD COLUMN specialinstructions text NOT NULL;
+ALTER TABLE recurrsalesorderdetails ADD INDEX ((recurrorderno,stkcode)); # auto columns must always be indexed
+ALTER TABLE recurrsalesorderdetails DROP PRIMARY KEY; # was (recurrorderno,stkcode)
+ALTER TABLE stockmoves DROP INDEX stockid; # was INDEX (stockid,loccode)
+ALTER TABLE stockmoves ADD INDEX reference (reference);
+DROP TABLE worksorders;
+
+CREATE TABLE woitems (
+  wo int NOT NULL,
+  stockid char(20) NOT NULL DEFAULT '',
+  qtyreqd double NOT NULL DEFAULT '1',
+  qtyrecd double NOT NULL DEFAULT '0',
+  stdcost double NOT NULL,
+  nextlotsnref varchar(20) DEFAULT '',
+  PRIMARY KEY (wo,stockid),
+  KEY stockid (stockid)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE worequirements (
+  wo int NOT NULL,
+  parentstockid varchar(20) NOT NULL,
+  stockid varchar(20) NOT NULL,
+  qtypu double NOT NULL DEFAULT '1',
+  stdcost double NOT NULL DEFAULT '0',
+  autoissue tinyint NOT NULL DEFAULT '0',
+  PRIMARY KEY (wo,parentstockid,stockid)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE workorders (
+  wo int NOT NULL,
+  loccode char(5) NOT NULL DEFAULT '',
+  requiredby date NOT NULL DEFAULT '2023-01-01',
+  startdate date NOT NULL DEFAULT '2023-01-01',
+  costissued double NOT NULL DEFAULT '0',
+  closed tinyint NOT NULL DEFAULT '0',
+  PRIMARY KEY (wo),
+  KEY LocCode (loccode),
+  KEY StartDate (startdate),
+  KEY RequiredBy (requiredby)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+Diff between Weberp/Input/Weberp-3.06-demo_mod_sort.sql and Weberp/Input/Weberp-3.07-demo_mod_sort.sql:
+## mysqldiff 0.60
+## 
+## Run on Tue Feb 27 18:53:12 2024
+## Options: user=root, ignore_tables=(?^:^schema_migrations$), port=3306, password=, host=localhost
+##
+## --- file: Weberp/Input/Weberp-3.06-demo_mod_sort.sql
+## +++ file: Weberp/Input/Weberp-3.07-demo_mod_sort.sql
+
+CREATE TABLE stockcatproperties (
+  stkcatpropid int NOT NULL AUTO_INCREMENT,
+  categoryid char(6) NOT NULL,
+  label text NOT NULL,
+  controltype tinyint NOT NULL DEFAULT '0',
+  defaultvalue varchar(100) NOT NULL DEFAULT '',
+  reqatsalesorder tinyint NOT NULL DEFAULT '0',
+  PRIMARY KEY (stkcatpropid),
+  KEY categoryid (categoryid)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE stockitemproperties (
+  stockid varchar(20) NOT NULL,
+  stkcatpropid int NOT NULL,
+  value varchar(50) NOT NULL,
+  PRIMARY KEY (stockid,stkcatpropid),
+  KEY stockid (stockid),
+  KEY value (value)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+Diff between Weberp/Input/Weberp-3.07-demo_mod_sort.sql and Weberp/Input/Weberp-3.08-demo_mod_sort.sql:
+## mysqldiff 0.60
+## 
+## Run on Tue Feb 27 18:53:51 2024
+## Options: user=root, ignore_tables=(?^:^schema_migrations$), port=3306, password=, host=localhost
+##
+## --- file: Weberp/Input/Weberp-3.07-demo_mod_sort.sql
+## +++ file: Weberp/Input/Weberp-3.08-demo_mod_sort.sql
+
+ALTER TABLE debtorsmaster ADD COLUMN customerpoline tinyint(1) NOT NULL DEFAULT '0';
+ALTER TABLE salesorderdetails ADD COLUMN itemdue date DEFAULT NULL COMMENT 'Due date for line item. Some customers require \nacknowledgements with due dates by line item';
+ALTER TABLE salesorderdetails ADD COLUMN poline varchar(10) DEFAULT NULL COMMENT 'Some Customers require acknowledgements with a PO line number for each sales line';
+
+Diff between Weberp/Input/Weberp-3.08-demo_mod_sort.sql and Weberp/Input/Weberp-3.09-demo_mod_sort.sql:
+## mysqldiff 0.60
+## 
+## Run on Tue Feb 27 18:54:30 2024
+## Options: user=root, ignore_tables=(?^:^schema_migrations$), port=3306, password=, host=localhost
+##
+## --- file: Weberp/Input/Weberp-3.08-demo_mod_sort.sql
+## +++ file: Weberp/Input/Weberp-3.09-demo_mod_sort.sql
+
+ALTER TABLE bankaccounts ADD COLUMN currcode char(3) NOT NULL;
+ALTER TABLE banktrans CHANGE COLUMN exrate exrate double NOT NULL DEFAULT '1' COMMENT 'From bank account currency to payment currency'; # was double NOT NULL DEFAULT '1'
+ALTER TABLE banktrans ADD COLUMN functionalexrate double NOT NULL DEFAULT '1' COMMENT 'Account currency to functional currency';
+ALTER TABLE salesorders CHANGE COLUMN contactemail contactemail varchar(40) DEFAULT NULL; # was varchar(25) DEFAULT NULL
+ALTER TABLE stockmaster ADD COLUMN perishable tinyint(1) NOT NULL DEFAULT '0';
+ALTER TABLE stockmaster ADD COLUMN appendfile varchar(40) NOT NULL DEFAULT 'none';
+ALTER TABLE stockserialitems ADD COLUMN expirationdate datetime NOT NULL DEFAULT '2023-01-01 00:00:00';
+ALTER TABLE suppliers ADD COLUMN factorcompanyid int NOT NULL DEFAULT '1';
+ALTER TABLE worequirements ADD CONSTRAINT worequirements_ibfk_3 FOREIGN KEY (wo, parentstockid) REFERENCES woitems (wo, stockid);
+CREATE TABLE assetmanager (
+  id int NOT NULL AUTO_INCREMENT,
+  serialno varchar(30) NOT NULL DEFAULT '',
+  assetglcode int NOT NULL DEFAULT '0',
+  depnglcode int NOT NULL DEFAULT '0',
+  description varchar(30) NOT NULL DEFAULT '',
+  lifetime int NOT NULL DEFAULT '0',
+  location varchar(15) NOT NULL DEFAULT '',
+  cost double NOT NULL DEFAULT '0',
+  depn double NOT NULL DEFAULT '0',
+  PRIMARY KEY (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE audittrail (
+  transactiondate datetime NOT NULL DEFAULT '2023-01-01 00:00:00',
+  userid varchar(20) NOT NULL DEFAULT '',
+  querystring text,
+  KEY UserID (userid)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE factorcompanies (
+  id int NOT NULL AUTO_INCREMENT,
+  coyname varchar(50) NOT NULL DEFAULT '',
+  address1 varchar(40) NOT NULL DEFAULT '',
+  address2 varchar(40) NOT NULL DEFAULT '',
+  address3 varchar(40) NOT NULL DEFAULT '',
+  address4 varchar(40) NOT NULL DEFAULT '',
+  address5 varchar(20) NOT NULL DEFAULT '',
+  address6 varchar(15) NOT NULL DEFAULT '',
+  contact varchar(25) NOT NULL DEFAULT '',
+  telephone varchar(25) NOT NULL DEFAULT '',
+  fax varchar(25) NOT NULL DEFAULT '',
+  email varchar(55) NOT NULL DEFAULT '',
+  PRIMARY KEY (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+Diff between Weberp/Input/Weberp-3.09-demo_mod_sort.sql and Weberp/Input/Weberp-3.10-demo_mod_sort.sql:
+## mysqldiff 0.60
+## 
+## Run on Tue Feb 27 18:55:14 2024
+## Options: user=root, ignore_tables=(?^:^schema_migrations$), port=3306, password=, host=localhost
+##
+## --- file: Weberp/Input/Weberp-3.09-demo_mod_sort.sql
+## +++ file: Weberp/Input/Weberp-3.10-demo_mod_sort.sql
+
+ALTER TABLE custbranch ADD COLUMN lat float(10,6) NOT NULL;
+ALTER TABLE custbranch ADD COLUMN lng float(10,6) NOT NULL;
+ALTER TABLE debtorsmaster ADD COLUMN typeid tinyint NOT NULL DEFAULT '1';
+ALTER TABLE debtortrans CHANGE COLUMN trandate trandate date NOT NULL DEFAULT '2023-01-01'; # was datetime NOT NULL DEFAULT '2023-01-01 00:00:00'
+ALTER TABLE gltrans ADD COLUMN tag tinyint NOT NULL DEFAULT '0';
+ALTER TABLE purchdata ADD COLUMN effectivefrom date NOT NULL;
+ALTER TABLE salesanalysis CHANGE COLUMN area area varchar(3) NOT NULL; # was char(2) NOT NULL DEFAULT ''
+ALTER TABLE salesglpostings CHANGE COLUMN area area varchar(3) NOT NULL; # was char(2) NOT NULL DEFAULT ''
+ALTER TABLE suppliers ADD COLUMN lng float(10,6) NOT NULL;
+ALTER TABLE suppliers ADD COLUMN lat float(10,6) NOT NULL;
+ALTER TABLE suppliers ADD COLUMN taxref varchar(20) NOT NULL DEFAULT '';
+CREATE TABLE custcontacts (
+  contid int NOT NULL AUTO_INCREMENT,
+  debtorno varchar(10) NOT NULL,
+  contactname varchar(40) NOT NULL,
+  role varchar(40) NOT NULL,
+  phoneno varchar(20) NOT NULL,
+  notes varchar(255) NOT NULL,
+  PRIMARY KEY (contid)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE custnotes (
+  noteid tinyint NOT NULL AUTO_INCREMENT,
+  debtorno varchar(10) NOT NULL DEFAULT '0',
+  href varchar(100) NOT NULL,
+  note varchar(200) NOT NULL,
+  date date NOT NULL DEFAULT '2023-01-01',
+  priority varchar(20) NOT NULL,
+  PRIMARY KEY (noteid)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE debtortype (
+  typeid tinyint NOT NULL AUTO_INCREMENT,
+  typename varchar(100) NOT NULL,
+  PRIMARY KEY (typeid)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE debtortypenotes (
+  noteid tinyint NOT NULL AUTO_INCREMENT,
+  typeid tinyint NOT NULL DEFAULT '0',
+  href varchar(100) NOT NULL,
+  note varchar(200) NOT NULL,
+  date date NOT NULL DEFAULT '2023-01-01',
+  priority varchar(20) NOT NULL,
+  PRIMARY KEY (noteid)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE geocode_param (
+  geocodeid varchar(4) NOT NULL DEFAULT '',
+  geocode_key varchar(200) NOT NULL DEFAULT '',
+  center_long varchar(20) NOT NULL DEFAULT '',
+  center_lat varchar(20) NOT NULL DEFAULT '',
+  map_height varchar(10) NOT NULL DEFAULT '',
+  map_width varchar(10) NOT NULL DEFAULT '',
+  map_host varchar(50) NOT NULL DEFAULT ''
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE tags (
+  tagref tinyint NOT NULL AUTO_INCREMENT,
+  tagdescription varchar(50) NOT NULL,
+  PRIMARY KEY (tagref)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+Diff between Weberp/Input/Weberp-3.10-demo_mod_sort.sql and Weberp/Input/Weberp-3.11-demo_mod_sort.sql:
+## mysqldiff 0.60
+## 
+## Run on Tue Feb 27 18:56:00 2024
+## Options: user=root, ignore_tables=(?^:^schema_migrations$), port=3306, password=, host=localhost
+##
+## --- file: Weberp/Input/Weberp-3.10-demo_mod_sort.sql
+## +++ file: Weberp/Input/Weberp-3.11-demo_mod_sort.sql
+
+ALTER TABLE bankaccounts ADD COLUMN invoice smallint NOT NULL DEFAULT '0';
+ALTER TABLE bankaccounts ADD COLUMN bankaccountcode varchar(50) NOT NULL DEFAULT '';
+ALTER TABLE custnotes CHANGE COLUMN note note text NOT NULL; # was varchar(200) NOT NULL
+ALTER TABLE debtortrans CHANGE COLUMN shipvia shipvia int NOT NULL DEFAULT '0'; # was varchar(10) NOT NULL DEFAULT ''
+ALTER TABLE geocode_param CHANGE COLUMN geocodeid geocodeid tinyint NOT NULL AUTO_INCREMENT; # was varchar(4) NOT NULL DEFAULT ''
+ALTER TABLE purchdata ADD COLUMN suppliers_partno varchar(50) NOT NULL DEFAULT '';
+ALTER TABLE purchdata DROP PRIMARY KEY; # was (supplierno,stockid)
+ALTER TABLE purchdata ADD PRIMARY KEY (supplierno,stockid,effectivefrom);
+ALTER TABLE purchorderdetails ADD COLUMN nw varchar(50) NOT NULL DEFAULT '';
+ALTER TABLE purchorderdetails ADD COLUMN cuft varchar(50) NOT NULL DEFAULT '';
+ALTER TABLE purchorderdetails ADD COLUMN total_amount varchar(50) NOT NULL DEFAULT '';
+ALTER TABLE purchorderdetails ADD COLUMN total_quantity varchar(50) NOT NULL DEFAULT '';
+ALTER TABLE purchorderdetails ADD COLUMN pcunit varchar(50) NOT NULL DEFAULT '';
+ALTER TABLE purchorderdetails ADD COLUMN subtotal_amount varchar(50) NOT NULL DEFAULT '';
+ALTER TABLE purchorderdetails ADD COLUMN package varchar(100) NOT NULL DEFAULT '';
+ALTER TABLE purchorderdetails ADD COLUMN uom varchar(50) NOT NULL DEFAULT '';
+ALTER TABLE purchorderdetails ADD COLUMN suppliers_partno varchar(50) NOT NULL DEFAULT '';
+ALTER TABLE purchorderdetails ADD COLUMN itemno varchar(50) NOT NULL DEFAULT '';
+ALTER TABLE purchorderdetails ADD COLUMN gw varchar(50) NOT NULL DEFAULT '';
+ALTER TABLE purchorders ADD COLUMN deliveryby varchar(100) NOT NULL DEFAULT '';
+ALTER TABLE purchorders ADD COLUMN stat_comment text NOT NULL;
+ALTER TABLE purchorders ADD COLUMN version decimal(3,2) NOT NULL DEFAULT '1.00';
+ALTER TABLE purchorders ADD COLUMN revised date NOT NULL DEFAULT '2023-01-01';
+ALTER TABLE purchorders ADD COLUMN realorderno varchar(16) NOT NULL DEFAULT '';
+ALTER TABLE purchorders ADD COLUMN deliverydate date NOT NULL DEFAULT '2023-01-01';
+ALTER TABLE purchorders ADD COLUMN status varchar(12) NOT NULL DEFAULT '';
+ALTER TABLE salesorders ADD COLUMN quotedate date NOT NULL DEFAULT '2023-01-01';
+ALTER TABLE salesorders ADD COLUMN confirmeddate date NOT NULL DEFAULT '2023-01-01';
+ALTER TABLE stockmaster ADD COLUMN pansize double NOT NULL DEFAULT '0';
+ALTER TABLE stockmaster ADD COLUMN shrinkfactor double NOT NULL DEFAULT '0';
+ALTER TABLE stockmaster ADD COLUMN nextserialno bigint NOT NULL DEFAULT '0';
+ALTER TABLE stockmaster ADD COLUMN netweight decimal(20,4) NOT NULL DEFAULT '0.0000';
+ALTER TABLE stockserialitems ADD COLUMN qualitytext text NOT NULL;
+ALTER TABLE suppliers ADD COLUMN phn varchar(50) NOT NULL DEFAULT '';
+ALTER TABLE suppliers ADD COLUMN port varchar(200) NOT NULL DEFAULT '';
+ALTER TABLE www_users ADD COLUMN salesman char(3) NOT NULL;
+CREATE TABLE deliverynotes (
+  deliverynotenumber int NOT NULL,
+  deliverynotelineno tinyint NOT NULL,
+  salesorderno int NOT NULL,
+  salesorderlineno int NOT NULL,
+  qtydelivered double NOT NULL DEFAULT '0',
+  printed tinyint NOT NULL DEFAULT '0',
+  invoiced tinyint NOT NULL DEFAULT '0',
+  deliverydate date NOT NULL DEFAULT '2023-01-01',
+  PRIMARY KEY (deliverynotenumber,deliverynotelineno),
+  KEY deliverynotes_ibfk_2 (salesorderno,salesorderlineno)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+CREATE TABLE mrpcalendar (
+  calendardate date NOT NULL,
+  daynumber int NOT NULL,
+  manufacturingflag smallint NOT NULL DEFAULT '1',
+  PRIMARY KEY (calendardate),
+  KEY daynumber (daynumber)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+CREATE TABLE mrpdemands (
+  demandid int NOT NULL AUTO_INCREMENT,
+  stockid varchar(20) NOT NULL DEFAULT '',
+  mrpdemandtype varchar(6) NOT NULL DEFAULT '',
+  quantity double NOT NULL DEFAULT '0',
+  duedate date NOT NULL DEFAULT '2023-01-01',
+  PRIMARY KEY (demandid),
+  KEY StockID (stockid)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+CREATE TABLE mrpdemandtypes (
+  mrpdemandtype varchar(6) NOT NULL DEFAULT '',
+  description char(30) NOT NULL DEFAULT '',
+  PRIMARY KEY (mrpdemandtype),
+  KEY mrpdemandtype (mrpdemandtype)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+CREATE TABLE purchorderauth (
+  userid varchar(20) NOT NULL DEFAULT '',
+  currabrev char(3) NOT NULL DEFAULT '',
+  cancreate smallint NOT NULL DEFAULT '0',
+  authlevel int NOT NULL DEFAULT '0',
+  PRIMARY KEY (userid,currabrev)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+CREATE TABLE woserialnos (
+  wo int NOT NULL,
+  stockid varchar(20) NOT NULL,
+  serialno varchar(30) NOT NULL,
+  quantity double NOT NULL DEFAULT '1',
+  qualitytext text NOT NULL,
+  PRIMARY KEY (wo,stockid,serialno)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+
+Diff between Weberp/Input/Weberp-3.11-demo_mod_sort.sql and Weberp/Input/Weberp-3.11.1-demo_mod_sort.sql:
+## mysqldiff 0.60
+## 
+## Run on Tue Feb 27 18:56:43 2024
+## Options: user=root, ignore_tables=(?^:^schema_migrations$), port=3306, password=, host=localhost
+##
+## --- file: Weberp/Input/Weberp-3.11-demo_mod_sort.sql
+## +++ file: Weberp/Input/Weberp-3.11.1-demo_mod_sort.sql
+
+ALTER TABLE mrpdemands ADD INDEX mrpdemands_ibfk_1 (mrpdemandtype);
+ALTER TABLE mrpdemands ADD CONSTRAINT mrpdemands_ibfk_1 FOREIGN KEY (mrpdemandtype) REFERENCES mrpdemandtypes (mrpdemandtype);
+
+Use of uninitialized value in pattern match (m//) at /usr/local/share/perl/5.34.0/MySQL/Diff.pm line 434.
+Use of uninitialized value in pattern match (m//) at /usr/local/share/perl/5.34.0/MySQL/Diff.pm line 434.
+Use of uninitialized value in pattern match (m//) at /usr/local/share/perl/5.34.0/MySQL/Diff.pm line 434.
+Use of uninitialized value in pattern match (m//) at /usr/local/share/perl/5.34.0/MySQL/Diff.pm line 434.
+Use of uninitialized value in pattern match (m//) at /usr/local/share/perl/5.34.0/MySQL/Diff.pm line 434.
+Use of uninitialized value in pattern match (m//) at /usr/local/share/perl/5.34.0/MySQL/Diff.pm line 434.
+Use of uninitialized value in pattern match (m//) at /usr/local/share/perl/5.34.0/MySQL/Diff.pm line 434.
+Use of uninitialized value in pattern match (m//) at /usr/local/share/perl/5.34.0/MySQL/Diff.pm line 434.
+Use of uninitialized value in pattern match (m//) at /usr/local/share/perl/5.34.0/MySQL/Diff.pm line 434.
+Diff between Weberp/Input/Weberp-3.11.1-demo_mod_sort.sql and Weberp/Input/Weberp-4.00-demo_mod_sort.sql:
+## mysqldiff 0.60
+## 
+## Run on Tue Feb 27 18:57:29 2024
+## Options: user=root, ignore_tables=(?^:^schema_migrations$), port=3306, password=, host=localhost
+##
+## --- file: Weberp/Input/Weberp-3.11.1-demo_mod_sort.sql
+## +++ file: Weberp/Input/Weberp-4.00-demo_mod_sort.sql
+
+ALTER TABLE chartmaster DROP INDEX accountcode; # was INDEX (accountcode)
+ALTER TABLE contractbom CHANGE COLUMN quantity quantity double NOT NULL DEFAULT '1'; # was double(16,4) NOT NULL DEFAULT '1.0000'
+ALTER TABLE contractbom DROP COLUMN component; # was char(20) NOT NULL DEFAULT ''
+ALTER TABLE contractbom DROP COLUMN loccode; # was char(5) NOT NULL DEFAULT ''
+ALTER TABLE contractbom CHANGE COLUMN contractref contractref varchar(20) NOT NULL DEFAULT '0'; # was char(20) NOT NULL DEFAULT ''
+ALTER TABLE contractbom ADD COLUMN stockid varchar(20) NOT NULL DEFAULT '';
+ALTER TABLE contractbom DROP INDEX component; # was INDEX (component)
+ALTER TABLE contractbom DROP INDEX workcentreadded_2; # was INDEX (workcentreadded)
+ALTER TABLE contractbom DROP INDEX workcentreadded; # was INDEX (workcentreadded)
+ALTER TABLE contractbom DROP INDEX contractref; # was INDEX (contractref)
+ALTER TABLE contractbom DROP INDEX loccode; # was INDEX (loccode)
+ALTER TABLE contractbom ADD INDEX Stockid (stockid);
+ALTER TABLE contractbom ADD INDEX ContractRef (contractref);
+ALTER TABLE contractbom ADD INDEX WorkCentreAdded (workcentreadded);
+ALTER TABLE contractbom DROP PRIMARY KEY; # was (contractref,component,workcentreadded,loccode)
+ALTER TABLE contractbom ADD PRIMARY KEY (contractref,stockid,workcentreadded);
+ALTER TABLE contractbom ENGINE=InnoDB DEFAULT CHARSET=utf8mb3; # was ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+ALTER TABLE contractreqts DROP COLUMN contract; # was char(20) NOT NULL DEFAULT ''
+ALTER TABLE contractreqts DROP COLUMN priceperunit; # was decimal(20,4) NOT NULL DEFAULT '0.0000'
+ALTER TABLE contractreqts CHANGE COLUMN quantity quantity double NOT NULL DEFAULT '1'; # was double(16,4) NOT NULL DEFAULT '1.0000'
+ALTER TABLE contractreqts DROP COLUMN component; # was char(40) NOT NULL DEFAULT ''
+ALTER TABLE contractreqts ADD COLUMN contractref varchar(20) NOT NULL DEFAULT '0';
+ALTER TABLE contractreqts ADD COLUMN requirement varchar(40) NOT NULL DEFAULT '';
+ALTER TABLE contractreqts ADD COLUMN costperunit double NOT NULL DEFAULT '0';
+ALTER TABLE contractreqts DROP INDEX contract; # was INDEX (contract)
+ALTER TABLE contractreqts ADD INDEX ContractRef (contractref);
+ALTER TABLE contractreqts ENGINE=InnoDB DEFAULT CHARSET=utf8mb3; # was ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+ALTER TABLE contracts DROP COLUMN specifications; # was longblob NOT NULL
+ALTER TABLE contracts CHANGE COLUMN margin margin double NOT NULL DEFAULT '1'; # was double(16,4) NOT NULL DEFAULT '1.0000'
+ALTER TABLE contracts DROP COLUMN canceldate; # was datetime NOT NULL DEFAULT '2023-01-01 00:00:00'
+ALTER TABLE contracts DROP COLUMN woref; # was varchar(20) NOT NULL DEFAULT ''
+ALTER TABLE contracts DROP COLUMN rate; # was double(16,4) NOT NULL DEFAULT '1.0000'
+ALTER TABLE contracts CHANGE COLUMN contractdescription contractdescription text NOT NULL; # was varchar(50) NOT NULL DEFAULT ''
+ALTER TABLE contracts DROP COLUMN datequoted; # was datetime NOT NULL DEFAULT '2023-01-01 00:00:00'
+ALTER TABLE contracts CHANGE COLUMN drawing drawing varchar(50) NOT NULL DEFAULT ''; # was longblob NOT NULL
+ALTER TABLE contracts CHANGE COLUMN requireddate requireddate date NOT NULL DEFAULT '2023-01-01'; # was datetime NOT NULL DEFAULT '2023-01-01 00:00:00'
+ALTER TABLE contracts DROP COLUMN quotedpricefx; # was decimal(20,4) NOT NULL DEFAULT '0.0000'
+ALTER TABLE contracts DROP COLUMN quantityreqd; # was double(16,4) NOT NULL DEFAULT '1.0000'
+ALTER TABLE contracts DROP COLUMN typeabbrev; # was char(2) NOT NULL DEFAULT ''
+ALTER TABLE contracts CHANGE COLUMN status status tinyint NOT NULL DEFAULT '0'; # was varchar(10) NOT NULL DEFAULT 'quotation'
+ALTER TABLE contracts DROP COLUMN units; # was varchar(15) NOT NULL DEFAULT 'each'
+ALTER TABLE contracts ADD COLUMN wo int NOT NULL DEFAULT '0';
+ALTER TABLE contracts ADD COLUMN exrate double NOT NULL DEFAULT '1';
+ALTER TABLE contracts ADD COLUMN customerref varchar(20) NOT NULL DEFAULT '';
+ALTER TABLE contracts ADD COLUMN loccode varchar(5) NOT NULL DEFAULT '';
+ALTER TABLE contracts DROP INDEX woref; # was INDEX (woref)
+ALTER TABLE contracts DROP INDEX debtorno; # was INDEX (debtorno,branchcode)
+ALTER TABLE contracts DROP INDEX status; # was INDEX (status)
+ALTER TABLE contracts DROP INDEX typeabbrev; # was INDEX (typeabbrev)
+ALTER TABLE contracts DROP INDEX orderno; # was INDEX (orderno)
+ALTER TABLE contracts DROP INDEX categoryid; # was INDEX (categoryid)
+ALTER TABLE contracts ADD INDEX loccode (loccode);
+ALTER TABLE contracts ADD INDEX DebtorNo (debtorno,branchcode);
+ALTER TABLE contracts ADD INDEX Status (status);
+ALTER TABLE contracts ADD INDEX CategoryID (categoryid);
+ALTER TABLE contracts ADD INDEX OrderNo (orderno);
+ALTER TABLE contracts ADD INDEX WO (wo);
+ALTER TABLE contracts ENGINE=InnoDB DEFAULT CHARSET=utf8mb3; # was ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+ALTER TABLE currencies ADD COLUMN decimalplaces tinyint NOT NULL DEFAULT '2';
+ALTER TABLE debtortrans ADD COLUMN inputdate datetime NOT NULL;
+ALTER TABLE holdreasons DROP INDEX reasoncode; # was INDEX (reasoncode)
+ALTER TABLE locations ADD COLUMN cashsalebranch varchar(10) DEFAULT '';
+ALTER TABLE locations ADD COLUMN cashsalecustomer varchar(10) DEFAULT '';
+ALTER TABLE loctransfers CHANGE COLUMN shipqty shipqty double NOT NULL DEFAULT '0'; # was int NOT NULL DEFAULT '0'
+ALTER TABLE loctransfers CHANGE COLUMN recqty recqty double NOT NULL DEFAULT '0'; # was int NOT NULL DEFAULT '0'
+ALTER TABLE orderdeliverydifferenceslog ADD INDEX ((orderno,invoiceno,stockid)); # auto columns must always be indexed
+ALTER TABLE orderdeliverydifferenceslog DROP PRIMARY KEY; # was (orderno,invoiceno,stockid)
+ALTER TABLE paymentmethods ADD COLUMN usepreprintedstationery tinyint NOT NULL DEFAULT '0';
+ALTER TABLE prices ADD COLUMN startdate date NOT NULL DEFAULT '2023-01-01';
+ALTER TABLE prices ADD COLUMN enddate date NOT NULL DEFAULT '2023-01-01';
+ALTER TABLE prices DROP PRIMARY KEY; # was (stockid,typeabbrev,currabrev,debtorno)
+ALTER TABLE prices ADD PRIMARY KEY (stockid,typeabbrev,currabrev,debtorno,branchcode,startdate,enddate);
+ALTER TABLE purchdata ADD COLUMN minorderqty int NOT NULL DEFAULT '1';
+ALTER TABLE purchorderauth ADD COLUMN offhold tinyint(1) NOT NULL DEFAULT '0';
+ALTER TABLE purchorderdetails DROP COLUMN total_amount; # was varchar(50) NOT NULL DEFAULT ''
+ALTER TABLE purchorderdetails DROP COLUMN total_quantity; # was varchar(50) NOT NULL DEFAULT ''
+ALTER TABLE purchorderdetails DROP COLUMN cuft; # was varchar(50) NOT NULL DEFAULT ''
+ALTER TABLE purchorderdetails DROP COLUMN nw; # was varchar(50) NOT NULL DEFAULT ''
+ALTER TABLE purchorderdetails DROP COLUMN pcunit; # was varchar(50) NOT NULL DEFAULT ''
+ALTER TABLE purchorderdetails DROP COLUMN uom; # was varchar(50) NOT NULL DEFAULT ''
+ALTER TABLE purchorderdetails DROP COLUMN subtotal_amount; # was varchar(50) NOT NULL DEFAULT ''
+ALTER TABLE purchorderdetails DROP COLUMN package; # was varchar(100) NOT NULL DEFAULT ''
+ALTER TABLE purchorderdetails DROP COLUMN gw; # was varchar(50) NOT NULL DEFAULT ''
+ALTER TABLE purchorderdetails DROP COLUMN itemno; # was varchar(50) NOT NULL DEFAULT ''
+ALTER TABLE purchorderdetails ADD COLUMN conversionfactor double NOT NULL DEFAULT '1';
+ALTER TABLE purchorderdetails ADD COLUMN assetid int NOT NULL DEFAULT '0';
+ALTER TABLE purchorderdetails ADD COLUMN suppliersunit varchar(50) DEFAULT NULL;
+ALTER TABLE purchorders ADD COLUMN supptel varchar(30) NOT NULL DEFAULT '';
+ALTER TABLE purchorders ADD COLUMN tel varchar(15) NOT NULL DEFAULT '';
+ALTER TABLE purchorders ADD COLUMN suppdeladdress4 varchar(40) NOT NULL DEFAULT '';
+ALTER TABLE purchorders ADD COLUMN suppdeladdress5 varchar(20) NOT NULL DEFAULT '';
+ALTER TABLE purchorders ADD COLUMN paymentterms char(2) NOT NULL DEFAULT '';
+ALTER TABLE purchorders ADD COLUMN suppdeladdress3 varchar(40) NOT NULL DEFAULT '';
+ALTER TABLE purchorders ADD COLUMN suppdeladdress2 varchar(40) NOT NULL DEFAULT '';
+ALTER TABLE purchorders ADD COLUMN port varchar(40) NOT NULL DEFAULT '';
+ALTER TABLE purchorders ADD COLUMN suppdeladdress1 varchar(40) NOT NULL DEFAULT '';
+ALTER TABLE purchorders ADD COLUMN suppliercontact varchar(30) NOT NULL DEFAULT '';
+ALTER TABLE purchorders ADD COLUMN suppdeladdress6 varchar(15) NOT NULL DEFAULT '';
+ALTER TABLE reportfields CHANGE COLUMN fieldname fieldname varchar(80) NOT NULL DEFAULT ''; # was varchar(35) NOT NULL DEFAULT ''
+ALTER TABLE reports ADD COLUMN col16width int NOT NULL DEFAULT '25';
+ALTER TABLE reports ADD COLUMN col10width int NOT NULL DEFAULT '25';
+ALTER TABLE reports ADD COLUMN col15width int NOT NULL DEFAULT '25';
+ALTER TABLE reports ADD COLUMN col12width int NOT NULL DEFAULT '25';
+ALTER TABLE reports ADD COLUMN col18width int NOT NULL DEFAULT '25';
+ALTER TABLE reports ADD COLUMN col11width int NOT NULL DEFAULT '25';
+ALTER TABLE reports ADD COLUMN col9width int NOT NULL DEFAULT '25';
+ALTER TABLE reports ADD COLUMN col13width int NOT NULL DEFAULT '25';
+ALTER TABLE reports ADD COLUMN col17width int NOT NULL DEFAULT '25';
+ALTER TABLE reports ADD COLUMN col14width int NOT NULL DEFAULT '25';
+ALTER TABLE reports ADD COLUMN col19width int NOT NULL DEFAULT '25';
+ALTER TABLE reports ADD COLUMN col20width int NOT NULL DEFAULT '25';
+ALTER TABLE salesorderdetails ADD COLUMN commissionrate double NOT NULL DEFAULT '0';
+ALTER TABLE salesorderdetails ADD COLUMN commissionearned double NOT NULL DEFAULT '0';
+ALTER TABLE salesorders ADD COLUMN poplaced tinyint NOT NULL DEFAULT '0';
+ALTER TABLE salesorders ADD INDEX poplaced (poplaced);
+ALTER TABLE salestypes CHANGE COLUMN sales_type sales_type varchar(40) NOT NULL DEFAULT ''; # was char(20) NOT NULL DEFAULT ''
+ALTER TABLE scripts DROP COLUMN filename; # was varchar(50) NOT NULL DEFAULT ''
+ALTER TABLE scripts DROP COLUMN pagedescription; # was text NOT NULL
+ALTER TABLE scripts DROP COLUMN pageid; # was smallint NOT NULL AUTO_INCREMENT
+ALTER TABLE scripts ADD COLUMN description text NOT NULL;
+ALTER TABLE scripts ADD COLUMN script varchar(78) NOT NULL DEFAULT '';
+ALTER TABLE scripts ADD COLUMN pagesecurity tinyint NOT NULL DEFAULT '1';
+ALTER TABLE scripts DROP INDEX filename; # was INDEX (filename)
+ALTER TABLE scripts DROP PRIMARY KEY; # was (pageid)
+ALTER TABLE scripts ADD PRIMARY KEY (script);
+ALTER TABLE scripts ENGINE=InnoDB DEFAULT CHARSET=utf8mb3; # was ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='index of all scripts'
+ALTER TABLE stockcatproperties CHANGE COLUMN label label mediumtext NOT NULL; # was text NOT NULL
+ALTER TABLE stockcatproperties ADD COLUMN maximumvalue double NOT NULL DEFAULT '999999999';
+ALTER TABLE stockcatproperties ADD COLUMN minimumvalue double NOT NULL DEFAULT '-999999999';
+ALTER TABLE stockcatproperties ADD COLUMN numericvalue tinyint NOT NULL DEFAULT '0';
+ALTER TABLE stockcatproperties ENGINE=InnoDB DEFAULT CHARSET=utf8mb3; # was ENGINE=InnoDB DEFAULT CHARSET=latin1
+ALTER TABLE stockcheckfreeze ADD COLUMN stockcheckdate date NOT NULL DEFAULT '2023-01-01';
+ALTER TABLE suppliers ADD COLUMN email varchar(55) DEFAULT NULL;
+ALTER TABLE suppliers ADD COLUMN fax varchar(25) DEFAULT NULL;
+ALTER TABLE suppliers ADD COLUMN telephone varchar(25) DEFAULT NULL;
+ALTER TABLE suppliers ADD COLUMN supptype tinyint NOT NULL DEFAULT '1';
+ALTER TABLE supptrans ADD COLUMN inputdate datetime NOT NULL;
+ALTER TABLE www_users CHANGE COLUMN language language varchar(10) NOT NULL DEFAULT 'en_GB.utf8'; # was char(5) NOT NULL DEFAULT 'en_GB'
+ALTER TABLE www_users ADD COLUMN pdflanguage tinyint(1) NOT NULL DEFAULT '0';
+ALTER TABLE www_users ADD COLUMN supplierid varchar(10) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL DEFAULT '';
+CREATE TABLE contractcharges (
+  id int NOT NULL AUTO_INCREMENT,
+  contractref varchar(20) NOT NULL,
+  transtype smallint NOT NULL DEFAULT '20',
+  transno int NOT NULL DEFAULT '0',
+  amount double NOT NULL DEFAULT '0',
+  narrative text NOT NULL,
+  anticipated tinyint NOT NULL DEFAULT '0',
+  PRIMARY KEY (id),
+  KEY contractref (contractref,transtype,transno)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+CREATE TABLE emailsettings (
+  id int NOT NULL AUTO_INCREMENT,
+  host varchar(30) NOT NULL,
+  port char(5) NOT NULL,
+  heloaddress varchar(20) NOT NULL,
+  username varchar(30) DEFAULT NULL,
+  password varchar(30) DEFAULT NULL,
+  timeout int DEFAULT '5',
+  companyname varchar(50) DEFAULT NULL,
+  auth tinyint(1) DEFAULT '0',
+  PRIMARY KEY (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+CREATE TABLE fixedassetcategories (
+  categoryid char(6) NOT NULL DEFAULT '',
+  categorydescription char(20) NOT NULL DEFAULT '',
+  costact int NOT NULL DEFAULT '0',
+  depnact int NOT NULL DEFAULT '0',
+  disposalact int NOT NULL DEFAULT '80000',
+  accumdepnact int NOT NULL DEFAULT '0',
+  defaultdepnrate double NOT NULL DEFAULT '0.2',
+  defaultdepntype int NOT NULL DEFAULT '1',
+  PRIMARY KEY (categoryid)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+CREATE TABLE fixedassetlocations (
+  locationid char(6) NOT NULL DEFAULT '',
+  locationdescription char(20) NOT NULL DEFAULT '',
+  parentlocationid char(6) DEFAULT '',
+  PRIMARY KEY (locationid)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+CREATE TABLE fixedassets (
+  assetid int NOT NULL AUTO_INCREMENT,
+  serialno varchar(30) NOT NULL DEFAULT '',
+  barcode varchar(20) NOT NULL,
+  assetlocation varchar(6) NOT NULL DEFAULT '',
+  cost double NOT NULL DEFAULT '0',
+  accumdepn double NOT NULL DEFAULT '0',
+  datepurchased date NOT NULL DEFAULT '2023-01-01',
+  disposalproceeds double NOT NULL DEFAULT '0',
+  assetcategoryid varchar(6) NOT NULL DEFAULT '',
+  description varchar(50) NOT NULL DEFAULT '',
+  longdescription text NOT NULL,
+  depntype int NOT NULL DEFAULT '1',
+  depnrate double NOT NULL,
+  disposaldate date NOT NULL DEFAULT '2023-01-01',
+  PRIMARY KEY (assetid)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+CREATE TABLE fixedassettrans (
+  id int NOT NULL AUTO_INCREMENT,
+  assetid int NOT NULL,
+  transtype tinyint NOT NULL,
+  transdate date NOT NULL,
+  transno int NOT NULL,
+  periodno smallint NOT NULL,
+  inputdate date NOT NULL,
+  fixedassettranstype varchar(8) NOT NULL,
+  amount double NOT NULL,
+  PRIMARY KEY (id),
+  KEY assetid (assetid,transtype,transno),
+  KEY inputdate (inputdate),
+  KEY transdate (transdate)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+CREATE TABLE offers (
+  offerid int NOT NULL AUTO_INCREMENT,
+  tenderid int NOT NULL DEFAULT '0',
+  supplierid varchar(10) NOT NULL DEFAULT '',
+  stockid varchar(20) NOT NULL DEFAULT '',
+  quantity double NOT NULL DEFAULT '0',
+  uom varchar(15) NOT NULL DEFAULT '',
+  price double NOT NULL DEFAULT '0',
+  expirydate date NOT NULL DEFAULT '2023-01-01',
+  currcode char(3) NOT NULL DEFAULT '',
+  PRIMARY KEY (offerid)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+CREATE TABLE pcashdetails (
+  counterindex int NOT NULL AUTO_INCREMENT,
+  tabcode varchar(20) NOT NULL,
+  date date NOT NULL,
+  codeexpense varchar(20) NOT NULL,
+  amount double NOT NULL,
+  authorized date NOT NULL COMMENT 'date cash assigment was revised and authorized by authorizer from tabs table',
+  posted tinyint NOT NULL COMMENT 'has (or has not) been posted into gltrans',
+  notes text NOT NULL,
+  receipt text COMMENT 'filename or path to scanned receipt or code of receipt to find physical receipt if tax guys or auditors show up',
+  PRIMARY KEY (counterindex)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+CREATE TABLE pcexpenses (
+  codeexpense varchar(20) NOT NULL COMMENT 'code for the group',
+  description varchar(50) NOT NULL COMMENT 'text description, e.g. meals, train tickets, fuel, etc',
+  glaccount int NOT NULL COMMENT 'GL related account',
+  PRIMARY KEY (codeexpense),
+  KEY glaccount (glaccount)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+CREATE TABLE pctabexpenses (
+  typetabcode varchar(20) NOT NULL,
+  codeexpense varchar(20) NOT NULL,
+  KEY typetabcode (typetabcode),
+  KEY codeexpense (codeexpense)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+CREATE TABLE pctabs (
+  tabcode varchar(20) NOT NULL,
+  usercode varchar(20) NOT NULL COMMENT 'code of user employee from www_users',
+  typetabcode varchar(20) NOT NULL,
+  currency char(3) NOT NULL,
+  tablimit double NOT NULL,
+  authorizer varchar(20) NOT NULL COMMENT 'code of user from www_users',
+  glaccountassignment int NOT NULL COMMENT 'gl account where the money comes from',
+  glaccountpcash int NOT NULL,
+  PRIMARY KEY (tabcode),
+  KEY usercode (usercode),
+  KEY typetabcode (typetabcode),
+  KEY currency (currency),
+  KEY authorizer (authorizer),
+  KEY glaccountassignment (glaccountassignment)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+CREATE TABLE pctypetabs (
+  typetabcode varchar(20) NOT NULL COMMENT 'code for the type of petty cash tab',
+  typetabdescription varchar(50) NOT NULL COMMENT 'text description, e.g. tab for CEO',
+  PRIMARY KEY (typetabcode)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+CREATE TABLE pickinglistdetails (
+  pickinglistno int NOT NULL DEFAULT '0',
+  pickinglistlineno int NOT NULL DEFAULT '0',
+  orderlineno int NOT NULL DEFAULT '0',
+  qtyexpected double NOT NULL DEFAULT '0',
+  qtypicked double NOT NULL DEFAULT '0',
+  PRIMARY KEY (pickinglistno,pickinglistlineno)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+CREATE TABLE pickinglists (
+  pickinglistno int NOT NULL DEFAULT '0',
+  orderno int NOT NULL DEFAULT '0',
+  pickinglistdate date NOT NULL DEFAULT '2023-01-01',
+  dateprinted date NOT NULL DEFAULT '2023-01-01',
+  deliverynotedate date NOT NULL DEFAULT '2023-01-01',
+  PRIMARY KEY (pickinglistno)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+CREATE TABLE suppliertype (
+  typeid tinyint NOT NULL AUTO_INCREMENT,
+  typename varchar(100) NOT NULL,
+  PRIMARY KEY (typeid)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3;
+
+
+Diff between Weberp/Input/Weberp-4.00-demo_mod_sort.sql and Weberp/Input/Weberp-4.04-demo_mod_sort.sql:
+
+Diff between Weberp/Input/Weberp-4.04-demo_mod_sort.sql and Weberp/Input/Weberp-4.04.1-demo_mod_sort.sql:
+## mysqldiff 0.60
+## 
+## Run on Tue Feb 27 18:59:06 2024
+## Options: user=root, ignore_tables=(?^:^schema_migrations$), port=3306, password=, host=localhost
+##
+## --- file: Weberp/Input/Weberp-4.04-demo_mod_sort.sql
+## +++ file: Weberp/Input/Weberp-4.04.1-demo_mod_sort.sql
+
+ALTER TABLE pctabs ADD COLUMN assigner varchar(20) NOT NULL COMMENT 'Cash assigner for the tab';
+ALTER TABLE scripts CHANGE COLUMN pagesecurity pagesecurity int NOT NULL DEFAULT '1'; # was tinyint NOT NULL DEFAULT '1'
+
+Diff between Weberp/Input/Weberp-4.04.1-demo_mod_sort.sql and Weberp/Input/Weberp-4.04.4-demo_mod_sort.sql:
+## mysqldiff 0.60
+## 
+## Run on Tue Feb 27 18:59:55 2024
+## Options: user=root, ignore_tables=(?^:^schema_migrations$), port=3306, password=, host=localhost
+##
+## --- file: Weberp/Input/Weberp-4.04.1-demo_mod_sort.sql
+## +++ file: Weberp/Input/Weberp-4.04.4-demo_mod_sort.sql
+
+ALTER TABLE salesman ADD COLUMN current tinyint NOT NULL COMMENT 'Salesman current (1) or not (0)';
+
+Diff between Weberp/Input/Weberp-4.04.4-demo_mod_sort.sql and Weberp/Input/Weberp-4.04.5-demo_mod_sort.sql:
+## mysqldiff 0.60
+## 
+## Run on Tue Feb 27 19:00:44 2024
+## Options: user=root, ignore_tables=(?^:^schema_migrations$), port=3306, password=, host=localhost
+##
+## --- file: Weberp/Input/Weberp-4.04.4-demo_mod_sort.sql
+## +++ file: Weberp/Input/Weberp-4.04.5-demo_mod_sort.sql
+
+ALTER TABLE custcontacts ADD COLUMN email varchar(55) NOT NULL;
+
+Diff between Weberp/Input/Weberp-4.04.5-demo_mod_sort.sql and Weberp/Input/Weberp-4.05-demo_mod_sort.sql:
+
+Use of uninitialized value in pattern match (m//) at /usr/local/share/perl/5.34.0/MySQL/Diff.pm line 434.
+Diff between Weberp/Input/Weberp-4.05-demo_mod_sort.sql and Weberp/Input/Weberp-4.06-demo_mod_sort.sql:
+## mysqldiff 0.60
+## 
+## Run on Tue Feb 27 19:02:23 2024
+## Options: user=root, ignore_tables=(?^:^schema_migrations$), port=3306, password=, host=localhost
+##
+## --- file: Weberp/Input/Weberp-4.05-demo_mod_sort.sql
+## +++ file: Weberp/Input/Weberp-4.06-demo_mod_sort.sql
+
+ALTER TABLE banktrans ADD INDEX ref (ref);
+ALTER TABLE pcexpenses ADD COLUMN tag tinyint NOT NULL DEFAULT '0';
+ALTER TABLE stockmaster DROP COLUMN lastcurcostdate; # was date NOT NULL DEFAULT '1800-01-01'
+ALTER TABLE stockmaster ADD COLUMN lastcostupdate date NOT NULL;
+ALTER TABLE stockmaster DROP INDEX lastcurcostdate; # was INDEX (lastcurcostdate)
+
+Diff between Weberp/Input/Weberp-4.06-demo_mod_sort.sql and Weberp/Input/Weberp-4.07-demo_mod_sort.sql:
+## mysqldiff 0.60
+## 
+## Run on Tue Feb 27 19:03:15 2024
+## Options: user=root, ignore_tables=(?^:^schema_migrations$), port=3306, password=, host=localhost
+##
+## --- file: Weberp/Input/Weberp-4.06-demo_mod_sort.sql
+## +++ file: Weberp/Input/Weberp-4.07-demo_mod_sort.sql
+
+ALTER TABLE www_users ADD COLUMN cancreatetender tinyint(1) NOT NULL DEFAULT '0';
+CREATE TABLE tenderitems (
+  tenderid int NOT NULL DEFAULT '0',
+  stockid varchar(20) NOT NULL DEFAULT '',
+  quantity varchar(40) NOT NULL DEFAULT '',
+  units varchar(20) NOT NULL DEFAULT 'each',
+  PRIMARY KEY (tenderid,stockid)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+CREATE TABLE tenders (
+  tenderid int NOT NULL DEFAULT '0',
+  location varchar(5) NOT NULL DEFAULT '',
+  address1 varchar(40) NOT NULL DEFAULT '',
+  address2 varchar(40) NOT NULL DEFAULT '',
+  address3 varchar(40) NOT NULL DEFAULT '',
+  address4 varchar(40) NOT NULL DEFAULT '',
+  address5 varchar(20) NOT NULL DEFAULT '',
+  address6 varchar(15) NOT NULL DEFAULT '',
+  telephone varchar(25) NOT NULL DEFAULT '',
+  closed int NOT NULL DEFAULT '0',
+  requiredbydate datetime NOT NULL DEFAULT '2023-01-01 00:00:00',
+  PRIMARY KEY (tenderid)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+CREATE TABLE tendersuppliers (
+  tenderid int NOT NULL DEFAULT '0',
+  supplierid varchar(10) NOT NULL DEFAULT '',
+  email varchar(40) NOT NULL DEFAULT '',
+  responded int NOT NULL DEFAULT '0',
+  PRIMARY KEY (tenderid,supplierid)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+
+Diff between Weberp/Input/Weberp-4.07-demo_mod_sort.sql and Weberp/Input/Weberp-4.08-demo_mod_sort.sql:
+## mysqldiff 0.60
+## 
+## Run on Tue Feb 27 19:04:07 2024
+## Options: user=root, ignore_tables=(?^:^schema_migrations$), port=3306, password=, host=localhost
+##
+## --- file: Weberp/Input/Weberp-4.07-demo_mod_sort.sql
+## +++ file: Weberp/Input/Weberp-4.08-demo_mod_sort.sql
+
+ALTER TABLE bankaccounts CHANGE COLUMN accountcode accountcode varchar(20) NOT NULL DEFAULT '0'; # was int NOT NULL DEFAULT '0'
+ALTER TABLE banktrans CHANGE COLUMN bankact bankact varchar(20) NOT NULL DEFAULT '0'; # was int NOT NULL DEFAULT '0'
+ALTER TABLE chartdetails CHANGE COLUMN accountcode accountcode varchar(20) NOT NULL DEFAULT '0'; # was int NOT NULL DEFAULT '0'
+ALTER TABLE chartmaster CHANGE COLUMN accountcode accountcode varchar(20) NOT NULL DEFAULT '0'; # was int NOT NULL DEFAULT '0'
+ALTER TABLE gltrans CHANGE COLUMN account account varchar(20) NOT NULL DEFAULT '0'; # was int NOT NULL DEFAULT '0'
+ALTER TABLE locations ADD UNIQUE locationname (locationname);
+ALTER TABLE paymentmethods ADD COLUMN opencashdrawer tinyint NOT NULL DEFAULT '0';
+ALTER TABLE pcexpenses CHANGE COLUMN glaccount glaccount varchar(20) NOT NULL DEFAULT '0'; # was int NOT NULL COMMENT 'GL related account'
+ALTER TABLE pctabs CHANGE COLUMN glaccountassignment glaccountassignment varchar(20) NOT NULL DEFAULT '0'; # was int NOT NULL COMMENT 'gl account where the money comes from'
+ALTER TABLE pctabs CHANGE COLUMN glaccountpcash glaccountpcash varchar(20) NOT NULL DEFAULT '0'; # was int NOT NULL
+ALTER TABLE stockcategory ADD COLUMN issueglact int NOT NULL DEFAULT '0';
+ALTER TABLE stockmaster CHANGE COLUMN lastcostupdate lastcostupdate date NOT NULL DEFAULT '2023-01-01'; # was date NOT NULL
+ALTER TABLE taxauthorities CHANGE COLUMN taxglcode taxglcode varchar(20) NOT NULL DEFAULT '0'; # was int NOT NULL DEFAULT '0'
+ALTER TABLE taxauthorities CHANGE COLUMN purchtaxglaccount purchtaxglaccount varchar(20) NOT NULL DEFAULT '0'; # was int NOT NULL DEFAULT '0'
+CREATE TABLE departments (
+  departmentid int NOT NULL AUTO_INCREMENT,
+  description varchar(100) NOT NULL DEFAULT '',
+  authoriser varchar(20) NOT NULL DEFAULT '',
+  PRIMARY KEY (departmentid)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+CREATE TABLE labelfields (
+  labelfieldid int NOT NULL AUTO_INCREMENT,
+  labelid tinyint NOT NULL,
+  fieldvalue varchar(20) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  vpos double NOT NULL DEFAULT '0',
+  hpos double NOT NULL DEFAULT '0',
+  fontsize tinyint NOT NULL,
+  barcode tinyint NOT NULL DEFAULT '0',
+  PRIMARY KEY (labelfieldid),
+  KEY labelid (labelid),
+  KEY vpos (vpos)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+CREATE TABLE labels (
+  labelid tinyint NOT NULL AUTO_INCREMENT,
+  description varchar(50) NOT NULL,
+  pagewidth double NOT NULL DEFAULT '0',
+  pageheight double NOT NULL DEFAULT '0',
+  height double NOT NULL DEFAULT '0',
+  width double NOT NULL DEFAULT '0',
+  topmargin double NOT NULL DEFAULT '0',
+  leftmargin double NOT NULL DEFAULT '0',
+  rowheight double NOT NULL DEFAULT '0',
+  columnwidth double NOT NULL DEFAULT '0',
+  PRIMARY KEY (labelid)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+CREATE TABLE stockrequest (
+  dispatchid int NOT NULL AUTO_INCREMENT,
+  loccode varchar(5) NOT NULL DEFAULT '',
+  departmentid int NOT NULL DEFAULT '0',
+  despatchdate date NOT NULL DEFAULT '2023-01-01',
+  authorised tinyint NOT NULL DEFAULT '0',
+  closed tinyint NOT NULL DEFAULT '0',
+  narrative text NOT NULL,
+  PRIMARY KEY (dispatchid)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+CREATE TABLE stockrequestitems (
+  dispatchitemsid int NOT NULL DEFAULT '0',
+  dispatchid int NOT NULL DEFAULT '0',
+  stockid varchar(20) NOT NULL DEFAULT '',
+  quantity double NOT NULL DEFAULT '0',
+  qtydelivered double NOT NULL DEFAULT '0',
+  decimalplaces int NOT NULL DEFAULT '0',
+  uom varchar(20) NOT NULL DEFAULT '',
+  completed tinyint NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+
+Diff between Weberp/Input/Weberp-4.08-demo_mod_sort.sql and Weberp/Input/Weberp-4.09-demo_mod_sort.sql:
+## mysqldiff 0.60
+## 
+## Run on Tue Feb 27 19:05:00 2024
+## Options: user=root, ignore_tables=(?^:^schema_migrations$), port=3306, password=, host=localhost
+##
+## --- file: Weberp/Input/Weberp-4.08-demo_mod_sort.sql
+## +++ file: Weberp/Input/Weberp-4.09-demo_mod_sort.sql
+
+ALTER TABLE custbranch CHANGE COLUMN braddress6 braddress6 varchar(40) NOT NULL DEFAULT ''; # was varchar(15) NOT NULL DEFAULT ''
+ALTER TABLE debtorsmaster CHANGE COLUMN address6 address6 varchar(40) NOT NULL DEFAULT ''; # was varchar(15) NOT NULL
+ALTER TABLE locations ADD COLUMN internalrequest tinyint NOT NULL DEFAULT '1' COMMENT 'Allow (1) or not (0) internal request from this location';
+ALTER TABLE loctransfers CHANGE COLUMN shipdate shipdate datetime NOT NULL DEFAULT '2023-01-01 00:00:00'; # was date NOT NULL DEFAULT '2023-01-01'
+ALTER TABLE loctransfers CHANGE COLUMN recdate recdate datetime NOT NULL DEFAULT '2023-01-01 00:00:00'; # was date NOT NULL DEFAULT '2023-01-01'
+ALTER TABLE stockrequest ADD INDEX loccode (loccode);
+ALTER TABLE stockrequest ADD INDEX departmentid (departmentid);
+ALTER TABLE stockrequestitems ADD INDEX stockid (stockid);
+ALTER TABLE stockrequestitems ADD INDEX dispatchid (dispatchid);
+ALTER TABLE stockrequestitems ADD PRIMARY KEY (dispatchitemsid);
+ALTER TABLE suppliers CHANGE COLUMN address6 address6 varchar(40) NOT NULL DEFAULT ''; # was varchar(15) NOT NULL DEFAULT ''
+ALTER TABLE www_users ADD COLUMN department int NOT NULL DEFAULT '0';
+CREATE TABLE internalstockcatrole (
+  categoryid varchar(6) NOT NULL,
+  secroleid int NOT NULL,
+  PRIMARY KEY (categoryid,secroleid),
+  KEY internalstockcatrole_ibfk_1 (categoryid),
+  KEY internalstockcatrole_ibfk_2 (secroleid)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+
+Diff between Weberp/Input/Weberp-4.09-demo_mod_sort.sql and Weberp/Input/Weberp-4.10-demo_mod_sort.sql:
+## mysqldiff 0.60
+## 
+## Run on Tue Feb 27 19:05:53 2024
+## Options: user=root, ignore_tables=(?^:^schema_migrations$), port=3306, password=, host=localhost
+##
+## --- file: Weberp/Input/Weberp-4.09-demo_mod_sort.sql
+## +++ file: Weberp/Input/Weberp-4.10-demo_mod_sort.sql
+
+ALTER TABLE cogsglpostings CHANGE COLUMN area area char(3) NOT NULL DEFAULT ''; # was char(2) NOT NULL DEFAULT ''
+ALTER TABLE debtortrans ADD COLUMN packages int NOT NULL DEFAULT '1' COMMENT 'number of cartons';
+ALTER TABLE gltrans ADD INDEX tag (tag);
+ALTER TABLE locstock ADD COLUMN bin varchar(10) NOT NULL;
+ALTER TABLE locstock ADD INDEX bin (bin);
+ALTER TABLE purchorders CHANGE COLUMN initiator initiator varchar(20) DEFAULT NULL; # was varchar(10) DEFAULT NULL
+ALTER TABLE salesorderdetails DROP COLUMN commissionrate; # was double NOT NULL DEFAULT '0'
+ALTER TABLE salesorderdetails DROP COLUMN commissionearned; # was double NOT NULL DEFAULT '0'
+ALTER TABLE salesorders ADD COLUMN salesperson varchar(4) NOT NULL;
+ALTER TABLE salesorders ADD INDEX salesperson (salesperson);
+CREATE TABLE sellthroughsupport (
+  id int NOT NULL AUTO_INCREMENT,
+  supplierno varchar(10) NOT NULL,
+  debtorno varchar(10) NOT NULL DEFAULT '',
+  categoryid char(6) NOT NULL DEFAULT '',
+  stockid varchar(20) NOT NULL DEFAULT '',
+  narrative varchar(20) NOT NULL DEFAULT '',
+  rebatepercent double NOT NULL DEFAULT '0',
+  rebateamount double NOT NULL DEFAULT '0',
+  effectivefrom date NOT NULL,
+  effectiveto date NOT NULL,
+  PRIMARY KEY (id),
+  KEY supplierno (supplierno),
+  KEY debtorno (debtorno),
+  KEY effectivefrom (effectivefrom),
+  KEY effectiveto (effectiveto),
+  KEY stockid (stockid),
+  KEY categoryid (categoryid)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+CREATE TABLE supplierdiscounts (
+  id int NOT NULL AUTO_INCREMENT,
+  supplierno varchar(10) NOT NULL,
+  stockid varchar(20) NOT NULL,
+  discountnarrative varchar(20) NOT NULL,
+  discountpercent double NOT NULL,
+  discountamount double NOT NULL,
+  effectivefrom date NOT NULL,
+  effectiveto date NOT NULL,
+  PRIMARY KEY (id),
+  KEY supplierno (supplierno),
+  KEY effectivefrom (effectivefrom),
+  KEY effectiveto (effectiveto),
+  KEY stockid (stockid)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+
+Diff between Weberp/Input/Weberp-4.10-demo_mod_sort.sql and Weberp/Input/Weberp-4.11-demo_mod_sort.sql:
+## mysqldiff 0.60
+## 
+## Run on Tue Feb 27 19:06:49 2024
+## Options: user=root, ignore_tables=(?^:^schema_migrations$), port=3306, password=, host=localhost
+##
+## --- file: Weberp/Input/Weberp-4.10-demo_mod_sort.sql
+## +++ file: Weberp/Input/Weberp-4.11-demo_mod_sort.sql
+
+ALTER TABLE cogsglpostings CHANGE COLUMN glcode glcode varchar(20) NOT NULL DEFAULT '0'; # was int NOT NULL DEFAULT '0'
+ALTER TABLE companies CHANGE COLUMN exchangediffact exchangediffact varchar(20) NOT NULL DEFAULT '65000'; # was int NOT NULL DEFAULT '65000'
+ALTER TABLE companies CHANGE COLUMN grnact grnact varchar(20) NOT NULL DEFAULT '72000'; # was int NOT NULL DEFAULT '72000'
+ALTER TABLE companies CHANGE COLUMN pytdiscountact pytdiscountact varchar(20) NOT NULL DEFAULT '55000'; # was int NOT NULL DEFAULT '55000'
+ALTER TABLE companies CHANGE COLUMN debtorsact debtorsact varchar(20) NOT NULL DEFAULT '70000'; # was int NOT NULL DEFAULT '70000'
+ALTER TABLE companies CHANGE COLUMN purchasesexchangediffact purchasesexchangediffact varchar(20) NOT NULL DEFAULT '0'; # was int NOT NULL DEFAULT '0'
+ALTER TABLE companies CHANGE COLUMN freightact freightact varchar(20) NOT NULL DEFAULT '0'; # was int NOT NULL DEFAULT '0'
+ALTER TABLE companies CHANGE COLUMN retainedearnings retainedearnings varchar(20) NOT NULL DEFAULT '90000'; # was int NOT NULL DEFAULT '90000'
+ALTER TABLE companies CHANGE COLUMN creditorsact creditorsact varchar(20) NOT NULL DEFAULT '80000'; # was int NOT NULL DEFAULT '80000'
+ALTER TABLE companies CHANGE COLUMN payrollact payrollact varchar(20) NOT NULL DEFAULT '84000'; # was int NOT NULL DEFAULT '84000'
+ALTER TABLE currencies ADD COLUMN webcart tinyint(1) NOT NULL DEFAULT '1' COMMENT 'If 1 shown in weberp cart. if 0 no show';
+ALTER TABLE custbranch CHANGE COLUMN brpostaddr3 brpostaddr3 varchar(40) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL DEFAULT ''; # was varchar(30) NOT NULL DEFAULT ''
+ALTER TABLE custbranch CHANGE COLUMN brpostaddr4 brpostaddr4 varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL DEFAULT ''; # was varchar(20) NOT NULL DEFAULT ''
+ALTER TABLE custbranch CHANGE COLUMN brpostaddr6 brpostaddr6 varchar(40) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL DEFAULT ''; # was varchar(15) NOT NULL DEFAULT ''
+ALTER TABLE debtorsmaster ADD COLUMN language_id varchar(10) NOT NULL DEFAULT 'en_GB.utf8';
+ALTER TABLE debtortrans ADD COLUMN salesperson varchar(4) NOT NULL DEFAULT '';
+ALTER TABLE debtortrans ADD INDEX salesperson (salesperson);
+ALTER TABLE fixedassetcategories CHANGE COLUMN accumdepnact accumdepnact varchar(20) NOT NULL DEFAULT '0'; # was int NOT NULL DEFAULT '0'
+ALTER TABLE fixedassetcategories CHANGE COLUMN depnact depnact varchar(20) NOT NULL DEFAULT '0'; # was int NOT NULL DEFAULT '0'
+ALTER TABLE fixedassetcategories CHANGE COLUMN costact costact varchar(20) NOT NULL DEFAULT '0'; # was int NOT NULL DEFAULT '0'
+ALTER TABLE fixedassetcategories CHANGE COLUMN disposalact disposalact varchar(20) NOT NULL DEFAULT '80000'; # was int NOT NULL DEFAULT '80000'
+ALTER TABLE freightcosts ADD COLUMN destinationcountry varchar(40) NOT NULL;
+ALTER TABLE lastcostrollup CHANGE COLUMN stockact stockact varchar(20) NOT NULL DEFAULT '0'; # was int NOT NULL DEFAULT '0'
+ALTER TABLE lastcostrollup CHANGE COLUMN adjglact adjglact varchar(20) NOT NULL DEFAULT '0'; # was int NOT NULL DEFAULT '0'
+ALTER TABLE purchorderauth CHANGE COLUMN authlevel authlevel double NOT NULL DEFAULT '0'; # was int NOT NULL DEFAULT '0'
+ALTER TABLE purchorderdetails CHANGE COLUMN glcode glcode varchar(20) NOT NULL DEFAULT '0'; # was int NOT NULL DEFAULT '0'
+ALTER TABLE salescat CHANGE COLUMN salescatname salescatname varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL; # was varchar(20) DEFAULT NULL
+ALTER TABLE salescat ADD COLUMN active int NOT NULL DEFAULT '1' COMMENT '1 if active 0 if inactive';
+ALTER TABLE salescatprod ADD COLUMN manufacturers_id int NOT NULL;
+ALTER TABLE salescatprod ADD COLUMN featured int NOT NULL DEFAULT '0';
+ALTER TABLE salescatprod ADD INDEX manufacturers_id (manufacturers_id);
+ALTER TABLE salesglpostings CHANGE COLUMN salesglcode salesglcode varchar(20) NOT NULL DEFAULT '0'; # was int NOT NULL DEFAULT '0'
+ALTER TABLE salesglpostings CHANGE COLUMN discountglcode discountglcode varchar(20) NOT NULL DEFAULT '0'; # was int NOT NULL DEFAULT '0'
+ALTER TABLE stockcategory CHANGE COLUMN purchpricevaract purchpricevaract varchar(20) NOT NULL DEFAULT '80000'; # was int NOT NULL DEFAULT '80000'
+ALTER TABLE stockcategory CHANGE COLUMN materialuseagevarac materialuseagevarac varchar(20) NOT NULL DEFAULT '80000'; # was int NOT NULL DEFAULT '80000'
+ALTER TABLE stockcategory CHANGE COLUMN wipact wipact varchar(20) NOT NULL DEFAULT '0'; # was int NOT NULL DEFAULT '0'
+ALTER TABLE stockcategory CHANGE COLUMN issueglact issueglact varchar(20) NOT NULL DEFAULT '0'; # was int NOT NULL DEFAULT '0'
+ALTER TABLE stockcategory CHANGE COLUMN stockact stockact varchar(20) NOT NULL DEFAULT '0'; # was int NOT NULL DEFAULT '0'
+ALTER TABLE stockcategory CHANGE COLUMN adjglact adjglact varchar(20) NOT NULL DEFAULT '0'; # was int NOT NULL DEFAULT '0'
+ALTER TABLE stockcategory ADD COLUMN defaulttaxcatid tinyint NOT NULL DEFAULT '1';
+ALTER TABLE stockmaster DROP COLUMN kgs; # was decimal(20,4) NOT NULL DEFAULT '0.0000'
+ALTER TABLE stockmaster ADD COLUMN grossweight decimal(20,4) NOT NULL DEFAULT '0.0000';
+ALTER TABLE stockrequestitems DROP PRIMARY KEY; # was (dispatchitemsid)
+ALTER TABLE stockrequestitems ADD PRIMARY KEY (dispatchitemsid,dispatchid);
+ALTER TABLE workcentres CHANGE COLUMN overheadrecoveryact overheadrecoveryact varchar(20) NOT NULL DEFAULT '0'; # was int NOT NULL DEFAULT '0'
+CREATE TABLE fixedassettasks (
+  taskid int NOT NULL AUTO_INCREMENT,
+  assetid int NOT NULL,
+  taskdescription text NOT NULL,
+  frequencydays int NOT NULL DEFAULT '365',
+  lastcompleted date NOT NULL,
+  userresponsible varchar(20) NOT NULL,
+  manager varchar(20) NOT NULL DEFAULT '',
+  PRIMARY KEY (taskid),
+  KEY assetid (assetid),
+  KEY userresponsible (userresponsible)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+CREATE TABLE mailgroupdetails (
+  groupname varchar(100) NOT NULL,
+  userid varchar(20) NOT NULL,
+  KEY groupname (groupname)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+CREATE TABLE mailgroups (
+  id int NOT NULL AUTO_INCREMENT,
+  groupname varchar(100) NOT NULL,
+  PRIMARY KEY (id),
+  UNIQUE KEY groupname (groupname)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+CREATE TABLE manufacturers (
+  manufacturers_id int NOT NULL AUTO_INCREMENT,
+  manufacturers_name varchar(32) NOT NULL,
+  manufacturers_url varchar(50) NOT NULL DEFAULT '',
+  manufacturers_image varchar(64) DEFAULT NULL,
+  PRIMARY KEY (manufacturers_id),
+  KEY manufacturers_name (manufacturers_name)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+CREATE TABLE salescattranslations (
+  salescatid tinyint NOT NULL DEFAULT '0',
+  language_id varchar(10) NOT NULL DEFAULT 'en_GB.utf8',
+  salescattranslation varchar(40) NOT NULL,
+  PRIMARY KEY (salescatid,language_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+CREATE TABLE stockdescriptiontranslations (
+  stockid varchar(20) NOT NULL DEFAULT '',
+  language_id varchar(10) NOT NULL DEFAULT 'en_GB.utf8',
+  descriptiontranslation varchar(50) NOT NULL,
+  PRIMARY KEY (stockid,language_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+
+Diff between Weberp/Input/Weberp-4.11-demo_mod_sort.sql and Weberp/Input/Weberp-4.11.2-demo_mod_sort.sql:
+## mysqldiff 0.60
+## 
+## Run on Tue Feb 27 19:07:47 2024
+## Options: user=root, ignore_tables=(?^:^schema_migrations$), port=3306, password=, host=localhost
+##
+## --- file: Weberp/Input/Weberp-4.11-demo_mod_sort.sql
+## +++ file: Weberp/Input/Weberp-4.11.2-demo_mod_sort.sql
+
+ALTER TABLE locstock CHANGE COLUMN bin bin varchar(10) NOT NULL DEFAULT ''; # was varchar(10) NOT NULL
+ALTER TABLE suppliers ADD COLUMN url varchar(50) NOT NULL DEFAULT '';
+CREATE TABLE bankaccountusers (
+  accountcode varchar(20) NOT NULL COMMENT 'Bank account code',
+  userid varchar(20) NOT NULL COMMENT 'User code'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+
+Diff between Weberp/Input/Weberp-4.11.2-demo_mod_sort.sql and Weberp/Input/Weberp-4.11.3-demo_mod_sort.sql:
+## mysqldiff 0.60
+## 
+## Run on Tue Feb 27 19:09:40 2024
+## Options: user=root, ignore_tables=(?^:^schema_migrations$), port=3306, password=, host=localhost
+##
+## --- file: Weberp/Input/Weberp-4.11.2-demo_mod_sort.sql
+## +++ file: Weberp/Input/Weberp-4.11.3-demo_mod_sort.sql
+
+ALTER TABLE bom ADD COLUMN sequence int NOT NULL DEFAULT '0';
+ALTER TABLE emailsettings CHANGE COLUMN username username varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL; # was varchar(30) DEFAULT NULL
+ALTER TABLE stockmoves CHANGE COLUMN reference reference varchar(100) NOT NULL DEFAULT ''; # was varchar(40) NOT NULL DEFAULT ''
+CREATE TABLE pricematrix (
+  salestype char(2) NOT NULL DEFAULT '',
+  stockid varchar(20) NOT NULL DEFAULT '',
+  quantitybreak int NOT NULL DEFAULT '1',
+  price double NOT NULL DEFAULT '0',
+  PRIMARY KEY (salestype,stockid,quantitybreak),
+  KEY DiscountCategory (stockid),
+  KEY SalesType (salestype)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+
+Diff between Weberp/Input/Weberp-4.11.3-demo_mod_sort.sql and Weberp/Input/Weberp-4.11.4-demo_mod_sort.sql:
+## mysqldiff 0.60
+## 
+## Run on Tue Feb 27 19:11:01 2024
+## Options: user=root, ignore_tables=(?^:^schema_migrations$), port=3306, password=, host=localhost
+##
+## --- file: Weberp/Input/Weberp-4.11.3-demo_mod_sort.sql
+## +++ file: Weberp/Input/Weberp-4.11.4-demo_mod_sort.sql
+
+ALTER TABLE audittrail ADD INDEX transactiondate (transactiondate);
+ALTER TABLE bankaccounts ADD COLUMN importformat varchar(10) NOT NULL DEFAULT '';
+ALTER TABLE debtortrans CHANGE COLUMN consignment consignment varchar(20) NOT NULL DEFAULT ''; # was varchar(15) NOT NULL DEFAULT ''
+ALTER TABLE locations ADD COLUMN usedforwo tinyint NOT NULL DEFAULT '1';
+ALTER TABLE pricematrix ADD COLUMN currabrev char(3) NOT NULL DEFAULT '';
+ALTER TABLE pricematrix ADD COLUMN enddate date NOT NULL DEFAULT '9999-12-31';
+ALTER TABLE pricematrix ADD COLUMN startdate date NOT NULL DEFAULT '2023-01-01';
+ALTER TABLE pricematrix DROP PRIMARY KEY; # was (salestype,stockid,quantitybreak)
+ALTER TABLE pricematrix ADD PRIMARY KEY (salestype,stockid,currabrev,quantitybreak,startdate,enddate);
+ALTER TABLE purchorders CHANGE COLUMN tel tel varchar(30) NOT NULL DEFAULT ''; # was varchar(15) NOT NULL DEFAULT ''
+ALTER TABLE stockmoves CHANGE COLUMN price price decimal(21,5) NOT NULL DEFAULT '0.00000'; # was decimal(20,4) NOT NULL DEFAULT '0.0000'
+ALTER TABLE stockmoves ADD COLUMN userid varchar(20) NOT NULL;
+ALTER TABLE stockmoves ADD INDEX userid (userid);
+ALTER TABLE woitems ADD COLUMN comments longblob;
+ALTER TABLE workorders ADD COLUMN closecomments longblob;
+ALTER TABLE www_users CHANGE COLUMN modulesallowed modulesallowed varchar(25) NOT NULL; # was varchar(20) NOT NULL DEFAULT ''
+CREATE TABLE custitem (
+  debtorno char(10) NOT NULL DEFAULT '',
+  stockid varchar(20) NOT NULL DEFAULT '',
+  cust_part varchar(20) NOT NULL DEFAULT '',
+  cust_description varchar(30) NOT NULL DEFAULT '',
+  customersuom char(50) NOT NULL DEFAULT '',
+  conversionfactor double NOT NULL DEFAULT '1',
+  PRIMARY KEY (debtorno,stockid),
+  KEY StockID (stockid),
+  KEY Debtorno (debtorno)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+CREATE TABLE locationusers (
+  loccode varchar(5) NOT NULL,
+  userid varchar(20) NOT NULL,
+  canview tinyint NOT NULL DEFAULT '0',
+  canupd tinyint NOT NULL DEFAULT '0',
+  PRIMARY KEY (loccode,userid),
+  KEY UserId (userid)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+CREATE TABLE relateditems (
+  stockid varchar(20) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  related varchar(20) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  PRIMARY KEY (stockid,related),
+  UNIQUE KEY Related (related,stockid)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+
+
+Diff between Weberp/Input/Weberp-4.11.4-demo_mod_sort.sql and Weberp/Input/Weberp-4.12-demo_mod_sort.sql:
+## mysqldiff 0.60
+## 
+## Run on Tue Feb 27 19:11:59 2024
+## Options: user=root, ignore_tables=(?^:^schema_migrations$), port=3306, password=, host=localhost
+##
+## --- file: Weberp/Input/Weberp-4.11.4-demo_mod_sort.sql
+## +++ file: Weberp/Input/Weberp-4.12-demo_mod_sort.sql
+
+ALTER TABLE stockdescriptiontranslations CHANGE COLUMN descriptiontranslation descriptiontranslation varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL COMMENT 'Item''s short description'; # was varchar(50) NOT NULL
+ALTER TABLE stockdescriptiontranslations ADD COLUMN longdescriptiontranslation text CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci COMMENT 'Item''s long description';
+ALTER TABLE stockdescriptiontranslations ADD COLUMN needsrevision tinyint(1) NOT NULL DEFAULT '0';
+ALTER TABLE www_users ADD COLUMN showdashboard tinyint(1) NOT NULL DEFAULT '0' COMMENT 'Display dashboard after login';
+CREATE TABLE prodspecs (
+  keyval varchar(25) NOT NULL,
+  testid int NOT NULL,
+  defaultvalue varchar(150) NOT NULL DEFAULT '',
+  targetvalue varchar(30) NOT NULL DEFAULT '',
+  rangemin float DEFAULT NULL,
+  rangemax float DEFAULT NULL,
+  showoncert tinyint NOT NULL DEFAULT '1',
+  showonspec tinyint NOT NULL DEFAULT '1',
+  showontestplan tinyint NOT NULL DEFAULT '1',
+  active tinyint NOT NULL DEFAULT '1',
+  PRIMARY KEY (keyval,testid),
+  KEY testid (testid)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+CREATE TABLE qasamples (
+  sampleid int NOT NULL AUTO_INCREMENT,
+  prodspeckey varchar(25) NOT NULL DEFAULT '',
+  lotkey varchar(25) NOT NULL DEFAULT '',
+  identifier varchar(10) NOT NULL DEFAULT '',
+  createdby varchar(15) NOT NULL DEFAULT '',
+  sampledate date NOT NULL DEFAULT '2023-01-01',
+  comments varchar(255) NOT NULL DEFAULT '',
+  cert tinyint NOT NULL DEFAULT '0',
+  PRIMARY KEY (sampleid),
+  KEY prodspeckey (prodspeckey,lotkey)
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb3;
+
+CREATE TABLE qatests (
+  testid int NOT NULL AUTO_INCREMENT,
+  name varchar(50) NOT NULL,
+  method varchar(20) DEFAULT NULL,
+  groupby varchar(20) DEFAULT NULL,
+  units varchar(20) NOT NULL,
+  type varchar(15) NOT NULL,
+  defaultvalue varchar(150) NOT NULL DEFAULT '',
+  numericvalue tinyint NOT NULL DEFAULT '0',
+  showoncert int NOT NULL DEFAULT '1',
+  showonspec int NOT NULL DEFAULT '1',
+  showontestplan tinyint NOT NULL DEFAULT '1',
+  active int NOT NULL DEFAULT '1',
+  PRIMARY KEY (testid),
+  KEY name (name),
+  KEY groupname (groupby,name)
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb3;
+
+CREATE TABLE sampleresults (
+  resultid bigint NOT NULL AUTO_INCREMENT,
+  sampleid int NOT NULL,
+  testid int NOT NULL,
+  defaultvalue varchar(150) NOT NULL,
+  targetvalue varchar(30) NOT NULL,
+  rangemin float DEFAULT NULL,
+  rangemax float DEFAULT NULL,
+  testvalue varchar(30) NOT NULL DEFAULT '',
+  testdate date NOT NULL DEFAULT '2023-01-01',
+  testedby varchar(15) NOT NULL DEFAULT '',
+  comments varchar(255) NOT NULL DEFAULT '',
+  isinspec tinyint NOT NULL DEFAULT '0',
+  showoncert tinyint NOT NULL DEFAULT '1',
+  showontestplan tinyint NOT NULL DEFAULT '1',
+  manuallyadded tinyint NOT NULL DEFAULT '0',
+  PRIMARY KEY (resultid),
+  KEY sampleid (sampleid),
+  KEY testid (testid)
+) ENGINE=InnoDB AUTO_INCREMENT=339 DEFAULT CHARSET=utf8mb3;
+
+
+Diff between Weberp/Input/Weberp-4.12-demo_mod_sort.sql and Weberp/Input/Weberp-4.12.1-demo_mod_sort.sql:
+
+Diff between Weberp/Input/Weberp-4.12.1-demo_mod_sort.sql and Weberp/Input/Weberp-4.12.2-demo_mod_sort.sql:
+## mysqldiff 0.60
+## 
+## Run on Tue Feb 27 19:13:57 2024
+## Options: user=root, ignore_tables=(?^:^schema_migrations$), port=3306, password=, host=localhost
+##
+## --- file: Weberp/Input/Weberp-4.12.1-demo_mod_sort.sql
+## +++ file: Weberp/Input/Weberp-4.12.2-demo_mod_sort.sql
+
+ALTER TABLE debtortrans CHANGE COLUMN reference reference varchar(50) DEFAULT NULL; # was varchar(20) NOT NULL DEFAULT ''
+
+Diff between Weberp/Input/Weberp-4.12.2-demo_mod_sort.sql and Weberp/Input/Weberp-4.12.3-demo_mod_sort.sql:
+## mysqldiff 0.60
+## 
+## Run on Tue Feb 27 19:14:54 2024
+## Options: user=root, ignore_tables=(?^:^schema_migrations$), port=3306, password=, host=localhost
+##
+## --- file: Weberp/Input/Weberp-4.12.2-demo_mod_sort.sql
+## +++ file: Weberp/Input/Weberp-4.12.3-demo_mod_sort.sql
+
+ALTER TABLE locations ADD COLUMN glaccountcode varchar(20) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL DEFAULT '' COMMENT 'GL account of the location';
+ALTER TABLE locations ADD COLUMN allowinvoicing tinyint(1) NOT NULL DEFAULT '1' COMMENT 'Allow invoicing of items at this location';
+
+Diff between Weberp/Input/Weberp-4.12.3-demo_mod_sort.sql and Weberp/Input/Weberp-4.13-demo_mod_sort.sql:
+## mysqldiff 0.60
+## 
+## Run on Tue Feb 27 19:15:58 2024
+## Options: user=root, ignore_tables=(?^:^schema_migrations$), port=3306, password=, host=localhost
+##
+## --- file: Weberp/Input/Weberp-4.12.3-demo_mod_sort.sql
+## +++ file: Weberp/Input/Weberp-4.13-demo_mod_sort.sql
+
+ALTER TABLE bom ADD COLUMN remark varchar(500) NOT NULL DEFAULT '';
+ALTER TABLE bom ADD COLUMN digitals int NOT NULL DEFAULT '0';
+ALTER TABLE custcontacts ADD COLUMN statement tinyint NOT NULL DEFAULT '0';
+ALTER TABLE grns ADD COLUMN supplierref varchar(30) NOT NULL DEFAULT '';
+ALTER TABLE pctabs CHANGE COLUMN authorizer authorizer varchar(100) DEFAULT NULL; # was varchar(20) NOT NULL COMMENT 'code of user from www_users'
+ALTER TABLE pctabs CHANGE COLUMN assigner assigner varchar(100) DEFAULT NULL; # was varchar(20) NOT NULL COMMENT 'Cash assigner for the tab'
+CREATE TABLE glaccountusers (
+  accountcode varchar(20) NOT NULL COMMENT 'GL account code from chartmaster',
+  userid varchar(20) NOT NULL,
+  canview tinyint NOT NULL DEFAULT '0',
+  canupd tinyint NOT NULL DEFAULT '0',
+  UNIQUE KEY useraccount (userid,accountcode),
+  UNIQUE KEY accountuser (accountcode,userid)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+CREATE TABLE loctransfercancellations (
+  reference int NOT NULL,
+  stockid varchar(20) NOT NULL,
+  cancelqty double NOT NULL,
+  canceldate datetime NOT NULL,
+  canceluserid varchar(20) NOT NULL,
+  KEY Index1 (reference,stockid),
+  KEY Index2 (canceldate,reference,stockid)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE suppinvstogrn (
+  suppinv int NOT NULL,
+  grnno int NOT NULL,
+  PRIMARY KEY (suppinv,grnno),
+  KEY suppinvstogrn_ibfk_1 (grnno)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+
+Diff between Weberp/Input/Weberp-4.13-demo_mod_sort.sql and Weberp/Input/Weberp-4.13.1-demo_mod_sort.sql:
+## mysqldiff 0.60
+## 
+## Run on Tue Feb 27 19:16:58 2024
+## Options: user=root, ignore_tables=(?^:^schema_migrations$), port=3306, password=, host=localhost
+##
+## --- file: Weberp/Input/Weberp-4.13-demo_mod_sort.sql
+## +++ file: Weberp/Input/Weberp-4.13.1-demo_mod_sort.sql
+
+ALTER TABLE chartmaster ADD COLUMN cashflowsactivity tinyint(1) NOT NULL DEFAULT '-1' COMMENT 'Cash flows activity';
+ALTER TABLE salesanalysis CHANGE COLUMN salesperson salesperson varchar(4) NOT NULL DEFAULT ''; # was char(3) NOT NULL DEFAULT ''
+ALTER TABLE stockrequest ADD COLUMN initiator varchar(20) NOT NULL DEFAULT '';
+ALTER TABLE workorders ADD COLUMN remark text;
+ALTER TABLE workorders ADD COLUMN reference varchar(40) NOT NULL DEFAULT '';
+
+Diff between Weberp/Input/Weberp-4.13.1-demo_mod_sort.sql and Weberp/Input/Weberp-4.14-demo_mod_sort.sql:
+## mysqldiff 0.60
+## 
+## Run on Tue Feb 27 19:18:07 2024
+## Options: user=root, ignore_tables=(?^:^schema_migrations$), port=3306, password=, host=localhost
+##
+## --- file: Weberp/Input/Weberp-4.13.1-demo_mod_sort.sql
+## +++ file: Weberp/Input/Weberp-4.14-demo_mod_sort.sql
+
+ALTER TABLE paymentmethods ADD COLUMN percentdiscount double NOT NULL DEFAULT '0';
+ALTER TABLE pcashdetails ADD UNIQUE tabcodedate (tabcode,date,codeexpense,counterindex);
+ALTER TABLE www_users ADD COLUMN showfieldhelp tinyint(1) NOT NULL DEFAULT '1' COMMENT 'Turn off/on field help';
+ALTER TABLE www_users ADD COLUMN showpagehelp tinyint(1) NOT NULL DEFAULT '1' COMMENT 'Turn off/on page help';
+CREATE TABLE favourites (
+  userid varchar(20) NOT NULL DEFAULT '',
+  caption varchar(50) NOT NULL DEFAULT '',
+  href varchar(200) NOT NULL DEFAULT '#',
+  PRIMARY KEY (userid,caption)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+
+Diff between Weberp/Input/Weberp-4.14-demo_mod_sort.sql and Weberp/Input/Weberp-4.14.1-demo_mod_sort.sql:
+
+Diff between Weberp/Input/Weberp-4.14.1-demo_mod_sort.sql and Weberp/Input/Weberp-4.15-demo_mod_sort.sql:
+## mysqldiff 0.60
+## 
+## Run on Tue Feb 27 19:20:17 2024
+## Options: user=root, ignore_tables=(?^:^schema_migrations$), port=3306, password=, host=localhost
+##
+## --- file: Weberp/Input/Weberp-4.14.1-demo_mod_sort.sql
+## +++ file: Weberp/Input/Weberp-4.15-demo_mod_sort.sql
+
+ALTER TABLE banktrans ADD COLUMN chequeno varchar(16) NOT NULL DEFAULT '';
+ALTER TABLE custbranch CHANGE COLUMN lat lat float(12,8) NOT NULL DEFAULT '0.00000000'; # was float(10,6) NOT NULL
+ALTER TABLE custbranch CHANGE COLUMN lng lng float(12,8) NOT NULL DEFAULT '0.00000000'; # was float(10,6) NOT NULL
+ALTER TABLE pcashdetails CHANGE COLUMN receipt receipt text COMMENT 'Column redundant. Replaced by receipt file upload. Nov 2017.'; # was text COMMENT 'filename or path to scanned receipt or code of receipt to find physical receipt if tax guys or auditors show up'
+ALTER TABLE pcashdetails ADD COLUMN tag int NOT NULL DEFAULT '0';
+ALTER TABLE pcashdetails ADD COLUMN purpose text;
+ALTER TABLE pcexpenses ADD COLUMN taxcatid tinyint NOT NULL DEFAULT '1';
+ALTER TABLE pctabs ADD COLUMN taxgroupid tinyint NOT NULL DEFAULT '1';
+ALTER TABLE pctabs ADD COLUMN defaulttag tinyint NOT NULL DEFAULT '0';
+ALTER TABLE pctabs ADD COLUMN authorizerexpenses varchar(20) NOT NULL;
+ALTER TABLE salesorders ADD COLUMN internalcomment blob;
+ALTER TABLE stockserialitems ADD COLUMN createdate timestamp NULL DEFAULT CURRENT_TIMESTAMP;
+ALTER TABLE stockserialitems ADD INDEX createdate (createdate);
+ALTER TABLE supptrans ADD COLUMN void tinyint(1) NOT NULL DEFAULT '0';
+ALTER TABLE supptrans ADD COLUMN chequeno varchar(16) NOT NULL DEFAULT '';
+CREATE TABLE pcashdetailtaxes (
+  counterindex int NOT NULL AUTO_INCREMENT,
+  pccashdetail int NOT NULL DEFAULT '0',
+  calculationorder tinyint NOT NULL DEFAULT '0',
+  description varchar(40) NOT NULL DEFAULT '',
+  taxauthid tinyint NOT NULL DEFAULT '0',
+  purchtaxglaccount varchar(20) NOT NULL DEFAULT '',
+  taxontax tinyint NOT NULL DEFAULT '0',
+  taxrate double NOT NULL DEFAULT '0',
+  amount double NOT NULL DEFAULT '0',
+  PRIMARY KEY (counterindex)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+CREATE TABLE pcreceipts (
+  counterindex int NOT NULL AUTO_INCREMENT,
+  pccashdetail int NOT NULL DEFAULT '0' COMMENT 'Expenses record identity',
+  hashfile varchar(32) NOT NULL DEFAULT '' COMMENT 'MD5 hash of uploaded receipt file',
+  type varchar(80) NOT NULL DEFAULT '' COMMENT 'Mime type of uploaded receipt file',
+  extension varchar(4) NOT NULL DEFAULT '' COMMENT 'File extension of uploaded receipt',
+  size int NOT NULL DEFAULT '0' COMMENT 'File size of uploaded receipt',
+  PRIMARY KEY (counterindex)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+CREATE TABLE pickreq (
+  prid int NOT NULL AUTO_INCREMENT,
+  initiator varchar(20) NOT NULL DEFAULT '',
+  shippedby varchar(20) NOT NULL DEFAULT '',
+  initdate date NOT NULL DEFAULT '2023-01-01',
+  requestdate date NOT NULL DEFAULT '2023-01-01',
+  shipdate date NOT NULL DEFAULT '2023-01-01',
+  status varchar(12) NOT NULL DEFAULT '',
+  comments text,
+  closed tinyint NOT NULL DEFAULT '0',
+  loccode varchar(5) NOT NULL DEFAULT '',
+  orderno int NOT NULL DEFAULT '1',
+  consignment varchar(15) NOT NULL DEFAULT '',
+  packages int NOT NULL DEFAULT '1' COMMENT 'number of cartons',
+  PRIMARY KEY (prid),
+  KEY orderno (orderno),
+  KEY requestdate (requestdate),
+  KEY shipdate (shipdate),
+  KEY status (status),
+  KEY closed (closed),
+  KEY loccode (loccode),
+  CONSTRAINT pickreq_ibfk_1 FOREIGN KEY (orderno) REFERENCES salesorders (orderno)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+CREATE TABLE pickreqdetails (
+  detailno int NOT NULL AUTO_INCREMENT,
+  prid int NOT NULL DEFAULT '1',
+  orderlineno int NOT NULL DEFAULT '0',
+  stockid varchar(20) NOT NULL DEFAULT '',
+  qtyexpected double NOT NULL DEFAULT '0',
+  qtypicked double NOT NULL DEFAULT '0',
+  invoicedqty double NOT NULL DEFAULT '0',
+  shipqty double NOT NULL DEFAULT '0',
+  PRIMARY KEY (detailno),
+  KEY prid (prid),
+  KEY stockid (stockid),
+  CONSTRAINT pickreqdetails_ibfk_1 FOREIGN KEY (prid) REFERENCES pickreq (prid)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+CREATE TABLE pickserialdetails (
+  serialmoveid int NOT NULL AUTO_INCREMENT,
+  detailno int NOT NULL DEFAULT '1',
+  stockid varchar(20) NOT NULL DEFAULT '',
+  serialno varchar(30) NOT NULL DEFAULT '',
+  moveqty double NOT NULL DEFAULT '0',
+  PRIMARY KEY (serialmoveid),
+  KEY detailno (detailno),
+  KEY stockid (stockid,serialno),
+  KEY serialno (serialno)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+
+Diff between Weberp/Input/Weberp-4.15-demo_mod_sort.sql and Weberp/Input/Weberp-4.15.1-demo_mod_sort.sql:
+## mysqldiff 0.60
+## 
+## Run on Tue Feb 27 19:21:31 2024
+## Options: user=root, ignore_tables=(?^:^schema_migrations$), port=3306, password=, host=localhost
+##
+## --- file: Weberp/Input/Weberp-4.15-demo_mod_sort.sql
+## +++ file: Weberp/Input/Weberp-4.15.1-demo_mod_sort.sql
+
+ALTER TABLE audittrail CHANGE COLUMN transactiondate transactiondate datetime NOT NULL DEFAULT '1000-01-01 00:00:00'; # was datetime NOT NULL DEFAULT '2023-01-01 00:00:00'
+ALTER TABLE banktrans CHANGE COLUMN transdate transdate date NOT NULL DEFAULT '1000-01-01'; # was date NOT NULL DEFAULT '2023-01-01'
+ALTER TABLE bom CHANGE COLUMN effectiveafter effectiveafter date NOT NULL DEFAULT '1000-01-01'; # was date NOT NULL DEFAULT '2023-01-01'
+ALTER TABLE contracts CHANGE COLUMN requireddate requireddate date NOT NULL DEFAULT '1000-01-01'; # was date NOT NULL DEFAULT '2023-01-01'
+ALTER TABLE custallocns CHANGE COLUMN datealloc datealloc date NOT NULL DEFAULT '1000-01-01'; # was date NOT NULL DEFAULT '2023-01-01'
+ALTER TABLE custnotes CHANGE COLUMN date date date NOT NULL DEFAULT '1000-01-01'; # was date NOT NULL DEFAULT '2023-01-01'
+ALTER TABLE debtorsmaster CHANGE COLUMN clientsince clientsince datetime NOT NULL DEFAULT '1000-01-01 00:00:00'; # was datetime NOT NULL DEFAULT '2023-01-01 00:00:00'
+ALTER TABLE debtortrans CHANGE COLUMN trandate trandate date NOT NULL DEFAULT '1000-01-01'; # was date NOT NULL DEFAULT '2023-01-01'
+ALTER TABLE debtortypenotes CHANGE COLUMN date date date NOT NULL DEFAULT '1000-01-01'; # was date NOT NULL DEFAULT '2023-01-01'
+ALTER TABLE deliverynotes CHANGE COLUMN deliverydate deliverydate date NOT NULL DEFAULT '1000-01-01'; # was date NOT NULL DEFAULT '2023-01-01'
+ALTER TABLE fixedassets CHANGE COLUMN datepurchased datepurchased date NOT NULL DEFAULT '1000-01-01'; # was date NOT NULL DEFAULT '2023-01-01'
+ALTER TABLE fixedassets CHANGE COLUMN disposaldate disposaldate date NOT NULL DEFAULT '1000-01-01'; # was date NOT NULL DEFAULT '2023-01-01'
+ALTER TABLE gltrans CHANGE COLUMN trandate trandate date NOT NULL DEFAULT '1000-01-01'; # was date NOT NULL DEFAULT '2023-01-01'
+ALTER TABLE grns CHANGE COLUMN deliverydate deliverydate date NOT NULL DEFAULT '1000-01-01'; # was date NOT NULL DEFAULT '2023-01-01'
+ALTER TABLE loctransfers CHANGE COLUMN recdate recdate datetime NOT NULL DEFAULT '1000-01-01 00:00:00'; # was datetime NOT NULL DEFAULT '2023-01-01 00:00:00'
+ALTER TABLE loctransfers CHANGE COLUMN shipdate shipdate datetime NOT NULL DEFAULT '1000-01-01 00:00:00'; # was datetime NOT NULL DEFAULT '2023-01-01 00:00:00'
+ALTER TABLE mrpdemands CHANGE COLUMN duedate duedate date NOT NULL DEFAULT '1000-01-01'; # was date NOT NULL DEFAULT '2023-01-01'
+ALTER TABLE offers CHANGE COLUMN expirydate expirydate date NOT NULL DEFAULT '1000-01-01'; # was date NOT NULL DEFAULT '2023-01-01'
+ALTER TABLE periods CHANGE COLUMN lastdate_in_period lastdate_in_period date NOT NULL DEFAULT '1000-01-01'; # was date NOT NULL DEFAULT '2023-01-01'
+ALTER TABLE pickinglists CHANGE COLUMN deliverynotedate deliverynotedate date NOT NULL DEFAULT '1000-01-01'; # was date NOT NULL DEFAULT '2023-01-01'
+ALTER TABLE pickinglists CHANGE COLUMN dateprinted dateprinted date NOT NULL DEFAULT '1000-01-01'; # was date NOT NULL DEFAULT '2023-01-01'
+ALTER TABLE pickinglists CHANGE COLUMN pickinglistdate pickinglistdate date NOT NULL DEFAULT '1000-01-01'; # was date NOT NULL DEFAULT '2023-01-01'
+ALTER TABLE pickreq CHANGE COLUMN initdate initdate date NOT NULL DEFAULT '1000-01-01'; # was date NOT NULL DEFAULT '2023-01-01'
+ALTER TABLE pickreq CHANGE COLUMN shipdate shipdate date NOT NULL DEFAULT '1000-01-01'; # was date NOT NULL DEFAULT '2023-01-01'
+ALTER TABLE pickreq CHANGE COLUMN requestdate requestdate date NOT NULL DEFAULT '1000-01-01'; # was date NOT NULL DEFAULT '2023-01-01'
+ALTER TABLE pricematrix CHANGE COLUMN startdate startdate date NOT NULL DEFAULT '1000-01-01'; # was date NOT NULL DEFAULT '2023-01-01'
+ALTER TABLE prices CHANGE COLUMN startdate startdate date NOT NULL DEFAULT '1000-01-01'; # was date NOT NULL DEFAULT '2023-01-01'
+ALTER TABLE purchorderdetails CHANGE COLUMN deliverydate deliverydate date NOT NULL DEFAULT '1000-01-01'; # was date NOT NULL DEFAULT '2023-01-01'
+ALTER TABLE purchorders CHANGE COLUMN orddate orddate datetime NOT NULL DEFAULT '1000-01-01 00:00:00'; # was datetime NOT NULL DEFAULT '2023-01-01 00:00:00'
+ALTER TABLE purchorders CHANGE COLUMN deliverydate deliverydate date NOT NULL DEFAULT '1000-01-01'; # was date NOT NULL DEFAULT '2023-01-01'
+ALTER TABLE purchorders CHANGE COLUMN revised revised date NOT NULL DEFAULT '1000-01-01'; # was date NOT NULL DEFAULT '2023-01-01'
+ALTER TABLE qasamples CHANGE COLUMN sampledate sampledate date NOT NULL DEFAULT '1000-01-01'; # was date NOT NULL DEFAULT '2023-01-01'
+ALTER TABLE recurringsalesorders CHANGE COLUMN lastrecurrence lastrecurrence date NOT NULL DEFAULT '1000-01-01'; # was date NOT NULL DEFAULT '2023-01-01'
+ALTER TABLE recurringsalesorders CHANGE COLUMN orddate orddate date NOT NULL DEFAULT '1000-01-01'; # was date NOT NULL DEFAULT '2023-01-01'
+ALTER TABLE recurringsalesorders CHANGE COLUMN stopdate stopdate date NOT NULL DEFAULT '1000-01-01'; # was date NOT NULL DEFAULT '2023-01-01'
+ALTER TABLE salesorderdetails CHANGE COLUMN actualdispatchdate actualdispatchdate datetime NOT NULL DEFAULT '1000-01-01 00:00:00'; # was datetime NOT NULL DEFAULT '2023-01-01 00:00:00'
+ALTER TABLE salesorders CHANGE COLUMN orddate orddate date NOT NULL DEFAULT '1000-01-01'; # was date NOT NULL DEFAULT '2023-01-01'
+ALTER TABLE salesorders CHANGE COLUMN datepackingslipprinted datepackingslipprinted date NOT NULL DEFAULT '1000-01-01'; # was date NOT NULL DEFAULT '2023-01-01'
+ALTER TABLE salesorders CHANGE COLUMN deliverydate deliverydate date NOT NULL DEFAULT '1000-01-01'; # was date NOT NULL DEFAULT '2023-01-01'
+ALTER TABLE salesorders CHANGE COLUMN quotedate quotedate date NOT NULL DEFAULT '1000-01-01'; # was date NOT NULL DEFAULT '2023-01-01'
+ALTER TABLE salesorders CHANGE COLUMN confirmeddate confirmeddate date NOT NULL DEFAULT '1000-01-01'; # was date NOT NULL DEFAULT '2023-01-01'
+ALTER TABLE sampleresults CHANGE COLUMN testdate testdate date NOT NULL DEFAULT '1000-01-01'; # was date NOT NULL DEFAULT '2023-01-01'
+ALTER TABLE shipments CHANGE COLUMN eta eta datetime NOT NULL DEFAULT '1000-01-01 00:00:00'; # was datetime NOT NULL DEFAULT '2023-01-01 00:00:00'
+ALTER TABLE stockcheckfreeze CHANGE COLUMN stockcheckdate stockcheckdate date NOT NULL DEFAULT '1000-01-01'; # was date NOT NULL DEFAULT '2023-01-01'
+ALTER TABLE stockmaster CHANGE COLUMN lastcostupdate lastcostupdate date NOT NULL DEFAULT '1000-01-01'; # was date NOT NULL DEFAULT '2023-01-01'
+ALTER TABLE stockmaster DROP COLUMN appendfile; # was varchar(40) NOT NULL DEFAULT 'none'
+ALTER TABLE stockmoves CHANGE COLUMN trandate trandate date NOT NULL DEFAULT '1000-01-01'; # was date NOT NULL DEFAULT '2023-01-01'
+ALTER TABLE stockrequest CHANGE COLUMN despatchdate despatchdate date NOT NULL DEFAULT '1000-01-01'; # was date NOT NULL DEFAULT '2023-01-01'
+ALTER TABLE stockserialitems CHANGE COLUMN expirationdate expirationdate datetime NOT NULL DEFAULT '1000-01-01 00:00:00'; # was datetime NOT NULL DEFAULT '2023-01-01 00:00:00'
+ALTER TABLE suppallocs CHANGE COLUMN datealloc datealloc date NOT NULL DEFAULT '1000-01-01'; # was date NOT NULL DEFAULT '2023-01-01'
+ALTER TABLE suppliers CHANGE COLUMN suppliersince suppliersince date NOT NULL DEFAULT '1000-01-01'; # was date NOT NULL DEFAULT '2023-01-01'
+ALTER TABLE suppliers ADD COLUMN defaultgl varchar(20) NOT NULL DEFAULT '1';
+ALTER TABLE suppliers ADD COLUMN defaultshipper int NOT NULL DEFAULT '0';
+ALTER TABLE supptrans CHANGE COLUMN duedate duedate date NOT NULL DEFAULT '1000-01-01'; # was date NOT NULL DEFAULT '2023-01-01'
+ALTER TABLE supptrans CHANGE COLUMN trandate trandate date NOT NULL DEFAULT '1000-01-01'; # was date NOT NULL DEFAULT '2023-01-01'
+ALTER TABLE tenders CHANGE COLUMN requiredbydate requiredbydate datetime NOT NULL DEFAULT '1000-01-01 00:00:00'; # was datetime NOT NULL DEFAULT '2023-01-01 00:00:00'
+ALTER TABLE workorders CHANGE COLUMN startdate startdate date NOT NULL DEFAULT '1000-01-01'; # was date NOT NULL DEFAULT '2023-01-01'
+ALTER TABLE workorders CHANGE COLUMN requiredby requiredby date NOT NULL DEFAULT '1000-01-01'; # was date NOT NULL DEFAULT '2023-01-01'
+CREATE TABLE employees (
+  id int NOT NULL AUTO_INCREMENT,
+  surname varchar(20) NOT NULL,
+  firstname varchar(20) NOT NULL,
+  stockid varchar(20) NOT NULL COMMENT 'FK with stockmaster',
+  manager int DEFAULT NULL COMMENT 'an employee also in this table',
+  normalhours double NOT NULL DEFAULT '40',
+  userid varchar(20) NOT NULL DEFAULT '' COMMENT 'loose FK with www-users will have some employees who are not users',
+  email varchar(55) NOT NULL DEFAULT '',
+  PRIMARY KEY (id),
+  KEY surname (surname),
+  KEY firstname (firstname),
+  KEY stockid (stockid),
+  KEY manager (manager),
+  KEY userid (userid)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+CREATE TABLE jnltmpldetails (
+  linenumber int NOT NULL DEFAULT '0',
+  templateid int NOT NULL DEFAULT '0',
+  tags varchar(50) NOT NULL DEFAULT '0',
+  accountcode varchar(20) NOT NULL DEFAULT '1',
+  amount double NOT NULL DEFAULT '0',
+  narrative varchar(200) NOT NULL DEFAULT '',
+  PRIMARY KEY (templateid,linenumber)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE jnltmplheader (
+  templateid int NOT NULL DEFAULT '0',
+  templatedescription varchar(50) NOT NULL DEFAULT '',
+  journaltype int NOT NULL DEFAULT '0',
+  PRIMARY KEY (templateid)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE timesheets (
+  id int NOT NULL AUTO_INCREMENT,
+  wo int NOT NULL COMMENT 'loose FK with workorders',
+  employeeid int NOT NULL,
+  weekending date NOT NULL DEFAULT '1900-01-01',
+  workcentre varchar(5) NOT NULL COMMENT 'loose FK with workcentres',
+  day1 double NOT NULL DEFAULT '0',
+  day2 double NOT NULL DEFAULT '0',
+  day3 double NOT NULL DEFAULT '0',
+  day4 double NOT NULL DEFAULT '0',
+  day5 double NOT NULL DEFAULT '0',
+  day6 double NOT NULL DEFAULT '0',
+  day7 double NOT NULL DEFAULT '0',
+  status tinyint NOT NULL DEFAULT '0' COMMENT '0=entered 1=submitted 2=approved',
+  PRIMARY KEY (id),
+  KEY workcentre (workcentre),
+  KEY employees (employeeid),
+  KEY wo (wo),
+  KEY weekending (weekending)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+
+Diff between Weberp/Input/Weberp-4.15.1-demo_mod_sort.sql and Weberp/Input/Weberp-4.15.2-demo_mod_sort.sql:
+## mysqldiff 0.60
+## 
+## Run on Tue Feb 27 19:22:45 2024
+## Options: user=root, ignore_tables=(?^:^schema_migrations$), port=3306, password=, host=localhost
+##
+## --- file: Weberp/Input/Weberp-4.15.1-demo_mod_sort.sql
+## +++ file: Weberp/Input/Weberp-4.15.2-demo_mod_sort.sql
+
+ALTER TABLE www_users ADD COLUMN fontsize tinyint NOT NULL DEFAULT '1';
+

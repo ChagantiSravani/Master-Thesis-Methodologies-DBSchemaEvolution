@@ -1,0 +1,8 @@
+FROM mysql:latest
+
+ENV MYSQL_ROOT_PASSWORD=root
+
+RUN mkdir -p /docker-roundcube.d/Migrationfiles /docker-roundcube.d/Patchfiles
+
+COPY ./2007101000_mod.sql /docker-roundcube.d/
+COPY ./Roundcube/Patchfiles_Mod /docker-roundcube.d/Patchfiles

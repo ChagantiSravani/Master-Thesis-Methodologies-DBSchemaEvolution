@@ -1,0 +1,8 @@
+FROM mysql:latest
+
+ENV MYSQL_ROOT_PASSWORD=root
+
+RUN mkdir -p /docker-joomla.d/Migrationfiles /docker-joomla.d/Patchfiles
+
+COPY ./joomla-4.0.0_mod.sql /docker-joomla.d/
+COPY ./Joomla/Patchfiles_Mod /docker-joomla.d/Patchfiles

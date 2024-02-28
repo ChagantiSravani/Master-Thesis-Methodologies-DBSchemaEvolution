@@ -1,0 +1,4507 @@
+Git log for file administrator/components/com_admin/sql/updates/mysql/4.0.0-2018-03-05.sql:
+commit 943752290313105831b554993fff51af033881bf
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Sun Feb 27 16:49:53 2022 +0100
+
+    Remove period after links to pull requests in comments
+
+commit be9e01480162d8d9ab8f898e8c6532f7eea4d75b
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Sun Feb 27 15:26:20 2022 +0100
+
+    Add comments to changes
+
+commit 4e98330a5ceb7e9561cc7f422fb630fee5a0b269
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Sun Feb 27 12:53:02 2022 +0100
+
+    Make update SQL scripts resilient to multiple executions
+    
+    1. Use `IF EXISTS` and `IF NOT EXISTS` for structure changes where possible.
+    2. Mark structure changes with `/** CAN FAIL **/` where 1. is not possible but would be needed.
+    3. Use `INSERT IGNORE` on MySQL and `ON CONFLICT DO NOTHING` on PostgreSQL when inserting new records where we would get duplicate primary or unique keys when running the particular statement a 2nd time.
+
+commit 5f68ac3bf67bd1bef283656403c1f58dcc0f39f8
+Author: Dimitris Grammatikogiannis <dg@dgrammatiko.dev>
+Date:   Tue Jan 25 14:41:52 2022 +0100
+
+    [4.1] Fix the upgrade  path (#36585)
+    
+    * Use a function for the new mode
+    
+    * cs
+    
+    * ctrl+z
+    
+    * CS
+    
+    * int
+    
+    * order please
+    
+    * int
+    
+    * Update administrator/components/com_admin/script.php
+    
+    Co-authored-by: Phil E. Taylor <phil@phil-taylor.com>
+    
+    * Update administrator/components/com_admin/script.php
+    
+    Co-authored-by: Phil E. Taylor <phil@phil-taylor.com>
+    
+    * Move fixTemplateMode to preflight
+    
+    * Set inheritable and parent columns in 4.0.0-2018-03-05.sql
+    
+    * Add comment about the change to 4.0.0-2018-03-05.sql
+    
+    Co-authored-by: Phil E. Taylor <phil@phil-taylor.com>
+    Co-authored-by: Richard Fath <richard67@users.noreply.github.com>
+    Co-authored-by: Allon Moritz <allon.moritz@digital-peak.com>
+
+commit a5183489f0b2e2fc77741c217e5933b24de2a7c1
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Tue Jul 13 18:08:27 2021 +0200
+
+    Fix update SQL for template styles (#34763)
+
+commit a3a1b8ba73c60f33c6eeabc9b5e751efde5e9fe0
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Thu May 27 23:40:52 2021 +0200
+
+    [4.0] Combine update SQL scripts to reduce their number (#34139)
+
+commit 69734e463522fd3f66d7bd8fb73c8daa94d037d7
+Author: Allon Moritz <allon.moritz@digital-peak.com>
+Date:   Thu May 31 00:51:24 2018 +0200
+
+    [4.0] Modules can't be created (#19836)
+    
+    * Allow null for module content
+    
+    * Don't set a default value as null is allowed
+    
+    * postgres update script
+    
+    * postgres install script
+
+Git log for file administrator/components/com_admin/sql/updates/mysql/4.0.0-2018-05-15.sql:
+commit 943752290313105831b554993fff51af033881bf
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Sun Feb 27 16:49:53 2022 +0100
+
+    Remove period after links to pull requests in comments
+
+commit be9e01480162d8d9ab8f898e8c6532f7eea4d75b
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Sun Feb 27 15:26:20 2022 +0100
+
+    Add comments to changes
+
+commit 4e98330a5ceb7e9561cc7f422fb630fee5a0b269
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Sun Feb 27 12:53:02 2022 +0100
+
+    Make update SQL scripts resilient to multiple executions
+    
+    1. Use `IF EXISTS` and `IF NOT EXISTS` for structure changes where possible.
+    2. Mark structure changes with `/** CAN FAIL **/` where 1. is not possible but would be needed.
+    3. Use `INSERT IGNORE` on MySQL and `ON CONFLICT DO NOTHING` on PostgreSQL when inserting new records where we would get duplicate primary or unique keys when running the particular statement a 2nd time.
+
+commit b9ae1ca6589d6e51f59e5b91c1389d1f9d32d56a
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Mon May 3 00:16:29 2021 +0200
+
+    [4.0] Remove display widths for integer data types from SQL scripts for MySQL and MariaDB databases (#32608)
+
+commit 09d8db55ff0ac9d9684bd1790f45c0f703efc756
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Sat Sep 12 02:33:47 2020 +0200
+
+    [4.0] Revert removal of the "custom_data" field of the "extensions" database table. (#30373)
+
+commit d10177fb62190b64abda5c130e72f70a0333f2d3
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Wed May 27 19:21:12 2020 +0200
+
+    Remove locked column of extensions table from update sql - sorry was my mistake (#117)
+
+commit 3bc6d86173ce94c41496946b6585e4370916c18a
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Tue May 26 09:40:27 2020 +0200
+
+    Fix update sql for extensions table (#105)
+    
+    Add missing column "locked", add helpful comment for the extensions table null dates.
+
+commit 5a18ed191dfe068655c5f251c50e35a95db82b72
+Author: bembelimen <benjamin.trenkle@wicked-chick.de>
+Date:   Sat May 23 18:03:30 2020 +0200
+
+    Rename default workflow/stage to "basic"
+
+commit 3f292243a99e86bb5ca660378ae5821b5cdd75b1
+Author: Benjamin Trenkle <bembelimen@users.noreply.github.com>
+Date:   Tue May 19 02:00:42 2020 +0200
+
+    Remove core workflow protection (#98)
+
+commit 87917110427a3729c681401bbf3b63efad6e6d23
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Mon May 11 09:34:56 2020 +0200
+
+    Use old pseudo-nulldates in 4.0.0-2018-05-15.sql (#96)
+
+commit 4b933ae41e662bb666ebc2dea39ebdec9357f5d1
+Author: bembelimen <benjamin.trenkle@wicked-chick.de>
+Date:   Sun May 10 22:37:15 2020 +0200
+
+    Add Publish & Feature as Transition
+
+commit 18e4f7f08cffbbb9331490b2b258c54c5f3093e9
+Author: Benjamin Trenkle <bembelimen@users.noreply.github.com>
+Date:   Sun May 10 05:22:42 2020 +0200
+
+    Refactor stages transitions (#93)
+    
+    * Add feature to the default workflow
+    Remove unnecessary stages (if s.o. wants J3 workflow => disable)
+    
+    * Allow edit of core transition but only permissions
+    
+    * Cleanup variable
+    
+    * Disable different edit buttons for core workflow transitions
+
+commit 0238c943b6a57ddba2a2b82733bb8a31d2657bb9
+Author: Harald Leithner <leithner@itronic.at>
+Date:   Wed May 6 22:42:53 2020 +0200
+
+    Add featuring plugin (#84)
+    
+    * Initial support for featuring transition
+    
+    * Move $supportFunctionality from the trait to the service.
+    
+    * Disable list item feature button and view restriction
+    
+    * Comments/cs
+
+commit 12ca6b25bfb8fcd65c51b2a123b59eebe25ae890
+Author: Benjamin Trenkle <bembelimen@users.noreply.github.com>
+Date:   Wed Apr 22 01:00:42 2020 +0200
+
+    Workflow v3 transitions (#61)
+    
+    * Remove condition from workflow component
+    
+    * Load Workflow plugins on transition generation
+    
+    * First commit for the publishing plugin
+    
+    * Prevent saving of publishing state if workflow + plugin is active and the function is supported
+    
+    * Only enhance transition form, if plugin is supported
+    
+    * Add options field for transition plugins
+    Fix support check for workflow publishing plugin
+    
+    * Set transition default values when creating a new workflow
+    
+    * Make publishing plugin support name generic
+    
+    * Allow to kill transition execution
+    
+    * Add missing variable assignment to kill transitions
+    
+    * Prevent state change on publish events
+    
+    * Implement finished version of the publishing plugin which now changes states of items
+    Fix wrong contexts
+    
+    * Update the workflow model interface to respect all methods
+    Secure controller execution for runTransition
+    
+    * Implement frontend transition with the new plugin method
+
+commit b520b5abcaa2f4bb26fa2c6778f41b100d43ecf4
+Author: Benjamin Trenkle <bembelimen@users.noreply.github.com>
+Date:   Tue Apr 21 03:49:13 2020 +0200
+
+    Rename com_content context to "com_content.article" (#60)
+
+commit f7db0e2c6e5a7ade56196f718aa322fa5ad718f8
+Author: Benjamin Trenkle <bembelimen@users.noreply.github.com>
+Date:   Sat Mar 14 20:55:46 2020 +0100
+
+    Remove condition from workflow component (#52)
+
+commit 1178a7e2d6ee80786b79f36e2f187e8ed416383e
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Thu Oct 3 17:14:14 2019 +0200
+
+    [4.0] [com_workflow] Fix default value for not nullable datetime columns and make checkout_time nullable (#26428)
+
+commit 5f8e751409718909730f942bbef712e3d22469a9
+Merge: 766ac40f97 5fff3b8cc3
+Author: Roland Dalmulder <contact@rolandd.com>
+Date:   Sat Aug 31 23:31:38 2019 +0200
+
+    Merge branch '4.0-dev' into workflow-database-checkedout
+
+commit c3949dd92db17ada2fb360bb0cd840027fd07e9c
+Author: Allon Moritz <allon.moritz@digital-peak.com>
+Date:   Wed Apr 17 12:02:48 2019 +0200
+
+    [4.0] Remove hardcoded extension ID's (#22374)
+
+commit 027eed9b49037d52837e0d4d98536173d40c9f46
+Author: George Wilson <georgejameswilson@googlemail.com>
+Date:   Thu Mar 14 16:51:43 2019 +0000
+
+    Update extension ids
+
+commit 329c54e43480c04d8ccd24eb2597255cf4122a7d
+Merge: 7836dcc8b5 4b0f1c1bbb
+Author: George Wilson <georgejameswilson@googlemail.com>
+Date:   Thu Mar 14 14:53:11 2019 +0000
+
+    Merge commit '4b0f1c1' into 4.0-dev
+
+commit 911e4e612c03bc27d37c13d5c5c077b3b02ddbce
+Author: chmst <dev@chmst.de>
+Date:   Sat Mar 2 14:21:08 2019 +0100
+
+    Prepare Database for checked_out in workflow tables
+
+commit fdfef91d3f2aa1187d400f3e0cdaf7dc76e6923a
+Author: Benjamin Trenkle <bembelimen@users.noreply.github.com>
+Date:   Fri Feb 22 13:44:56 2019 +0100
+
+    [4.0] Workflow new article stage category change (#23458)
+
+commit dcbcc6fd00cfa38e1cd43f650c3b860d57b7be87
+Author: Benjamin Trenkle <bembelimen@users.noreply.github.com>
+Date:   Tue Dec 11 00:51:18 2018 +0100
+
+    [4.0] Protect the default workflow (#22827)
+
+commit d71fef22665301f7c0c519ce541096daebfae4c6
+Author: zero-24 <zero-24@users.noreply.github.com>
+Date:   Sun Oct 28 15:24:58 2018 +0100
+
+    add missing , to the sql file thanks @degobbis (#22845)
+
+commit 3136ebeca14bd5bedf2a97cc707845051062f2b1
+Author: Benjamin Trenkle <bembelimen@users.noreply.github.com>
+Date:   Wed Oct 10 14:55:17 2018 +0200
+
+    Improve workflow association DB keys (#22547)
+
+commit 2b36367dce7becd73a212b6f70610ea864ba325c
+Author: Allon Moritz <allon.moritz@digital-peak.com>
+Date:   Sun Sep 16 13:07:49 2018 +0200
+
+    [4.0] Generate the classmap from the manifest files (#21766)
+    
+    * Change namespace generator from database to manifests
+    
+    * adapt com_media
+    
+    * site components
+    
+    * short array
+    
+    * remove database code
+    
+    * full plugin support
+    
+    * better function name
+    
+    * CS
+    
+    * Adapt installer scripts
+    
+    * Invalid change
+    
+    * Only back end components
+
+commit e4e6454ef25b91189afe5997bebc89f9db87f79b
+Author: Benjamin Trenkle <bembelimen@users.noreply.github.com>
+Date:   Mon Sep 10 02:16:20 2018 +0200
+
+    [4.0] Translate workflows via language file (#21939)
+    
+    * Translate workflow via language file
+    
+    * Change alpha-ordering
+    
+    * Fix wrong escaping and missing path.
+    
+    * Fixed typo
+
+commit 4314e47bc24ccfe67f796e8f44ee72b28f11f516
+Author: Benjamin Trenkle <bembelimen@users.noreply.github.com>
+Date:   Fri Aug 31 22:02:52 2018 +0200
+
+    [4.0] Translate stages via language files (#21506)
+    
+    * Make states translatable
+    
+    * Fix double factory
+    
+    * Fix missing translations Thanks @infograf768
+    
+    * Clean up variables + use
+    
+    * state => stage
+    
+    * Escape after Text::_(...)
+    
+    * Add missing Text::_(...)
+    
+    * postgresql  & update
+    
+    * update mysql
+    
+    * update postgresql
+
+commit aca906d44adb4f1f473c3b3c5da3d8a55443eaa6
+Author: Harald <leithner@itronic.at>
+Date:   Fri Aug 17 12:24:22 2018 +0200
+
+    [4.0][Workflow] Add component specific workflow conditions (#21585)
+
+commit 959949430c160587b0bb04cf5838839392c892da
+Author: Nicola Galgano <optimus4joomla@gmail.com>
+Date:   Tue Aug 14 17:39:50 2018 +0200
+
+    [4.0] - Workflow mysql/postgresql schema (#21520)
+    
+    * [WIP][4.0] - workwflow mysql schema
+    
+    -idx prefix
+    - removed ENUM field type
+    
+    * postgresql schema update workflow
+    
+    * fix mysql install 4 workflow
+    
+    * workflow mysql install review
+    
+    * now()
+    
+    * lost hypen
+    
+    * workflow postgresql schema
+    
+    * the state alter
+    
+    * the state alter
+    
+    * state2stage
+    
+    * state2stage
+    
+    * mysql 5.5
+    
+    * mysql 5.5
+    
+    * mysql 5.5 consistency
+    
+    * mysql 5.5 consistency
+    
+    * missed quote
+    
+    * remove duplicated tables
+    
+    * revert state change on #__content
+    
+    * revert state field change
+    
+    * revert start field change
+    
+    * revert start field change
+
+commit 7b5adf9e6dd3cf584d53574d4449ef389a650c95
+Author: chmst <dev@chmst.de>
+Date:   Mon Aug 13 17:30:19 2018 +0200
+
+    [4.0] State to stage fixes (#21566)
+
+commit ecbc5764dcf56e44fd8104e3ff6bdf8ecb61fc84
+Author: chmst <dev@chmst.de>
+Date:   Sun Aug 12 12:28:37 2018 +0200
+
+    Fix errors in renaming state to stage for workflow (#21563)
+    
+    * Fix errors in renaming state to stage for workflow
+    
+    * Fix table
+
+commit e986af589973722ac1dad9408e4818557669da28
+Author: chmst <dev@chmst.de>
+Date:   Sun Aug 12 00:47:13 2018 +0200
+
+    [4.0] State to stage (#21544)
+    
+    * Change "state" to "stage"
+    
+    * article-model
+    
+    * Change "state" to "stage"
+    
+    * Spelling correction controler/controller
+    
+    * Fix typos
+    
+    * Revert renaming of workflowstate
+    
+    * Revert renaming of workflowstate
+    
+    * Fix Language-key and String, rename the e-mail param, revert change of the classname
+    
+    * Fix typos
+    
+    * Some more state-stage changes
+    
+    * Email without hyphen
+    
+    * Language string copied
+
+commit 6d2c49a20ac50ffabbd32b38ad3baf24b6a60213
+Author: Nicola Galgano <optimus4joomla@gmail.com>
+Date:   Fri Aug 10 10:15:19 2018 +0200
+
+    [WIP][4.0] - workwflow mysql schema (#21499)
+    
+    * [4.0] - workwflow mysql schema [wip]
+    
+    * extension field consistent
+    
+    make the extension field consistent with the current schema  ie varchar(50)
+
+commit e1693bd03d64e1a87084117d54a350a179f9bbcb
+Author: Benjamin Trenkle <bembelimen@users.noreply.github.com>
+Date:   Wed Aug 8 23:30:58 2018 +0200
+
+    [4.0] Feature/New Publishing Workflow (#20381)
+    
+    Thanks @bembelimen @Didldu-Florian @puneet0191 @priiish @brianteeman and @chmst
+
+Git log for file administrator/components/com_admin/sql/updates/mysql/4.0.0-2018-07-19.sql:
+commit a3a1b8ba73c60f33c6eeabc9b5e751efde5e9fe0
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Thu May 27 23:40:52 2021 +0200
+
+    [4.0] Combine update SQL scripts to reduce their number (#34139)
+
+commit b9ae1ca6589d6e51f59e5b91c1389d1f9d32d56a
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Mon May 3 00:16:29 2021 +0200
+
+    [4.0] Remove display widths for integer data types from SQL scripts for MySQL and MariaDB databases (#32608)
+
+commit 09d8db55ff0ac9d9684bd1790f45c0f703efc756
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Sat Sep 12 02:33:47 2020 +0200
+
+    [4.0] Revert removal of the "custom_data" field of the "extensions" database table. (#30373)
+
+commit 682f0f4cfaab304b65a7c3003e455e5b19bccf23
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Fri Oct 11 00:18:14 2019 +0200
+
+    [4.0] [com_templates] Fix datetime columns for template overrides (#26462)
+
+commit 6eb5e25aebf122e676717f65a499224d8eb18b35
+Author: wilsonge <georgejameswilson@googlemail.com>
+Date:   Sat Jul 6 18:37:10 2019 +0100
+
+    Remove column that doesn't exist anymore
+
+commit c3949dd92db17ada2fb360bb0cd840027fd07e9c
+Author: Allon Moritz <allon.moritz@digital-peak.com>
+Date:   Wed Apr 17 12:02:48 2019 +0200
+
+    [4.0] Remove hardcoded extension ID's (#22374)
+
+commit fc0d2ea3c8e9f9451a1bdda8311e4c7640e7edef
+Author: wilsonge <georgejameswilson@googlemail.com>
+Date:   Sun Mar 31 22:26:13 2019 +0100
+
+    Fix update extension ids and add missing plugins
+
+commit 027eed9b49037d52837e0d4d98536173d40c9f46
+Author: George Wilson <georgejameswilson@googlemail.com>
+Date:   Thu Mar 14 16:51:43 2019 +0000
+
+    Update extension ids
+
+commit a4f106a030c1c02a2e6e1435ca8d45257bc102c2
+Author: infograf768 <infografjms@gmail.com>
+Date:   Thu Sep 6 12:52:22 2018 +0000
+
+    [4.0] Typo in update sql (#22024)
+
+commit 811ab3f5f2830638d8e11b4f85385c5fcb895bc9
+Author: Anurag <30978328+Anu1601CS@users.noreply.github.com>
+Date:   Thu Sep 6 16:30:11 2018 +0530
+
+    [4.0][GSoC 2018] Improve Override Management   (#21851)
+    
+    * Load correct core files of override files (#2)
+    
+    Start implements loadcorefile() in administrator/components/com_templates/Model/TemplateModel.php
+    
+    * CS (#3) Coding Standards
+    
+    * codingstandards
+    
+    * codingstandards (#4)
+    
+    * Test (#6)
+    
+    Phase 2 (2 part) Mechanism to find correct core file and implementation.
+    
+    * Remove Notice: Only available for html-folder
+    
+    * Remove Warning if core file not found (#11)
+    
+    Thanks.
+    So one part of the issue https://github.com/joomla-projects/gsoc18_override_management/issues/12 is done.
+    
+    * Implement the diff view in template manager
+    
+    Implement the diff view in template manager
+    
+    * coding standard (#17)
+    
+    * fix diff (#18) Fix bug in path in case of administrator template override.
+    
+    Fix bug in path in case of administrator template override.
+    
+    * Notification after update and TEST (#16)
+    
+    Find changed files of overridden files and show message.
+    
+    * coding standard (#21)
+    
+    * correction
+    
+    * correction (#26)
+    
+    * Correcthtmlpath (#27)
+    
+    * correction
+    
+    * change oldhtml to newhtml
+    
+    * List of updated override files. (#30)
+    
+    * addcss (#34)
+    
+    * Final Product  (#39)
+    
+    Core and Diff view
+    Updated override history list.
+    Quick icon notification plugin.
+    Override control plugin.
+    
+    * save 3 lines :)
+    
+    * New feature show status. (#47)
+    
+    show status in com_template view templates
+    
+    * link
+    
+    * corrected namespace
+    
+    * Button to Switch (#35)
+    
+    * wip add Switcher
+    
+    * wip style switcher
+    
+    * wip style switch make inline and change on off text
+    
+    * wip start with js
+    
+    * wip js
+    
+    * wip delete buttons and make js more robust
+    
+    * wip save to storage
+    
+    * wip delete old code
+    
+    * wip
+    
+    * wip lint
+    
+    * wip css
+    
+    * set default value for switcher
+    
+    * wip make switcher blue
+    
+    * wip
+    
+    * wip
+    
+    * build
+    
+    * correct names
+    
+    * create new functions
+    
+    * fist test code
+    
+    * use onchange
+    
+    * undo installer.min.js
+    
+    * add forgotten new line at the end of css file
+    
+    * correct align
+    
+    * correct compare.es6 - only deleted the toggle part
+    
+    * correct compare.js - only deleted the toggle part
+    
+    * wip
+    
+    * reduce timeout
+    
+    * wrap in funcitons
+    
+    * wip
+    
+    * add use strict to both js-files(compare and toggle)
+    
+    * add the timeout value of 500 again, because 200 are not enought in my case
+    
+    * use css class 'active' for toggle views
+    
+    * add strict
+    
+    * time out for editor
+    
+    * wip
+    
+    * improvments use newActive and switch
+    
+    * correction
+    
+    * width of switcher-spans
+    
+    * correct align
+    
+    * do not use global
+    
+    * wip
+    
+    * removed timeouts
+    
+    * JTEXT to TEXT
+    
+    * forgotton last line
+    
+    * deleted duplicated comments
+    
+    * css fix align
+    
+    * use unnamed functions in es6
+    
+    * Sql files for fix database (#50)
+    
+    * sql files for database fix
+    
+    * delete space
+    
+    * Suggestion for displaying Dates in view updates files (#52)
+    
+    Correct Dates and do not use date of file any more
+    
+    * Store Date as UTC and show it in server time zone (#57)
+    
+    * modified and created date are created and stored in UTC
+    
+    * convert dates for displaying in model
+    
+    * spar a loop
+    
+    * normalize timezone in view
+    
+    * use language constants for dateformat
+    
+    * JToolbarHelper to ToolbarHelper
+    
+    * CS
+    
+    * namespace
+    
+    * plural
+    
+    * name
+    
+    * clean
+    
+    * text
+    
+    * fx
+    
+    * sin
+    
+    * files
+    
+    * s
+    
+    * Suggestion for language strings (#60)
+    
+    * language strings
+    
+    * correct typo
+    
+    * delete media folder plg_quickicon
+    
+    * add folder plg_quickicon to build/media_src
+    
+    * delete files in media folder
+    
+    * Move media folder - System (#66)
+    
+    * multi
+    
+    * cs
+    
+    * delete files in media folder for joomla toolbar (#67)
+    
+    * Fix button switchers style. (#70)
+    
+    * button
+    
+    * CS
+    
+    * changed uitab.addTab for updated files
+    
+    * Bring back core.js changes. (#69)
+    
+    * core.js
+    
+    * const
+    
+    * fix
+    
+    * form
+    
+    * core
+    
+    * hound
+    
+    * CS
+    
+    * scopr
+    
+    * grid
+    
+    * alpha
+    
+    * cs
+    
+    * lang
+    
+    * only override file
+    
+    * lang
+    
+    * override lang installer
+    
+    * Cs
+    
+    * sub
+    
+    * Update list of core extensions (#71)
+    
+    * Language changes (#76)
+    
+    * update
+    
+    * Update en-GB.com_templates.ini
+    
+    * override JLIB_HTML_PUBLISH_ITEM
+    
+    this is the hover text on the publish icon in the list of files
+    
+    * Change icon (#74)
+    
+    change the icon to use an outline for more consistency
+    
+    * lang
+    
+    * not core (#75)
+    
+    * not core
+    
+    * Update en-GB.plg_installer_override.ini
+    
+    * namespace
+    
+    * cs
+    
+    * Updated files (#82)
+    
+    * Update default_updated_files.php
+    
+    * Update en-GB.com_templates.ini
+    
+    * Update en-GB.com_templates.ini (#81)
+    
+    * Update en-GB.plg_quickicon_overridecheck.ini (#80)
+    
+    * Update en-GB.plg_quickicon_overridecheck.ini (#79)
+    
+    * remove space (#78)
+    
+    * Update en-GB.plg_quickicon_overridecheck.ini
+    
+    * Update en-GB.plg_quickicon_overridecheck.sys.ini
+    
+    * remove hardcoded id
+    
+    * null get function
+    
+    * state
+    
+    * clean
+    
+    * More changes "core" to "original" (#85)
+    
+    * cs
+    
+    * update
+    
+    * plural
+
+Git log for file administrator/components/com_admin/sql/updates/mysql/4.0.0-2018-07-29.sql:
+commit 943752290313105831b554993fff51af033881bf
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Sun Feb 27 16:49:53 2022 +0100
+
+    Remove period after links to pull requests in comments
+
+commit be9e01480162d8d9ab8f898e8c6532f7eea4d75b
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Sun Feb 27 15:26:20 2022 +0100
+
+    Add comments to changes
+
+commit 4e98330a5ceb7e9561cc7f422fb630fee5a0b269
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Sun Feb 27 12:53:02 2022 +0100
+
+    Make update SQL scripts resilient to multiple executions
+    
+    1. Use `IF EXISTS` and `IF NOT EXISTS` for structure changes where possible.
+    2. Mark structure changes with `/** CAN FAIL **/` where 1. is not possible but would be needed.
+    3. Use `INSERT IGNORE` on MySQL and `ON CONFLICT DO NOTHING` on PostgreSQL when inserting new records where we would get duplicate primary or unique keys when running the particular statement a 2nd time.
+
+commit b9ae1ca6589d6e51f59e5b91c1389d1f9d32d56a
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Mon May 3 00:16:29 2021 +0200
+
+    [4.0] Remove display widths for integer data types from SQL scripts for MySQL and MariaDB databases (#32608)
+
+commit 09d8db55ff0ac9d9684bd1790f45c0f703efc756
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Sat Sep 12 02:33:47 2020 +0200
+
+    [4.0] Revert removal of the "custom_data" field of the "extensions" database table. (#30373)
+
+commit c87e54203a8c6dc2228a90a9eb4e52963566c664
+Author: Nicola Galgano <optimus4joomla@gmail.com>
+Date:   Sat Apr 25 20:28:31 2020 +0200
+
+    [4.0] - Respect the field limits for the asset table (#28734)
+
+commit 4617ce912deaaf6bc5a0315bf5b82a9a0c93cadf
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Fri Apr 10 00:06:57 2020 +0200
+
+    [4.0] Fixing smartsearch issue with some multibytes characters (alternative proposal) (#28592)
+
+commit 00aad3963c2f5789656ee7e370e896d21252d6ba
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Mon Mar 23 22:49:40 2020 +0100
+
+    [4.0] Change collations of com_finder tables from general to unicode on MySQL databases. (#28425)
+
+commit 8066dee959d8f95474a9604296c0c369e5046ef9
+Author: Nicola Galgano <optimus4joomla@gmail.com>
+Date:   Sat Feb 29 09:17:48 2020 +0100
+
+    [4.0] fix warning 1280 for mysql/mariadb (#28128)
+    
+    * fix warning 1280
+    
+    * fix warning 1280
+    
+    * fix warning 1280
+
+commit 7b86da9b4142c149c58bb03f4219260edb4c37ae
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Sun Oct 13 23:54:34 2019 +0200
+
+    [4.0] [com_finder] Fix default value for not nullable datetime columns and make some nullable (#26463)
+
+commit 94bcbbe51d83ded33226d9e8b30488fd74826f4a
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Wed Sep 25 11:30:47 2019 +0200
+
+    Fix index name for finder_terms_common everywhere (#26402)
+
+commit 8a5c1450b2ca0db93bd9eb0f5af02ac045064d2b
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Mon Sep 9 12:52:08 2019 +0200
+
+    [4.0] Fix index names of `#__finder_terms` table for new installs and updates on MySQL databases (#26216)
+
+commit b148928bc3540a0f48f751c9ae8f2cbff5a69429
+Author: wilsonge <georgejameswilson@googlemail.com>
+Date:   Sat Jul 6 21:28:29 2019 +0100
+
+    Remove hardcoded extension id and quoting fixes in mysql in finder
+
+commit b4d757fd4dca48efee42824dac579f5a19916c43
+Author: Hannes Papenberg <info@joomlager.de>
+Date:   Sat Apr 27 18:11:50 2019 +0200
+
+    [4.0] Normalize finder tables and add default values (#20561)
+
+commit f594a691ecd152558167eea1fc9e51d7d6980499
+Author: Hannes Papenberg <info@joomlager.de>
+Date:   Thu Feb 28 13:30:05 2019 +0100
+
+    [4.0] Smart Search: Adding nested taxonomy (#21327)
+
+Git log for file administrator/components/com_admin/sql/updates/mysql/4.0.0-2018-08-29.sql:
+commit 943752290313105831b554993fff51af033881bf
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Sun Feb 27 16:49:53 2022 +0100
+
+    Remove period after links to pull requests in comments
+
+commit be9e01480162d8d9ab8f898e8c6532f7eea4d75b
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Sun Feb 27 15:26:20 2022 +0100
+
+    Add comments to changes
+
+commit 4e98330a5ceb7e9561cc7f422fb630fee5a0b269
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Sun Feb 27 12:53:02 2022 +0100
+
+    Make update SQL scripts resilient to multiple executions
+    
+    1. Use `IF EXISTS` and `IF NOT EXISTS` for structure changes where possible.
+    2. Mark structure changes with `/** CAN FAIL **/` where 1. is not possible but would be needed.
+    3. Use `INSERT IGNORE` on MySQL and `ON CONFLICT DO NOTHING` on PostgreSQL when inserting new records where we would get duplicate primary or unique keys when running the particular statement a 2nd time.
+
+commit a3a1b8ba73c60f33c6eeabc9b5e751efde5e9fe0
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Thu May 27 23:40:52 2021 +0200
+
+    [4.0] Combine update SQL scripts to reduce their number (#34139)
+
+commit 028061e3d4bbe1a423a05720ba07f903a3e67624
+Author: George Wilson <georgejameswilson@googlemail.com>
+Date:   Sun Oct 6 11:57:57 2019 +0100
+
+    [4.0] Cleanup previous date time queries and implement new ones for com_content (#26295)
+
+commit 447983bd7f3613c2708f500ccb7fa461f30d71b2
+Author: Tomasz Narloch <csthomas@users.noreply.github.com>
+Date:   Tue Mar 19 21:03:13 2019 +0100
+
+    [4.0] Replace the zero datetime value '0000-00-00 00:00:00' by the real NULL value (#21901)
+
+Git log for file administrator/components/com_admin/sql/updates/mysql/4.0.0-2019-03-09.sql:
+commit 943752290313105831b554993fff51af033881bf
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Sun Feb 27 16:49:53 2022 +0100
+
+    Remove period after links to pull requests in comments
+
+commit be9e01480162d8d9ab8f898e8c6532f7eea4d75b
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Sun Feb 27 15:26:20 2022 +0100
+
+    Add comments to changes
+
+commit 4e98330a5ceb7e9561cc7f422fb630fee5a0b269
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Sun Feb 27 12:53:02 2022 +0100
+
+    Make update SQL scripts resilient to multiple executions
+    
+    1. Use `IF EXISTS` and `IF NOT EXISTS` for structure changes where possible.
+    2. Mark structure changes with `/** CAN FAIL **/` where 1. is not possible but would be needed.
+    3. Use `INSERT IGNORE` on MySQL and `ON CONFLICT DO NOTHING` on PostgreSQL when inserting new records where we would get duplicate primary or unique keys when running the particular statement a 2nd time.
+
+commit a3a1b8ba73c60f33c6eeabc9b5e751efde5e9fe0
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Thu May 27 23:40:52 2021 +0200
+
+    [4.0] Combine update SQL scripts to reduce their number (#34139)
+
+commit 09d8db55ff0ac9d9684bd1790f45c0f703efc756
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Sat Sep 12 02:33:47 2020 +0200
+
+    [4.0] Revert removal of the "custom_data" field of the "extensions" database table. (#30373)
+
+commit c3949dd92db17ada2fb360bb0cd840027fd07e9c
+Author: Allon Moritz <allon.moritz@digital-peak.com>
+Date:   Wed Apr 17 12:02:48 2019 +0200
+
+    [4.0] Remove hardcoded extension ID's (#22374)
+
+commit fc0d2ea3c8e9f9451a1bdda8311e4c7640e7edef
+Author: wilsonge <georgejameswilson@googlemail.com>
+Date:   Sun Mar 31 22:26:13 2019 +0100
+
+    Fix update extension ids and add missing plugins
+
+commit f6c4e4561788290ebff10e88aaade3bf63e220ec
+Author: Brian Teeman <brian@teeman.net>
+Date:   Tue Mar 26 12:34:11 2019 +0200
+
+    [4.0] [a11y] Add SkipTo Navigation plugin (#24142)
+    
+    Integration of the great accessibility plugin by PayPal Accessibility Team and University of Illinois
+    
+    SkipTo is a replacement for your old classic "Skipnav" link, (so please use it as such)! The SkipTo script creates a drop-down menu consisting of the links to the important places on a given web page. Once installed and configured, the menu makes it easier for keyboard and screen reader users to quickly jump to the desired location by simply choosing it from the list of options.
+    
+    Co-Authored-By: brianteeman <brian@teeman.net>
+
+Git log for file administrator/components/com_admin/sql/updates/mysql/4.0.0-2019-03-30.sql:
+commit 943752290313105831b554993fff51af033881bf
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Sun Feb 27 16:49:53 2022 +0100
+
+    Remove period after links to pull requests in comments
+
+commit be9e01480162d8d9ab8f898e8c6532f7eea4d75b
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Sun Feb 27 15:26:20 2022 +0100
+
+    Add comments to changes
+
+commit 4e98330a5ceb7e9561cc7f422fb630fee5a0b269
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Sun Feb 27 12:53:02 2022 +0100
+
+    Make update SQL scripts resilient to multiple executions
+    
+    1. Use `IF EXISTS` and `IF NOT EXISTS` for structure changes where possible.
+    2. Mark structure changes with `/** CAN FAIL **/` where 1. is not possible but would be needed.
+    3. Use `INSERT IGNORE` on MySQL and `ON CONFLICT DO NOTHING` on PostgreSQL when inserting new records where we would get duplicate primary or unique keys when running the particular statement a 2nd time.
+
+commit 0f63c551b7e87d13abb80545969f03331aade667
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Thu Oct 3 17:13:07 2019 +0200
+
+    [4.0] [com_menus] Nullable datetime columns in database (#26435)
+
+commit c92535ed5e936f0e425fabc08fbc0cbd71070d16
+Author: Nicola Galgano <optimus4joomla@gmail.com>
+Date:   Tue Apr 23 00:25:37 2019 +0200
+
+    [4.0] Menu items expiration (#24416)
+
+Git log for file administrator/components/com_admin/sql/updates/mysql/4.0.0-2019-04-15.sql:
+commit a3a1b8ba73c60f33c6eeabc9b5e751efde5e9fe0
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Thu May 27 23:40:52 2021 +0200
+
+    [4.0] Combine update SQL scripts to reduce their number (#34139)
+
+commit 015a95743203b565e20167f48e274352b1f2556c
+Author: Tuan Pham Ngoc <github@joomdonation.com>
+Date:   Fri Apr 23 14:44:15 2021 +0700
+
+    [4.0] Rename Fields - Subfields plugin to Fields - Subform plugin (#33200)
+
+commit 09d8db55ff0ac9d9684bd1790f45c0f703efc756
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Sat Sep 12 02:33:47 2020 +0200
+
+    [4.0] Revert removal of the "custom_data" field of the "extensions" database table. (#30373)
+
+commit 87f590c1274795a7c6434e802985f1a8403f8e3e
+Author: continga <github@continga.com>
+Date:   Sun Oct 13 13:15:15 2019 +0200
+
+    [4.0] Fields subfields (#24711)
+
+Git log for file administrator/components/com_admin/sql/updates/mysql/4.0.0-2019-04-22.sql:
+commit d045021ab9baa86155f75cff7b248e05797119c3
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Sun Jan 3 21:06:32 2021 +0100
+
+    [4.0] Fix old null dates for created times of core content (#31449)
+
+commit 22af38194dd3e433126d98dafccf017cd8329d0e
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Sat Nov 2 23:33:15 2019 +0100
+
+    [4.0] Set modified by user to created by user for new items (#26745)
+
+commit 4984e0b0d45c402fd17b18db75c626cef1b6cdd4
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Wed Oct 16 21:07:32 2019 +0200
+
+    [4.0] [com_contacts] Fix default value for not nullable datetime column (#26379)
+
+commit 028061e3d4bbe1a423a05720ba07f903a3e67624
+Author: George Wilson <georgejameswilson@googlemail.com>
+Date:   Sun Oct 6 11:57:57 2019 +0100
+
+    [4.0] Cleanup previous date time queries and implement new ones for com_content (#26295)
+
+commit 90878992f817c528f86b4ab5ee75f3f6b61c5a76
+Author: Nicola Galgano <optimus4joomla@gmail.com>
+Date:   Thu May 16 18:08:10 2019 +0200
+
+    [4.0] Contact - nullable datetime fields (#24675)
+
+Git log for file administrator/components/com_admin/sql/updates/mysql/4.0.0-2019-05-20.sql:
+commit 943752290313105831b554993fff51af033881bf
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Sun Feb 27 16:49:53 2022 +0100
+
+    Remove period after links to pull requests in comments
+
+commit be9e01480162d8d9ab8f898e8c6532f7eea4d75b
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Sun Feb 27 15:26:20 2022 +0100
+
+    Add comments to changes
+
+commit 4e98330a5ceb7e9561cc7f422fb630fee5a0b269
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Sun Feb 27 12:53:02 2022 +0100
+
+    Make update SQL scripts resilient to multiple executions
+    
+    1. Use `IF EXISTS` and `IF NOT EXISTS` for structure changes where possible.
+    2. Mark structure changes with `/** CAN FAIL **/` where 1. is not possible but would be needed.
+    3. Use `INSERT IGNORE` on MySQL and `ON CONFLICT DO NOTHING` on PostgreSQL when inserting new records where we would get duplicate primary or unique keys when running the particular statement a 2nd time.
+
+commit a3a1b8ba73c60f33c6eeabc9b5e751efde5e9fe0
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Thu May 27 23:40:52 2021 +0200
+
+    [4.0] Combine update SQL scripts to reduce their number (#34139)
+
+commit 6e45dfdd4a0970bd87f8778162de4f506fc2b9ff
+Author: hgh-esn <hgh-esn@users.noreply.github.com>
+Date:   Sat Jun 8 01:48:13 2019 +0200
+
+    [4.0] Backend: add a note-field to plugins (#24967)
+
+Git log for file administrator/components/com_admin/sql/updates/mysql/4.0.0-2019-06-29.sql:
+commit a3a1b8ba73c60f33c6eeabc9b5e751efde5e9fe0
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Thu May 27 23:40:52 2021 +0200
+
+    [4.0] Combine update SQL scripts to reduce their number (#34139)
+
+commit d045021ab9baa86155f75cff7b248e05797119c3
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Sun Jan 3 21:06:32 2021 +0100
+
+    [4.0] Fix old null dates for created times of core content (#31449)
+
+commit 22af38194dd3e433126d98dafccf017cd8329d0e
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Sat Nov 2 23:33:15 2019 +0100
+
+    [4.0] Set modified by user to created by user for new items (#26745)
+
+commit 50de7e0f145f2819ebae98cb9f57b293b80676dd
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Mon Oct 7 14:03:30 2019 +0200
+
+    [4.0] [com_newsfeeds] Fix default value for not nullable datetime column (#26380)
+
+commit 028061e3d4bbe1a423a05720ba07f903a3e67624
+Author: George Wilson <georgejameswilson@googlemail.com>
+Date:   Sun Oct 6 11:57:57 2019 +0100
+
+    [4.0] Cleanup previous date time queries and implement new ones for com_content (#26295)
+
+commit e0ef559b7ff35c90af0d54173b1e7a6b8597f884
+Author: Brian Teeman <brian@teeman.net>
+Date:   Tue Jul 23 18:54:45 2019 +0100
+
+    [4.0] newsfeeds - nullable datetime fields (#25362)
+    
+    Pull Request for Issue #16788 ....same as #24675 for contacts - I really just copied the work of others (someone has to)
+    
+    some datetime fields should be nullable as default
+    
+    - publish_up
+    - publish_down
+    - checked_out_time
+
+Git log for file administrator/components/com_admin/sql/updates/mysql/4.0.0-2019-07-13.sql:
+commit a3a1b8ba73c60f33c6eeabc9b5e751efde5e9fe0
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Thu May 27 23:40:52 2021 +0200
+
+    [4.0] Combine update SQL scripts to reduce their number (#34139)
+
+commit 51e8f235b087e0cfda1f1d61955f826b2e2f5d29
+Author: Phil E. Taylor <phil@phil-taylor.com>
+Date:   Fri Apr 16 08:29:18 2021 +0100
+
+    [4] Change link to Joomla News (#33058)
+
+commit 09d8db55ff0ac9d9684bd1790f45c0f703efc756
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Sat Sep 12 02:33:47 2020 +0200
+
+    [4.0] Revert removal of the "custom_data" field of the "extensions" database table. (#30373)
+
+commit f45af25f32fdab61f10d5d4955fac4560a7fd379
+Author: Bear <programming@hallhome.us>
+Date:   Mon Feb 3 16:09:36 2020 -0600
+
+    [4.0] - Update fontawesome 4- to fontawesome 5 classes (#27657)
+    
+    * circle
+    
+    * ellipsis
+    
+    * Revert "ellipsis"
+    
+    This reverts commit 8212d77e
+    
+    * "ellipsis"
+    
+    * exclamation
+    
+    * exclamation
+    
+    * bulk replace
+    
+    * vue
+    
+    * sql
+    
+    * scss changes for .fa {
+    
+    * adding .fas & .far to .fa, .fab
+    
+    * ran npm ci
+    
+    * fixed font size issue
+    
+    * updated -eye and -eye-slash
+    
+    * Revert "updated -eye and -eye-slash"
+    
+    This reverts commit beb37719
+    
+    * change fa-css-prefix to fas
+    issue #27333
+    
+    * quickicons
+    
+    * Update administrator/templates/atum/scss/_variables.scss
+    
+    revert as it refers to the icon content itself not the calling class
+    
+    Co-Authored-By: Quy <quy@fluxbb.org>
+    
+    * Revert "ran npm ci" to remove package-lock.json
+    
+    This reverts commit 217f924e
+    
+    * revert _header.scss
+    
+    * revert conflict
+    
+    * reapply fas fix
+    
+    * reapply fas fix for _header.scss
+    
+    * media folder icons
+    
+    * media folder icon in toolbar
+    
+    * open eye
+    
+    * open eye
+    
+    * Add missing fas class for quickicons
+    
+    * Add missing fas and fab classes to inactive tables
+    
+    * remove .fa and .far
+    
+    * remove more .fa and .far
+    
+    * resolve conflict
+    
+    * accidently removed lines
+    
+    * try again
+    
+    Co-authored-by: Quy <quy@fluxbb.org>
+    Co-authored-by: Richard Fath <richard67@users.noreply.github.com>
+
+commit 44babcbc146308f8f9f6c468cdad45d1356c79e3
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Sun Sep 15 19:02:05 2019 +0200
+
+    Align dashboard module titles in files 4.0.0-2019-07-13.sql with joomla.sql files (#26318)
+
+commit a176bbac89bf161b67f428368dddc4023864ab94
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Tue Aug 13 00:46:15 2019 +0200
+
+    More corrections for schema updates (#37)
+    
+    * Correct schema update for PostgreSQL
+    
+    * Align schema update with joomla.sql for MySQL
+    
+    * Align schema update with joomla.sql for PostgreSQL
+
+commit 7025c82c6bdb528611f9a8104adb7e4037adb359
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Sat Aug 10 12:12:31 2019 +0200
+
+    Fix schema updates (#34)
+    
+    Fix schema updates for consistent use of null values in module table and correct names quoting for PostgreSQL.
+
+commit 55b1787ddb6ddceae9177d8b2bbf80169d3bacd5
+Author: Hannes Papenberg <info@joomlager.de>
+Date:   Sat Jul 13 23:18:04 2019 +0200
+
+    Refactoring Privacy Dashboard
+
+commit c8658f94d0b2ead60c2173eab87709dd8cdd8164
+Author: Hannes Papenberg <info@joomlager.de>
+Date:   Sat Jul 13 19:40:57 2019 +0200
+
+    Combining SQL Update files
+
+Git log for file administrator/components/com_admin/sql/updates/mysql/4.0.0-2019-09-13.sql:
+commit 943752290313105831b554993fff51af033881bf
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Sun Feb 27 16:49:53 2022 +0100
+
+    Remove period after links to pull requests in comments
+
+commit be9e01480162d8d9ab8f898e8c6532f7eea4d75b
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Sun Feb 27 15:26:20 2022 +0100
+
+    Add comments to changes
+
+commit 4e98330a5ceb7e9561cc7f422fb630fee5a0b269
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Sun Feb 27 12:53:02 2022 +0100
+
+    Make update SQL scripts resilient to multiple executions
+    
+    1. Use `IF EXISTS` and `IF NOT EXISTS` for structure changes where possible.
+    2. Mark structure changes with `/** CAN FAIL **/` where 1. is not possible but would be needed.
+    3. Use `INSERT IGNORE` on MySQL and `ON CONFLICT DO NOTHING` on PostgreSQL when inserting new records where we would get duplicate primary or unique keys when running the particular statement a 2nd time.
+
+commit a3a1b8ba73c60f33c6eeabc9b5e751efde5e9fe0
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Thu May 27 23:40:52 2021 +0200
+
+    [4.0] Combine update SQL scripts to reduce their number (#34139)
+
+commit 0f63c551b7e87d13abb80545969f03331aade667
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Thu Oct 3 17:13:07 2019 +0200
+
+    [4.0] [com_menus] Nullable datetime columns in database (#26435)
+
+commit 0cf7f413ee19ea6de3fe83bf23498fbedacf5562
+Author: Brian Teeman <brian@teeman.net>
+Date:   Fri Sep 13 10:56:22 2019 +0100
+
+    [4.0] duplicate id 18 (#26289)
+    
+    As requested by @wilsonge
+    
+    Not tested under pgsql
+
+Git log for file administrator/components/com_admin/sql/updates/mysql/4.0.0-2019-09-22.sql:
+commit a3a1b8ba73c60f33c6eeabc9b5e751efde5e9fe0
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Thu May 27 23:40:52 2021 +0200
+
+    [4.0] Combine update SQL scripts to reduce their number (#34139)
+
+commit 82d02d5d079c4ad1e83805b72d0e3abeab6d8a5d
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Sun Sep 29 00:02:32 2019 +0200
+
+    [4.0] [com_messages] Fix default value for not nullable datetime column (#26378)
+
+Git log for file administrator/components/com_admin/sql/updates/mysql/4.0.0-2019-10-06.sql:
+commit a3a1b8ba73c60f33c6eeabc9b5e751efde5e9fe0
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Thu May 27 23:40:52 2021 +0200
+
+    [4.0] Combine update SQL scripts to reduce their number (#34139)
+
+commit 8a3aaa0d7d2e1f27c5712a868c307944090bb1a2
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Wed Oct 16 21:27:56 2019 +0200
+
+    [4.0] Make checked out time of extensions table nullable (#26491)
+
+Git log for file administrator/components/com_admin/sql/updates/mysql/4.0.0-2019-10-17.sql:
+commit a3a1b8ba73c60f33c6eeabc9b5e751efde5e9fe0
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Thu May 27 23:40:52 2021 +0200
+
+    [4.0] Combine update SQL scripts to reduce their number (#34139)
+
+commit d045021ab9baa86155f75cff7b248e05797119c3
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Sun Jan 3 21:06:32 2021 +0100
+
+    [4.0] Fix old null dates for created times of core content (#31449)
+
+commit 2019eadbd3f3a7e937d0fe4276099c7b8e34e9d5
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Sat Nov 2 11:06:13 2019 +0100
+
+    [4.0] [com_users] Fix default value for datetime columns and make some nullable (#26611)
+
+Git log for file administrator/components/com_admin/sql/updates/mysql/4.0.0-2020-02-02.sql:
+commit a3a1b8ba73c60f33c6eeabc9b5e751efde5e9fe0
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Thu May 27 23:40:52 2021 +0200
+
+    [4.0] Combine update SQL scripts to reduce their number (#34139)
+
+commit 5fac42b01d946dadf926fe052ebda7bd5afa64b5
+Author: Brian Teeman <brian@teeman.net>
+Date:   Sun Feb 16 12:15:24 2020 +0000
+
+    [4.0] Components dashboard (#27773)
+
+Git log for file administrator/components/com_admin/sql/updates/mysql/4.0.0-2020-03-10.sql:
+commit a3a1b8ba73c60f33c6eeabc9b5e751efde5e9fe0
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Thu May 27 23:40:52 2021 +0200
+
+    [4.0] Combine update SQL scripts to reduce their number (#34139)
+
+commit 09d8db55ff0ac9d9684bd1790f45c0f703efc756
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Sat Sep 12 02:33:47 2020 +0200
+
+    [4.0] Revert removal of the "custom_data" field of the "extensions" database table. (#30373)
+
+commit 7685863ee1c4d55b57c3989122fa95f7dfc09f8b
+Author: Nicola Galgano <optimus4joomla@gmail.com>
+Date:   Wed Mar 18 14:46:39 2020 +0100
+
+    [4.0] correct date for .sql update file (#28388)
+
+Git log for file administrator/components/com_admin/sql/updates/mysql/4.0.0-2020-03-25.sql:
+commit 943752290313105831b554993fff51af033881bf
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Sun Feb 27 16:49:53 2022 +0100
+
+    Remove period after links to pull requests in comments
+
+commit be9e01480162d8d9ab8f898e8c6532f7eea4d75b
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Sun Feb 27 15:26:20 2022 +0100
+
+    Add comments to changes
+
+commit 4e98330a5ceb7e9561cc7f422fb630fee5a0b269
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Sun Feb 27 12:53:02 2022 +0100
+
+    Make update SQL scripts resilient to multiple executions
+    
+    1. Use `IF EXISTS` and `IF NOT EXISTS` for structure changes where possible.
+    2. Mark structure changes with `/** CAN FAIL **/` where 1. is not possible but would be needed.
+    3. Use `INSERT IGNORE` on MySQL and `ON CONFLICT DO NOTHING` on PostgreSQL when inserting new records where we would get duplicate primary or unique keys when running the particular statement a 2nd time.
+
+commit 328b7d39e6ce8b8db1a1aafb5040289206c54508
+Author: Tobias Zulauf <zero-24@users.noreply.github.com>
+Date:   Fri May 7 09:05:31 2021 +0200
+
+    [4.0] Remove com_csp and move the CSP configuration to the HttpHeaders plugin (#33550)
+
+commit b9ae1ca6589d6e51f59e5b91c1389d1f9d32d56a
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Mon May 3 00:16:29 2021 +0200
+
+    [4.0] Remove display widths for integer data types from SQL scripts for MySQL and MariaDB databases (#32608)
+
+commit 015a95743203b565e20167f48e274352b1f2556c
+Author: Tuan Pham Ngoc <github@joomdonation.com>
+Date:   Fri Apr 23 14:44:15 2021 +0700
+
+    [4.0] Rename Fields - Subfields plugin to Fields - Subform plugin (#33200)
+
+commit 40916b75bd8b277dff51e59f3c85ea4f7ce36bfa
+Author: ReLater <ReLater@users.noreply.github.com>
+Date:   Sat May 2 18:07:57 2020 +0200
+
+    [4] Revision of protected and locked states for core extensions in #__extensions table (update and installation) (#28563)
+
+commit 81406e42dfc0db5959ce1e7c672ce560fe134ad2
+Author: Quy <quy@fluxbb.org>
+Date:   Tue Mar 31 06:42:00 2020 -0700
+
+    [4.0] Add locked field to extensions table, prevent uninstalling core extensions, restructure protected extension list (#28462)
+
+Git log for file administrator/components/com_admin/sql/updates/mysql/4.0.0-2020-05-29.sql:
+commit 943752290313105831b554993fff51af033881bf
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Sun Feb 27 16:49:53 2022 +0100
+
+    Remove period after links to pull requests in comments
+
+commit be9e01480162d8d9ab8f898e8c6532f7eea4d75b
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Sun Feb 27 15:26:20 2022 +0100
+
+    Add comments to changes
+
+commit 4e98330a5ceb7e9561cc7f422fb630fee5a0b269
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Sun Feb 27 12:53:02 2022 +0100
+
+    Make update SQL scripts resilient to multiple executions
+    
+    1. Use `IF EXISTS` and `IF NOT EXISTS` for structure changes where possible.
+    2. Mark structure changes with `/** CAN FAIL **/` where 1. is not possible but would be needed.
+    3. Use `INSERT IGNORE` on MySQL and `ON CONFLICT DO NOTHING` on PostgreSQL when inserting new records where we would get duplicate primary or unique keys when running the particular statement a 2nd time.
+
+commit a3a1b8ba73c60f33c6eeabc9b5e751efde5e9fe0
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Thu May 27 23:40:52 2021 +0200
+
+    [4.0] Combine update SQL scripts to reduce their number (#34139)
+
+commit b9ae1ca6589d6e51f59e5b91c1389d1f9d32d56a
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Mon May 3 00:16:29 2021 +0200
+
+    [4.0] Remove display widths for integer data types from SQL scripts for MySQL and MariaDB databases (#32608)
+
+commit 2b549519e0c1748dcf2e678dc887cad4d53acf41
+Author: wilsonge <georgejameswilson@googlemail.com>
+Date:   Sat May 30 16:08:05 2020 +0100
+
+    Fix column name in where statement
+
+commit f6b94f556c8e42fdb2da8deee08da3b24c751fd8
+Author: Hannes Papenberg <info@joomlager.de>
+Date:   Fri May 29 22:40:41 2020 +0200
+
+    [4.0] Converting checked_out fields to true NULLs (#29260)
+    
+    * Converting checked_out fields to true NULLs
+    
+    * Fixing errors
+    
+    * Don't check in everything
+    
+    * Fixing Postgres
+
+Git log for file administrator/components/com_admin/sql/updates/mysql/4.0.0-2020-09-27.sql:
+commit a3a1b8ba73c60f33c6eeabc9b5e751efde5e9fe0
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Thu May 27 23:40:52 2021 +0200
+
+    [4.0] Combine update SQL scripts to reduce their number (#34139)
+
+commit 7b6e69a970d9520ee290a4d58ab89943a873f205
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Wed Oct 21 09:48:42 2020 +0200
+
+    Fix MySQL error 1093 from PR #30945 (#31171)
+
+commit 1543f3170ac0456eaa2ce3b1e2df85271b757d86
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Sat Oct 17 00:55:28 2020 +0200
+
+    [4.0] Fix duplicate "Sample Data - Multilingual" plugin in database on 4.0 sites which have been updated from 3.10 (#30945)
+
+commit 520e2e42d4991540abe055e6d7421ae465ecf073
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Thu Oct 8 11:19:30 2020 +0200
+
+    Add update SQL to delete plg_authentication_gmail from extensions table (#30941)
+
+commit 9cc6cb1ef51f27356be1c2d236ab5b77cea67eff
+Author: Tobias Zulauf <zero-24@users.noreply.github.com>
+Date:   Sun Sep 27 22:42:38 2020 +0200
+
+    [4.0] Pluginless lazyloading for the core (#30748)
+    
+    * remove the plugin code
+    
+    * make sure there is no error message on attributs passed as string
+    
+    * implement width & height into the media field
+    
+    * add width & hight to com_media
+    
+    * add width & height to the file list
+    
+    * fix file path
+    
+    * add width & heigth to the media field
+    
+    * there is no alt text comming from com_media yet
+    
+    * patch JS thanks @dgrammatiko
+    
+    * Update installation/sql/postgresql/base.sql
+    
+    Co-authored-by: Quy <quy@fluxbb.org>
+    
+    * Update installation/sql/mysql/base.sql
+    
+    Co-authored-by: Quy <quy@fluxbb.org>
+    
+    * fix issues mention vy @dgrammatiko and implement width and heigth in the intro and full image layout
+    
+    * When we have no image nothing is going to be displayed
+    
+    * move json_decode & change back to the original image url
+    
+    * take off px for width and height
+    
+    * reset other changes that has been moved to #30784
+    
+    * also reset the image list layout
+    
+    * Update libraries/src/HTML/HTMLHelper.php
+    
+    * Add update SQL scripts 4.0.0-2020-09-27.sql (#47)
+    
+    Co-authored-by: Quy <quy@fluxbb.org>
+    Co-authored-by: Richard Fath <richard67@users.noreply.github.com>
+
+Git log for file administrator/components/com_admin/sql/updates/mysql/4.0.0-2020-12-20.sql:
+commit f7a163f2979fedf3e8c66a29cdbf006faf238cde
+Author: Konstantin Kolos <k0nstantinkolos88@gmail.com>
+Date:   Thu Dec 29 21:52:45 2022 +0200
+
+    [4.2] The "activate" tag is not needed in the user registration email template without activation (#39195)
+    
+    * Tag "activate" is not needed
+    
+    * Added update files for existing sites
+    
+    * Added SQL-files with actual names
+    
+    * DEL 4.2.6-2022-11-11.sql
+    
+    * DEL 4.2.6-2022-11-11.sql
+
+commit 943752290313105831b554993fff51af033881bf
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Sun Feb 27 16:49:53 2022 +0100
+
+    Remove period after links to pull requests in comments
+
+commit be9e01480162d8d9ab8f898e8c6532f7eea4d75b
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Sun Feb 27 15:26:20 2022 +0100
+
+    Add comments to changes
+
+commit 4e98330a5ceb7e9561cc7f422fb630fee5a0b269
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Sun Feb 27 12:53:02 2022 +0100
+
+    Make update SQL scripts resilient to multiple executions
+    
+    1. Use `IF EXISTS` and `IF NOT EXISTS` for structure changes where possible.
+    2. Mark structure changes with `/** CAN FAIL **/` where 1. is not possible but would be needed.
+    3. Use `INSERT IGNORE` on MySQL and `ON CONFLICT DO NOTHING` on PostgreSQL when inserting new records where we would get duplicate primary or unique keys when running the particular statement a 2nd time.
+
+commit a3a1b8ba73c60f33c6eeabc9b5e751efde5e9fe0
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Thu May 27 23:40:52 2021 +0200
+
+    [4.0] Combine update SQL scripts to reduce their number (#34139)
+
+commit 0d4480119feacc624b8445727ca7d5e9014ca88c
+Author: Brian Teeman <brian@teeman.net>
+Date:   Tue Dec 22 07:45:34 2020 +0000
+
+    [4.0] Update Checks quickicon module (#31733)
+    
+    PR for #28669 and elsewhere
+    
+    This module displays many things that are not updates so lets change the module title to Notifications
+
+Git log for file administrator/components/com_admin/sql/updates/mysql/4.0.0-2021-04-22.sql:
+commit 943752290313105831b554993fff51af033881bf
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Sun Feb 27 16:49:53 2022 +0100
+
+    Remove period after links to pull requests in comments
+
+commit be9e01480162d8d9ab8f898e8c6532f7eea4d75b
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Sun Feb 27 15:26:20 2022 +0100
+
+    Add comments to changes
+
+commit 4e98330a5ceb7e9561cc7f422fb630fee5a0b269
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Sun Feb 27 12:53:02 2022 +0100
+
+    Make update SQL scripts resilient to multiple executions
+    
+    1. Use `IF EXISTS` and `IF NOT EXISTS` for structure changes where possible.
+    2. Mark structure changes with `/** CAN FAIL **/` where 1. is not possible but would be needed.
+    3. Use `INSERT IGNORE` on MySQL and `ON CONFLICT DO NOTHING` on PostgreSQL when inserting new records where we would get duplicate primary or unique keys when running the particular statement a 2nd time.
+
+commit a3a1b8ba73c60f33c6eeabc9b5e751efde5e9fe0
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Thu May 27 23:40:52 2021 +0200
+
+    [4.0] Combine update SQL scripts to reduce their number (#34139)
+
+commit 43fb462bc3f1ac769a8a7584288b888e459c5ac9
+Author: Tuan Pham Ngoc <github@joomdonation.com>
+Date:   Fri Apr 23 16:30:54 2021 +0700
+
+    [4.0] Mail Templates improvement (#33230)
+
+Git log for file administrator/components/com_admin/sql/updates/mysql/4.0.0-2021-04-27.sql:
+commit 441f2e326cc5387689887d7c0cc6f09ae0176fc8
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Fri Apr 30 13:23:51 2021 +0200
+
+    [4.0] Add update SQL script for admin modules parameters changed by PR #33045 (#33375)
+
+Git log for file administrator/components/com_admin/sql/updates/mysql/4.0.0-2021-05-30.sql:
+commit 943752290313105831b554993fff51af033881bf
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Sun Feb 27 16:49:53 2022 +0100
+
+    Remove period after links to pull requests in comments
+
+commit be9e01480162d8d9ab8f898e8c6532f7eea4d75b
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Sun Feb 27 15:26:20 2022 +0100
+
+    Add comments to changes
+
+commit 4e98330a5ceb7e9561cc7f422fb630fee5a0b269
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Sun Feb 27 12:53:02 2022 +0100
+
+    Make update SQL scripts resilient to multiple executions
+    
+    1. Use `IF EXISTS` and `IF NOT EXISTS` for structure changes where possible.
+    2. Mark structure changes with `/** CAN FAIL **/` where 1. is not possible but would be needed.
+    3. Use `INSERT IGNORE` on MySQL and `ON CONFLICT DO NOTHING` on PostgreSQL when inserting new records where we would get duplicate primary or unique keys when running the particular statement a 2nd time.
+
+commit 04336c3ae160cc450623f4ba05457a9eef80d2a5
+Author: George Wilson <georgejameswilson@googlemail.com>
+Date:   Tue Jun 1 00:40:59 2021 +0100
+
+    [4.0] Point to J4 translations list (#34302)
+    
+    * Point to J4 translations list
+    
+    * Combine with previous sql script and use correct where clause
+    
+    Co-authored-by: Richard Fath <richard67@users.noreply.github.com>
+
+Git log for file administrator/components/com_admin/sql/updates/mysql/4.0.0-2021-06-04.sql:
+commit f88caa880666d9680b19b416680b744c93810fbd
+Author: Brian Teeman <brian@teeman.net>
+Date:   Sun Jun 6 14:15:48 2021 +0100
+
+    [4.0] capitalisation of styles (#34399)
+    
+    * [4.0] capitalisation of styles
+    
+    Nothing major but it bugs me that the template styles are "atum - Default" and "cassiopeia - Default" with the template name being all lower case.
+
+Git log for file administrator/components/com_admin/sql/updates/mysql/4.0.0-2021-08-13.sql:
+commit fa790f4fd38eda64db5dbc9b10691ba7eb07be2b
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Sun Aug 15 21:51:14 2021 +0200
+
+    [4.0] Fix assets for workflow tables for new installations and updates (#35113)
+
+Git log for file administrator/components/com_admin/sql/updates/mysql/4.0.0-2021-08-17.sql:
+commit 95b187b264cfcc152085f3136e46490659ae07eb
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Tue Aug 17 12:43:59 2021 +0200
+
+    Combine update statements for package_id of search extensions (#35176)
+
+commit fe5554013a5deb3646d317cd4367b6147c9437d3
+Author: George Wilson <georgejameswilson@googlemail.com>
+Date:   Tue Aug 17 05:00:47 2021 +0100
+
+    Handle com_search migration to a core supported extension (#35164)
+
+Git log for file administrator/components/com_admin/sql/updates/mysql/4.0.3-2021-09-04.sql:
+commit c70520d1b91b32517b86e3004c615712c0ce37b7
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Mon Sep 6 20:42:58 2021 +0200
+
+    [4.0] Delete obsolete pkg_search in extensions table on update from a 4.0 RC or Beta version (#35483)
+    
+    * Delete obsolete pkg_search extension and update site from database on update
+    
+    * Fix delete statement
+    
+    * Correct version in file names
+
+Git log for file administrator/components/com_admin/sql/updates/mysql/4.0.3-2021-09-05.sql:
+commit 3ab65030d56a8d5bb9edd2760650830ea0d72aca
+Author: Benjamin Trenkle <bembelimen@users.noreply.github.com>
+Date:   Sat Sep 11 23:58:56 2021 +0200
+
+    [4.0] Make transitions translateable (#35457)
+
+Git log for file administrator/components/com_admin/sql/updates/mysql/4.0.6-2021-12-23.sql:
+commit ae0923c5a8a22d35290dd8203eb057c44a48be91
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Fri Dec 31 00:44:42 2021 +0100
+
+    Fix checked out pkg_search extension after update from 3.10 (#36374)
+
+Git log for file administrator/components/com_admin/sql/updates/mysql/4.1.0-2021-11-20.sql:
+commit 943752290313105831b554993fff51af033881bf
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Sun Feb 27 16:49:53 2022 +0100
+
+    Remove period after links to pull requests in comments
+
+commit be9e01480162d8d9ab8f898e8c6532f7eea4d75b
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Sun Feb 27 15:26:20 2022 +0100
+
+    Add comments to changes
+
+commit 4e98330a5ceb7e9561cc7f422fb630fee5a0b269
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Sun Feb 27 12:53:02 2022 +0100
+
+    Make update SQL scripts resilient to multiple executions
+    
+    1. Use `IF EXISTS` and `IF NOT EXISTS` for structure changes where possible.
+    2. Mark structure changes with `/** CAN FAIL **/` where 1. is not possible but would be needed.
+    3. Use `INSERT IGNORE` on MySQL and `ON CONFLICT DO NOTHING` on PostgreSQL when inserting new records where we would get duplicate primary or unique keys when running the particular statement a 2nd time.
+
+commit 1554ad2631ef0fa466fad0084e8d637f51ce3566
+Author: Dimitris Grammatikogiannis <d.grammatiko@gmail.com>
+Date:   Sun Jan 9 11:51:52 2022 +0100
+
+    [4.1] Update fix 4.1.0-2021-11-20.sql (#36576)
+    
+    * Update 4.1.0-2021-11-20.sql
+    
+    * Update 4.1.0-2021-11-20.sql
+    
+    * Update 4.1.0-2021-11-20.sql
+    
+    * Update 4.1.0-2021-11-20.sql
+    
+    * Fix mail template params also for new installations
+    
+    * Fix task notification plugin params for new installations, too
+    
+    * Add new update SQL to fix previous 4.1 beta versions
+    
+    * Revert "Fix task notification plugin params for new installations, too"
+    
+    This reverts commit 3b68af5e6bf42daf7a2f2477a13709391a0ed325.
+    
+    * Remove change for extension params from new update SQL
+    
+    * Revert change of extension params in old update SQL, too
+    
+    Co-authored-by: Richard Fath <richard67@users.noreply.github.com>
+
+commit 3be67ab04261f582570ea25531bf66f0aa83d0ab
+Author: Tushar <ditsuke@protonmail.com>
+Date:   Fri Nov 26 17:12:10 2021 +0530
+
+    [4.1] [SOC 21] Add a Scheduled Tasks Infrastructure to Joomla (#35143)
+    
+    * Fix task filter ordering
+    
+    Order now matches the order of columns the db table.
+    
+    Ref: joomla/joomla-cms#35143#discussion_r700213211 / @brianteeman.
+    
+    * Improve com_scheduler language strings
+    
+    Improves a task form hint, a label.
+    
+    Refs: joomla/joomla-cms#35143#discussion_r700203125
+          joomla/joomla-cms#35143#discussion_r700202862
+          @brianteeman.
+    
+    * Scheduler runner as a shutdown_function
+    
+    The schedule runner trigger is now bound as a shutdown_function.
+    The function is registered by a onBeforeRender listener.
+    
+    * Enhance task locks and events
+    
+    - Updates task locks (the `locked` column) so they now use a timestamp
+      to allow for recovery from a fatal failure. Includes updates to SQL
+      scripts.
+    - Dispatch a new onTaskRecoverFailure event on "recovery" from a fatal
+      failure.
+    - Actually dispatch task exit events (oops!)
+    - Update the event class declaration for onExecuteTask to be more
+      elegant, readable. [1]
+    
+    [1]: http://joomla/joomla-cms#35143#discussion_r700897628 / @Denitz
+    
+    * Add a sanity check to TaskPluginTrait
+    
+    Adds a pre-broadcast sanity check for plugins with invalid an TASK_MAP.
+    The advertiseRoutines method will no longer try to advertise tasks that
+    don't have a corresponding 'langConstPrefix'.
+    
+    * Fix fatal task failure check
+    
+    Fixes the failure check (the lock should not be null) and
+    enhances a comment + styling.
+    
+    * Increase scheduler plugin hook priority
+    
+    Increases the priority for the registerRunner hook to PHP_INT_MAX,
+    although I'm not yet sure if onBeforeRender is the first event to be
+    fired (probably not).
+    
+    * Fix event dispatchers in the Task class
+    
+    The onTaskRecoverFailure and exit task weren't passing the
+    event name to dispatchers. Oops!
+    P.S. I don't know why that's required with the new Event classes.
+    
+    * Cleanup com_scheduler manifest
+    
+    Removes menu link (was supposed to go before).
+    
+    * Add filtering by lock state in TasksModel
+    
+    Adds support for filtering by the "lock" state of a task. Also in
+    the process defines different lock levels: hard locks and soft locks.
+    I think in the future, the filtering states should maybe
+    go into a namespace/class for constants.
+    
+    * Add task timeout config to "com_scheduler"
+    
+    Adds a configuration field for a global task timeout.
+    The timeout serves the purpose of safely declaring a hard-limit on how
+    long tasks can be considered as running once a lock on them is acquired.
+    Right now the default is 300s (5min) but this can be re-evaluated
+    in the future to a more sensible value if needed.
+    
+    * Update language file for "com_scheduler"
+    
+    Adds new constants for the component configuration form.
+    
+    * Bugfix and update Scheduler API class
+    
+    - Now fetches all fields from the DB (this broke things as the `locked`
+      field was never fetched!!)
+    - Adds locked state filtering as a default (excludes hard-locked jobs).
+    
+    * Add priority column to `#__scheduler_tasks`
+    
+    - Adds a priority column to the tasks table, also a linked index.
+    - Fixes update SQL script styling.
+    
+    * Add task priority to Task form and filter form
+    
+    * Add priority, multi-ordering support to TasksModel
+    
+    - Adds priority to the filter_fields config.
+    - Adds support for a `list.multi_ordering` model state variable which
+      can be used to sort by multiple fields (limitation for the standard
+      `list.ordering` `list.direction` model). The way this is right now
+      means we pass unquoted names to the db which should be fixed in the
+      future. In any case this is not exposed in the filter form but only
+      meant to be used by internal handlers interacting with the model.
+    - Fixes behaviour for high collision ordering fields (used to order
+      first by title and then by the targeted column).
+    
+    * Update task timeout with config fetch
+    
+    The Task driver class now fetches the task timeout from the component
+    config.
+    
+    * Add priority-aware task queue to Scheduler class
+    
+    The fetchTasks() method now uses multi-ordering with priority as the
+    primary ordering column to make the task queue priority aware.
+    
+    * Update language files for com_scheduler
+    
+    - Adds language constants for the task priority config in the task and
+      tasks filter form.
+    - Sneaks in a description attribute for the priority form field.
+    
+    * Bugfix and add an 'Advanced' tab to the task form
+    
+    - Moves the log config and task priority to the advanced tab.
+    - Fixes a bug with using `joomla.edit.params`, which is now used
+      for rendering all injected task routine parameters.
+    
+    * Enhance orphan task handling in Task driver
+    
+    - Dispatches now an event if task to run is orphaned, then skip the
+      execution and exit early with a new exit code.
+    - Adds a skipExecution method to the Task class.
+    - Enhanced the handleExit method through an events map to dispatch
+      other events based on exit code.
+    - Adds a new code for orphaned tasks to the Status namespace class.
+    
+    * Enhance orphan handling in Scheduler, update lang
+    
+    - Scheduler now includes orphaned tasks by default. Before this,
+      the ::runTask() method never got to handling or logging orphaned
+      tasks because of the default filtering excluding them.
+    - Adds exceptional log for orphaned tasks.
+    - Update language file to match.
+    
+    * Add demo task routines to stress memory
+    
+    Adds task routines to test scheduled tasks when either the system memory
+    runs out or the PHP memory_limit is exceeded.
+    
+    * Add sleep demo task routine
+    
+    Renames the first demo task routine and adds a form field to configure
+    the sleep duration.
+    
+    * Update language files for plgTaskDemotasks
+    
+    Adds constants for new task routines and updates some others.
+    
+    * Cleanup and bugfix com_scheduler
+    
+    - Removes redundant pass-by-reference
+    - Makes closures static where possible
+    - Fixes problematic casts
+    - Adds some missing parenthesis
+    - Removes unused variables
+    - Removes unused method overrides
+    - Miscellaneous changes
+    
+    Ref: joomla/joomla-cms#35143 / @Denitz
+    
+    * Improve consistency, extend `#__scheduler_tasks`
+    
+    Adds `checked_out` and `checkout_out_time` to `#__scheduler_tasks`. Also
+    adds index for `checked_out`.
+    
+    Ref: joomla/joomla-cms#35143#issuecomment-911819994 / @Denitz
+    
+    * Remove language autoload from ScheduleRunner
+    
+    Ref: joomla/joomla-cms#35143#issuecomment-911819994 / @Denitz
+    
+    * Fix missed errant cast
+    
+    Fixes a leftover problematic cast in IntervalField.
+    
+    * Patch Task::releaseLock()
+    
+    The method now updates the Task properties, so they now keep in sync
+    with db updates and can be used reliably by other code.
+    
+    * Add plgSystemTaskNotification
+    
+    This plugin is responsible for sending out email notifications for
+    task failures and optionally also successful executions.
+    
+    * Add language files for plgSystemTaskNotifications
+    
+    * Add SQL DDL for task notification mail templates
+    
+    * Add auto-install SQL (plgSystemTaskNotifications)
+    
+    * Add language autoload for plgSysTaskNotification
+    
+    * Patch auto-install SQL scripts
+    
+    - Adds installation DDL in installation script (supports.sql)
+    - Adds the `extension` column in update scripts.
+    
+    * Cleanup plg taskNotification
+    
+    * Fix Scheduler::fetchTasks() default behaviour
+    
+    Shifts the list config for the task queue to the fetchTaskRecord()
+    method. This makes more sense as the fetchTasks() method is supposed
+    to be a transparent API method to interact with the TasksModel rather
+    than have an overriding default like the list.multi_ordering state
+    variable as a default. Also changes the default ordering behaviour for
+    sensibility and adds some comments for clarity.
+    
+    * Add explicit id, title filtering to TasksModel
+    
+    These are largely redundant to the search filter but convenient to use
+    and when only the title should be targeted. It turned out I assumed
+    we had this in the model and so was an outstanding bug with the
+    Scheduler class. Probably, can use refactor later (or _should_).
+    
+    * Enhance ExecRuleHelper::nextExec()
+    
+    Adds a new option $nowBasis argument, when provided uses 'now' as the
+    last execution. Useful when skipping executions, so we're not actually
+    updating the last exec.
+    
+    * Add new Task::Status constant
+    
+    Adds a status code for when no (matching) task exists.
+    
+    * Improve comments in the TaskOption class
+    
+    Improves comment structure, adds some missing punctuation.
+    
+    * Update the Scheduler class
+    
+    - Renames fetchTasks() => fetchTaskRecords().
+    - Fixes broken id search (l190).
+    - Updates runTask() return (now returns the Task exit code).
+    - Adds TASK_QUEUE filters and list config as class constants so other
+      extensions can reliably use them to get the queue behaviour (should
+      this somehow be baked in?).
+    - Updates return for fetchTaskRecords(), which could return a false
+      from the model query before but now would an empty array.
+    
+    * Bugfix Task::skipExecution()
+    
+    Now actually skips the execution and advances the task to the next
+    execution slot relative to 'now'.
+    
+    * Add scheduler:list console command
+    
+    Command to list scheduled tasks.
+    
+    * Add scheduler:run command
+    
+    Command to run scheduled tasks. Supports triggering the task queue
+    as well as individual tasks, matching either by id or title. Right now,
+    due some code-smell fixes and perhaps behavior adjustments. An example,
+    perhaps the title match could support running all tasks matching a title
+    with the --all flag.
+    
+    * Add autoload for new commands
+    
+    Adds new commands to the application loader and dependency injection
+    class used by other core commands.
+    
+    * Add plugin plgTaskCheckFiles
+    
+    Adds plgTaskCheckFiles. This plugin includes currently a single task
+    routine which offers the ability to check images in a directory
+    for dimensions and resize ones that are too big!
+    
+    * Enhance form for image size routine
+    
+    Adds sensible defaults, require attributes, etc.
+    
+    * Update form for get_request routine
+    
+    Updates the fieldset so its translated right.
+    
+    * Update language file for com_scheduler
+    
+    Adds a new constant for the task_params fieldset so plugins can use it
+    without defining their own.
+    
+    * Patch task form
+    
+    Patches the "trigger" field to make it hidden. This is temporary as it
+    should be removed altogether soon both in the form and the db table.
+    
+    * Patch exit handling in Task class
+    
+    The handleExit() method needed the exit code to be passed while it was
+    available already in the $snapshot class property. This also created
+    room for error and the final handleExit() return meant that generic
+    failures were never broadcasted through the failure event.
+    
+    * Patch exit handling in Task class
+    
+    The handleExit() method needed the exit code to be passed while it was
+    available already in the $snapshot class property. This also created
+    room for error and the final handleExit() return meant that generic
+    failures were never broadcasted through the failure event.
+    
+    * Add support for mailing task outputs
+    
+    Implements support for mailing out task output attachments and
+    in the body. Not robust but just works for a demo (needs to be
+    redone).
+    
+    * Update SQL for task notification templates
+    
+    Adds the "task_output" param.
+    
+    * Add output file support in GET request routine
+    
+    Hastily done and to be redone but this works okay as a POC.
+    
+    * Patch task class
+    
+    Fixes the execution time record/next execution which broke somewhere
+    along before. This is a quick patch and should be fixed as suggested
+    by the comment.
+    
+    * Disable deprecated routineEndMessage [CheckFiles]
+    
+    * Improve code quality, consistency and style
+    
+    - Removes some redundant comments.
+    - Reduces reliance on implicit PHP casts.
+    - Refactors to a more functional approach in TaskModel::save() and calls
+      nested within.
+    - Uses allowed Priority::MAX as plgSystemSchedulerunner listener
+      priority.
+    - Refactors some abbreviated variable names.
+    - Changes uses of the 'GMT' to 'UTC' (more correct and consistent with
+      existing Joomla code)
+    - Separates some variable assignments and tests for improved
+      readability.
+    - Starts removing imports for native global functions and objects.
+      This should be a gradual process.
+    - Cover up a couple copy-and-paste inconsistencies. oops!
+    - Reverts a styling regression in old code.
+    
+    Ref: joomla/joomla-cms#35143 / @nibra / @HLeithner / @brianteeman.
+    
+    * Make SchedulerHelper abstract
+    
+    Makes SchedulerHelper an abstract class. This also eliminates the need
+    for a private constructor.
+    
+    Refs: joomla/joomla-cms/#35143#discussion_r710998565
+         / joomla/joomla-cms#35143#discussion_r710999157
+         / @PhilETaylor
+         / @nibra.
+    
+    * Add request hash protection for scheduler runner
+    
+    - Adds a configuration tab for the lazy scheduler in ComScheduler with
+      configuration switches for disabling the lazy scheduler and protecting
+      it with a request hash.
+    - Adds configuration checks in plgSystemScheduleRunner to only run if
+      either hash matches or it's not protected.
+    
+    * Bugfix scheduleRunner event subscription behaviour
+    
+    ScheduleRunner attached itself to events even with comScheduler
+    disabled. This was likely because it utilised a constructor short which
+    is useful only with the pre-4.x event-method model.
+    This commit adds checks for the component straight to the
+    getSubscribedEvents() method and also adds a check for the lazy
+    scheduler switch in com_scheduler config params.
+    
+    Refs: @Denitz / joomla/joomla-cms#35143#issuecomment-911453500.
+    
+    * Add rule for manual-only task invocation
+    
+    Adds an execution rule for when a task should only run when manually
+    invoked. Also renames internally the "custom" rule to "cron-expression".
+    
+    * Refactor and extend TaskModel, TaskTable
+    
+    - Updates TaskModel for changes in the Task form.
+    - Extends and refactors TaskModel to both support to both support
+      the new manual invocation only rule and for better behaviour with
+      setting some fields initially in the database.
+    - Adds a Task::bind() override to TaskTable and changes a default
+      param to support updating fields to NULL through AdminModel::save().
+    
+    * Update ExecRuleHelper
+    
+    - Update with changes to the Task form.
+    - Removes imports for native global functions.
+    
+    * Update language constants for com_scheduler
+    
+    - Adds language constants for new Scheduler config fields.
+    - Refactors some language constants for better, more uniform naming.
+    
+    * Cleanup Task class
+    
+    - Removes outdated info from handleExit() PHP-doc.
+    - Removes imports for native global symbols.
+    
+    * Update com_scheduler manifest
+    
+    - Adds some missing fields and fixes code-style.
+    
+    * Apply code-style suggestions from code review
+    
+    - Fixes styling for some docblocks.
+    - Fixes copyright header alignment for consistency (non-exhaustive).
+    - Adds trailing commas for multi-line array declarations (probably non-exhaustive).
+    - Adds explicit name-spacing for global native symbols (likely non-exhaustive).
+    - Misc code-style improvements.
+    
+    Co-authored-by: Phil E. Taylor <phil@phil-taylor.com>
+    
+    * Apply code-style suggestions from code review
+    
+    - Fixes styling for some docblocks.
+    - Fixes copyright header alignment for consistency (non-exhaustive).
+    - Adds trailing commas for multi-line array declarations (probably non-exhaustive).
+    - Adds explicit name-spacing for global native symbols (likely non-exhaustive).
+    - Misc code-style improvements.
+    
+    Co-authored-by: Phil E. Taylor <phil@phil-taylor.com>
+    
+    * Clean up usage
+    
+    * Add AJAX requests script to scheduleRunner
+    
+    JS sets up a navigator.sendBeacon() callback to make
+    requests to trigger a `com_ajax` backed AJAX listener offered by
+    plgSystemScheduleRunner.
+    
+    * Update manifest for plgSystemScheduleRunner
+    
+    Adds the new media asset folder, fills in some missing fields and
+    fixes the language field.
+    
+    * Add scheduleRunner listener to inject JS
+    
+    - Removes `shutdown_function` behavior to register the scheduleRunner.
+    - Adds listener method to inject the trigger JS on the
+      `onBeforeCompileHead` event.
+    - Fixes copyright header styling.
+    - Reduces event subscription stage check complexity. (Ref: @Denitz /
+      joomla-projects/soc21_website-cronjob#4#commitcomment-57308547)
+    - Adds `com_scheduler` component config as class property.
+    - Change scheduleRunner's subscription event to `onAjaxRunScheduler`.
+    
+    * Add scheduleRunner doc and missing checks
+    
+    - Adds descriptive doc in the class docblock.
+    - Adds missing checks to the runScheduler() method.
+    
+    * Fix `created_by` auto set on task save
+    
+    - TaskTable::save() now sets the `created_by` field  correctly.
+    - Adds and fixes existing checks for field auto-set.
+    
+    * Cleanup and enhance TaskTable docs
+    
+    - Fix copyright style.
+    - Enhance doc blocks.
+    - Cleanup.
+    
+    * Fix plugin manifests
+    
+    - Lowercase <name>.
+    - Adds missing fields and missing <files> nodes.
+    - Fixes XML styling (tasknotification.xml)
+    
+    Ref: @bembelimen
+    
+    * Revert changes to the modules/select template
+    
+    Reverts file to 4.1-dev state.
+    
+    * Add standard routine handler
+    
+    `standardRoutineHandler()` can take care of initialising the routine,
+    calling the associated callable and ending the routine all without
+    any logic in the plugin class if each routine has a corresponding
+    callable.
+    
+    * Fix copyright formatting
+    
+    * Update Task\Status
+    
+    Adds status code for invalid return and improves member doc blocks.
+    
+    * Refactor TaskPluginTrait
+    
+    - Renames methods:
+     - `taskLog()` => `logTask()`
+     - `taskEnd()` => `endRoutine()`
+     - `taskStart()` => `initRoutine()`
+    - Upgrade `enhanceTaskItemForm()` to a complete event handler. For
+      plugins targeting only the task form, this method can now be mapped
+      straight to the `onContentPrepareForm` event.
+    - Code style improvements and fixes for global namespace qualification
+      on some `\Exception` references.
+    - More explicit checks on variables.
+    - `Event` type arguments are now `EventInterface` so other
+      implementations stay compatible.
+    - Removes deprecated logging nd `$log` param from `endRoutine()`.
+    
+    * Improve TaskPluginTrait documentation
+    
+    Adds and improves on the information in the doc blocks with context,
+    usage hints and related information. Also updates some parameter
+    information and fixes the tag order (`@since` <=> `@throws`).
+    
+    * Implement suggestions on TaskPluginTrait
+    
+    - Refactors `initRoutine()` => `startRoutine()`
+    - Return true for irrelevant enhanceTaskItemForm() contexts.
+    - Path checks for routine forms.
+    - Allow only class methods with `standardRoutineHandler()`
+    - Adds signature checks on standard routine methods.
+    - Adds validation on routine return codes against `Task\Status`.
+    
+    * Update TaskPluginTrait::standardRoutineHandler()
+    
+    Now enforces a single required parameter of type `ExecuteTaskEvent`
+    (from `EventInterface`).
+    
+    * Update task plugins
+    
+    - Remove methods now offered by TaskPluginTrait.
+    - The 'call' TASKS_MAP param is now 'method'.
+    - Update event subscriptions.
+    - Update docs.
+    - Improve code-style and copyright blocks.
+    
+    * Ignore user aborts on scheduler trigger
+    
+    Adds attempt to set the INI `ignore_user_abort` to true.
+    Also enhances some docs.
+    
+    * Update TaskPluginTrait doc
+    
+    Updates signature reference for standard routine methods.
+    
+    * Rename status code
+    
+    Renames `Task\Status::NO_TIME` to `Task\Status::RUNNING`.
+    
+    * Add config options for scheduleRunner
+    
+    Adds config option for the client side request intervals
+    for the scheduler trigger. Also fixes some showon attributes in
+    the com_scheduler config form.
+    
+    * Add removal of time limit on task runs
+    Add test task permission
+    Add webcron, test task, lazycron entry points
+    
+    * Fix broken interval run when setting custom value
+    
+    * Set correct lazyCron URL and run it at the beginning
+    Prevent running LazyCron when not in html view or if lazyCron is not enabled
+    Implement hash check for webCron
+    
+    * Rebuild JS
+    Implement test runner
+    
+    * Finish test cron
+    
+    * Fix CS
+    
+    * Revert SQL query
+    
+    * Add webcron to scheduler config
+    
+    Updates the `com_scheduler` config.xml with the webcron fieldset.
+    
+    * Add webcron key autogen and more to Schedulerunner
+    
+    - Schedulerunner auto-generates the webcron key and does some form
+      usability enhancements on the config form (much like the user API
+      token plugin).
+    
+    * Add custom field for webcron link
+    
+    - Adds new field 'WebcronLinkField', this field is not really needed
+      except for to support the custom layout location.
+    - Allows for the webcron link to be copies on click, much like the user
+      API token field.
+    - Adds field JS to the `com_scheduler` media source provider.
+    
+    * Update com_scheduler language file
+    
+    Adds new strings for the config form and updates some refs.
+    
+    * Fix regression in Scheduler class
+    
+    - Fix regression due to newly protected status
+      of Task::snapshot + accessor.
+    - Update some doc-blocks and related formatting.
+    - Optimise some imports.
+    - Minor miscellaneous changes.
+    
+    * Fix test run JS
+    
+    Fixes apparent JS parse error on non-zero task exits.
+    
+    * Improve form manipulation code
+    
+    - Check for `com_scheduler` in the subject table for table event.
+    - Minor code simplification.
+    
+    * Clean up redundant field from Tasks table
+    
+    - Remove redundant `trigger` field from `#__scheduler_tasks`.
+      - From install and update SQL.
+      - Task item form.
+      - Language file.
+    - Fix regression in GenericDataException ref.
+    - Minor styling/doc fixes and upgrades.
+    
+    * Remove global task configuration config
+    
+    - Removes task configuration config from `plgSystemTasknotifications`
+      plugin config.
+    - ! Does not update any usages.
+    
+    * Add task notification config as injected form
+    
+    - Task notification config is now injected into the task item form.
+    - ! Usages are not updated.
+    
+    * Improve plgSystemTaskNotification code style
+    
+    - Updates docs.
+    - Improves docblocks, general code style for compliance with unenforced
+      Joomla! style guide.
+    
+    * Fix params display in task view
+    
+    * Add fieldset labels for task form
+    
+    - Adds missing fieldset labels.
+    - Adds some comments and fixes marginally code-style.
+    
+    * Update task notification logic
+    
+    - Replaces checks with updated task item configuration.
+    - Improves logging (additional checks).
+    - Makes file attachment handling safer.
+    - Fixes/updates code-style.
+    
+    * Update plgSystemTaskNotification language file
+    
+    - Adds new constants for logging.
+    - Fixes ordering.
+    
+    * Fix Task driver behavior
+    
+    The run() method now updates the object state instead of leaving it
+    to releaseLock(). The class continues to appear a clunky build :D.
+    
+    * Fix TasksRunCommand regression
+    
+    * Fix scheduleRunner default behaviour
+    
+    - Uses again sensible defaults (enabled lazy cron).
+    - Check webcron.enabled.
+    - Some useful logging.
+    - Improved docblocks.
+    
+    * Update scheduleRunner language files
+    
+    Adds new constant for a logging string.
+    
+    * Update and fix code-style
+    
+    - Fix license header formatting.
+    - Fix doc phpdoc tag ordering.
+    - Cleanup and marginally improve doc-blocks.
+    - Fix unqualified global refs in doc-blocks.
+    - Misc formatting fixes/improvements.
+    - Remove phpcs ignores.
+    
+    * Revert drone
+    
+    * Update com_scheduler language file
+    
+    - Missing constant.
+    - Ordering.
+    
+    * Apply suggestions from code review
+    
+    Code-style and language improvements.
+    
+    Co-authored-by: Brian Teeman <brian@teeman.net>
+    
+    * Apply suggestions from code review
+    
+    Code-style and language improvements.
+    
+    Co-authored-by: Brian Teeman <brian@teeman.net>
+    
+    * Update language constants for plgSysScheduleRunner
+    
+    Updates plugin description string.
+    
+    * Bugfix Task::run()
+    
+    For some reason, the UNIX timestamp with microseconds `microtime()`
+    broke the DateTime breaking down the task usual scheduling.
+    This commit introduces an int cast for the timestamp which makes things
+    work as expected.
+    
+    * Fix webcron url & description
+    
+    Fixes webcron url and description as exposed in the Scheduler component
+    config.
+    
+    Ref: joomla-projects/soc21_website-cronjob#37
+    
+    * Update joomla.asset.json
+    
+    * Improve the locking mechanism
+    
+    * Add table locking when locking task
+    
+    * CS
+    
+    * Simplify null date check
+    
+    * Add column quote
+    
+    * Extend TaskModel's getter method
+    
+    ! Fails in MySQL 5.6 with "Table <task table> was not locked with LOCK
+      TABLES"
+    
+    - Adds options array to customise behavior.
+    - Adds static option resolver for proxies to the getter.
+    - Wrap queue behavior in a sub-query for compatibility.
+    ...
+    
+    * Update Scheduler::getTask() and runTask()
+    
+    Updates Scheduler::getTask() and Scheduler::runTask() to match
+    the updated TaskModel::getTask() method.
+    
+    * Fix typos and improve static analysis support
+    
+    Fixes some typos and adds some doc IDE typehint for improved
+    static analysis to the Scheduler class.
+    
+    * Update/fix Schedulerunner
+    
+    Updates primarily the Schedulerunner::runTestCron() method. Other
+    methods might need to be updated still.
+    
+    * Update Task class
+    
+    Minor updates, comments for the future.
+    
+    * Update Task::releaseLock()
+    
+    Fixes compatibility with PostgreSQL (tested on 11). Removes table
+    specificity from columns (this confuses Postgres for some reason).
+    
+    * Update TaskModel::getTask()
+    
+    Fixes task queue behavior (now only applies when an ID is not passed).
+    
+    * Improve TaskModel::getTask() mysql compat
+    
+    ! Still fails because of table locks
+    - Adds pseudo-source for sub-query.
+      https://stackoverflow.com/q/44970574
+    - Adds reference comments to try to make the
+      SQL gymnastics make sense.
+    
+    * Add unlock function
+    
+    * Fix language strings for the schedulerunner plugin
+    
+    * Update description and remove plugin files
+    
+    * Implement Scheduler CLI state changer
+    
+    * Update TasksStateCommand.php
+    
+    * Fix list state filter in scheduler
+    
+    * Fix MySQL lock violations
+    
+    Fixes lock violation by getting rid of sub-queries.
+    
+    * Fix label a11y [#42]
+    
+    * Quote 'id'
+    
+    Co-authored-by: Benjamin Trenkle <bembelimen@users.noreply.github.com>
+    
+    * update publish/unpublish => enable/disable
+    
+    * Add check for checked out tasks
+    
+    Adds check for checked out state of tasks, so it doesn't silently fail
+    anymore if such a task is attempted to be updated.
+    
+    * Improve static analysis support.
+    
+    Adds type hints for classes so static analysis and IDE autocomplete
+    works better.
+    
+    * Update exit codes and fix typos
+    
+    - Updates failure exit codes so all are now distinct.
+    - Fixes typos and other minor things.
+    - Uses syntactic string composition instead of concatenation.
+    
+    * Cleanup
+    
+    Removes debug string eval
+    
+    * Fix SQL scripts
+    
+    Reduces length of `#__scheduler_tasks.type` to evade exceeding maximum
+    length of indices and considering 128 chars is sufficient for a UUID
+    and for context aware string currently used for routine IDs.
+    
+    Refs: @HLeithner
+    
+    * Apply Code-style and doc-block improvements from code review
+    
+    Co-authored-by: Phil E. Taylor <phil@phil-taylor.com>
+    
+    * Replace Registry inheritance with composition
+    
+    Task no longer extends Registry, but uses a new `taskRegistry` property
+    to store a Registry object. This compositional pattern makes the code
+    stink less.
+    
+    * Refactor Task::isSuccess()
+    
+    No longer takes care of dispatching exit events, which is done by
+    Task::dispatchExitEvent() now. Return API is unchanged.
+    
+    * Apply Code-style and doc-block improvements from code review
+    
+    Co-authored-by: Phil E. Taylor <phil@phil-taylor.com>
+    
+    * Update doc-blocks for the Task driver
+    
+    Adds doc-block for Task::EVENTS_MAP and updates the constructor's.
+    
+    * Update composer.lock
+    
+    * Update composer.lock
+    
+    * Make Task property getter public [bug]
+    
+    Makes the task property getter public. Protected visibility here
+    breaks things.
+    
+    * Improve task routine exception handling
+    
+    - The driver now allows for and preserves exceptions from routines,
+    throwing them again after wrapping things up and releasing the task
+    lock.
+    - Removes the nonNull assertion for the routine snapshot (this already
+      did not work).
+    
+    * Update plgScheduleRunner
+    
+    Webcron now throws the exception from the task, if it exists. This is
+    caught by com_ajax and the exception message included in the output.
+    
+    * Update Task::Status
+    
+    Renames the KO_RUN status to KNOCKOUT, adds description in docblock.
+    
+    * Fix exception handling in TaskPluginTrait
+    
+    Catches only ReflectionExceptions now, leaving out others for the Task
+    driver to access.
+    
+    * Cleanup assert exception refs
+    
+    Cleans up imports and docblocks.
+    
+    * Improve ScheduleRunner documentation.
+    
+    * Improve code style
+    
+    Majorly fixes from the latest updates in Joomla's PHP CS Fixer config,
+    
+    * Fix demo task form
+    
+    * Update language file for `com_scheduler`
+    
+    * Use output buffering for lazyCron to avoid dying
+    
+    * Merge update SQL
+    
+    * Update plgTaskCheckfiles
+    
+    - Adds support for WEBP.
+    - Better format support while resizing.
+    - Minor refactoring and more informative logging.
+    
+    * Update scheduleRunner docs
+    
+    * Improve code quality for task unlocking
+    
+    - Improved static analysis support and type-hinting.
+    - Fix usage of undefined variables.
+    - Add/modify comments and variable names.
+    - Update event names and interface for relevance.
+    - Improve docs in doc-blocks.
+    - Fix code-style.
+    
+    * Fix com_scheduler, task plugin code-style
+    
+    Fixes code-style with the updated php-cs-fixer config.
+    
+    * Fix WebcronLinkField::getLayoutPaths()
+    
+    The union operator... did not do the right job.
+    
+    * Merge more update SQL
+    
+    Missed one!
+    
+    * Rename update SQL
+    
+    Updates date signatures of update files to a fresher date.
+    
+    * Make plgTaskCheckfiles logging translatable
+    
+    Adds language constants for logging strings.
+    
+    Refs: @PhilETaylor
+    
+    * Update plgTaskRequests
+    
+    - Add logging on exception.
+    - Improve variable naming/file write safety.
+    - Update language file.
+    
+    Refs: @PhilETaylor
+    
+    * Improve exception handling plgTaskCheckfiles
+    
+    - Improves handling exceptions and failures.
+    - Adds more informative logging.
+    
+    Refs: @PhilETaylor
+    
+    * Update code-style and language
+    
+    - Fixes some misc code-style, reverses regression.
+    - Adds language for some log.
+    
+    * Fix installation and update SQL scripts
+    
+    * Fix update SQL for PostgreSQL for the database checker
+    
+    * Add new core extensions to the extensions helper
+    
+    * Add auto-install SQL for plg_task_checkfiles
+    
+    - Adds auto-install SQL for both installation and update.
+    - Also adds relevant entry to ExtensionHelper.
+    
+    Refs: joomla-projects/soc21_website-cronjob#49 / @richard67
+    
+    * Add DB column for cli exclusive tasks
+    
+    - Adds new DB column `#__scheduler_tasks.cli_exclusive`, updating both
+      install and update scripts. Also adds relevant index.
+    
+    * Add support for CLI exclusive tasks
+    
+    - Updates TaskModel::getTask() with an option to include/exclude
+      CLI exclusives.
+    - Adds runtime check to Scheduler::runTask() so it now includes CLI
+      exclusives only in a CLI context.
+    
+    * Add comments, fix doc signatures + style
+    
+    - Add comments to schedulerunner.
+    - Fix some type signatures in doc-blocks.
+    - Other minor style fixes.
+    
+    * Fix get request response body
+    
+    Shouldn't throw an undefined constant again.
+    
+    * Add `Scheduler::run()` option for concurrency
+    
+    - Scheduler::run() now uses an options array backed by the Symfony
+      OptionsResolver.
+    - Offers a new option that allows for execution concurrency (this was
+      specifically required by the CLI command).
+    
+    * Update plgSystemSchedulerunner
+    
+    Updates Schedulerunner for changes in Scheduler::run()
+    
+    * Make `scheduler:run` safer
+    
+    - Null safety against Tasks.
+    - More informative stderr log on lock acquisition failures.
+    - Now allows concurrency so Web doesn't block out CLI anymore (thanks
+      to the updates in Scheduler::run()).
+    
+    Refs: joomla/joomla-cms#35143#issuecomment-976391914
+          / @alikon
+          / @bembelimen
+    
+    * Refactor `scheduler:state`
+    
+    - Better (expectedly safer) flow of logic with attempts to get the
+      logical/enumerated state from command mode and interactive modes.
+    - Terminate on invalid command invocation.
+    - Fix exit success message (did not show action).
+    - Better formatting of description, etc.
+    - Code-style fixes.
+    
+    Refs: joomla/joomla-cms#35143#issuecomment-977608144
+          / @alikon
+          / @bembelimen
+    
+    * Improve `scheduler:run` description style
+    
+    Minor improvement to `scheduler:run` description for consistency.
+    
+    * Add utilities, bugfix Task class
+    
+    - Adds state enumerations and map.
+    - Adds basic static state and id validators.
+    - Fix use of un-imported Text class, $->getMessage() call.
+    
+    * Improve `scheduler:state` command
+    
+    - Better validation and improved consistency.
+    - Removes now redundant state enumerations, mapping and validators
+      which the Task class offers.
+    
+    * Add page reload after testing
+    
+    * Code sniffer fixes
+    
+    * Rename param for Scheduler::fetchTaskRecord()
+    
+    Co-authored-by: Phil E. Taylor <phil@phil-taylor.com>
+    Co-authored-by: Benjamin Trenkle <benjamin.trenkle@wicked-software.de>
+    Co-authored-by: Brian Teeman <brian@teeman.net>
+    Co-authored-by: Benjamin Trenkle <bembelimen@users.noreply.github.com>
+    Co-authored-by: Richard Fath <richard67@users.noreply.github.com>
+
+Git log for file administrator/components/com_admin/sql/updates/mysql/4.1.0-2021-11-28.sql:
+commit 579e20ee14141b46ce12cce74408eabc9cba555f
+Author: Dimitris Grammatikogiannis <d.grammatiko@gmail.com>
+Date:   Tue Nov 30 03:34:47 2021 +0100
+
+    4.1 Child templates 1/2 (#35874)
+    
+    * New mode for cassiopeia and atum
+    
+    * DB Changes
+    
+    * Fix wrong import paths
+    
+    * SQL for updates
+    
+    * Deleted files and folder for changing core templates to inheritable
+    
+    * Better version comments
+    
+    * Move custom files in core templates to media folder on update
+    
+    * Better English in the comment
+    
+    * Fix some paths
+    
+    * System templates
+    
+    * Deleted files and folders for system templates
+    
+    * Move template preview files, too
+    
+    * Create parent folders if necessary at target path
+    
+    * Don't delete template previews
+    
+    * Revert special handling for core template preview images
+    
+    * move images to the correct folder
+    
+    * Fix the logos
+    
+    * One more path fixed
+    
+    * Revert the tinyMCE changes here
+    
+    * Fix the roboto path
+    
+    * Fix the fontawesome path
+    
+    * .css files imports are relative to the path of the file importing
+    
+    * Add missing import
+    
+    * Use realpath instaed of the Path::clean
+    
+    * RecursiveDirectoryIterator && mkdir
+    
+    * Meh
+    
+    * Mehhh
+    
+    * Update administrator/components/com_admin/script.php
+    
+    Co-authored-by: Richard Fath <richard67@users.noreply.github.com>
+    
+    * No dots and dirs
+    
+    * Use the flag for the dots
+    
+    * Update administrator/components/com_admin/script.php
+    
+    Co-authored-by: Richard Fath <richard67@users.noreply.github.com>
+    
+    * sql
+    
+    * Cassiopeia Roboto
+    
+    * Update paths to local font schemes in template style parameters on database update
+    
+    * Roboto font path
+    
+    Co-authored-by: Richard Fath <richard67@users.noreply.github.com>
+    Co-authored-by: Benjamin Trenkle <bembelimen@users.noreply.github.com>
+
+Git log for file administrator/components/com_admin/sql/updates/mysql/4.1.0-2021-12-29.sql:
+commit 7c05c2badb57cbf31a098b45aca1759d24795a42
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Wed Dec 29 20:36:30 2021 +0100
+
+    [4.1] Fix checked_out value in 4.1.0-2021-11-26.sql and rename to 4.1.0-2021-12-29.sql (#36475)
+    
+    * Fix checked_out value in 4.1.0-2021-11-26.sql
+    
+    * Rename update SQL scripts
+
+Git log for file administrator/components/com_admin/sql/updates/mysql/4.1.0-2022-01-08.sql:
+commit 1554ad2631ef0fa466fad0084e8d637f51ce3566
+Author: Dimitris Grammatikogiannis <d.grammatiko@gmail.com>
+Date:   Sun Jan 9 11:51:52 2022 +0100
+
+    [4.1] Update fix 4.1.0-2021-11-20.sql (#36576)
+    
+    * Update 4.1.0-2021-11-20.sql
+    
+    * Update 4.1.0-2021-11-20.sql
+    
+    * Update 4.1.0-2021-11-20.sql
+    
+    * Update 4.1.0-2021-11-20.sql
+    
+    * Fix mail template params also for new installations
+    
+    * Fix task notification plugin params for new installations, too
+    
+    * Add new update SQL to fix previous 4.1 beta versions
+    
+    * Revert "Fix task notification plugin params for new installations, too"
+    
+    This reverts commit 3b68af5e6bf42daf7a2f2477a13709391a0ed325.
+    
+    * Remove change for extension params from new update SQL
+    
+    * Revert change of extension params in old update SQL, too
+    
+    Co-authored-by: Richard Fath <richard67@users.noreply.github.com>
+
+Git log for file administrator/components/com_admin/sql/updates/mysql/4.1.0-2022-01-19.sql:
+commit f8ddce363725e21b9393af14c5554f84344eb13d
+Author: brian teeman <brian@teeman.net>
+Date:   Wed Jan 19 09:39:11 2022 +0000
+
+    [4.1] plg_webservices_media missing on update
+    
+    There was no sql to install this plugin on update from 4.0 to 4.1
+
+Git log for file administrator/components/com_admin/sql/updates/mysql/4.1.0-2022-01-24.sql:
+commit 943752290313105831b554993fff51af033881bf
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Sun Feb 27 16:49:53 2022 +0100
+
+    Remove period after links to pull requests in comments
+
+commit be9e01480162d8d9ab8f898e8c6532f7eea4d75b
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Sun Feb 27 15:26:20 2022 +0100
+
+    Add comments to changes
+
+commit 4e98330a5ceb7e9561cc7f422fb630fee5a0b269
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Sun Feb 27 12:53:02 2022 +0100
+
+    Make update SQL scripts resilient to multiple executions
+    
+    1. Use `IF EXISTS` and `IF NOT EXISTS` for structure changes where possible.
+    2. Mark structure changes with `/** CAN FAIL **/` where 1. is not possible but would be needed.
+    3. Use `INSERT IGNORE` on MySQL and `ON CONFLICT DO NOTHING` on PostgreSQL when inserting new records where we would get duplicate primary or unique keys when running the particular statement a 2nd time.
+
+commit e67cfa68b30fe0e687cad36771473ecfc9958457
+Author: Brian Teeman <brian@teeman.net>
+Date:   Mon Jan 31 15:54:42 2022 +0000
+
+    [4.1] redirect links index (#36817)
+    
+    * [4.1] redirect links index
+    
+    Set the correct index name
+    
+    * updates
+    
+    * Update administrator/components/com_admin/sql/updates/postgresql/4.1.0-2022-01-24.sql
+    
+    Co-authored-by: Quy <quy@fluxbb.org>
+    
+    Co-authored-by: Quy <quy@fluxbb.org>
+
+Git log for file administrator/components/com_admin/sql/updates/mysql/4.1.1-2022-02-20.sql:
+commit 521da1c1398cda5a200f8b4b0adef4a95f01cdfd
+Merge: 553f2d41ec a624ecff8a
+Author: Benjamin Trenkle <benjamin.trenkle@wicked-software.de>
+Date:   Sun Feb 20 21:08:24 2022 +0100
+
+    Merge commit 'a624ecff8aa7911680b8c1b071fb3da0d339001e' into 4.1/upmerges/2022-02-20
+    
+    # Conflicts:
+    #       administrator/components/com_config/model/form/application.xml
+    #       administrator/language/en-GB/en-GB.com_admin.ini
+    #       administrator/language/en-GB/en-GB.com_config.ini
+    #       htaccess.txt
+    #       installation/sql/mysql/joomla.sql
+    #       installation/sql/postgresql/joomla.sql
+    #       installation/sql/sqlazure/joomla.sql
+    #       libraries/src/Application/CMSApplication.php
+
+Git log for file administrator/components/com_admin/sql/updates/mysql/4.1.3-2022-04-07.sql:
+commit ad2aa9c7dd1f8a33abc7af34b36b002f71719f18
+Author: Brian Teeman <brian@teeman.net>
+Date:   Sat Apr 9 09:04:10 2022 +0100
+
+    [4.1]Mail templates missing tags (#37504)
+    
+    * updates
+    
+    * new installs
+    
+    * I will not copy paste code from core again
+
+Git log for file administrator/components/com_admin/sql/updates/mysql/4.1.3-2022-04-08.sql:
+commit 939488f506a5a6954dc0fe9f533fb1c2c61fc12c
+Author: Brian Teeman <brian@teeman.net>
+Date:   Fri Apr 8 07:05:08 2022 +0100
+
+    [4.1] Joomla Update Component update site (#37505)
+    
+    * new
+    
+    * updates
+    
+    * Update 4.1.3-2022-04-08.sql
+    
+    * Update 4.1.3-2022-04-08.sql
+
+Git log for file administrator/components/com_admin/sql/updates/mysql/4.2.0-2022-05-15.sql:
+commit 186c21b690dd8790af69ba632fe27ccbd558ab73
+Author: Nicholas K. Dionysopoulos <nicholas@akeeba.com>
+Date:   Sat Jun 4 10:01:40 2022 +0300
+
+    Multi-Factor Authentication (replaces Two Factor Authentication) (#37912)
+    
+    * Captive TFA
+    
+    Import YubiKey plugin
+    
+    * Captive TFA
+    
+    Prepare SQL for new plugins
+    
+    * Captive TFA
+    
+    Import Fixed plugin (EXAMPLE)
+    
+    * Captive TFA
+    
+    System plugin
+    
+    * Captive TFA
+    
+    Replace the two factor authentication integration in the core
+    
+    * Captive TFA
+    
+    Fix wrong SQL / table name
+    
+    * Captive TFA
+    
+    Use correct prefix in the TFA helper when getting config UI
+    
+    * Captive TFA
+    
+    Fix a whoopsie or four
+    
+    * Captive TFA
+    
+    Coffee has long stopped working
+    
+    * Captive TFA
+    
+    Format the Methods page
+    
+    * Captive TFA
+    
+    Fix wrong TFA method internal name
+    
+    * Captive TFA
+    
+    Make sure we get the right view in the controllers
+    
+    * Captive TFA
+    
+    Remove yet another integration of the legacy TFA
+    
+    * Captive TFA
+    
+    Automatic migration from old TFA upon first login
+    
+    * Captive TFA
+    
+    Frontend MVC
+    
+    * Captive TFA
+    
+    Frontend routing
+    
+    * Captive TFA
+    
+    Style the method select page
+    
+    * Captive TFA
+    
+    Missed a legacy integration which needs removal
+    
+    * Captive TFA
+    
+    Better format of the configuration UI in the profile page
+    
+    * Captive TFA
+    
+    Use language strings when migrating data from legacy TFA
+    
+    * Captive TFA
+    
+    Only show the prompt to add a TFA method if none is already added
+    
+    * Captive TFA
+    
+    YubiKey should allow entry batching
+    
+    This means that you can authenticate with any registered
+    YubiKey in your user profile.
+    
+    * Captive TFA
+    
+    Replace Tfa::triggerEvent
+    
+    * Captive TFA
+    
+    Import WebAuthn plugin
+    
+    * Captive TFA
+    
+    Improve TFA behavior on non-HTML pages. Basically, block
+    them!
+    
+    * Captive TFA
+    
+    Replace alerts with Joomla messages
+    
+    * Captive TFA
+    
+    Move onUserAfterDelete code to the `joomla` user plugin
+    
+    * Captive TFA
+    
+    Remove the System - Two Factor Authentication plugin
+    
+    Use a trait for the application and fold the rest of
+    the code into Joomla's core user plugin.
+    
+    * Captive TFA
+    
+    Remove accidental leftover references to loginguard
+    
+    * Captive TFA
+    
+    Import Code by Email plugin
+    
+    * Captive TFA
+    
+    Post-installation messages
+    
+    * Captive TFA
+    
+    Enable the TFA plugins on NEW installations
+    
+    * Captive TFA
+    
+    XML formatting
+    
+    * Captive TFA
+    
+    Language and grammar in comments
+    
+    * Captive TFA
+    
+    Rearrange XML attributes
+    
+    * Captive TFA
+    
+    Fix typo
+    
+    * Captive TFA
+    
+    Fix wrong language key name
+    
+    * Captive TFA
+    
+    Remove leftover legacy TFA options
+    
+    * Captive TFA
+    
+    Fix wrong CSS class
+    
+    * Captive TFA
+    
+    Merge the padding classes
+    
+    * Captive TFA
+    
+    This lang string should never have had a link
+    
+    * Captive TFA
+    
+    Hide the Key emoji from screen readers
+    
+    * Captive TFA
+    
+    Accessibility improvements
+    
+    * Captive TFA
+    
+    Accessibility improvements
+    
+    * Captive TFA
+    
+    Accessibility improvements
+    
+    * Captive TFA
+    
+    Accessibility improvements
+    
+    * Captive TFA
+    
+    Accessibility improvements
+    
+    * Captive TFA
+    
+    Accessibility improvements
+    
+    * Captive TFA
+    
+    Use “Two Factor Authentication” / TFA consistently
+    
+    * Captive TFA
+    
+    Tytytytypo
+    
+    * Captive TFA
+    
+    Fixed PHPCS issue unrelated to PR but reported by Drone nonetheless
+    
+    * Captive TFA
+    
+    Lang improvement
+    
+    Co-authored-by: Brian Teeman <brian@teeman.net>
+    
+    * Captive TFA
+    
+    Lang improvement
+    
+    Co-authored-by: Brian Teeman <brian@teeman.net>
+    
+    * Captive TFA
+    
+    Remove no longer valid plugin options
+    
+    * Captive TFA
+    
+    Typo in plugin path
+    
+    * Captive TFA
+    
+    Move TFA options in com_users config next to the
+    password options
+    
+    * Captive TFA
+    
+    Add Show Inline Help button to com_users' options page
+    
+    * Captive TFA
+    
+    Move loading static assets to the view template
+    
+    See https://github.com/joomla/joomla-cms/pull/37356 for
+    the reasoning. This should REALLY have been documented
+    somewhere...
+    
+    * Captive TFA
+    
+    Fixed wrong plugin path
+    
+    * Captive TFA
+    
+    Language style guide
+    
+    Co-authored-by: Brian Teeman <brian@teeman.net>
+    
+    * Captive TFA
+    
+    Language style guide
+    
+    * SQL code style and consistency fixes
+    
+    * Add "CAN FAIL" installer hint
+    
+    * Change longtext to mediumtext
+    
+    * Change longtext to mediumtext in update script
+    
+    * No default value for method
+    
+    * Use real null values for last_used
+    
+    * Captive TFA
+    
+    Fix JS linter errors
+    
+    * Captive TFA
+    
+    Fix PHPCS issues after merging @richard67 's PR
+    
+    * Captive TFA
+    
+    Update formatRelative to use JNEVER, simplifying the
+    code in the view templates.
+    
+    * Captive TFA
+    
+    Fix typo
+    
+    * Captive TFA
+    
+    Fix transcription error
+    
+    * Captive TFA
+    
+    Show correct TFA column in the backend Users page
+    
+    * Captive TFA
+    
+    Fix PHPCS errors in UsersModel unrelated to this PR
+    
+    * Captive TFA
+    
+    Add note about supported browsers in TOTP's link
+    
+    * Captive TFA
+    
+    Remove bogus ESLint notice about qrcode
+    
+    * Captive TFA
+    
+    Fix confusing prompt
+    
+    * Captive TFA
+    
+    Consistently change ->qn to ->quoteName
+    
+    * Captive TFA
+    
+    Strict equality check
+    
+    * Captive TFA
+    
+    Move setSiteTemplateStyle to the views
+    
+    * Captive TFA
+    
+    Rename regbackupcodes to regenerateBackupCodes
+    
+    * Captive TFA
+    
+    Rename dontshowthisagain to doNotShowThisAgain
+    
+    * Captive TFA
+    
+    Throw deprecated notices from deprecated methods
+    
+    * Captive TFA
+    
+    Strict comparison
+    
+    * Captive TFA
+    
+    Typo in comment
+    
+    * Captive TFA
+    
+    Rename TwoFactorAuthenticationAware to TwoFactorAuthenticationHandler
+    
+    * Captive TFA
+    
+    Fix comment typo
+    
+    * Captive TFA
+    
+    Remove variables from SQL when not necessary
+    
+    * codestyle changes
+    
+    * Renamed SiteTemplateAware to SiteTemplateTrait
+    
+    Change made against feedback item https://github.com/joomla/joomla-cms/pull/37811#pullrequestreview-975749217 for pull request #37811 with title "Improved Two Factor Authentication".
+    
+    Feedback item marked the SiteTemplateAware trait name and had the following content:
+    
+    > Still ...Aware is not a good name for a trait, since it usually denotes interfaces
+    
+    * Remove more instances of "2SV"
+    
+    Per feedback item https://github.com/joomla/joomla-cms/pull/37811#discussion_r875012422
+    
+    * s/Two Step Verification/Two Step Validation/
+    
+    Per feedback item https://github.com/joomla/joomla-cms/pull/37811#discussion_r875013978
+    
+    * Language style
+    
+    Per feedback item https://github.com/joomla/joomla-cms/pull/37811#discussion_r875014752
+    
+    * Remove unnecessary language string
+    
+    * Remove redundant paragraph tags from PLG_TWOFACTORAUTH_EMAIL_XML_DESCRIPTION
+    
+    Per feedback item https://github.com/joomla/joomla-cms/pull/37811#discussion_r875016433
+    
+    * Remove redundant paragraph tags from PLG_TWOFACTORAUTH_EMAIL_XML_DESCRIPTION
+    
+    Per feedback item https://github.com/joomla/joomla-cms/pull/37811#discussion_r875016433
+    
+    The other file with the same language string I forgot to put in the previous commit.
+    
+    * Remove the info tooltip in the methods list
+    
+    Addresses feedback in https://github.com/joomla/joomla-cms/pull/37811#issuecomment-1128672899
+    
+    * Simplify the TFA enabled / disabled message
+    
+    Per feedback item https://github.com/joomla/joomla-cms/pull/37811#issuecomment-1128687773
+    
+    * Fix layout of backup codes in methods list
+    
+    Per feedback item https://github.com/joomla/joomla-cms/pull/37811#issuecomment-1129075315
+    
+    * Fix mail message
+    
+    Per https://github.com/joomla/joomla-cms/pull/37811#issuecomment-1129083232
+    
+    * Confirm TFA method deletion
+    
+    Per feedback item https://github.com/joomla/joomla-cms/pull/37811#issuecomment-1129077417
+    
+    * Simplify code label in Email plugin
+    
+    Per feedback https://github.com/joomla/joomla-cms/pull/37811#discussion_r875146855
+    
+    We show short instructions above the field and the field label is simplified. Applied the same change to the Fixed plugin for consistency.
+    
+    * Remove more dead code referencing the legacy TFA
+    
+    * Use concrete events
+    
+    This was the plan all along. Now that https://github.com/joomla/joomla-cms/pull/36578 is merged we can FINALLY do it!
+    
+    * WebAuthn support for some Android devices and FIDO keys
+    
+    Backported from https://github.com/joomla/joomla-cms/pull/37675
+    
+    * Rename Tfa to Mfa
+    
+    Ongoing process
+    
+    * Move Joomla\CMS\Event\TwoFactor to Joomla\CMS\Event\MultiFactor
+    
+    Ongoing process
+    
+    * Two Factor Authentication => Multi-factor Authentication
+    
+    Ongoing process
+    
+    * `#__user_tfa` => `#__user_mfa`
+    
+    Ongoing process
+    
+    * twofactorauth => multifactorauth
+    
+    Ongoing process
+    
+    * Change the post-install message
+    
+    Ongoing process
+    
+    * Remove references to “second factor”
+    
+    Ongoing process
+    
+    * Remove the legacy TFA plugins
+    
+    * I missed a few things
+    
+    * I missed a few more things
+    
+    * Wrong redirection from post-installation messages
+    
+    Addresses https://github.com/joomla/joomla-cms/pull/37811#issuecomment-1130275542
+    
+    * Fix NotifyActionLog expected event names
+    
+    Addresses feedback item https://github.com/joomla/joomla-cms/pull/37811#issuecomment-1130288832
+    
+    * Improve display of Last Used date
+    
+    Addresses feedback item https://github.com/joomla/joomla-cms/pull/37811#issuecomment-1130290809
+    
+    * MFA extension helper
+    
+    moves the group to the correct alpha order in the array now that it doesnt begin with T
+    
+    * Remove unused field
+    
+    * Remove no longer used language strings
+    
+    * Undo changes in old SQL scripts
+    
+    * Improve layout and accessibility of the methods list page
+    
+    Based on VoiceOver testing on macOS 12.4 and the feedback from https://github.com/joomla/joomla-cms/pull/37811#issuecomment-1130465382 and https://github.com/joomla/joomla-cms/pull/37811#issuecomment-1130480411
+    
+    * Add missing options to plg_multifactorauth_email
+    
+    * Sort lines alphabetically
+    
+    Why not confuse the translators with out of order labels providing zero context to what they are translating? It's the One True Joomla Way...
+    
+    * Add label to the One Time Emergency Password input
+    
+    Per feedback item https://github.com/joomla/joomla-cms/pull/37811#issuecomment-1130488813
+    
+    * Sort lines
+    
+    * Fix PHPCS complaint
+    
+    * Formatting of XML files
+    
+    * Forgot to remove extra CSS class
+    
+    * Apply suggestions from code review
+    
+    Formatting, wrong copyright and version information
+    
+    Co-authored-by: heelc29 <66922325+heelc29@users.noreply.github.com>
+    
+    * Commit suggestions from code review
+    
+    Co-authored-by: heelc29 <66922325+heelc29@users.noreply.github.com>
+    
+    * Commit formatting suggestions from code review
+    
+    Co-authored-by: heelc29 <66922325+heelc29@users.noreply.github.com>
+    
+    * Commit formatting suggestions from code review
+    
+    Co-authored-by: heelc29 <66922325+heelc29@users.noreply.github.com>
+    
+    * Commit formatting suggestions from code review
+    
+    Co-authored-by: heelc29 <66922325+heelc29@users.noreply.github.com>
+    
+    * Commit formatting suggestions from code review
+    
+    Co-authored-by: heelc29 <66922325+heelc29@users.noreply.github.com>
+    
+    * Commit formatting suggestions from code review
+    
+    Co-authored-by: heelc29 <66922325+heelc29@users.noreply.github.com>
+    
+    * Commit formatting suggestions from code review
+    
+    Co-authored-by: heelc29 <66922325+heelc29@users.noreply.github.com>
+    
+    * Commit formatting suggestions from code review
+    
+    Co-authored-by: heelc29 <66922325+heelc29@users.noreply.github.com>
+    
+    * Commit formatting suggestions from code review
+    
+    Co-authored-by: heelc29 <66922325+heelc29@users.noreply.github.com>
+    
+    * Commit formatting suggestions from code review
+    
+    Co-authored-by: heelc29 <66922325+heelc29@users.noreply.github.com>
+    
+    * Update build/media_source/plg_multifactorauth_webauthn/js/webauthn.es6.js
+    
+    Co-authored-by: heelc29 <66922325+heelc29@users.noreply.github.com>
+    
+    * Fix update SQL
+    
+    Feedback item https://github.com/joomla/joomla-cms/pull/37811#pullrequestreview-980749684
+    
+    * Onboarding would result in a PHP exception
+    
+    Feedback item https://github.com/joomla/joomla-cms/pull/37811#issuecomment-1133360971
+    
+    * Make MFA plugins' publish state consistent between MySQL and PostgreSQL
+    
+    Feedback item https://github.com/joomla/joomla-cms/pull/37811#pullrequestreview-980799768
+    
+    * Update administrator/components/com_users/src/Controller/MethodsController.php
+    
+    Co-authored-by: heelc29 <66922325+heelc29@users.noreply.github.com>
+    
+    * Update administrator/components/com_admin/sql/updates/mysql/4.2.0-2022-05-15.sql
+    
+    Co-authored-by: heelc29 <66922325+heelc29@users.noreply.github.com>
+    
+    * Update administrator/components/com_admin/sql/updates/postgresql/4.2.0-2022-05-15.sql
+    
+    Co-authored-by: heelc29 <66922325+heelc29@users.noreply.github.com>
+    
+    * Update administrator/components/com_admin/sql/updates/mysql/4.2.0-2022-05-15.sql
+    
+    Co-authored-by: heelc29 <66922325+heelc29@users.noreply.github.com>
+    
+    * Update administrator/components/com_admin/sql/updates/postgresql/4.2.0-2022-05-15.sql
+    
+    Co-authored-by: heelc29 <66922325+heelc29@users.noreply.github.com>
+    
+    * Update administrator/components/com_admin/sql/updates/postgresql/4.2.0-2022-05-15.sql
+    
+    Co-authored-by: Richard Fath <richard67@users.noreply.github.com>
+    
+    * Restore obsolete language strings
+    
+    Per discussion with @bembelimen
+    
+    I had to rename One Time Emergency Passwords to Backup Codes so as not to make major changes to the obsolete language strings. Having them named One Time Emergency Passwords (OTEPs) was both misleading (they are not passwords, they are second factor authentication codes) and would collide with the `_OTEP_` component of language existing strings. Backup Codes is a good compromise, one that is also field tested for nearly seven years. So, there you go!
+    
+    * Re-add the obsolete plugins' language files
+    
+    Per discussion with @bembelimen
+    
+    Yes, it's pointless, it looks wrong, it is what it is. At least I've put a header that this file needs to be removed.
+    
+    * Remove no longer used twofactor field
+    
+    * Rename CSS class to com-users-profile__multifactor
+    
+    * Update administrator/language/en-GB/plg_multifactorauth_email.sys.ini
+    
+    Co-authored-by: Brian Teeman <brian@teeman.net>
+    
+    * Update administrator/language/en-GB/plg_multifactorauth_email.ini
+    
+    Co-authored-by: Brian Teeman <brian@teeman.net>
+    
+    * Update administrator/language/en-GB/plg_multifactorauth_email.ini
+    
+    Co-authored-by: Brian Teeman <brian@teeman.net>
+    
+    * Update administrator/language/en-GB/com_users.ini
+    
+    Co-authored-by: Brian Teeman <brian@teeman.net>
+    
+    * Update administrator/language/en-GB/com_users.ini
+    
+    Co-authored-by: Brian Teeman <brian@teeman.net>
+    
+    * Update administrator/language/en-GB/com_users.ini
+    
+    Co-authored-by: Brian Teeman <brian@teeman.net>
+    
+    * Update administrator/language/en-GB/com_users.ini
+    
+    Co-authored-by: Brian Teeman <brian@teeman.net>
+    
+    * Update administrator/language/en-GB/com_users.ini
+    
+    Co-authored-by: Brian Teeman <brian@teeman.net>
+    
+    * Accessibility improvement
+    
+    * Improve language
+    
+    * Change the heading level
+    
+    * Fix case of extension registry file
+    
+    Regression after renaming TFA to MFA
+    
+    * Remove accidental double space after echo
+    
+    * Remove BS3 leftovers
+    
+    * Remove BS3 leftovers
+    
+    * Remove BS3 leftovers
+    
+    * Update administrator/components/com_users/tmpl/methods/list.php
+    
+    Co-authored-by: Brian Teeman <brian@teeman.net>
+    
+    * Update components/com_users/tmpl/methods/list.php
+    
+    Co-authored-by: Brian Teeman <brian@teeman.net>
+    
+    * PHP warnings when there are no MFA plugins enabled
+    
+    * MFA onboarding was shown with no MFA plugins enabled
+    
+    * Backup codes alert is narrower than page on super-wide screens
+    
+    * Backup codes alert heading font size fix in backend
+    
+    * Revert wording for JENFORCE_2FA_REDIRECT_MESSAGE
+    
+    * Backend users without `core.manage` on com_users were blocked
+    
+    They were blocked from setting up / manage their on MFA,
+    blocked from the onboarding page and blocked from the
+    captive login page.
+    
+    * Onboarding in backend shouldn't have a Back button
+    
+    * Improve layout of method add/edit page
+    
+    * Remove unnecessary H5 tag from TOTP setup table
+    
+    * Kill that bloody Back button with fire
+    
+    * MFA WebAuthn: use Joomla.Text instead of Joomla.JText
+    
+    * MFA WebAuthn: show meaningful error on HTTP
+    
+    * MFA Email: more sensible email body
+    
+    * MFA WebAuthn: must be able to edit the title
+    
+    * MFA add/edit: remove placeholders, replace with help text
+    
+    * Heading levels
+    
+    We assume an H1 will already be output on the page. This is always true on Atum and never true on Cassiopeia — but very likely on real world sites's frontend templates. So it's a compromise which is at least better than the previous case of starting at h3 or h4.
+    
+    * Editing a user would show the wrong interface
+    
+    When editing a user other than ourselves we need to show the MFA editing interface for the user being edited, not the MFA editing interface for our own user.
+    
+    * Refactor security checks
+    
+    Now they are conforming to the original intention
+    
+    * Add missing Group By to the SQL query
+    
+    * Show MFA enabled when a legacy method is enabled
+    
+    * Users: filter by MFA status
+    
+    * Language clarification
+    
+    * Move the frontend onboarding page header to the top
+    
+    * User Options language clarification
+    
+    * PostgreSQL installation SQL wasn't updated
+    
+    * Adding periods to the end of lines of error messages you will never, ever see
+    
+    * Remove a tab
+    
+    * Remove another tab from a comment
+    
+    * Typo removing junk
+    
+    * Remove useless imports
+    
+    * Busywork
+    
+    * Typo in the INI file
+    
+    * Align comment
+    
+    * Remove redundant SQL for PostgreSQL
+    
+    * Typo in labels' `for` attribute
+    
+    * Move backup codes to the top of the page
+    
+    * Mandatory and forbidden MFA was not taken into account
+    
+    If only one group matched, due to typo.
+    
+    * Show information when MFA is mandatory
+    
+    * Make the buttons smaller
+    
+    * The secondary button looks horrid in the frontend
+    
+    * Redirect users to login page in the frontend
+    
+    When they try to access a captive or methods / method page.
+    
+    * MFA Email: fallback to standard mailer when the mail template isn't installed
+    
+    * Delete backup codes when the last MFA method is deleted
+    
+    * Use text inputs for TOTP
+    
+    With the correct input box attributes
+    
+    * Fix the buttons for WebAuthn
+    
+    * Clarify language strings
+    
+    * Use toolbar buttons in the backend
+    
+    Except for screen size small and extra small. Over there we ALSO display the inline content buttons because the toolbar buttons are hidden behind an unintuitive gears icon.
+    
+    JUST BECAUSE THE DEFAULT JOOMLA WAY IS TO USE A TOOLBAR IT DOES NOT MEAN THAT IT MAKES SENSE ALWAYS, EVERYWHERE. THE USER IS KING. WE SERVE THE USER, NOT OURSELVES!
+    
+    * Change the icon classes
+    
+    * Forgot to copy over the changes to the frontend
+    
+    * Regression: configure existing authenticators
+    
+    We used to set field_type to custom to make the code entry disappear. After the changes to the field type handling we need to instead set input_type to hidden.
+    
+    * Backup codes should never become the default method automatically
+    
+    * Improve methods list layout
+    
+    Now it is more clear which methods are enabled and which are available.
+    
+    * Use toolbar buttons in backend pages
+    
+    Except when the screen size is extra small which is the point where the toolbar is hidden and the interface becomes unintuitive.
+    
+    * Fix return URLs for backend MFA edit pages
+    
+    * Edit / Delete buttons mention the auth method name in the respective button's visually hidden text
+    
+    * RTL aware back buttons
+    
+    * Consistent use of the term Fixed Code
+    
+    * Fix typo
+    
+    Co-authored-by: Brian Teeman <brian@teeman.net>
+    Co-authored-by: Richard Fath <richard67@users.noreply.github.com>
+    Co-authored-by: heelc29 <66922325+heelc29@users.noreply.github.com>
+
+Git log for file administrator/components/com_admin/sql/updates/mysql/4.2.0-2022-06-15.sql:
+commit 1e1635516b3e319f35d4fef3e637ed5263850120
+Author: Brian Teeman <brian@teeman.net>
+Date:   Thu Jun 16 07:54:10 2022 +0100
+
+    [4.2] Mail Templates htmlbody (#37701)
+    
+    * [4.1] Mail Templates htmlbody
+    
+    * Update administrator/components/com_admin/sql/updates/mysql/4.1.3-2022-04-30.sql
+    
+    Co-authored-by: Richard Fath <richard67@users.noreply.github.com>
+    
+    * Rename 4.1.3-2022-04-30.sql to 4.2.0-2022-06-15.sql
+    
+    Co-authored-by: Richard Fath <richard67@users.noreply.github.com>
+
+Git log for file administrator/components/com_admin/sql/updates/mysql/4.2.0-2022-06-19.sql:
+commit febdab61581ffdffb941db3aa7dd368bc083a30e
+Author: Franciska Perisa <9084265+fancyFranci@users.noreply.github.com>
+Date:   Wed Jun 22 16:42:52 2022 +0200
+
+    [4.2] [GSoC 21] Keyboard-Shortcut Plugin (#38092)
+    
+    * Keboard Shortcuts Plugin
+    
+    Co-authored-by: Krshivam25 <49578630+Krshivam25@users.noreply.github.com>
+    Co-authored-by: Harald Leithner <leithner@itronic.at>
+    Co-authored-by: Benjamin Trenkle <bembelimen@users.noreply.github.com>
+    Co-authored-by: Brian Teeman <brian@teeman.net>
+    Co-authored-by: heelc29 <66922325+heelc29@users.noreply.github.com>
+    Co-authored-by: Richard Fath <richard67@users.noreply.github.com>
+    Co-authored-by: Quy <quy@fluxbb.org>
+
+Git log for file administrator/components/com_admin/sql/updates/mysql/4.2.0-2022-06-22.sql:
+commit 5cc51478728c90f9f145c45698c759de98f6fa1c
+Author: Brian Teeman <brian@teeman.net>
+Date:   Tue Jun 28 11:31:36 2022 +0100
+
+    [4.2] Update and correct locked plugins  (#38162)
+    
+    * [4.2] Update and correct locked plugins
+    
+    The following plugins should be locked (can not be uninstalled) like all core extensions
+    
+    plg_system_schedulerunner
+    plg_task_checkfiles
+    plg_task_demotasks
+    plg_task_requests
+    plg_task_sitestatus
+
+Git log for file administrator/components/com_admin/sql/updates/mysql/4.2.0-2022-07-07.sql:
+commit 9df5e6c7a7a1c6ec0aed99d6d4a22be048b9b299
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Sun Aug 28 10:14:49 2022 +0200
+
+    [4.2] Correctly revert pull request no. 38244 for updating from 4.2.0 RC 1 (#38567)
+    
+    * Add back removed files 4.2.0-2022-07-07.sql
+    
+    Add back the update SQL script "4.2.0-2022-07-07.sql" which were added with PR #38244 and released with 4.2.0-rc1 and then later removed before 4.2.0 stable when that PR was reverted, and comment out their content.
+    
+    * Add new files 4.2.1-2022-08-23.sql
+    
+    Add new update SQL script to correctly revert PR #38244 when updating from a 4.2.0-rc1.
+    
+    * Delete obsolete plugin files and folders on update
+
+commit 31a2677816a22da4d3f6d831a919efed9b93a139
+Author: Roland Dalmulder <contact@rolandd.com>
+Date:   Sun Aug 14 13:32:16 2022 +0200
+
+    Revert "[4.2] Menu item custom field (#38244)"
+    
+    This reverts commit 32ef564a
+    
+    Signed-off-by: Roland Dalmulder <contact@rolandd.com>
+
+commit 32ef564a55be8d44c3f81b2b1f4593314a238973
+Author: Brian Teeman <brian@teeman.net>
+Date:   Wed Jul 13 18:39:58 2022 +0100
+
+    [4.2] Menu item custom field (#38244)
+    
+    * [4.2] Menu item custom field
+    
+    * Update menuitem.php
+    
+    * Thanks @richard67
+    
+    * less haste more speed
+
+Git log for file administrator/components/com_admin/sql/updates/mysql/4.2.1-2022-08-23.sql:
+commit 9df5e6c7a7a1c6ec0aed99d6d4a22be048b9b299
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Sun Aug 28 10:14:49 2022 +0200
+
+    [4.2] Correctly revert pull request no. 38244 for updating from 4.2.0 RC 1 (#38567)
+    
+    * Add back removed files 4.2.0-2022-07-07.sql
+    
+    Add back the update SQL script "4.2.0-2022-07-07.sql" which were added with PR #38244 and released with 4.2.0-rc1 and then later removed before 4.2.0 stable when that PR was reverted, and comment out their content.
+    
+    * Add new files 4.2.1-2022-08-23.sql
+    
+    Add new update SQL script to correctly revert PR #38244 when updating from a 4.2.0-rc1.
+    
+    * Delete obsolete plugin files and folders on update
+
+Git log for file administrator/components/com_admin/sql/updates/mysql/4.2.3-2022-09-07.sql:
+commit 2665c3125bd9d87a0b5b038b80d8d950c50f9dbc
+Author: Brian Teeman <brian@teeman.net>
+Date:   Fri Sep 16 12:15:04 2022 +0100
+
+    Remove overrides when a template is uninstalled (#38714)
+
+Git log for file administrator/components/com_admin/sql/updates/mysql/4.2.7-2022-12-29.sql:
+commit f7a163f2979fedf3e8c66a29cdbf006faf238cde
+Author: Konstantin Kolos <k0nstantinkolos88@gmail.com>
+Date:   Thu Dec 29 21:52:45 2022 +0200
+
+    [4.2] The "activate" tag is not needed in the user registration email template without activation (#39195)
+    
+    * Tag "activate" is not needed
+    
+    * Added update files for existing sites
+    
+    * Added SQL-files with actual names
+    
+    * DEL 4.2.6-2022-11-11.sql
+    
+    * DEL 4.2.6-2022-11-11.sql
+
+Git log for file administrator/components/com_admin/sql/updates/mysql/4.2.9-2023-03-07.sql:
+commit 1b763def7e24e1fb5e20116f0882aa3121a80e00
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Tue Mar 7 21:41:03 2023 +0100
+
+    Don't append but set the "Content-Encoding" header value in htaccess.txt (#39205)
+
+Git log for file administrator/components/com_admin/sql/updates/mysql/4.3.0-2022-09-23.sql:
+commit 5a90e3e9b5ead2d74be6864a37613af4533fcb7e
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Sun May 7 21:29:33 2023 +0200
+
+    [4.3] Fix invalid json in params of com_templates after update to 4.3.0 or 4.3.1 caused by PR #38823 (#40535)
+
+commit 8d38cb0d80279bd40c6561e65f4c91c36a9c3a3f
+Author: Brian Teeman <brian@teeman.net>
+Date:   Sun Oct 9 20:04:23 2022 +0300
+
+    [4.3] Template Diff View (#38823)
+
+Git log for file administrator/components/com_admin/sql/updates/mysql/4.3.0-2022-11-06.sql:
+commit acc959a6ba04d179643bcd4f30902537de3505ce
+Author: Hannes Papenberg <info@joomlager.de>
+Date:   Fri Dec 30 15:11:53 2022 +0100
+
+    Do not track rows in #__ucm_content as assets (#39165)
+
+Git log for file administrator/components/com_admin/sql/updates/mysql/4.3.0-2023-01-30.sql:
+commit 5ebb39b35f958ab5d25173acfd50a53b6f1fba65
+Author: tatankat <tatankat@users.noreply.github.com>
+Date:   Mon Jan 30 13:42:13 2023 +0100
+
+    [4.x] Fix LDAP over SSL (#37962)
+    
+    * [4.x] Fix LDAP over SSL
+    
+    * More precise WHERE clause and a bit code style.
+    
+    * Select correct encryption type with uri ldaps://
+    
+    and fix element
+    
+    * Phase 1 convert BRANCH to PSR-12
+    
+    * Phase 2 convert BRANCH to PSR-12
+    
+    * remove leftover codestyle error
+    
+    * Use more correct namings, based on Thunderbird
+    
+    * rename DB updates for newer Joomla version
+    
+    * Renamed SQL files to update on latest release
+    
+    * Enable the test fixed by this PR
+    
+    * added certificate configuration options
+    
+    * Some cleaning
+    
+    ---------
+
+Git log for file administrator/components/com_admin/sql/updates/mysql/4.3.0-2023-02-15.sql:
+commit be4f48dd66da1dce0d2a1a9acb325cce1d1ebb06
+Author: Quy <quy@nomonkeybiz.com>
+Date:   Sat May 6 17:09:10 2023 -0700
+
+    Remove escape (#40274)
+
+commit 10be8d66237fc9b416d3e0bafe4cd2d8aaf24236
+Author: khu5h1 <60094678+khu5h1@users.noreply.github.com>
+Date:   Fri May 5 08:47:48 2023 +0530
+
+    [4.3][Guided Tours] Fixed missing field in Banners Tour (#40258)
+
+commit 3765fdfd93a8d62a6a6ae8bca8151dd0f6a9aa27
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Sun Apr 2 14:06:27 2023 +0200
+
+    [4.3] Fix SQL error "Can't Drop 'asset_id'; check that column/key exists" and checked out Guided Tours module when updating from 4.2.9 or older (#40286)
+
+commit 427f41d0eb384f54e70e3ff06d3f0a44e830c700
+Author: Olivier Buisard <olivier.buisard@simplifyyourweb.com>
+Date:   Fri Mar 31 18:03:15 2023 -0400
+
+    Guided tours removal of tour permissions (#40228)
+
+commit 7594a02890027f39cbe1a25ee45b1e7b2a1dd53a
+Author: Olivier Buisard <olivier.buisard@simplifyyourweb.com>
+Date:   Fri Mar 31 17:31:46 2023 -0400
+
+    [4.3] [Guided Tours] Fancy select fields are broken and not accessible in tours (#40238)
+
+commit 41729fb151b3e61d787e16245f80471500fb6591
+Author: Olivier Buisard <olivier.buisard@simplifyyourweb.com>
+Date:   Sat Mar 11 22:56:30 2023 -0500
+
+    [4.3][Guided Tours] Editors should be accessible with tabs (#40044)
+
+commit e06d828282de87d7ac6ff9292baf3eb462484314
+Author: Khushi Rauniyar <60094678+khu5h1@users.noreply.github.com>
+Date:   Sun Mar 12 05:41:34 2023 +0530
+
+    [4.3][Guided Tours] Fixed News Feed tour and User tour target (#40000)
+
+commit 069889ce127a48e2ca4575be290c9d8cca709ce2
+Author: Olivier Buisard <olivier.buisard@simplifyyourweb.com>
+Date:   Sat Mar 11 18:24:48 2023 -0500
+
+    [4.3][Guided Tours] target corrections (#40077)
+
+commit 94212433b370796c69cdd37c95402b9f40bb7b90
+Author: Olivier Buisard <olivier.buisard@simplifyyourweb.com>
+Date:   Fri Mar 3 17:56:12 2023 -0500
+
+    GSoC’22 project: Guided Tours (#39902)
+
+Git log for file administrator/components/com_admin/sql/updates/mysql/4.3.0-2023-02-25.sql:
+commit 070f1ef4722f9ddbe2fbc945f83580c5d6f1c3ac
+Author: Nicola Galgano <optimus4joomla@gmail.com>
+Date:   Fri Mar 3 04:18:34 2023 +0100
+
+    [4][sql] banners.clickurl varchar(2048) (#39937)
+
+Git log for file administrator/components/com_admin/sql/updates/mysql/4.3.0-2023-03-07.sql:
+commit 41729fb151b3e61d787e16245f80471500fb6591
+Author: Olivier Buisard <olivier.buisard@simplifyyourweb.com>
+Date:   Sat Mar 11 22:56:30 2023 -0500
+
+    [4.3][Guided Tours] Editors should be accessible with tabs (#40044)
+
+Git log for file administrator/components/com_admin/sql/updates/mysql/4.3.0-2023-03-09.sql:
+commit e06d828282de87d7ac6ff9292baf3eb462484314
+Author: Khushi Rauniyar <60094678+khu5h1@users.noreply.github.com>
+Date:   Sun Mar 12 05:41:34 2023 +0530
+
+    [4.3][Guided Tours] Fixed News Feed tour and User tour target (#40000)
+
+Git log for file administrator/components/com_admin/sql/updates/mysql/4.3.0-2023-03-10.sql:
+commit 069889ce127a48e2ca4575be290c9d8cca709ce2
+Author: Olivier Buisard <olivier.buisard@simplifyyourweb.com>
+Date:   Sat Mar 11 18:24:48 2023 -0500
+
+    [4.3][Guided Tours] target corrections (#40077)
+
+Git log for file administrator/components/com_admin/sql/updates/mysql/4.3.0-2023-03-28.sql:
+commit 3765fdfd93a8d62a6a6ae8bca8151dd0f6a9aa27
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Sun Apr 2 14:06:27 2023 +0200
+
+    [4.3] Fix SQL error "Can't Drop 'asset_id'; check that column/key exists" and checked out Guided Tours module when updating from 4.2.9 or older (#40286)
+
+commit 427f41d0eb384f54e70e3ff06d3f0a44e830c700
+Author: Olivier Buisard <olivier.buisard@simplifyyourweb.com>
+Date:   Fri Mar 31 18:03:15 2023 -0400
+
+    Guided tours removal of tour permissions (#40228)
+
+Git log for file administrator/components/com_admin/sql/updates/mysql/4.3.0-2023-03-29.sql:
+commit 7594a02890027f39cbe1a25ee45b1e7b2a1dd53a
+Author: Olivier Buisard <olivier.buisard@simplifyyourweb.com>
+Date:   Fri Mar 31 17:31:46 2023 -0400
+
+    [4.3] [Guided Tours] Fancy select fields are broken and not accessible in tours (#40238)
+
+Git log for file administrator/components/com_admin/sql/updates/mysql/4.3.2-2023-03-31.sql:
+commit f4fcea53da069e6c603599dd20888cc08f6f4054
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Tue May 16 03:49:36 2023 +0200
+
+    Rename SQL update scripts for 4.3.2 (#40601)
+
+Git log for file administrator/components/com_admin/sql/updates/mysql/4.3.2-2023-05-03.sql:
+commit f4fcea53da069e6c603599dd20888cc08f6f4054
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Tue May 16 03:49:36 2023 +0200
+
+    Rename SQL update scripts for 4.3.2 (#40601)
+
+Git log for file administrator/components/com_admin/sql/updates/mysql/4.3.2-2023-05-20.sql:
+commit 4f2ae76fedda349eb187d324a5109dbdd15b7974
+Author: Allon Moritz <allon.moritz@digital-peak.com>
+Date:   Wed May 31 16:58:50 2023 +0200
+
+    Joomla! 4.4.0 Alpha 1
+
+Git log for file administrator/components/com_admin/sql/updates/mysql/4.4.0-2023-05-08.sql:
+commit 52d9fcc0f25e1f05540e6da19931421cae7acf86
+Author: Mark Fleeson <mark.fleeson@community.joomla.org>
+Date:   Wed May 24 13:20:51 2023 +0100
+
+    End of Support Plugin for Joomla 4.4 (#40565)
+    
+    * End of Support Plugin for Joomla 4.4
+    
+    * Update mysql/base.sql - missing ,
+    
+    * Update plugins/quickicon/eos/src/Extension/Eos.php
+    
+    Co-authored-by: heelc29 <66922325+heelc29@users.noreply.github.com>
+    
+    * Update plugins/quickicon/eos/src/Extension/Eos.php
+    
+    Co-authored-by: heelc29 <66922325+heelc29@users.noreply.github.com>
+    
+    * Update plugins/quickicon/eos/src/Extension/Eos.php
+    
+    Co-authored-by: heelc29 <66922325+heelc29@users.noreply.github.com>
+    
+    * Update plugins/quickicon/eos/src/Extension/Eos.php
+    
+    Co-authored-by: heelc29 <66922325+heelc29@users.noreply.github.com>
+    
+    * Update plugins/quickicon/eos/src/Extension/Eos.php
+    
+    Co-authored-by: heelc29 <66922325+heelc29@users.noreply.github.com>
+    
+    * Update plugins/quickicon/eos/services/provider.php
+    
+    Co-authored-by: Allon Moritz <allon.moritz@digital-peak.com>
+    
+    * Update plugins/quickicon/eos/services/provider.php
+    
+    Co-authored-by: Allon Moritz <allon.moritz@digital-peak.com>
+    
+    * All requested changes made. Lets see what happens!
+    
+    * Removed __construct, followed Dimitris and JSanders suggestions
+    
+    * PHPCs fix again
+    
+    * Update Eos.php
+    
+    * Update provider.php
+    
+    * Update plugins/quickicon/eos/src/Extension/Eos.php
+    
+    Co-authored-by: Dimitris Grammatikogiannis <dg@dgrammatiko.dev>
+    
+    * Update plugins/quickicon/eos/services/provider.php
+    
+    Co-authored-by: jsanders <j53.sanders@gmail.com>
+    
+    * Update provider.php
+    
+    * Update plugins/quickicon/eos/src/Extension/Eos.php
+    
+    Co-authored-by: jsanders <j53.sanders@gmail.com>
+    
+    * Update to all files to get almost clean PR. Do not Review this one, wait for next please.
+    
+    Some files are showing in git some are not so this is all 10 files updated to the correct code. The next release will remove the extra spaces in this release which I've added to make sure all 10 files upload. Please do not review this PR but wait for the next one in about 10 mins.
+    
+    * Ready for checking.
+    
+    Here's the files ready for checking.
+    
+    * Updating GetMessageInfo in Eos to correctly just return an array
+    
+    * Changing Const from Public to Private
+    
+    * Updates to set language to only load when needed. Fix to allow building
+    
+    Fix from https://github.com/joomla/joomla-cms/pull/40565#issuecomment-1546882976
+    
+    * Update stats-message.es6.js
+    
+    * Update stats-message.es6.js
+    
+    * Update Eos.php - set hardcoded date to 2025-10-25
+    
+    * Update stats-message.es6.js - revert changes
+    
+    ---------
+    
+    Co-authored-by: heelc29 <66922325+heelc29@users.noreply.github.com>
+    Co-authored-by: Allon Moritz <allon.moritz@digital-peak.com>
+    Co-authored-by: Dimitris Grammatikogiannis <dg@dgrammatiko.dev>
+    Co-authored-by: jsanders <j53.sanders@gmail.com>
+    Co-authored-by: Richard Fath <richard67@users.noreply.github.com>
+    Co-authored-by: Martin Carl Kopp <6154099+MacJoom@users.noreply.github.com>
+
+Git log for file administrator/components/com_admin/sql/updates/mysql/4.4.0-2023-09-13.sql:
+commit b04c168b497ca777b07bce32145ab4e2f75d851d
+Author: Richard Fath <richard67@users.noreply.github.com>
+Date:   Wed Sep 13 18:00:14 2023 +0200
+
+    [4.4] Add Joomla 5 compat plugin to 4.4.0 to fix class "JPlugin" not found error on update to 5 (#41738)
+    
+    * Add J5 compat plugin to 4.4.0
+    
+    * Adapt provider.php to latest changes in 5.0-dev
+    
+    * Add to ExtensionsHelper
+    
+    * Use protected = 0
+    
+    * Better XML description.
+    
+    * Use correct creationDate in XML file
+    
+    Co-authored-by: Brian Teeman <brian@teeman.net>
+    
+    ---------
+    
+    Co-authored-by: Brian Teeman <brian@teeman.net>
+

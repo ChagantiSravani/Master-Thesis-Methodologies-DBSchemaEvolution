@@ -1,0 +1,2497 @@
+Git log for file SQL/mysql.initial.sql:
+commit 80404a8674da49e249c316a30932bed4a82e2dac
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Sun Oct 9 11:35:14 2022 +0200
+
+    Store uploads metadata in a separate sql database table instead of a session (#8415)
+
+commit c56d7342feee43c28701679f08cf82626179f72c
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Fri Aug 12 19:45:40 2022 +0200
+
+    Fix bug where it wasn't possible to create more than one response record on SQLite and Postgres (#8664)
+
+commit 4f887f65eaa489dd4a7b115988624df8da632e7d
+Author: Interduo <jkl@interduo.pl>
+Date:   Sun Apr 10 12:06:58 2022 +0200
+
+    Don't declare default statement for MySQL columns in initial schema (#8485)
+
+commit 0c42af132e14b4869b4142921426ca90e647fcab
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Tue Oct 26 10:55:16 2021 +0200
+
+    Fix installation/upgrade on MySQL 5.5 - Index column size too large (#8231)
+
+commit 48fbf110af3f76128de7bbe7f6ce0e48247513e4
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Sun Oct 3 12:10:14 2021 +0200
+
+    SQLite: Use foreign keys, require SQLite >= 3.6.19 (#8159)
+
+commit cb37d14c5c50129e993937bb612159a0978af1c9
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Sat Aug 28 19:17:19 2021 +0200
+
+    Support responses (snippets) in HTML format (#5315)
+
+commit 6cddb2745649c5a3b510625b77c512f520c2569e
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Tue Dec 29 16:21:14 2020 +0100
+
+    Allow NULL in users.preferences column in postgres and sqlite db, the same as for other engines (#7767)
+
+commit 9713ce364cd14e40edec1de819e17341a6745c71
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Sun Sep 20 10:00:08 2020 +0200
+
+    Automatically collected recipients and trusted senders (#6904)
+    
+    Added configurable Collected Recipients addressbook source (#4971)
+    Added configurable Trusted Senders addressbook source (#5046)
+    Added 'contact_exists' hook
+
+commit b606d81cdf3fa4a088a061bbef7c244e244fceed
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Sat Feb 1 17:19:04 2020 +0100
+
+    MySQL: Use utf8mb4 charset and utf8mb4_unicode_ci collation (#6535, #7113)
+    
+    Fixes support for utf8 emoji in html signature.
+
+commit 50d6ea30e0d72a2fbe7142d51b6c112540a8cdea
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Sat Feb 1 09:40:11 2020 +0100
+
+    Support for language codes up to 16 chars long (e.g. es-419) in database schema (#6851)
+
+commit 3841f63fbd42578f403624e71384b094d65212c8
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Sun Sep 29 13:18:46 2019 +0200
+
+    Make cache keys case-sensitive on MySQL/MSSQL (#6942)
+
+commit 0e640e95c9b1e433dc89af8c981be660741f7697
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Sun Dec 23 13:51:39 2018 +0100
+
+    Enigma: Fixed multi-host syncronization of private and deleted keys and pubring.kbx file
+    
+    Added context column to filestore table for easier listing of stored files.
+
+commit 72a3fb764b3962fc5d96b8e6c6299e311eed03e9
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Sat Aug 25 18:26:31 2018 +0200
+
+    Fix compatibility with MySQL 8 - error on 'system' table use
+
+commit 656f97983109612fb519614304bc190e42ee6584
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Thu Mar 1 10:12:23 2018 +0100
+
+    Fix column type (#6200)
+
+commit 7b1f0f020b23553965275c8e6282f3ef22143a59
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Wed Feb 28 09:36:25 2018 +0100
+
+    Enigma: Multi-host support
+
+commit a1f679adcacb865c8b692d4427bde65cd4065b43
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Sat Nov 26 09:14:16 2016 +0100
+
+    Fixed redundancy in sql caching system and compatibility with Galera Cluster (#5439)
+    
+    - Removed redundant 'created' column from cache and cache_shared tables
+    - Removed use of redundant data records
+    - Added missing primary keys (dictionary, cache, cache_shared tables)
+
+commit 32ffc4e6377808f2411b3c4bebc5036650912cac
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Wed Oct 12 09:07:01 2016 +0200
+
+    Bump database version
+
+commit 0836b213db0baa57fc20f8e4287f6b6a333f3359
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Fri Aug 12 13:02:39 2016 +0200
+
+    Removed useless 'created' column from 'session' table (#5389)
+
+commit a15d877ba8e12ba6659aad69d63b8b73256144ad
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Wed Nov 11 18:53:43 2015 +0100
+
+    Added brute-force attack prevention via login rate limit (#1490566)
+
+commit f06f4b8424d33e1e06d9f99aa6f2cbc4b5f252e3
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Sun Mar 8 12:49:36 2015 +0100
+
+    Fix storing signatures with big images in MySQL database (#1490306)
+
+commit b6f7304d69918e31dd701d4c041169aa05934aee
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Tue Apr 29 12:12:26 2014 +0200
+
+    Fix too small length of users.preferences column data type on MySQL
+
+commit 60b6d7c3894f61eb9c8bc40efe5528e91386bf94
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Sun Jun 9 11:07:46 2013 +0200
+
+    Fix database cache expunge issues (#1489149) - added 'expires' column
+
+commit 50abd557184326f173357b50e7593dc3f452be91
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Sat May 25 15:37:46 2013 +0200
+
+    Added shared (cross-user) cache
+
+commit 311e82652ae0f2dd9792610175a1ba19cd71c0af
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Sun Apr 28 14:30:34 2013 +0200
+
+    Add lost files for "db_prefix related changes" commit
+
+commit 9e46fb535ddce461a11f57d4ce75a43c3ad651e8
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Tue Feb 19 14:27:26 2013 +0100
+
+    Fix typo in DB version strings (there should be no .sql suffix)
+
+commit aa691c40eda8fbae0f9175a5a59569f24d066a83
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Thu Jan 17 18:08:24 2013 +0100
+
+    Bump version number in *.initial.sql
+
+commit b7e7c8f9501850a38705e0a1f18a8ae6e25f1be1
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Wed Jan 9 15:57:29 2013 +0100
+
+    Added new database upgrade script, converted DDL scripts to new format
+
+commit 565c472918e7f9707cd8d7909ad5dbcc5a921fdf
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Mon Aug 6 11:08:58 2012 +0200
+
+    Removed users.alias column, added option ('user_aliases')
+    to use email address from identities as username (#1488581)
+
+commit 83121ece3348bfe09bb1026eace79a74a5ccf2c9
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Mon Aug 6 10:32:37 2012 +0200
+
+    - Removed redundant cache.cache_id column (#1488528)
+
+commit 3d4a482fd7527cfd8ee9b86df239b7a833535cd4
+Author: alecpl <alec@alec.pl>
+Date:   Thu Jan 12 07:16:51 2012 +0000
+
+    - Fix failure on MySQL database upgrade from 0.7 - text column can't have default value (#1488300)
+
+commit 48be8f6428ba3be7375b84aea2b73d1c67de6da1
+Author: alecpl <alec@alec.pl>
+Date:   Thu Jan 5 08:45:22 2012 +0000
+
+    - Fix SQL Error when saving a contact with many email addresses (#1488286)
+
+commit b8ae0ecb22264b6a4dc8785c431a8d0556fa83bf
+Author: alecpl <alec@alec.pl>
+Date:   Tue Nov 22 08:36:29 2011 +0000
+
+    - Fixed bug where session ID's length was limited to 40 characters. Since PHP5.3 it's possible
+      to set session.hash_function to any hash algorithm that would produce strings
+      up to 128 characters long (#1488196)
+
+commit 609d3923d7dc674263ddea990387dbf5488fabc6
+Author: alecpl <alec@alec.pl>
+Date:   Sun Sep 18 09:02:35 2011 +0000
+
+    - Cache synchronization using QRESYNC/CONDSTORE
+    - Fixed message ID updates in cache
+    - Changed message flags handling + some fixes (e.g. fixed messages listing after delete)
+
+commit 80152b333ca5d856dcf09f5ca10a9ffd80ba117f
+Author: alecpl <alec@alec.pl>
+Date:   Wed Sep 7 11:07:03 2011 +0000
+
+    - Rewritten messages caching (merged devel-mcache branch):
+      Indexes are stored in a separate table, so there's no need to store all messages in a folder
+      Added threads data caching
+      Flags are stored separately, so flag change doesn't cause DELETE+INSERT, just UPDATE
+    - Partial QRESYNC support
+    - Improved FETCH response handling
+    - Improvements in response tokenization method
+
+commit d5ae9772c1427dbbcf1cb7582106dd1d542bc26e
+Author: alecpl <alec@alec.pl>
+Date:   Tue Sep 6 17:18:12 2011 +0000
+
+    - Fix username case-insensitivity issue in MySQL (#1488021)
+
+commit f8e48df71540b268ceac058d32b8ee848fc2ab6b
+Author: alecpl <alec@alec.pl>
+Date:   Tue Sep 6 16:35:14 2011 +0000
+
+    - Merge devel-saved_search branch (Addressbook Saved Searches)
+
+commit 66df084203a217ab74a416064c459cc3420a648c
+Author: alecpl <alec@alec.pl>
+Date:   Tue Sep 6 13:39:45 2011 +0000
+
+    - Merge devel-spellcheck branch:
+      - Added spellchecker exceptions dictionary (shared or per-user)
+      - Added possibility to ignore words containing caps, numbers, symbols (spellcheck_ignore_* options)
+
+commit 09b0e36b3f453a410b3389b6d95a29605d13bfca
+Author: thomascube <thomas@roundcube.net>
+Date:   Wed Apr 27 17:10:07 2011 +0000
+
+    Change vcard field to LONGTEXT to completely store vcards with embedded photos
+
+commit 3a5476d150419b46847dd922935f368c969519c1
+Author: alecpl <alec@alec.pl>
+Date:   Wed Feb 23 08:13:02 2011 +0000
+
+    - Add index on contactgroupmembers.contact_id column.
+      Improves performance and fixes problem with contactgroupmembers table creation on MySQL 4.x
+
+commit 3e2637351da9559a4aa420004ac90e9fe30477ef
+Author: thomascube <thomas@roundcube.net>
+Date:   Mon Feb 14 20:46:48 2011 +0000
+
+    Fulltext search over contact fields. Attention: DATABASE SCHEMA CHANGED\!
+
+commit 6f096812c9fd460fddd21ff1cef55542cb79a890
+Author: alecpl <alec@alec.pl>
+Date:   Tue Nov 2 09:27:03 2010 +0000
+
+    - Support contact's email addresses up to 255 characters long (#1487095)
+    - Added email format checks when saving contacts data
+
+commit ace511a771656c983046919333cee501339c98a1
+Author: alecpl <alec@alec.pl>
+Date:   Wed Oct 6 13:00:12 2010 +0000
+
+    - Add unique index on users.username+users.mail_host
+
+commit e019f2d0f2dc2fbfa345ab5d7ae85e67bfdd76b8
+Author: alecpl <alec@alec.pl>
+Date:   Sat Sep 25 13:03:53 2010 +0000
+
+    - s/RoundCube/Roundcube/
+
+commit e2402ef99af447b7cc30d661e62450cbb04b202b
+Author: alecpl <alec@alec.pl>
+Date:   Wed Apr 28 10:34:33 2010 +0000
+
+    - Set DEFAULT NULL for users.last_login
+
+commit a35062a1eba5c6c15f703686cd4fecc5536d74df
+Author: thomascube <thomas@roundcube.net>
+Date:   Thu Apr 15 06:33:30 2010 +0000
+
+    Always set changed date when marking a DB record as deleted + provide a cleanup script
+
+commit 1924136b4777197aa8b010394650675211161e4c
+Author: alecpl <alec@alec.pl>
+Date:   Sat Mar 27 07:31:39 2010 +0000
+
+    - fix default datetime
+
+commit a61bbb24aafec5718ca9bc985e7c596c5821f018
+Author: thomascube <thomas@roundcube.net>
+Date:   Fri Mar 26 16:38:20 2010 +0000
+
+    Added basic contact groups feature
+
+commit 94fe9ca1a87b20ddeee55024986e95ca72097af6
+Author: alecpl <alec@alec.pl>
+Date:   Sat Mar 6 14:13:25 2010 +0000
+
+    - re-fix (#1486474) + require MySQL 4.0.8 + add index/update in identities table
+
+commit 951c07b1b16e1635f4563239cf55664a92b7c290
+Author: alecpl <alec@alec.pl>
+Date:   Wed Feb 24 19:46:13 2010 +0000
+
+    - Fix adding contacts SQL error on mysql (#1486459)
+
+commit 8248e4a64230870ccfa8d009918cda8b36142890
+Author: alecpl <alec@alec.pl>
+Date:   Sat Feb 6 12:34:16 2010 +0000
+
+    - Add workaround for MySQL bug [http://bugs.mysql.com/bug.php?id=46293] (#1486474)
+
+commit 23b76563dcc2542cff9f447e809462472cfccd88
+Author: alecpl <alec@alec.pl>
+Date:   Tue Sep 29 07:59:25 2009 +0000
+
+    - use better index for contacts table
+
+commit b2b8b19cf55064d97438eee83a56fe20c257de59
+Author: vbenincasa <vbenincasa@gmail.com>
+Date:   Thu Sep 17 12:50:54 2009 +0000
+
+    - Change MySQL data type to avoid problems with big session vars
+
+commit 3d601d267dfb0ffca32ad953f36944b83910d907
+Author: alecpl <alec@alec.pl>
+Date:   Mon Sep 7 12:40:05 2009 +0000
+
+    - added index in messages table
+
+commit 798ad5ea8e7f121e7c3ffaee2d96e15db3686dff
+Author: alecpl <alec@alec.pl>
+Date:   Thu May 14 08:28:11 2009 +0000
+
+    - remove version number from *.initial.sql
+
+commit 37974e2490ef20c0155d5461a316bcf940da2773
+Author: alecpl <alec@alec.pl>
+Date:   Wed Mar 4 08:24:23 2009 +0000
+
+    - Fix datetime columns defaults in mysql's DDL (#1485641)
+
+commit fa898a4a84202f0ba28c27a39e059c6f5a442c4e
+Author: thomascube <thomas@roundcube.net>
+Date:   Sat Nov 29 17:18:52 2008 +0000
+
+    Simplify MYSQL database initialization instructions
+
+commit 2bedfab77a33da76bb450bff20de76c4ecdf9898
+Author: thomascube <thomas@roundcube.net>
+Date:   Sat Nov 29 17:17:13 2008 +0000
+
+    Add conditional comments to mysql initial script (#1485517); remove old mysql 4.0 init script
+
+commit debdda011717e63945a0f6a9db6ab77b30a47079
+Author: alecpl <alec@alec.pl>
+Date:   Tue Nov 25 10:17:57 2008 +0000
+
+    #1485420: remove default (and not null) for users.language column in DDL
+
+commit e4d9f05e4126501ce329fc4c36704375f6dfe681
+Author: alecpl <alec@alec.pl>
+Date:   Mon Nov 24 07:59:10 2008 +0000
+
+    - Added index on cache.created + small fixes in mssql DDL script
+
+commit dcf780a6bd5065ffb0dcc76233b1e5f601e258d2
+Author: alecpl <alec@alec.pl>
+Date:   Sat Nov 22 18:06:13 2008 +0000
+
+    - fix r2076: removed cache.session_id column, removed DELETEs from cache in session_gc
+    - trust DB server's time when "touching" cache and messages tables
+
+commit 3e48d2eee1d2af42aa777fd5e461fa570762732e
+Author: alecpl <alec@alec.pl>
+Date:   Fri Nov 21 18:19:30 2008 +0000
+
+    - Increase speed of session destroy and garbage clean up
+    - Fix session timeout when DB server got clock skew (#1485490)
+
+commit c98f3b5d6e4c681b7e42ea71c32cd2ef1991b519
+Author: alecpl <alec@alec.pl>
+Date:   Thu Jun 12 17:46:31 2008 +0000
+
+    #1485125: added index on messages.created
+
+commit f18911adb4a6d08fc85963a2f15f13fa869877ec
+Author: alecpl <alec@alec.pl>
+Date:   Thu Jun 12 06:26:17 2008 +0000
+
+    - #1485120 (text column can't have a default value)
+
+commit d7f3d796a240ed830346e74de46e108cc3fb4d3a
+Author: alecpl <alec@alec.pl>
+Date:   Mon May 19 09:07:13 2008 +0000
+
+    -Fixed Mysql DDL for default identities creation (#1485070)
+
+commit 6cb7786912ab18e53d8de0bbe436e46bf6d61782
+Author: alecpl <alec@alec.pl>
+Date:   Thu Apr 3 11:03:54 2008 +0000
+
+    #1484854
+
+commit ac26b964663405521077c7710212a58c37a041c7
+Author: thomascube <thomas@roundcube.net>
+Date:   Tue Mar 25 19:08:19 2008 +0000
+
+    Optimize database schema; get rid of unnecessary indexes
+
+commit 112bff6f1129de9966155f841bb0a6e855110886
+Author: thomascube <thomas@roundcube.net>
+Date:   Wed Oct 10 06:38:23 2007 +0000
+
+    Set prefs field in user table to null (#1484386)
+
+commit 84d06edb06433c980dc7718188fcdd0799b08c09
+Author: thomascube <thomas@roundcube.net>
+Date:   Wed Sep 19 06:55:05 2007 +0000
+
+    IPv6 Compatability
+
+commit 6ae6e41fb32ca544ed29681d18130ba2c9c344fd
+Author: thomascube <thomas@roundcube.net>
+Date:   Thu May 17 20:15:24 2007 +0000
+
+    Updated description files and version info
+
+commit 43a42dcf405c1667f0f39150ffaa8bbda7d9d1a0
+Author: thomascube <thomas@roundcube.net>
+Date:   Sun Mar 18 17:11:43 2007 +0000
+
+    Use user_id for unique key in messages table (closes #1484074)
+
+commit a0109c4933e0bfb5ed9dbcf94f932991ca689542
+Author: svncommit <devs@roundcube.net>
+Date:   Thu Sep 14 03:49:28 2006 +0000
+
+    Initial TinyMCE editor support (still need to work on spellcheck and skins)
+
+commit f7bfec96be8bf095ffc0af64a761f3866d5947b9
+Author: thomascube <thomas@roundcube.net>
+Date:   Fri Aug 25 11:51:11 2006 +0000
+
+    Finalized new message parsing. Attention: changes in database schema
+
+commit 64009eb8495a9bc8855fd43846777a38dc5cdcc5
+Author: thomascube <thomas@roundcube.net>
+Date:   Fri Aug 11 18:31:35 2006 +0000
+
+    Reverted files to r305
+
+commit a06be986eb229a0b8db3acda6a9ed9bfc037a424
+Author: svncommit <devs@roundcube.net>
+Date:   Thu Aug 10 13:10:32 2006 +0000
+
+    Added a few fields to the contact table and made this fields avaiable (Ticket #1332930)
+
+commit aade7b98044ad4abb9021452688ec3af57f36acb
+Author: thomascube <thomas@roundcube.net>
+Date:   Sun Aug 6 15:55:11 2006 +0000
+
+    Finalized 0.1beta2 release
+
+commit 535da27ca630866d28f0448a1e5bea0f800a9430
+Author: thomascube <thomas@roundcube.net>
+Date:   Sun Feb 19 19:08:53 2006 +0000
+
+    Updated installation instructions
+
+commit c6e808e90c67f08a821907053a83013a9213a021
+Author: svncommit <devs@roundcube.net>
+Date:   Wed Jan 25 04:33:25 2006 +0000
+
+    fixed mysql SQL scripts for new created column
+
+commit 15a9d1ce671fcbc44ea3e4858d7aa6f5b22300c9
+Author: thomascube <thomas@roundcube.net>
+Date:   Thu Jan 5 00:37:10 2006 +0000
+
+    Optimized loading time; added periodic mail check; added EXPUNGE command
+
+commit 1cded85790206afe084e1baff371c543711b2b18
+Author: thomascube <thomas@roundcube.net>
+Date:   Sat Dec 3 16:54:12 2005 +0000
+
+    Re-design of caching (new database table added\!); some bugfixes; Postgres support
+
+commit e447cb072f025f1b0af9fea091a316e11163119d
+Author: thomascube <thomas@roundcube.net>
+Date:   Sun Nov 6 23:04:27 2005 +0000
+
+    Added 'changed' col to contacts table and support for 160-bit session hashes
+
+commit e0ddd4e6c03d533cc3f8427624e026cc20c88fa6
+Author: thomascube <thomas@roundcube.net>
+Date:   Sun Nov 6 16:37:45 2005 +0000
+
+    Added 'changed' col to contacts table and support for 160-bit session hashes
+
+commit 42b11351497ce67e96a0465c76694632cdfb3ecb
+Author: thomascube <thomas@roundcube.net>
+Date:   Fri Oct 7 14:17:08 2005 +0000
+
+    Several bugfixes and feature improvements
+
+commit f5dc2a42a2b2a9b9e77c0a1513db3de21f709c41
+Author: svncommit <devs@roundcube.net>
+Date:   Sun Oct 2 12:45:13 2005 +0000
+
+    more changes to reflect postgres support
+
+Git log for file SQL/mysql/2008030300.sql:
+commit b7e7c8f9501850a38705e0a1f18a8ae6e25f1be1
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Wed Jan 9 15:57:29 2013 +0100
+
+    Added new database upgrade script, converted DDL scripts to new format
+
+Git log for file SQL/mysql/2008040500.sql:
+commit 28c778b7a039c3612b6497733d7cd5eae55492aa
+Author: Michael Voříšek <mvorisek@mvorisek.cz>
+Date:   Mon Dec 18 07:46:51 2023 +0100
+
+    Modernize more CS III (#9270)
+    
+    * fix "single_trait_insert_per_statement"
+    
+    * fix "empty_loop_condition"
+    
+    * fix "backtick_to_shell_exec"
+    
+    * fix "phpdoc_to_comment"
+    
+    * fix "no_empty_statement"
+    
+    * fix "heredoc_to_nowdoc"
+    
+    * fix "class_reference_name_casing"
+    
+    * fix "align_multiline_comment"
+    
+    * fix "heredoc_indentation"
+    
+    * fix "constant_case"
+    
+    * fix "single_line_comment_style"
+    
+    * fix "no_null_property_initialization"
+    
+    * fix "standardize_increment"
+    
+    * fix "no_unneeded_control_parentheses"
+    
+    * fix missing NL after "<?php"
+    
+    * fix php in *.sh files too
+    
+    * fix trailing spaces from all text files
+    
+    * fix "explicit_indirect_variable"
+    
+    * Revert "fix "align_multiline_comment""
+    
+    This reverts commit 42e584f8e3ee2acce72426b3d707c62e2c1ba92a.
+    
+    * fix "align_multiline_comment" properly
+    
+    * Revert "fix trailing spaces from all text files" - diff files only
+    
+    * Revert "Revert "fix trailing spaces from all text files" - diff files only"
+    
+    This reverts commit 2101c2a3a3b696ab0ffbade5428081e5b757da79.
+    
+    * rm useless "setup-php" config
+
+commit b7e7c8f9501850a38705e0a1f18a8ae6e25f1be1
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Wed Jan 9 15:57:29 2013 +0100
+
+    Added new database upgrade script, converted DDL scripts to new format
+
+Git log for file SQL/mysql/2008060900.sql:
+commit b7e7c8f9501850a38705e0a1f18a8ae6e25f1be1
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Wed Jan 9 15:57:29 2013 +0100
+
+    Added new database upgrade script, converted DDL scripts to new format
+
+Git log for file SQL/mysql/2008092100.sql:
+commit b7e7c8f9501850a38705e0a1f18a8ae6e25f1be1
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Wed Jan 9 15:57:29 2013 +0100
+
+    Added new database upgrade script, converted DDL scripts to new format
+
+Git log for file SQL/mysql/2009090400.sql:
+commit 28c778b7a039c3612b6497733d7cd5eae55492aa
+Author: Michael Voříšek <mvorisek@mvorisek.cz>
+Date:   Mon Dec 18 07:46:51 2023 +0100
+
+    Modernize more CS III (#9270)
+    
+    * fix "single_trait_insert_per_statement"
+    
+    * fix "empty_loop_condition"
+    
+    * fix "backtick_to_shell_exec"
+    
+    * fix "phpdoc_to_comment"
+    
+    * fix "no_empty_statement"
+    
+    * fix "heredoc_to_nowdoc"
+    
+    * fix "class_reference_name_casing"
+    
+    * fix "align_multiline_comment"
+    
+    * fix "heredoc_indentation"
+    
+    * fix "constant_case"
+    
+    * fix "single_line_comment_style"
+    
+    * fix "no_null_property_initialization"
+    
+    * fix "standardize_increment"
+    
+    * fix "no_unneeded_control_parentheses"
+    
+    * fix missing NL after "<?php"
+    
+    * fix php in *.sh files too
+    
+    * fix trailing spaces from all text files
+    
+    * fix "explicit_indirect_variable"
+    
+    * Revert "fix "align_multiline_comment""
+    
+    This reverts commit 42e584f8e3ee2acce72426b3d707c62e2c1ba92a.
+    
+    * fix "align_multiline_comment" properly
+    
+    * Revert "fix trailing spaces from all text files" - diff files only
+    
+    * Revert "Revert "fix trailing spaces from all text files" - diff files only"
+    
+    This reverts commit 2101c2a3a3b696ab0ffbade5428081e5b757da79.
+    
+    * rm useless "setup-php" config
+
+commit b7e7c8f9501850a38705e0a1f18a8ae6e25f1be1
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Wed Jan 9 15:57:29 2013 +0100
+
+    Added new database upgrade script, converted DDL scripts to new format
+
+Git log for file SQL/mysql/2009103100.sql:
+commit b7e7c8f9501850a38705e0a1f18a8ae6e25f1be1
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Wed Jan 9 15:57:29 2013 +0100
+
+    Added new database upgrade script, converted DDL scripts to new format
+
+Git log for file SQL/mysql/2010042300.sql:
+commit b7e7c8f9501850a38705e0a1f18a8ae6e25f1be1
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Wed Jan 9 15:57:29 2013 +0100
+
+    Added new database upgrade script, converted DDL scripts to new format
+
+Git log for file SQL/mysql/2010100600.sql:
+commit b7e7c8f9501850a38705e0a1f18a8ae6e25f1be1
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Wed Jan 9 15:57:29 2013 +0100
+
+    Added new database upgrade script, converted DDL scripts to new format
+
+Git log for file SQL/mysql/2011011200.sql:
+commit b7e7c8f9501850a38705e0a1f18a8ae6e25f1be1
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Wed Jan 9 15:57:29 2013 +0100
+
+    Added new database upgrade script, converted DDL scripts to new format
+
+Git log for file SQL/mysql/2011092800.sql:
+commit b7e7c8f9501850a38705e0a1f18a8ae6e25f1be1
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Wed Jan 9 15:57:29 2013 +0100
+
+    Added new database upgrade script, converted DDL scripts to new format
+
+Git log for file SQL/mysql/2011111600.sql:
+commit b7e7c8f9501850a38705e0a1f18a8ae6e25f1be1
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Wed Jan 9 15:57:29 2013 +0100
+
+    Added new database upgrade script, converted DDL scripts to new format
+
+Git log for file SQL/mysql/2011121400.sql:
+commit b7e7c8f9501850a38705e0a1f18a8ae6e25f1be1
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Wed Jan 9 15:57:29 2013 +0100
+
+    Added new database upgrade script, converted DDL scripts to new format
+
+Git log for file SQL/mysql/2012080700.sql:
+commit b7e7c8f9501850a38705e0a1f18a8ae6e25f1be1
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Wed Jan 9 15:57:29 2013 +0100
+
+    Added new database upgrade script, converted DDL scripts to new format
+
+Git log for file SQL/mysql/2013011000.sql:
+commit bcfdac6660b2c3d1527d1e993f63f345992d0afa
+Author: Thomas Bruederli <thomas@roundcube.net>
+Date:   Thu Mar 28 17:42:09 2013 +0100
+
+    Add 'if not exists' to system table creation. Just in case some previous db update routine was aborted or failed
+
+commit b7e7c8f9501850a38705e0a1f18a8ae6e25f1be1
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Wed Jan 9 15:57:29 2013 +0100
+
+    Added new database upgrade script, converted DDL scripts to new format
+
+Git log for file SQL/mysql/2013042700.sql:
+commit 311e82652ae0f2dd9792610175a1ba19cd71c0af
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Sun Apr 28 14:30:34 2013 +0200
+
+    Add lost files for "db_prefix related changes" commit
+
+Git log for file SQL/mysql/2013052500.sql:
+commit 50abd557184326f173357b50e7593dc3f452be91
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Sat May 25 15:37:46 2013 +0200
+
+    Added shared (cross-user) cache
+
+Git log for file SQL/mysql/2013061000.sql:
+commit 60b6d7c3894f61eb9c8bc40efe5528e91386bf94
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Sun Jun 9 11:07:46 2013 +0200
+
+    Fix database cache expunge issues (#1489149) - added 'expires' column
+
+Git log for file SQL/mysql/2014042900.sql:
+commit b6f7304d69918e31dd701d4c041169aa05934aee
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Tue Apr 29 12:12:26 2014 +0200
+
+    Fix too small length of users.preferences column data type on MySQL
+
+Git log for file SQL/mysql/2015030800.sql:
+commit f06f4b8424d33e1e06d9f99aa6f2cbc4b5f252e3
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Sun Mar 8 12:49:36 2015 +0100
+
+    Fix storing signatures with big images in MySQL database (#1490306)
+
+Git log for file SQL/mysql/2015111100.sql:
+commit a15d877ba8e12ba6659aad69d63b8b73256144ad
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Wed Nov 11 18:53:43 2015 +0100
+
+    Added brute-force attack prevention via login rate limit (#1490566)
+
+Git log for file SQL/mysql/2016081200.sql:
+commit 0836b213db0baa57fc20f8e4287f6b6a333f3359
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Fri Aug 12 13:02:39 2016 +0200
+
+    Removed useless 'created' column from 'session' table (#5389)
+
+Git log for file SQL/mysql/2016100900.sql:
+commit 492b181d5123bd8a47339c9bdfc9cae3e1b3319c
+Author: Sylvain Rochet <gradator@gradator.net>
+Date:   Sun Oct 9 19:31:24 2016 +0200
+
+    SQL, upgrade: increase session table ip field size for IPv6 addresses
+    
+    Commit 84d06edb06 introduced IPv6 support on SQL session table but
+    failed at providing upgrade SQL scripts, this commit fixes it.
+    
+    Fixes: 84d06edb06 ("IPv6 Compatability")
+    Signed-off-by: Sylvain Rochet <gradator@gradator.net>
+
+Git log for file SQL/mysql/2016112200.sql:
+commit c81c27e92461050e36d01df49ff3b677623f24e7
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Sat Apr 1 08:52:42 2023 +0200
+
+    Move inline comment
+
+commit a1f679adcacb865c8b692d4427bde65cd4065b43
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Sat Nov 26 09:14:16 2016 +0100
+
+    Fixed redundancy in sql caching system and compatibility with Galera Cluster (#5439)
+    
+    - Removed redundant 'created' column from cache and cache_shared tables
+    - Removed use of redundant data records
+    - Added missing primary keys (dictionary, cache, cache_shared tables)
+
+Git log for file SQL/mysql/2018021600.sql:
+commit 3841f63fbd42578f403624e71384b094d65212c8
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Sun Sep 29 13:18:46 2019 +0200
+
+    Make cache keys case-sensitive on MySQL/MSSQL (#6942)
+
+commit 656f97983109612fb519614304bc190e42ee6584
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Thu Mar 1 10:12:23 2018 +0100
+
+    Fix column type (#6200)
+
+commit 7b1f0f020b23553965275c8e6282f3ef22143a59
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Wed Feb 28 09:36:25 2018 +0100
+
+    Enigma: Multi-host support
+
+Git log for file SQL/mysql/2018122300.sql:
+commit 0e640e95c9b1e433dc89af8c981be660741f7697
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Sun Dec 23 13:51:39 2018 +0100
+
+    Enigma: Fixed multi-host syncronization of private and deleted keys and pubring.kbx file
+    
+    Added context column to filestore table for easier listing of stored files.
+
+Git log for file SQL/mysql/2019092900.sql:
+commit 3841f63fbd42578f403624e71384b094d65212c8
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Sun Sep 29 13:18:46 2019 +0200
+
+    Make cache keys case-sensitive on MySQL/MSSQL (#6942)
+
+Git log for file SQL/mysql/2020020100.sql:
+commit 50d6ea30e0d72a2fbe7142d51b6c112540a8cdea
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Sat Feb 1 09:40:11 2020 +0100
+
+    Support for language codes up to 16 chars long (e.g. es-419) in database schema (#6851)
+
+Git log for file SQL/mysql/2020020101.sql:
+commit 0c42af132e14b4869b4142921426ca90e647fcab
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Tue Oct 26 10:55:16 2021 +0200
+
+    Fix installation/upgrade on MySQL 5.5 - Index column size too large (#8231)
+
+commit 203f45662067f783e1675fe8df04b924b55b8236
+Author: Josh Soref <jsoref@users.noreply.github.com>
+Date:   Sun Apr 18 02:43:18 2021 -0400
+
+    Spelling (#8001)
+
+commit cd2ec14b36dbe5bcfae12cf9fea338f78bccfc1d
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Sat Jul 18 14:14:33 2020 +0200
+
+    Fix MySQL DDL update 2020020101.sql (#7277)
+
+commit dc1ce546b9cbd897ecd7950d58f35df0afc89c23
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Sat Mar 14 11:27:55 2020 +0100
+
+    Fix sql syntax error introduced in last commit
+
+commit 2c1a22d2837afe9a35eea64610e2279e4849a608
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Sat Mar 14 08:31:28 2020 +0100
+
+    Bring back BINARY for some columns after switch to utf8mb4 charset (#7277)
+
+commit b606d81cdf3fa4a088a061bbef7c244e244fceed
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Sat Feb 1 17:19:04 2020 +0100
+
+    MySQL: Use utf8mb4 charset and utf8mb4_unicode_ci collation (#6535, #7113)
+    
+    Fixes support for utf8 emoji in html signature.
+
+Git log for file SQL/mysql/2020091000.sql:
+commit 0c42af132e14b4869b4142921426ca90e647fcab
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Tue Oct 26 10:55:16 2021 +0200
+
+    Fix installation/upgrade on MySQL 5.5 - Index column size too large (#8231)
+
+commit 9713ce364cd14e40edec1de819e17341a6745c71
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Sun Sep 20 10:00:08 2020 +0200
+
+    Automatically collected recipients and trusted senders (#6904)
+    
+    Added configurable Collected Recipients addressbook source (#4971)
+    Added configurable Trusted Senders addressbook source (#5046)
+    Added 'contact_exists' hook
+
+Git log for file SQL/mysql/2020122900.sql:
+commit 3c5547195fcaa19c6d73f5b5a1f5c880beeb6eab
+Author: iRedMail <2048991+iredmail@users.noreply.github.com>
+Date:   Tue Jan 25 14:52:16 2022 +0800
+
+    Fix incorrect (comment) syntax (#8416)
+
+commit 6cddb2745649c5a3b510625b77c512f520c2569e
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Tue Dec 29 16:21:14 2020 +0100
+
+    Allow NULL in users.preferences column in postgres and sqlite db, the same as for other engines (#7767)
+
+Git log for file SQL/mysql/2021081000.sql:
+commit 0c42af132e14b4869b4142921426ca90e647fcab
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Tue Oct 26 10:55:16 2021 +0200
+
+    Fix installation/upgrade on MySQL 5.5 - Index column size too large (#8231)
+
+commit cb37d14c5c50129e993937bb612159a0978af1c9
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Sat Aug 28 19:17:19 2021 +0200
+
+    Support responses (snippets) in HTML format (#5315)
+
+Git log for file SQL/mysql/2021100300.sql:
+commit 48fbf110af3f76128de7bbe7f6ce0e48247513e4
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Sun Oct 3 12:10:14 2021 +0200
+
+    SQLite: Use foreign keys, require SQLite >= 3.6.19 (#8159)
+
+Git log for file SQL/mysql/2022081200.sql:
+commit c56d7342feee43c28701679f08cf82626179f72c
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Fri Aug 12 19:45:40 2022 +0200
+
+    Fix bug where it wasn't possible to create more than one response record on SQLite and Postgres (#8664)
+
+Git log for file SQL/mysql/2022100100.sql:
+commit 80404a8674da49e249c316a30932bed4a82e2dac
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Sun Oct 9 11:35:14 2022 +0200
+
+    Store uploads metadata in a separate sql database table instead of a session (#8415)
+
+Git log for file SQL/postgres.initial.sql:
+commit 80404a8674da49e249c316a30932bed4a82e2dac
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Sun Oct 9 11:35:14 2022 +0200
+
+    Store uploads metadata in a separate sql database table instead of a session (#8415)
+
+commit c56d7342feee43c28701679f08cf82626179f72c
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Fri Aug 12 19:45:40 2022 +0200
+
+    Fix bug where it wasn't possible to create more than one response record on SQLite and Postgres (#8664)
+
+commit 71e5b26ea183cf297ceef15d042797442443b3aa
+Author: Interduo <jkl@interduo.pl>
+Date:   Sun Mar 20 11:00:30 2022 +0100
+
+    Don't declare default statement for postgres columns in initial schema (#8464)
+
+commit 48fbf110af3f76128de7bbe7f6ce0e48247513e4
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Sun Oct 3 12:10:14 2021 +0200
+
+    SQLite: Use foreign keys, require SQLite >= 3.6.19 (#8159)
+
+commit cb37d14c5c50129e993937bb612159a0978af1c9
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Sat Aug 28 19:17:19 2021 +0200
+
+    Support responses (snippets) in HTML format (#5315)
+
+commit 6cddb2745649c5a3b510625b77c512f520c2569e
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Tue Dec 29 16:21:14 2020 +0100
+
+    Allow NULL in users.preferences column in postgres and sqlite db, the same as for other engines (#7767)
+
+commit 9713ce364cd14e40edec1de819e17341a6745c71
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Sun Sep 20 10:00:08 2020 +0200
+
+    Automatically collected recipients and trusted senders (#6904)
+    
+    Added configurable Collected Recipients addressbook source (#4971)
+    Added configurable Trusted Senders addressbook source (#5046)
+    Added 'contact_exists' hook
+
+commit b606d81cdf3fa4a088a061bbef7c244e244fceed
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Sat Feb 1 17:19:04 2020 +0100
+
+    MySQL: Use utf8mb4 charset and utf8mb4_unicode_ci collation (#6535, #7113)
+    
+    Fixes support for utf8 emoji in html signature.
+
+commit 50d6ea30e0d72a2fbe7142d51b6c112540a8cdea
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Sat Feb 1 09:40:11 2020 +0100
+
+    Support for language codes up to 16 chars long (e.g. es-419) in database schema (#6851)
+
+commit 3841f63fbd42578f403624e71384b094d65212c8
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Sun Sep 29 13:18:46 2019 +0200
+
+    Make cache keys case-sensitive on MySQL/MSSQL (#6942)
+
+commit 0e640e95c9b1e433dc89af8c981be660741f7697
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Sun Dec 23 13:51:39 2018 +0100
+
+    Enigma: Fixed multi-host syncronization of private and deleted keys and pubring.kbx file
+    
+    Added context column to filestore table for easier listing of stored files.
+
+commit 72a3fb764b3962fc5d96b8e6c6299e311eed03e9
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Sat Aug 25 18:26:31 2018 +0200
+
+    Fix compatibility with MySQL 8 - error on 'system' table use
+
+commit 7b1f0f020b23553965275c8e6282f3ef22143a59
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Wed Feb 28 09:36:25 2018 +0100
+
+    Enigma: Multi-host support
+
+commit a1f679adcacb865c8b692d4427bde65cd4065b43
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Sat Nov 26 09:14:16 2016 +0100
+
+    Fixed redundancy in sql caching system and compatibility with Galera Cluster (#5439)
+    
+    - Removed redundant 'created' column from cache and cache_shared tables
+    - Removed use of redundant data records
+    - Added missing primary keys (dictionary, cache, cache_shared tables)
+
+commit 32ffc4e6377808f2411b3c4bebc5036650912cac
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Wed Oct 12 09:07:01 2016 +0200
+
+    Bump database version
+
+commit 0836b213db0baa57fc20f8e4287f6b6a333f3359
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Fri Aug 12 13:02:39 2016 +0200
+
+    Removed useless 'created' column from 'session' table (#5389)
+
+commit a15d877ba8e12ba6659aad69d63b8b73256144ad
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Wed Nov 11 18:53:43 2015 +0100
+
+    Added brute-force attack prevention via login rate limit (#1490566)
+
+commit f06f4b8424d33e1e06d9f99aa6f2cbc4b5f252e3
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Sun Mar 8 12:49:36 2015 +0100
+
+    Fix storing signatures with big images in MySQL database (#1490306)
+
+commit b6f7304d69918e31dd701d4c041169aa05934aee
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Tue Apr 29 12:12:26 2014 +0200
+
+    Fix too small length of users.preferences column data type on MySQL
+
+commit 60b6d7c3894f61eb9c8bc40efe5528e91386bf94
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Sun Jun 9 11:07:46 2013 +0200
+
+    Fix database cache expunge issues (#1489149) - added 'expires' column
+
+commit 50abd557184326f173357b50e7593dc3f452be91
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Sat May 25 15:37:46 2013 +0200
+
+    Added shared (cross-user) cache
+
+commit 399db1b647e14947e97a865c09215969f56a7efe
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Sat Apr 27 18:31:40 2013 +0200
+
+    Add db_prefix configuration option in place of db_table_*/db_sequence_* options
+    Make possible to use db_prefix for schema initialization in Installer (#1489067)
+    Fix updatedb.sh script so it recognizes also table prefix for external DDL files
+
+commit 9e46fb535ddce461a11f57d4ce75a43c3ad651e8
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Tue Feb 19 14:27:26 2013 +0100
+
+    Fix typo in DB version strings (there should be no .sql suffix)
+
+commit aa691c40eda8fbae0f9175a5a59569f24d066a83
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Thu Jan 17 18:08:24 2013 +0100
+
+    Bump version number in *.initial.sql
+
+commit b7e7c8f9501850a38705e0a1f18a8ae6e25f1be1
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Wed Jan 9 15:57:29 2013 +0100
+
+    Added new database upgrade script, converted DDL scripts to new format
+
+commit 565c472918e7f9707cd8d7909ad5dbcc5a921fdf
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Mon Aug 6 11:08:58 2012 +0200
+
+    Removed users.alias column, added option ('user_aliases')
+    to use email address from identities as username (#1488581)
+
+commit 83121ece3348bfe09bb1026eace79a74a5ccf2c9
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Mon Aug 6 10:32:37 2012 +0200
+
+    - Removed redundant cache.cache_id column (#1488528)
+
+commit 48be8f6428ba3be7375b84aea2b73d1c67de6da1
+Author: alecpl <alec@alec.pl>
+Date:   Thu Jan 5 08:45:22 2012 +0000
+
+    - Fix SQL Error when saving a contact with many email addresses (#1488286)
+
+commit b8ae0ecb22264b6a4dc8785c431a8d0556fa83bf
+Author: alecpl <alec@alec.pl>
+Date:   Tue Nov 22 08:36:29 2011 +0000
+
+    - Fixed bug where session ID's length was limited to 40 characters. Since PHP5.3 it's possible
+      to set session.hash_function to any hash algorithm that would produce strings
+      up to 128 characters long (#1488196)
+
+commit 609d3923d7dc674263ddea990387dbf5488fabc6
+Author: alecpl <alec@alec.pl>
+Date:   Sun Sep 18 09:02:35 2011 +0000
+
+    - Cache synchronization using QRESYNC/CONDSTORE
+    - Fixed message ID updates in cache
+    - Changed message flags handling + some fixes (e.g. fixed messages listing after delete)
+
+commit 80152b333ca5d856dcf09f5ca10a9ffd80ba117f
+Author: alecpl <alec@alec.pl>
+Date:   Wed Sep 7 11:07:03 2011 +0000
+
+    - Rewritten messages caching (merged devel-mcache branch):
+      Indexes are stored in a separate table, so there's no need to store all messages in a folder
+      Added threads data caching
+      Flags are stored separately, so flag change doesn't cause DELETE+INSERT, just UPDATE
+    - Partial QRESYNC support
+    - Improved FETCH response handling
+    - Improvements in response tokenization method
+
+commit f8e48df71540b268ceac058d32b8ee848fc2ab6b
+Author: alecpl <alec@alec.pl>
+Date:   Tue Sep 6 16:35:14 2011 +0000
+
+    - Merge devel-saved_search branch (Addressbook Saved Searches)
+
+commit 66df084203a217ab74a416064c459cc3420a648c
+Author: alecpl <alec@alec.pl>
+Date:   Tue Sep 6 13:39:45 2011 +0000
+
+    - Merge devel-spellcheck branch:
+      - Added spellchecker exceptions dictionary (shared or per-user)
+      - Added possibility to ignore words containing caps, numbers, symbols (spellcheck_ignore_* options)
+
+commit 8381ec1254f816bea2a5e85acb0a54722d327a60
+Author: alecpl <alec@alec.pl>
+Date:   Thu Mar 10 12:30:42 2011 +0000
+
+    - Force names of unique constraints in PostgreSQL DDL (postgres 9.x uses different naming convention than older versions)
+
+commit 3a5476d150419b46847dd922935f368c969519c1
+Author: alecpl <alec@alec.pl>
+Date:   Wed Feb 23 08:13:02 2011 +0000
+
+    - Add index on contactgroupmembers.contact_id column.
+      Improves performance and fixes problem with contactgroupmembers table creation on MySQL 4.x
+
+commit 3e2637351da9559a4aa420004ac90e9fe30477ef
+Author: thomascube <thomas@roundcube.net>
+Date:   Mon Feb 14 20:46:48 2011 +0000
+
+    Fulltext search over contact fields. Attention: DATABASE SCHEMA CHANGED\!
+
+commit 6f096812c9fd460fddd21ff1cef55542cb79a890
+Author: alecpl <alec@alec.pl>
+Date:   Tue Nov 2 09:27:03 2010 +0000
+
+    - Support contact's email addresses up to 255 characters long (#1487095)
+    - Added email format checks when saving contacts data
+
+commit ace511a771656c983046919333cee501339c98a1
+Author: alecpl <alec@alec.pl>
+Date:   Wed Oct 6 13:00:12 2010 +0000
+
+    - Add unique index on users.username+users.mail_host
+
+commit e019f2d0f2dc2fbfa345ab5d7ae85e67bfdd76b8
+Author: alecpl <alec@alec.pl>
+Date:   Sat Sep 25 13:03:53 2010 +0000
+
+    - s/RoundCube/Roundcube/
+
+commit e2402ef99af447b7cc30d661e62450cbb04b202b
+Author: alecpl <alec@alec.pl>
+Date:   Wed Apr 28 10:34:33 2010 +0000
+
+    - Set DEFAULT NULL for users.last_login
+
+commit a35062a1eba5c6c15f703686cd4fecc5536d74df
+Author: thomascube <thomas@roundcube.net>
+Date:   Thu Apr 15 06:33:30 2010 +0000
+
+    Always set changed date when marking a DB record as deleted + provide a cleanup script
+
+commit 22d6b5346b8b604f0408a03c09968e869e398dca
+Author: alecpl <alec@alec.pl>
+Date:   Sat Mar 27 07:40:43 2010 +0000
+
+    - contactgroups DDL for postgres
+
+commit 94fe9ca1a87b20ddeee55024986e95ca72097af6
+Author: alecpl <alec@alec.pl>
+Date:   Sat Mar 6 14:13:25 2010 +0000
+
+    - re-fix (#1486474) + require MySQL 4.0.8 + add index/update in identities table
+
+commit 23b76563dcc2542cff9f447e809462472cfccd88
+Author: alecpl <alec@alec.pl>
+Date:   Tue Sep 29 07:59:25 2009 +0000
+
+    - use better index for contacts table
+
+commit 3d601d267dfb0ffca32ad953f36944b83910d907
+Author: alecpl <alec@alec.pl>
+Date:   Mon Sep 7 12:40:05 2009 +0000
+
+    - added index in messages table
+
+commit 798ad5ea8e7f121e7c3ffaee2d96e15db3686dff
+Author: alecpl <alec@alec.pl>
+Date:   Thu May 14 08:28:11 2009 +0000
+
+    - remove version number from *.initial.sql
+
+commit a493ea8e48ddaa28090c2b74251654376462ebb6
+Author: alecpl <alec@alec.pl>
+Date:   Wed Dec 3 08:02:32 2008 +0000
+
+    - change few "boolean" columns type from integer to smallint
+
+commit debdda011717e63945a0f6a9db6ab77b30a47079
+Author: alecpl <alec@alec.pl>
+Date:   Tue Nov 25 10:17:57 2008 +0000
+
+    #1485420: remove default (and not null) for users.language column in DDL
+
+commit e4d9f05e4126501ce329fc4c36704375f6dfe681
+Author: alecpl <alec@alec.pl>
+Date:   Mon Nov 24 07:59:10 2008 +0000
+
+    - Added index on cache.created + small fixes in mssql DDL script
+
+commit dcf780a6bd5065ffb0dcc76233b1e5f601e258d2
+Author: alecpl <alec@alec.pl>
+Date:   Sat Nov 22 18:06:13 2008 +0000
+
+    - fix r2076: removed cache.session_id column, removed DELETEs from cache in session_gc
+    - trust DB server's time when "touching" cache and messages tables
+
+commit 3e48d2eee1d2af42aa777fd5e461fa570762732e
+Author: alecpl <alec@alec.pl>
+Date:   Fri Nov 21 18:19:30 2008 +0000
+
+    - Increase speed of session destroy and garbage clean up
+    - Fix session timeout when DB server got clock skew (#1485490)
+
+commit be7d3b6918ff90757d10804ac914edb5a65f4828
+Author: alecpl <alec@alec.pl>
+Date:   Fri Nov 21 14:33:58 2008 +0000
+
+    - Fix 'cache' table cleanup on session destroy (#1485516)
+
+commit c98f3b5d6e4c681b7e42ea71c32cd2ef1991b519
+Author: alecpl <alec@alec.pl>
+Date:   Thu Jun 12 17:46:31 2008 +0000
+
+    #1485125: added index on messages.created
+
+commit 6cb7786912ab18e53d8de0bbe436e46bf6d61782
+Author: alecpl <alec@alec.pl>
+Date:   Thu Apr 3 11:03:54 2008 +0000
+
+    #1484854
+
+commit edc63c2e3845c1a7ec21898bb0636daddd124a27
+Author: alecpl <alec@alec.pl>
+Date:   Thu Apr 3 10:26:32 2008 +0000
+
+    fix: there's no ALTER TABLE ... ADD INDEX in postgresql
+
+commit ac26b964663405521077c7710212a58c37a041c7
+Author: thomascube <thomas@roundcube.net>
+Date:   Tue Mar 25 19:08:19 2008 +0000
+
+    Optimize database schema; get rid of unnecessary indexes
+
+commit 84d06edb06433c980dc7718188fcdd0799b08c09
+Author: thomascube <thomas@roundcube.net>
+Date:   Wed Sep 19 06:55:05 2007 +0000
+
+    IPv6 Compatability
+
+commit 2c633703e97eb6e7aa7ba840ef86b1fc1bd98ada
+Author: svncommit <devs@roundcube.net>
+Date:   Thu May 24 03:49:19 2007 +0000
+
+    upgrade to TinyMCE v2.1.1.1
+
+commit 43a42dcf405c1667f0f39150ffaa8bbda7d9d1a0
+Author: thomascube <thomas@roundcube.net>
+Date:   Sun Mar 18 17:11:43 2007 +0000
+
+    Use user_id for unique key in messages table (closes #1484074)
+
+commit a0109c4933e0bfb5ed9dbcf94f932991ca689542
+Author: svncommit <devs@roundcube.net>
+Date:   Thu Sep 14 03:49:28 2006 +0000
+
+    Initial TinyMCE editor support (still need to work on spellcheck and skins)
+
+commit f7bfec96be8bf095ffc0af64a761f3866d5947b9
+Author: thomascube <thomas@roundcube.net>
+Date:   Fri Aug 25 11:51:11 2006 +0000
+
+    Finalized new message parsing. Attention: changes in database schema
+
+commit f88d417c96119b8e50297b930b14fe6ff9a1c5ed
+Author: thomascube <thomas@roundcube.net>
+Date:   Sun Feb 19 18:34:34 2006 +0000
+
+    Applied several patches
+
+commit b59474133a308182c69b2fd158b4f51aeffc87e4
+Author: thomascube <thomas@roundcube.net>
+Date:   Wed Jan 25 18:05:40 2006 +0000
+
+    Add created date to message cache
+
+commit 15a9d1ce671fcbc44ea3e4858d7aa6f5b22300c9
+Author: thomascube <thomas@roundcube.net>
+Date:   Thu Jan 5 00:37:10 2006 +0000
+
+    Optimized loading time; added periodic mail check; added EXPUNGE command
+
+commit 977a295eb1e97e0c230063da40b8296fca778814
+Author: thomascube <thomas@roundcube.net>
+Date:   Fri Dec 16 20:05:41 2005 +0000
+
+    Usage of virtusertable; mail_domain for new users; Chinese and Turkish localization
+
+commit 1cded85790206afe084e1baff371c543711b2b18
+Author: thomascube <thomas@roundcube.net>
+Date:   Sat Dec 3 16:54:12 2005 +0000
+
+    Re-design of caching (new database table added\!); some bugfixes; Postgres support
+
+commit d7cb77414c4cf074269b6812c3dd3571ee29afca
+Author: svncommit <devs@roundcube.net>
+Date:   Tue Oct 25 15:04:17 2005 +0000
+
+    more pear/mdb2 integration
+
+commit 49afbf5d698eb7d57ae10a553b6dcb14117727dd
+Author: thomascube <thomas@roundcube.net>
+Date:   Tue Oct 11 21:06:21 2005 +0000
+
+    Better support for Courier IMAP
+
+commit 42b11351497ce67e96a0465c76694632cdfb3ecb
+Author: thomascube <thomas@roundcube.net>
+Date:   Fri Oct 7 14:17:08 2005 +0000
+
+    Several bugfixes and feature improvements
+
+commit f5dc2a42a2b2a9b9e77c0a1513db3de21f709c41
+Author: svncommit <devs@roundcube.net>
+Date:   Sun Oct 2 12:45:13 2005 +0000
+
+    more changes to reflect postgres support
+
+Git log for file SQL/postgres/2008030300.sql:
+commit b7e7c8f9501850a38705e0a1f18a8ae6e25f1be1
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Wed Jan 9 15:57:29 2013 +0100
+
+    Added new database upgrade script, converted DDL scripts to new format
+
+Git log for file SQL/postgres/2008060900.sql:
+commit b7e7c8f9501850a38705e0a1f18a8ae6e25f1be1
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Wed Jan 9 15:57:29 2013 +0100
+
+    Added new database upgrade script, converted DDL scripts to new format
+
+Git log for file SQL/postgres/2008092100.sql:
+commit b7e7c8f9501850a38705e0a1f18a8ae6e25f1be1
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Wed Jan 9 15:57:29 2013 +0100
+
+    Added new database upgrade script, converted DDL scripts to new format
+
+Git log for file SQL/postgres/2009090400.sql:
+commit b7e7c8f9501850a38705e0a1f18a8ae6e25f1be1
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Wed Jan 9 15:57:29 2013 +0100
+
+    Added new database upgrade script, converted DDL scripts to new format
+
+Git log for file SQL/postgres/2009103100.sql:
+commit b7e7c8f9501850a38705e0a1f18a8ae6e25f1be1
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Wed Jan 9 15:57:29 2013 +0100
+
+    Added new database upgrade script, converted DDL scripts to new format
+
+Git log for file SQL/postgres/2010042300.sql:
+commit b7e7c8f9501850a38705e0a1f18a8ae6e25f1be1
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Wed Jan 9 15:57:29 2013 +0100
+
+    Added new database upgrade script, converted DDL scripts to new format
+
+Git log for file SQL/postgres/2010100600.sql:
+commit b7e7c8f9501850a38705e0a1f18a8ae6e25f1be1
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Wed Jan 9 15:57:29 2013 +0100
+
+    Added new database upgrade script, converted DDL scripts to new format
+
+Git log for file SQL/postgres/2011011200.sql:
+commit b7e7c8f9501850a38705e0a1f18a8ae6e25f1be1
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Wed Jan 9 15:57:29 2013 +0100
+
+    Added new database upgrade script, converted DDL scripts to new format
+
+Git log for file SQL/postgres/2011092800.sql:
+commit b7e7c8f9501850a38705e0a1f18a8ae6e25f1be1
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Wed Jan 9 15:57:29 2013 +0100
+
+    Added new database upgrade script, converted DDL scripts to new format
+
+Git log for file SQL/postgres/2011111600.sql:
+commit b7e7c8f9501850a38705e0a1f18a8ae6e25f1be1
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Wed Jan 9 15:57:29 2013 +0100
+
+    Added new database upgrade script, converted DDL scripts to new format
+
+Git log for file SQL/postgres/2011121400.sql:
+commit b7e7c8f9501850a38705e0a1f18a8ae6e25f1be1
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Wed Jan 9 15:57:29 2013 +0100
+
+    Added new database upgrade script, converted DDL scripts to new format
+
+Git log for file SQL/postgres/2012080700.sql:
+commit b7e7c8f9501850a38705e0a1f18a8ae6e25f1be1
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Wed Jan 9 15:57:29 2013 +0100
+
+    Added new database upgrade script, converted DDL scripts to new format
+
+Git log for file SQL/postgres/2013011000.sql:
+commit b7e7c8f9501850a38705e0a1f18a8ae6e25f1be1
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Wed Jan 9 15:57:29 2013 +0100
+
+    Added new database upgrade script, converted DDL scripts to new format
+
+Git log for file SQL/postgres/2013042700.sql:
+commit 311e82652ae0f2dd9792610175a1ba19cd71c0af
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Sun Apr 28 14:30:34 2013 +0200
+
+    Add lost files for "db_prefix related changes" commit
+
+Git log for file SQL/postgres/2013052500.sql:
+commit 50abd557184326f173357b50e7593dc3f452be91
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Sat May 25 15:37:46 2013 +0200
+
+    Added shared (cross-user) cache
+
+Git log for file SQL/postgres/2013061000.sql:
+commit 60b6d7c3894f61eb9c8bc40efe5528e91386bf94
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Sun Jun 9 11:07:46 2013 +0200
+
+    Fix database cache expunge issues (#1489149) - added 'expires' column
+
+Git log for file SQL/postgres/2014042900.sql:
+commit b6f7304d69918e31dd701d4c041169aa05934aee
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Tue Apr 29 12:12:26 2014 +0200
+
+    Fix too small length of users.preferences column data type on MySQL
+
+Git log for file SQL/postgres/2015030800.sql:
+commit f06f4b8424d33e1e06d9f99aa6f2cbc4b5f252e3
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Sun Mar 8 12:49:36 2015 +0100
+
+    Fix storing signatures with big images in MySQL database (#1490306)
+
+Git log for file SQL/postgres/2015111100.sql:
+commit a15d877ba8e12ba6659aad69d63b8b73256144ad
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Wed Nov 11 18:53:43 2015 +0100
+
+    Added brute-force attack prevention via login rate limit (#1490566)
+
+Git log for file SQL/postgres/2016081200.sql:
+commit 0836b213db0baa57fc20f8e4287f6b6a333f3359
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Fri Aug 12 13:02:39 2016 +0200
+
+    Removed useless 'created' column from 'session' table (#5389)
+
+Git log for file SQL/postgres/2016100900.sql:
+commit 492b181d5123bd8a47339c9bdfc9cae3e1b3319c
+Author: Sylvain Rochet <gradator@gradator.net>
+Date:   Sun Oct 9 19:31:24 2016 +0200
+
+    SQL, upgrade: increase session table ip field size for IPv6 addresses
+    
+    Commit 84d06edb06 introduced IPv6 support on SQL session table but
+    failed at providing upgrade SQL scripts, this commit fixes it.
+    
+    Fixes: 84d06edb06 ("IPv6 Compatability")
+    Signed-off-by: Sylvain Rochet <gradator@gradator.net>
+
+Git log for file SQL/postgres/2016112200.sql:
+commit a1f679adcacb865c8b692d4427bde65cd4065b43
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Sat Nov 26 09:14:16 2016 +0100
+
+    Fixed redundancy in sql caching system and compatibility with Galera Cluster (#5439)
+    
+    - Removed redundant 'created' column from cache and cache_shared tables
+    - Removed use of redundant data records
+    - Added missing primary keys (dictionary, cache, cache_shared tables)
+
+Git log for file SQL/postgres/2018021600.sql:
+commit 7b1f0f020b23553965275c8e6282f3ef22143a59
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Wed Feb 28 09:36:25 2018 +0100
+
+    Enigma: Multi-host support
+
+Git log for file SQL/postgres/2018122300.sql:
+commit c56d7342feee43c28701679f08cf82626179f72c
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Fri Aug 12 19:45:40 2022 +0200
+
+    Fix bug where it wasn't possible to create more than one response record on SQLite and Postgres (#8664)
+
+commit 0e640e95c9b1e433dc89af8c981be660741f7697
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Sun Dec 23 13:51:39 2018 +0100
+
+    Enigma: Fixed multi-host syncronization of private and deleted keys and pubring.kbx file
+    
+    Added context column to filestore table for easier listing of stored files.
+
+Git log for file SQL/postgres/2019092900.sql:
+commit 3841f63fbd42578f403624e71384b094d65212c8
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Sun Sep 29 13:18:46 2019 +0200
+
+    Make cache keys case-sensitive on MySQL/MSSQL (#6942)
+
+Git log for file SQL/postgres/2020020100.sql:
+commit 50d6ea30e0d72a2fbe7142d51b6c112540a8cdea
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Sat Feb 1 09:40:11 2020 +0100
+
+    Support for language codes up to 16 chars long (e.g. es-419) in database schema (#6851)
+
+Git log for file SQL/postgres/2020020101.sql:
+commit b606d81cdf3fa4a088a061bbef7c244e244fceed
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Sat Feb 1 17:19:04 2020 +0100
+
+    MySQL: Use utf8mb4 charset and utf8mb4_unicode_ci collation (#6535, #7113)
+    
+    Fixes support for utf8 emoji in html signature.
+
+Git log for file SQL/postgres/2020091000.sql:
+commit c56d7342feee43c28701679f08cf82626179f72c
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Fri Aug 12 19:45:40 2022 +0200
+
+    Fix bug where it wasn't possible to create more than one response record on SQLite and Postgres (#8664)
+
+commit 53f6e31cc5ee43d1407dcc8bbfa4c1a9777dd58a
+Author: Gianluca Giacometti <52405+gianlucagiacometti@users.noreply.github.com>
+Date:   Fri Nov 6 09:52:44 2020 +0100
+
+    Missing sequence in SQL update file (#7707)
+
+commit 9713ce364cd14e40edec1de819e17341a6745c71
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Sun Sep 20 10:00:08 2020 +0200
+
+    Automatically collected recipients and trusted senders (#6904)
+    
+    Added configurable Collected Recipients addressbook source (#4971)
+    Added configurable Trusted Senders addressbook source (#5046)
+    Added 'contact_exists' hook
+
+Git log for file SQL/postgres/2020122900.sql:
+commit 6cddb2745649c5a3b510625b77c512f520c2569e
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Tue Dec 29 16:21:14 2020 +0100
+
+    Allow NULL in users.preferences column in postgres and sqlite db, the same as for other engines (#7767)
+
+Git log for file SQL/postgres/2021081000.sql:
+commit cb37d14c5c50129e993937bb612159a0978af1c9
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Sat Aug 28 19:17:19 2021 +0200
+
+    Support responses (snippets) in HTML format (#5315)
+
+Git log for file SQL/postgres/2021100300.sql:
+commit 48fbf110af3f76128de7bbe7f6ce0e48247513e4
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Sun Oct 3 12:10:14 2021 +0200
+
+    SQLite: Use foreign keys, require SQLite >= 3.6.19 (#8159)
+
+Git log for file SQL/postgres/2022081200.sql:
+commit c56d7342feee43c28701679f08cf82626179f72c
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Fri Aug 12 19:45:40 2022 +0200
+
+    Fix bug where it wasn't possible to create more than one response record on SQLite and Postgres (#8664)
+
+Git log for file SQL/postgres/2022100100.sql:
+commit 80404a8674da49e249c316a30932bed4a82e2dac
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Sun Oct 9 11:35:14 2022 +0200
+
+    Store uploads metadata in a separate sql database table instead of a session (#8415)
+
+Git log for file SQL/sqlite.initial.sql:
+commit 28c778b7a039c3612b6497733d7cd5eae55492aa
+Author: Michael Voříšek <mvorisek@mvorisek.cz>
+Date:   Mon Dec 18 07:46:51 2023 +0100
+
+    Modernize more CS III (#9270)
+    
+    * fix "single_trait_insert_per_statement"
+    
+    * fix "empty_loop_condition"
+    
+    * fix "backtick_to_shell_exec"
+    
+    * fix "phpdoc_to_comment"
+    
+    * fix "no_empty_statement"
+    
+    * fix "heredoc_to_nowdoc"
+    
+    * fix "class_reference_name_casing"
+    
+    * fix "align_multiline_comment"
+    
+    * fix "heredoc_indentation"
+    
+    * fix "constant_case"
+    
+    * fix "single_line_comment_style"
+    
+    * fix "no_null_property_initialization"
+    
+    * fix "standardize_increment"
+    
+    * fix "no_unneeded_control_parentheses"
+    
+    * fix missing NL after "<?php"
+    
+    * fix php in *.sh files too
+    
+    * fix trailing spaces from all text files
+    
+    * fix "explicit_indirect_variable"
+    
+    * Revert "fix "align_multiline_comment""
+    
+    This reverts commit 42e584f8e3ee2acce72426b3d707c62e2c1ba92a.
+    
+    * fix "align_multiline_comment" properly
+    
+    * Revert "fix trailing spaces from all text files" - diff files only
+    
+    * Revert "Revert "fix trailing spaces from all text files" - diff files only"
+    
+    This reverts commit 2101c2a3a3b696ab0ffbade5428081e5b757da79.
+    
+    * rm useless "setup-php" config
+
+commit 80404a8674da49e249c316a30932bed4a82e2dac
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Sun Oct 9 11:35:14 2022 +0200
+
+    Store uploads metadata in a separate sql database table instead of a session (#8415)
+
+commit c56d7342feee43c28701679f08cf82626179f72c
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Fri Aug 12 19:45:40 2022 +0200
+
+    Fix bug where it wasn't possible to create more than one response record on SQLite and Postgres (#8664)
+
+commit 48fbf110af3f76128de7bbe7f6ce0e48247513e4
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Sun Oct 3 12:10:14 2021 +0200
+
+    SQLite: Use foreign keys, require SQLite >= 3.6.19 (#8159)
+
+commit cb37d14c5c50129e993937bb612159a0978af1c9
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Sat Aug 28 19:17:19 2021 +0200
+
+    Support responses (snippets) in HTML format (#5315)
+
+commit 6cddb2745649c5a3b510625b77c512f520c2569e
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Tue Dec 29 16:21:14 2020 +0100
+
+    Allow NULL in users.preferences column in postgres and sqlite db, the same as for other engines (#7767)
+
+commit 9713ce364cd14e40edec1de819e17341a6745c71
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Sun Sep 20 10:00:08 2020 +0200
+
+    Automatically collected recipients and trusted senders (#6904)
+    
+    Added configurable Collected Recipients addressbook source (#4971)
+    Added configurable Trusted Senders addressbook source (#5046)
+    Added 'contact_exists' hook
+
+commit b606d81cdf3fa4a088a061bbef7c244e244fceed
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Sat Feb 1 17:19:04 2020 +0100
+
+    MySQL: Use utf8mb4 charset and utf8mb4_unicode_ci collation (#6535, #7113)
+    
+    Fixes support for utf8 emoji in html signature.
+
+commit 50d6ea30e0d72a2fbe7142d51b6c112540a8cdea
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Sat Feb 1 09:40:11 2020 +0100
+
+    Support for language codes up to 16 chars long (e.g. es-419) in database schema (#6851)
+
+commit 3841f63fbd42578f403624e71384b094d65212c8
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Sun Sep 29 13:18:46 2019 +0200
+
+    Make cache keys case-sensitive on MySQL/MSSQL (#6942)
+
+commit 0e640e95c9b1e433dc89af8c981be660741f7697
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Sun Dec 23 13:51:39 2018 +0100
+
+    Enigma: Fixed multi-host syncronization of private and deleted keys and pubring.kbx file
+    
+    Added context column to filestore table for easier listing of stored files.
+
+commit 7b1f0f020b23553965275c8e6282f3ef22143a59
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Wed Feb 28 09:36:25 2018 +0100
+
+    Enigma: Multi-host support
+
+commit a1f679adcacb865c8b692d4427bde65cd4065b43
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Sat Nov 26 09:14:16 2016 +0100
+
+    Fixed redundancy in sql caching system and compatibility with Galera Cluster (#5439)
+    
+    - Removed redundant 'created' column from cache and cache_shared tables
+    - Removed use of redundant data records
+    - Added missing primary keys (dictionary, cache, cache_shared tables)
+
+commit 32ffc4e6377808f2411b3c4bebc5036650912cac
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Wed Oct 12 09:07:01 2016 +0200
+
+    Bump database version
+
+commit 0836b213db0baa57fc20f8e4287f6b6a333f3359
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Fri Aug 12 13:02:39 2016 +0200
+
+    Removed useless 'created' column from 'session' table (#5389)
+
+commit a15d877ba8e12ba6659aad69d63b8b73256144ad
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Wed Nov 11 18:53:43 2015 +0100
+
+    Added brute-force attack prevention via login rate limit (#1490566)
+
+commit f06f4b8424d33e1e06d9f99aa6f2cbc4b5f252e3
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Sun Mar 8 12:49:36 2015 +0100
+
+    Fix storing signatures with big images in MySQL database (#1490306)
+
+commit b6f7304d69918e31dd701d4c041169aa05934aee
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Tue Apr 29 12:12:26 2014 +0200
+
+    Fix too small length of users.preferences column data type on MySQL
+
+commit 8483de8bdf4c28e5acb5c8b51916a382546b4073
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Mon Jul 8 08:21:20 2013 +0200
+
+    Fix typo
+
+commit 60b6d7c3894f61eb9c8bc40efe5528e91386bf94
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Sun Jun 9 11:07:46 2013 +0200
+
+    Fix database cache expunge issues (#1489149) - added 'expires' column
+
+commit 50abd557184326f173357b50e7593dc3f452be91
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Sat May 25 15:37:46 2013 +0200
+
+    Added shared (cross-user) cache
+
+commit 311e82652ae0f2dd9792610175a1ba19cd71c0af
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Sun Apr 28 14:30:34 2013 +0200
+
+    Add lost files for "db_prefix related changes" commit
+
+commit 9e46fb535ddce461a11f57d4ce75a43c3ad651e8
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Tue Feb 19 14:27:26 2013 +0100
+
+    Fix typo in DB version strings (there should be no .sql suffix)
+
+commit aa691c40eda8fbae0f9175a5a59569f24d066a83
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Thu Jan 17 18:08:24 2013 +0100
+
+    Bump version number in *.initial.sql
+
+commit b7e7c8f9501850a38705e0a1f18a8ae6e25f1be1
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Wed Jan 9 15:57:29 2013 +0100
+
+    Added new database upgrade script, converted DDL scripts to new format
+
+commit 565c472918e7f9707cd8d7909ad5dbcc5a921fdf
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Mon Aug 6 11:08:58 2012 +0200
+
+    Removed users.alias column, added option ('user_aliases')
+    to use email address from identities as username (#1488581)
+
+commit 83121ece3348bfe09bb1026eace79a74a5ccf2c9
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Mon Aug 6 10:32:37 2012 +0200
+
+    - Removed redundant cache.cache_id column (#1488528)
+
+commit 48be8f6428ba3be7375b84aea2b73d1c67de6da1
+Author: alecpl <alec@alec.pl>
+Date:   Thu Jan 5 08:45:22 2012 +0000
+
+    - Fix SQL Error when saving a contact with many email addresses (#1488286)
+
+commit bd9190a660151c16af40c29ed63309a08fa7db04
+Author: alecpl <alec@alec.pl>
+Date:   Wed Dec 14 18:25:44 2011 +0000
+
+    - Fix broken CREATE INDEX queries in SQLite DDL files (#1488255)
+
+commit b8ae0ecb22264b6a4dc8785c431a8d0556fa83bf
+Author: alecpl <alec@alec.pl>
+Date:   Tue Nov 22 08:36:29 2011 +0000
+
+    - Fixed bug where session ID's length was limited to 40 characters. Since PHP5.3 it's possible
+      to set session.hash_function to any hash algorithm that would produce strings
+      up to 128 characters long (#1488196)
+
+commit 609d3923d7dc674263ddea990387dbf5488fabc6
+Author: alecpl <alec@alec.pl>
+Date:   Sun Sep 18 09:02:35 2011 +0000
+
+    - Cache synchronization using QRESYNC/CONDSTORE
+    - Fixed message ID updates in cache
+    - Changed message flags handling + some fixes (e.g. fixed messages listing after delete)
+
+commit 80152b333ca5d856dcf09f5ca10a9ffd80ba117f
+Author: alecpl <alec@alec.pl>
+Date:   Wed Sep 7 11:07:03 2011 +0000
+
+    - Rewritten messages caching (merged devel-mcache branch):
+      Indexes are stored in a separate table, so there's no need to store all messages in a folder
+      Added threads data caching
+      Flags are stored separately, so flag change doesn't cause DELETE+INSERT, just UPDATE
+    - Partial QRESYNC support
+    - Improved FETCH response handling
+    - Improvements in response tokenization method
+
+commit f8e48df71540b268ceac058d32b8ee848fc2ab6b
+Author: alecpl <alec@alec.pl>
+Date:   Tue Sep 6 16:35:14 2011 +0000
+
+    - Merge devel-saved_search branch (Addressbook Saved Searches)
+
+commit 66df084203a217ab74a416064c459cc3420a648c
+Author: alecpl <alec@alec.pl>
+Date:   Tue Sep 6 13:39:45 2011 +0000
+
+    - Merge devel-spellcheck branch:
+      - Added spellchecker exceptions dictionary (shared or per-user)
+      - Added possibility to ignore words containing caps, numbers, symbols (spellcheck_ignore_* options)
+
+commit 3a5476d150419b46847dd922935f368c969519c1
+Author: alecpl <alec@alec.pl>
+Date:   Wed Feb 23 08:13:02 2011 +0000
+
+    - Add index on contactgroupmembers.contact_id column.
+      Improves performance and fixes problem with contactgroupmembers table creation on MySQL 4.x
+
+commit 3e2637351da9559a4aa420004ac90e9fe30477ef
+Author: thomascube <thomas@roundcube.net>
+Date:   Mon Feb 14 20:46:48 2011 +0000
+
+    Fulltext search over contact fields. Attention: DATABASE SCHEMA CHANGED\!
+
+commit 6f096812c9fd460fddd21ff1cef55542cb79a890
+Author: alecpl <alec@alec.pl>
+Date:   Tue Nov 2 09:27:03 2010 +0000
+
+    - Support contact's email addresses up to 255 characters long (#1487095)
+    - Added email format checks when saving contacts data
+
+commit ace511a771656c983046919333cee501339c98a1
+Author: alecpl <alec@alec.pl>
+Date:   Wed Oct 6 13:00:12 2010 +0000
+
+    - Add unique index on users.username+users.mail_host
+
+commit e019f2d0f2dc2fbfa345ab5d7ae85e67bfdd76b8
+Author: alecpl <alec@alec.pl>
+Date:   Sat Sep 25 13:03:53 2010 +0000
+
+    - s/RoundCube/Roundcube/
+
+commit e2402ef99af447b7cc30d661e62450cbb04b202b
+Author: alecpl <alec@alec.pl>
+Date:   Wed Apr 28 10:34:33 2010 +0000
+
+    - Set DEFAULT NULL for users.last_login
+
+commit a35062a1eba5c6c15f703686cd4fecc5536d74df
+Author: thomascube <thomas@roundcube.net>
+Date:   Thu Apr 15 06:33:30 2010 +0000
+
+    Always set changed date when marking a DB record as deleted + provide a cleanup script
+
+commit a61bbb24aafec5718ca9bc985e7c596c5821f018
+Author: thomascube <thomas@roundcube.net>
+Date:   Fri Mar 26 16:38:20 2010 +0000
+
+    Added basic contact groups feature
+
+commit 94fe9ca1a87b20ddeee55024986e95ca72097af6
+Author: alecpl <alec@alec.pl>
+Date:   Sat Mar 6 14:13:25 2010 +0000
+
+    - re-fix (#1486474) + require MySQL 4.0.8 + add index/update in identities table
+
+commit 23b76563dcc2542cff9f447e809462472cfccd88
+Author: alecpl <alec@alec.pl>
+Date:   Tue Sep 29 07:59:25 2009 +0000
+
+    - use better index for contacts table
+
+commit 3d601d267dfb0ffca32ad953f36944b83910d907
+Author: alecpl <alec@alec.pl>
+Date:   Mon Sep 7 12:40:05 2009 +0000
+
+    - added index in messages table
+
+commit 798ad5ea8e7f121e7c3ffaee2d96e15db3686dff
+Author: alecpl <alec@alec.pl>
+Date:   Thu May 14 08:28:11 2009 +0000
+
+    - remove version number from *.initial.sql
+
+commit debdda011717e63945a0f6a9db6ab77b30a47079
+Author: alecpl <alec@alec.pl>
+Date:   Tue Nov 25 10:17:57 2008 +0000
+
+    #1485420: remove default (and not null) for users.language column in DDL
+
+commit e4d9f05e4126501ce329fc4c36704375f6dfe681
+Author: alecpl <alec@alec.pl>
+Date:   Mon Nov 24 07:59:10 2008 +0000
+
+    - Added index on cache.created + small fixes in mssql DDL script
+
+commit dcf780a6bd5065ffb0dcc76233b1e5f601e258d2
+Author: alecpl <alec@alec.pl>
+Date:   Sat Nov 22 18:06:13 2008 +0000
+
+    - fix r2076: removed cache.session_id column, removed DELETEs from cache in session_gc
+    - trust DB server's time when "touching" cache and messages tables
+
+commit 3e48d2eee1d2af42aa777fd5e461fa570762732e
+Author: alecpl <alec@alec.pl>
+Date:   Fri Nov 21 18:19:30 2008 +0000
+
+    - Increase speed of session destroy and garbage clean up
+    - Fix session timeout when DB server got clock skew (#1485490)
+
+commit c98f3b5d6e4c681b7e42ea71c32cd2ef1991b519
+Author: alecpl <alec@alec.pl>
+Date:   Thu Jun 12 17:46:31 2008 +0000
+
+    #1485125: added index on messages.created
+
+commit 6cb7786912ab18e53d8de0bbe436e46bf6d61782
+Author: alecpl <alec@alec.pl>
+Date:   Thu Apr 3 11:03:54 2008 +0000
+
+    #1484854
+
+commit ac26b964663405521077c7710212a58c37a041c7
+Author: thomascube <thomas@roundcube.net>
+Date:   Tue Mar 25 19:08:19 2008 +0000
+
+    Optimize database schema; get rid of unnecessary indexes
+
+commit 84d06edb06433c980dc7718188fcdd0799b08c09
+Author: thomascube <thomas@roundcube.net>
+Date:   Wed Sep 19 06:55:05 2007 +0000
+
+    IPv6 Compatability
+
+commit 6ae6e41fb32ca544ed29681d18130ba2c9c344fd
+Author: thomascube <thomas@roundcube.net>
+Date:   Thu May 17 20:15:24 2007 +0000
+
+    Updated description files and version info
+
+commit a0109c4933e0bfb5ed9dbcf94f932991ca689542
+Author: svncommit <devs@roundcube.net>
+Date:   Thu Sep 14 03:49:28 2006 +0000
+
+    Initial TinyMCE editor support (still need to work on spellcheck and skins)
+
+commit f7bfec96be8bf095ffc0af64a761f3866d5947b9
+Author: thomascube <thomas@roundcube.net>
+Date:   Fri Aug 25 11:51:11 2006 +0000
+
+    Finalized new message parsing. Attention: changes in database schema
+
+commit fd80c1eed83f1792176ad0cf13cdc06f71e49da6
+Author: thomascube <thomas@roundcube.net>
+Date:   Sun Feb 5 15:37:05 2006 +0000
+
+    Updated initial SQL queries
+
+commit 58e3602a37cccab55f71fbf839b32fbc4322699c
+Author: thomascube <thomas@roundcube.net>
+Date:   Sat Feb 4 19:08:10 2006 +0000
+
+    Bugfixes for encoding and sending with attachments
+
+commit b59474133a308182c69b2fd158b4f51aeffc87e4
+Author: thomascube <thomas@roundcube.net>
+Date:   Wed Jan 25 18:05:40 2006 +0000
+
+    Add created date to message cache
+
+commit 1cded85790206afe084e1baff371c543711b2b18
+Author: thomascube <thomas@roundcube.net>
+Date:   Sat Dec 3 16:54:12 2005 +0000
+
+    Re-design of caching (new database table added\!); some bugfixes; Postgres support
+
+commit 79fe17fb5a43786ccd407926d51fdfe4fe22f55f
+Author: thomascube <thomas@roundcube.net>
+Date:   Fri Oct 7 14:20:11 2005 +0000
+
+    Added SQLite supprt and MySQL update script
+
+Git log for file SQL/sqlite/2008030300.sql:
+commit b7e7c8f9501850a38705e0a1f18a8ae6e25f1be1
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Wed Jan 9 15:57:29 2013 +0100
+
+    Added new database upgrade script, converted DDL scripts to new format
+
+Git log for file SQL/sqlite/2008060900.sql:
+commit b7e7c8f9501850a38705e0a1f18a8ae6e25f1be1
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Wed Jan 9 15:57:29 2013 +0100
+
+    Added new database upgrade script, converted DDL scripts to new format
+
+Git log for file SQL/sqlite/2008092100.sql:
+commit b7e7c8f9501850a38705e0a1f18a8ae6e25f1be1
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Wed Jan 9 15:57:29 2013 +0100
+
+    Added new database upgrade script, converted DDL scripts to new format
+
+Git log for file SQL/sqlite/2009090400.sql:
+commit b7e7c8f9501850a38705e0a1f18a8ae6e25f1be1
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Wed Jan 9 15:57:29 2013 +0100
+
+    Added new database upgrade script, converted DDL scripts to new format
+
+Git log for file SQL/sqlite/2009103100.sql:
+commit b7e7c8f9501850a38705e0a1f18a8ae6e25f1be1
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Wed Jan 9 15:57:29 2013 +0100
+
+    Added new database upgrade script, converted DDL scripts to new format
+
+Git log for file SQL/sqlite/2010042300.sql:
+commit b7e7c8f9501850a38705e0a1f18a8ae6e25f1be1
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Wed Jan 9 15:57:29 2013 +0100
+
+    Added new database upgrade script, converted DDL scripts to new format
+
+Git log for file SQL/sqlite/2010100600.sql:
+commit b7e7c8f9501850a38705e0a1f18a8ae6e25f1be1
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Wed Jan 9 15:57:29 2013 +0100
+
+    Added new database upgrade script, converted DDL scripts to new format
+
+Git log for file SQL/sqlite/2011011200.sql:
+commit b7e7c8f9501850a38705e0a1f18a8ae6e25f1be1
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Wed Jan 9 15:57:29 2013 +0100
+
+    Added new database upgrade script, converted DDL scripts to new format
+
+Git log for file SQL/sqlite/2011092800.sql:
+commit b7e7c8f9501850a38705e0a1f18a8ae6e25f1be1
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Wed Jan 9 15:57:29 2013 +0100
+
+    Added new database upgrade script, converted DDL scripts to new format
+
+Git log for file SQL/sqlite/2011111600.sql:
+commit b7e7c8f9501850a38705e0a1f18a8ae6e25f1be1
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Wed Jan 9 15:57:29 2013 +0100
+
+    Added new database upgrade script, converted DDL scripts to new format
+
+Git log for file SQL/sqlite/2011121400.sql:
+commit b7e7c8f9501850a38705e0a1f18a8ae6e25f1be1
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Wed Jan 9 15:57:29 2013 +0100
+
+    Added new database upgrade script, converted DDL scripts to new format
+
+Git log for file SQL/sqlite/2012080700.sql:
+commit b7e7c8f9501850a38705e0a1f18a8ae6e25f1be1
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Wed Jan 9 15:57:29 2013 +0100
+
+    Added new database upgrade script, converted DDL scripts to new format
+
+Git log for file SQL/sqlite/2013011000.sql:
+commit bcfdac6660b2c3d1527d1e993f63f345992d0afa
+Author: Thomas Bruederli <thomas@roundcube.net>
+Date:   Thu Mar 28 17:42:09 2013 +0100
+
+    Add 'if not exists' to system table creation. Just in case some previous db update routine was aborted or failed
+
+commit b7e7c8f9501850a38705e0a1f18a8ae6e25f1be1
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Wed Jan 9 15:57:29 2013 +0100
+
+    Added new database upgrade script, converted DDL scripts to new format
+
+Git log for file SQL/sqlite/2013011700.sql:
+commit 474d9d49df58a673350e4fb8b68589a578eaae96
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Thu Jan 17 08:49:18 2013 +0100
+
+    Drop tmp_users table (#1488910)
+
+Git log for file SQL/sqlite/2013042700.sql:
+commit 311e82652ae0f2dd9792610175a1ba19cd71c0af
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Sun Apr 28 14:30:34 2013 +0200
+
+    Add lost files for "db_prefix related changes" commit
+
+Git log for file SQL/sqlite/2013052500.sql:
+commit 50abd557184326f173357b50e7593dc3f452be91
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Sat May 25 15:37:46 2013 +0200
+
+    Added shared (cross-user) cache
+
+Git log for file SQL/sqlite/2013061000.sql:
+commit 60b6d7c3894f61eb9c8bc40efe5528e91386bf94
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Sun Jun 9 11:07:46 2013 +0200
+
+    Fix database cache expunge issues (#1489149) - added 'expires' column
+
+Git log for file SQL/sqlite/2014042900.sql:
+commit b6f7304d69918e31dd701d4c041169aa05934aee
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Tue Apr 29 12:12:26 2014 +0200
+
+    Fix too small length of users.preferences column data type on MySQL
+
+Git log for file SQL/sqlite/2015030800.sql:
+commit f06f4b8424d33e1e06d9f99aa6f2cbc4b5f252e3
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Sun Mar 8 12:49:36 2015 +0100
+
+    Fix storing signatures with big images in MySQL database (#1490306)
+
+Git log for file SQL/sqlite/2015111100.sql:
+commit a15d877ba8e12ba6659aad69d63b8b73256144ad
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Wed Nov 11 18:53:43 2015 +0100
+
+    Added brute-force attack prevention via login rate limit (#1490566)
+
+Git log for file SQL/sqlite/2016081200.sql:
+commit 0836b213db0baa57fc20f8e4287f6b6a333f3359
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Fri Aug 12 13:02:39 2016 +0200
+
+    Removed useless 'created' column from 'session' table (#5389)
+
+Git log for file SQL/sqlite/2016100900.sql:
+commit 32ffc4e6377808f2411b3c4bebc5036650912cac
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Wed Oct 12 09:07:01 2016 +0200
+
+    Bump database version
+
+Git log for file SQL/sqlite/2016112200.sql:
+commit a1f679adcacb865c8b692d4427bde65cd4065b43
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Sat Nov 26 09:14:16 2016 +0100
+
+    Fixed redundancy in sql caching system and compatibility with Galera Cluster (#5439)
+    
+    - Removed redundant 'created' column from cache and cache_shared tables
+    - Removed use of redundant data records
+    - Added missing primary keys (dictionary, cache, cache_shared tables)
+
+Git log for file SQL/sqlite/2018021600.sql:
+commit 7b1f0f020b23553965275c8e6282f3ef22143a59
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Wed Feb 28 09:36:25 2018 +0100
+
+    Enigma: Multi-host support
+
+Git log for file SQL/sqlite/2018122300.sql:
+commit 0e640e95c9b1e433dc89af8c981be660741f7697
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Sun Dec 23 13:51:39 2018 +0100
+
+    Enigma: Fixed multi-host syncronization of private and deleted keys and pubring.kbx file
+    
+    Added context column to filestore table for easier listing of stored files.
+
+Git log for file SQL/sqlite/2019092900.sql:
+commit 3841f63fbd42578f403624e71384b094d65212c8
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Sun Sep 29 13:18:46 2019 +0200
+
+    Make cache keys case-sensitive on MySQL/MSSQL (#6942)
+
+Git log for file SQL/sqlite/2020020100.sql:
+commit 9d9901ee51c8439515178c5e75dc7ca07c368007
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Wed Jul 29 07:43:59 2020 +0200
+
+    Fix sqlite/2020020100.sql (#7516)
+
+commit 50d6ea30e0d72a2fbe7142d51b6c112540a8cdea
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Sat Feb 1 09:40:11 2020 +0100
+
+    Support for language codes up to 16 chars long (e.g. es-419) in database schema (#6851)
+
+Git log for file SQL/sqlite/2020020101.sql:
+commit b606d81cdf3fa4a088a061bbef7c244e244fceed
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Sat Feb 1 17:19:04 2020 +0100
+
+    MySQL: Use utf8mb4 charset and utf8mb4_unicode_ci collation (#6535, #7113)
+    
+    Fixes support for utf8 emoji in html signature.
+
+Git log for file SQL/sqlite/2020091000.sql:
+commit 9713ce364cd14e40edec1de819e17341a6745c71
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Sun Sep 20 10:00:08 2020 +0200
+
+    Automatically collected recipients and trusted senders (#6904)
+    
+    Added configurable Collected Recipients addressbook source (#4971)
+    Added configurable Trusted Senders addressbook source (#5046)
+    Added 'contact_exists' hook
+
+Git log for file SQL/sqlite/2020122900.sql:
+commit 6cddb2745649c5a3b510625b77c512f520c2569e
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Tue Dec 29 16:21:14 2020 +0100
+
+    Allow NULL in users.preferences column in postgres and sqlite db, the same as for other engines (#7767)
+
+Git log for file SQL/sqlite/2021081000.sql:
+commit cb37d14c5c50129e993937bb612159a0978af1c9
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Sat Aug 28 19:17:19 2021 +0200
+
+    Support responses (snippets) in HTML format (#5315)
+
+Git log for file SQL/sqlite/2021100300.sql:
+commit 48fbf110af3f76128de7bbe7f6ce0e48247513e4
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Sun Oct 3 12:10:14 2021 +0200
+
+    SQLite: Use foreign keys, require SQLite >= 3.6.19 (#8159)
+
+Git log for file SQL/sqlite/2022081200.sql:
+commit c56d7342feee43c28701679f08cf82626179f72c
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Fri Aug 12 19:45:40 2022 +0200
+
+    Fix bug where it wasn't possible to create more than one response record on SQLite and Postgres (#8664)
+
+Git log for file SQL/sqlite/2022100100.sql:
+commit 80404a8674da49e249c316a30932bed4a82e2dac
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Sun Oct 9 11:35:14 2022 +0200
+
+    Store uploads metadata in a separate sql database table instead of a session (#8415)
+
+Git log for file tests/Browser/data/data.sql:
+commit 50a3a6fd81018fa9950f917d9af518eaa23b67d7
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Sun Oct 3 17:01:32 2021 +0200
+
+    Fix database initialization for the browser tests
+
+commit cb37d14c5c50129e993937bb612159a0978af1c9
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Sat Aug 28 19:17:19 2021 +0200
+
+    Support responses (snippets) in HTML format (#5315)
+
+commit 59e1efb595318c1990c0ee70fc894cd8f0eab968
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Wed Jan 1 18:20:13 2020 +0100
+
+    Add more in-browser tests
+
+Git log for file tests/src/sql/contacts.sql:
+commit fc3cd4484ae24274fb1da89ab5ad3ddaae403993
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Thu May 4 07:34:55 2023 +0200
+
+    Fix QR code images for contacts with non-ASCII characters (#9001)
+
+commit 97991b59be451e9471cf5d5750c7f4975e363af4
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Thu Nov 5 11:59:02 2020 +0100
+
+    Add more tests for contact actions, fix various code issues
+
+commit 836adabbda368a0bed352067e01017f5279b9c31
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Tue Nov 3 19:57:34 2020 +0100
+
+    Add more actions tests
+
+commit e2572b89841fbc25a4e38533c7e90ddb3d4416f2
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Mon Nov 2 08:55:42 2020 +0100
+
+    PHP8 compat. fixes, added some tests
+
+commit 545a1569f115b5c8aa0be78061258d5f116d7b4b
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Sun Nov 1 11:25:38 2020 +0100
+
+    Steps -> Actions refactoring (#7688)
+    
+    * Move action handling code to rcmail class
+    * Add rcmail_action class
+    * Add action aliases
+    * Get rid of $OUTPUT global
+    * Move some methods from rcmail to rcmail_action
+    * PHP8 compat. fixes
+    * Add framework for testing actions
+    * Fix obvious code mistakes
+
+Git log for file tests/src/sql/identities.sql:
+commit 1007b873f029941496aec581bd4feeeeadecfe1a
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Sun Nov 15 12:03:37 2020 +0100
+
+    More action tests, PHP8 fixes
+
+Git log for file tests/src/sql/init.sql:
+commit 545a1569f115b5c8aa0be78061258d5f116d7b4b
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Sun Nov 1 11:25:38 2020 +0100
+
+    Steps -> Actions refactoring (#7688)
+    
+    * Move action handling code to rcmail class
+    * Add rcmail_action class
+    * Add action aliases
+    * Get rid of $OUTPUT global
+    * Move some methods from rcmail to rcmail_action
+    * PHP8 compat. fixes
+    * Add framework for testing actions
+    * Fix obvious code mistakes
+
+Git log for file tests/src/sql/responses.sql:
+commit cb37d14c5c50129e993937bb612159a0978af1c9
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Sat Aug 28 19:17:19 2021 +0200
+
+    Support responses (snippets) in HTML format (#5315)
+
+Git log for file tests/src/sql/searches.sql:
+commit 97991b59be451e9471cf5d5750c7f4975e363af4
+Author: Aleksander Machniak <alec@alec.pl>
+Date:   Thu Nov 5 11:59:02 2020 +0100
+
+    Add more tests for contact actions, fix various code issues
+

@@ -1,0 +1,8 @@
+FROM mysql:latest
+
+ENV MYSQL_ROOT_PASSWORD=root
+
+RUN mkdir -p /docker-weberp.d/Migrationfiles /docker-weberp.d/Patchfiles
+
+COPY ./weberp-demo-initial-migrationfile.sql /docker-weberp.d/
+COPY ./Weberp/Patchfiles_Mod /docker-weberp.d/Patchfiles

@@ -1,0 +1,711 @@
+Diff between Joomla/Input/joomla_4.0.0-2018-02-24_mod.sql and Joomla/Input/joomla_4.0.0-2018-03-05_mod.sql:
+## mysqldiff 0.60
+## 
+## Run on Tue Feb 27 17:04:39 2024
+## Options: user=root, port=3306, host=localhost, password=, ignore_tables=(?^:^schema_migrations$)
+##
+## --- file: Joomla/Input/joomla_4.0.0-2018-02-24_mod.sql
+## +++ file: Joomla/Input/joomla_4.0.0-2018-03-05_mod.sql
+
+ALTER TABLE modules CHANGE COLUMN content content text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci; # was text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
+
+Diff between Joomla/Input/joomla_4.0.0-2018-03-05_mod.sql and Joomla/Input/joomla_4.0.0-2018-05-15_mod.sql:
+## mysqldiff 0.60
+## 
+## Run on Tue Feb 27 17:05:12 2024
+## Options: user=root, port=3306, host=localhost, password=, ignore_tables=(?^:^schema_migrations$)
+##
+## --- file: Joomla/Input/joomla_4.0.0-2018-03-05_mod.sql
+## +++ file: Joomla/Input/joomla_4.0.0-2018-05-15_mod.sql
+
+CREATE TABLE workflow_associations (
+  item_id int NOT NULL DEFAULT '0' COMMENT 'Extension table id value',
+  stage_id int NOT NULL COMMENT 'Foreign Key to workflow_stages.id',
+  extension varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (item_id,extension),
+  KEY idx_item_stage_extension (item_id,stage_id,extension),
+  KEY idx_item_id (item_id),
+  KEY idx_stage_id (stage_id),
+  KEY idx_extension (extension)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE workflow_stages (
+  id int NOT NULL AUTO_INCREMENT,
+  asset_id int DEFAULT '0',
+  ordering int NOT NULL DEFAULT '0',
+  workflow_id int NOT NULL,
+  published tinyint NOT NULL DEFAULT '0',
+  title varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  description text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  default tinyint NOT NULL DEFAULT '0',
+  checked_out_time datetime DEFAULT NULL,
+  checked_out int NOT NULL DEFAULT '0',
+  PRIMARY KEY (id),
+  KEY idx_workflow_id (workflow_id),
+  KEY idx_checked_out (checked_out),
+  KEY idx_title (title(191)),
+  KEY idx_asset_id (asset_id),
+  KEY idx_default (default)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE workflow_transitions (
+  id int NOT NULL AUTO_INCREMENT,
+  asset_id int DEFAULT '0',
+  ordering int NOT NULL DEFAULT '0',
+  workflow_id int NOT NULL,
+  published tinyint NOT NULL DEFAULT '0',
+  title varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  description text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  from_stage_id int NOT NULL,
+  to_stage_id int NOT NULL,
+  options text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  checked_out_time datetime DEFAULT NULL,
+  checked_out int NOT NULL DEFAULT '0',
+  PRIMARY KEY (id),
+  KEY idx_title (title(191)),
+  KEY idx_asset_id (asset_id),
+  KEY idx_checked_out (checked_out),
+  KEY idx_from_stage_id (from_stage_id),
+  KEY idx_to_stage_id (to_stage_id),
+  KEY idx_workflow_id (workflow_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE workflows (
+  id int NOT NULL AUTO_INCREMENT,
+  asset_id int DEFAULT '0',
+  published tinyint NOT NULL DEFAULT '0',
+  title varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  description text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  extension varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  default tinyint NOT NULL DEFAULT '0',
+  ordering int NOT NULL DEFAULT '0',
+  created datetime NOT NULL,
+  created_by int NOT NULL DEFAULT '0',
+  modified datetime NOT NULL,
+  modified_by int NOT NULL DEFAULT '0',
+  checked_out_time datetime DEFAULT NULL,
+  checked_out int NOT NULL DEFAULT '0',
+  PRIMARY KEY (id),
+  KEY idx_asset_id (asset_id),
+  KEY idx_title (title(191)),
+  KEY idx_extension (extension),
+  KEY idx_default (default),
+  KEY idx_created (created),
+  KEY idx_created_by (created_by),
+  KEY idx_modified (modified),
+  KEY idx_modified_by (modified_by),
+  KEY idx_checked_out (checked_out)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+
+
+Diff between Joomla/Input/joomla_4.0.0-2018-05-15_mod.sql and Joomla/Input/joomla_4.0.0-2018-07-19_mod.sql:
+## mysqldiff 0.60
+## 
+## Run on Tue Feb 27 17:05:47 2024
+## Options: user=root, port=3306, host=localhost, password=, ignore_tables=(?^:^schema_migrations$)
+##
+## --- file: Joomla/Input/joomla_4.0.0-2018-05-15_mod.sql
+## +++ file: Joomla/Input/joomla_4.0.0-2018-07-19_mod.sql
+
+ALTER TABLE user_notes CHANGE COLUMN modified_user_id modified_user_id int unsigned NOT NULL DEFAULT '0'; # was int unsigned NOT NULL
+CREATE TABLE template_overrides (
+  id int unsigned NOT NULL AUTO_INCREMENT,
+  template varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  hash_id varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  extension_id int DEFAULT '0',
+  state tinyint NOT NULL DEFAULT '0',
+  action varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  client_id tinyint unsigned NOT NULL DEFAULT '0',
+  created_date datetime NOT NULL,
+  modified_date datetime DEFAULT NULL,
+  PRIMARY KEY (id),
+  KEY idx_template (template),
+  KEY idx_extension_id (extension_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+Use of uninitialized value in pattern match (m//) at /usr/local/share/perl/5.34.0/MySQL/Diff.pm line 434.
+Diff between Joomla/Input/joomla_4.0.0-2018-07-19_mod.sql and Joomla/Input/joomla_4.0.0-2018-07-29_mod.sql:
+## mysqldiff 0.60
+## 
+## Run on Tue Feb 27 17:06:17 2024
+## Options: user=root, port=3306, host=localhost, password=, ignore_tables=(?^:^schema_migrations$)
+##
+## --- file: Joomla/Input/joomla_4.0.0-2018-07-19_mod.sql
+## +++ file: Joomla/Input/joomla_4.0.0-2018-07-29_mod.sql
+
+ALTER TABLE finder_filters CHANGE COLUMN checked_out_time checked_out_time datetime DEFAULT NULL; # was datetime NOT NULL DEFAULT '2023-01-01 00:00:00'
+ALTER TABLE finder_filters CHANGE COLUMN params params mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci; # was mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci
+ALTER TABLE finder_filters CHANGE COLUMN data data text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL; # was text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
+ALTER TABLE finder_filters CHANGE COLUMN created_by_alias created_by_alias varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT ''; # was varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
+ALTER TABLE finder_filters CHANGE COLUMN modified modified datetime NOT NULL; # was datetime NOT NULL DEFAULT '2023-01-01 00:00:00'
+ALTER TABLE finder_filters CHANGE COLUMN alias alias varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL; # was varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
+ALTER TABLE finder_filters CHANGE COLUMN title title varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL; # was varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
+ALTER TABLE finder_filters CHANGE COLUMN created_by created_by int unsigned NOT NULL DEFAULT '0'; # was int unsigned NOT NULL
+ALTER TABLE finder_filters CHANGE COLUMN created created datetime NOT NULL; # was datetime NOT NULL DEFAULT '2023-01-01 00:00:00'
+ALTER TABLE finder_filters ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci; # was ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci
+ALTER TABLE finder_links CHANGE COLUMN language language char(7) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT ''; # was varchar(8) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
+ALTER TABLE finder_links CHANGE COLUMN description description text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci; # was text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci
+ALTER TABLE finder_links CHANGE COLUMN publish_start_date publish_start_date datetime DEFAULT NULL; # was datetime NOT NULL DEFAULT '2023-01-01 00:00:00'
+ALTER TABLE finder_links CHANGE COLUMN start_date start_date datetime DEFAULT NULL; # was datetime NOT NULL DEFAULT '2023-01-01 00:00:00'
+ALTER TABLE finder_links CHANGE COLUMN end_date end_date datetime DEFAULT NULL; # was datetime NOT NULL DEFAULT '2023-01-01 00:00:00'
+ALTER TABLE finder_links CHANGE COLUMN access access int NOT NULL DEFAULT '0'; # was int DEFAULT '0'
+ALTER TABLE finder_links CHANGE COLUMN publish_end_date publish_end_date datetime DEFAULT NULL; # was datetime NOT NULL DEFAULT '2023-01-01 00:00:00'
+ALTER TABLE finder_links CHANGE COLUMN indexdate indexdate datetime NOT NULL; # was datetime NOT NULL DEFAULT '2023-01-01 00:00:00'
+ALTER TABLE finder_links CHANGE COLUMN title title varchar(400) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL; # was varchar(400) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL
+ALTER TABLE finder_links CHANGE COLUMN url url varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL; # was varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
+ALTER TABLE finder_links CHANGE COLUMN state state int NOT NULL DEFAULT '1'; # was int DEFAULT '1'
+ALTER TABLE finder_links CHANGE COLUMN route route varchar(400) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL; # was varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
+ALTER TABLE finder_links CHANGE COLUMN md5sum md5sum varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL; # was varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL
+ALTER TABLE finder_links ADD INDEX idx_language (language);
+ALTER TABLE finder_links ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci; # was ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci
+DROP TABLE finder_links_terms0;
+
+DROP TABLE finder_links_terms1;
+
+DROP TABLE finder_links_terms2;
+
+DROP TABLE finder_links_terms3;
+
+DROP TABLE finder_links_terms4;
+
+DROP TABLE finder_links_terms5;
+
+DROP TABLE finder_links_terms6;
+
+DROP TABLE finder_links_terms7;
+
+DROP TABLE finder_links_terms8;
+
+DROP TABLE finder_links_terms9;
+
+DROP TABLE finder_links_termsa;
+
+DROP TABLE finder_links_termsb;
+
+DROP TABLE finder_links_termsc;
+
+DROP TABLE finder_links_termsd;
+
+DROP TABLE finder_links_termse;
+
+DROP TABLE finder_links_termsf;
+
+ALTER TABLE finder_taxonomy DROP COLUMN ordering; # was tinyint unsigned NOT NULL DEFAULT '0'
+ALTER TABLE finder_taxonomy CHANGE COLUMN access access tinyint unsigned NOT NULL DEFAULT '1'; # was tinyint unsigned NOT NULL DEFAULT '0'
+ALTER TABLE finder_taxonomy CHANGE COLUMN title title varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT ''; # was varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
+ALTER TABLE finder_taxonomy ADD COLUMN level int unsigned NOT NULL DEFAULT '0';
+ALTER TABLE finder_taxonomy ADD COLUMN rgt int NOT NULL DEFAULT '0';
+ALTER TABLE finder_taxonomy ADD COLUMN path varchar(400) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '';
+ALTER TABLE finder_taxonomy ADD COLUMN language char(7) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '';
+ALTER TABLE finder_taxonomy ADD COLUMN alias varchar(400) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '';
+ALTER TABLE finder_taxonomy ADD COLUMN lft int NOT NULL DEFAULT '0';
+ALTER TABLE finder_taxonomy DROP INDEX state; # was INDEX (state)
+ALTER TABLE finder_taxonomy DROP INDEX ordering; # was INDEX (ordering)
+ALTER TABLE finder_taxonomy DROP INDEX parent_id; # was INDEX (parent_id)
+ALTER TABLE finder_taxonomy DROP INDEX access; # was INDEX (access)
+ALTER TABLE finder_taxonomy ADD INDEX idx_alias (alias(100));
+ALTER TABLE finder_taxonomy ADD INDEX idx_state (state);
+ALTER TABLE finder_taxonomy ADD INDEX idx_left_right (lft,rgt);
+ALTER TABLE finder_taxonomy ADD INDEX idx_language (language);
+ALTER TABLE finder_taxonomy ADD INDEX idx_access (access);
+ALTER TABLE finder_taxonomy ADD INDEX idx_path (path(100));
+ALTER TABLE finder_taxonomy ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci; # was ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci
+ALTER TABLE finder_taxonomy_map ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci; # was ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci
+ALTER TABLE finder_terms CHANGE COLUMN stem stem varchar(75) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL DEFAULT ''; # was varchar(75) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
+ALTER TABLE finder_terms CHANGE COLUMN language language char(7) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT ''; # was char(3) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT ''
+ALTER TABLE finder_terms CHANGE COLUMN term term varchar(75) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL; # was varchar(75) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
+ALTER TABLE finder_terms CHANGE COLUMN soundex soundex varchar(75) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL DEFAULT ''; # was varchar(75) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
+ALTER TABLE finder_terms DROP INDEX idx_term; # was UNIQUE (term)
+ALTER TABLE finder_terms ADD INDEX idx_stem (stem);
+ALTER TABLE finder_terms ADD INDEX idx_language (language);
+ALTER TABLE finder_terms ADD UNIQUE idx_term_language (term,language);
+ALTER TABLE finder_terms ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci; # was ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci
+ALTER TABLE finder_terms_common CHANGE COLUMN term term varchar(75) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL DEFAULT ''; # was varchar(75) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
+ALTER TABLE finder_terms_common CHANGE COLUMN language language char(7) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT ''; # was varchar(3) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
+ALTER TABLE finder_terms_common ADD COLUMN custom int NOT NULL DEFAULT '0';
+ALTER TABLE finder_terms_common DROP INDEX idx_word_lang; # was INDEX (term,language)
+ALTER TABLE finder_terms_common ADD UNIQUE idx_term_language (term,language);
+ALTER TABLE finder_terms_common ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci; # was ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci
+ALTER TABLE finder_tokens CHANGE COLUMN language language char(7) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT ''; # was char(3) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT ''
+ALTER TABLE finder_tokens CHANGE COLUMN term term varchar(75) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL; # was varchar(75) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
+ALTER TABLE finder_tokens CHANGE COLUMN stem stem varchar(75) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL DEFAULT ''; # was varchar(75) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
+ALTER TABLE finder_tokens ADD INDEX idx_stem (stem);
+ALTER TABLE finder_tokens ADD INDEX idx_language (language);
+ALTER TABLE finder_tokens ENGINE=MEMORY DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci; # was ENGINE=MEMORY DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci
+ALTER TABLE finder_tokens_aggregate CHANGE COLUMN stem stem varchar(75) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL DEFAULT ''; # was varchar(75) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
+ALTER TABLE finder_tokens_aggregate CHANGE COLUMN total_weight total_weight float unsigned NOT NULL DEFAULT '0'; # was float unsigned NOT NULL
+ALTER TABLE finder_tokens_aggregate CHANGE COLUMN context_weight context_weight float unsigned NOT NULL DEFAULT '0'; # was float unsigned NOT NULL
+ALTER TABLE finder_tokens_aggregate CHANGE COLUMN language language char(7) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT ''; # was char(3) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT ''
+ALTER TABLE finder_tokens_aggregate CHANGE COLUMN term term varchar(75) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL; # was varchar(75) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
+ALTER TABLE finder_tokens_aggregate CHANGE COLUMN term_weight term_weight float unsigned NOT NULL DEFAULT '0'; # was float unsigned NOT NULL
+ALTER TABLE finder_tokens_aggregate DROP COLUMN map_suffix; # was char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
+ALTER TABLE finder_tokens_aggregate ENGINE=MEMORY DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci; # was ENGINE=MEMORY DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci
+ALTER TABLE finder_types CHANGE COLUMN title title varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL; # was varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
+ALTER TABLE finder_types CHANGE COLUMN mime mime varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT ''; # was varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
+ALTER TABLE finder_types ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci; # was ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci
+CREATE TABLE finder_links_terms (
+  link_id int unsigned NOT NULL,
+  term_id int unsigned NOT NULL,
+  weight float unsigned NOT NULL DEFAULT '0',
+  PRIMARY KEY (link_id,term_id),
+  KEY idx_term_weight (term_id,weight),
+  KEY idx_link_term_weight (link_id,term_id,weight)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE finder_logging (
+  searchterm varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  md5sum varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  query blob NOT NULL,
+  hits int NOT NULL DEFAULT '1',
+  results int NOT NULL DEFAULT '0',
+  PRIMARY KEY (md5sum),
+  KEY searchterm (searchterm(191))
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+Diff between Joomla/Input/joomla_4.0.0-2018-07-29_mod.sql and Joomla/Input/joomla_4.0.0-2018-08-29_mod.sql:
+## mysqldiff 0.60
+## 
+## Run on Tue Feb 27 17:06:41 2024
+## Options: user=root, port=3306, host=localhost, password=, ignore_tables=(?^:^schema_migrations$)
+##
+## --- file: Joomla/Input/joomla_4.0.0-2018-07-29_mod.sql
+## +++ file: Joomla/Input/joomla_4.0.0-2018-08-29_mod.sql
+
+ALTER TABLE modules CHANGE COLUMN checked_out_time checked_out_time datetime DEFAULT NULL; # was datetime NOT NULL DEFAULT '2023-01-01 00:00:00'
+ALTER TABLE modules CHANGE COLUMN publish_down publish_down datetime DEFAULT NULL; # was datetime NOT NULL DEFAULT '2023-01-01 00:00:00'
+ALTER TABLE modules CHANGE COLUMN publish_up publish_up datetime DEFAULT NULL; # was datetime NOT NULL DEFAULT '2023-01-01 00:00:00'
+ALTER TABLE ucm_content CHANGE COLUMN core_checked_out_time core_checked_out_time datetime DEFAULT NULL; # was varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '2023-01-01 00:00:00'
+ALTER TABLE ucm_content CHANGE COLUMN core_created_time core_created_time datetime NOT NULL; # was datetime NOT NULL DEFAULT '2023-01-01 00:00:00'
+ALTER TABLE ucm_content CHANGE COLUMN core_publish_up core_publish_up datetime DEFAULT NULL; # was datetime NOT NULL DEFAULT '2023-01-01 00:00:00'
+ALTER TABLE ucm_content CHANGE COLUMN core_modified_time core_modified_time datetime NOT NULL; # was datetime NOT NULL DEFAULT '2023-01-01 00:00:00'
+ALTER TABLE ucm_content CHANGE COLUMN core_publish_down core_publish_down datetime DEFAULT NULL; # was datetime NOT NULL DEFAULT '2023-01-01 00:00:00'
+
+Diff between Joomla/Input/joomla_4.0.0-2018-08-29_mod.sql and Joomla/Input/joomla_4.0.0-2019-03-09_mod.sql:
+## mysqldiff 0.60
+## 
+## Run on Tue Feb 27 17:07:08 2024
+## Options: user=root, port=3306, host=localhost, password=, ignore_tables=(?^:^schema_migrations$)
+##
+## --- file: Joomla/Input/joomla_4.0.0-2018-08-29_mod.sql
+## +++ file: Joomla/Input/joomla_4.0.0-2019-03-09_mod.sql
+
+CREATE TABLE mail_templates (
+  template_id varchar(127) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  language char(7) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  subject varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  body text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  htmlbody text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  attachments text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  params text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (template_id,language)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+Diff between Joomla/Input/joomla_4.0.0-2019-03-09_mod.sql and Joomla/Input/joomla_4.0.0-2019-03-30_mod.sql:
+## mysqldiff 0.60
+## 
+## Run on Tue Feb 27 17:07:34 2024
+## Options: user=root, port=3306, host=localhost, password=, ignore_tables=(?^:^schema_migrations$)
+##
+## --- file: Joomla/Input/joomla_4.0.0-2019-03-09_mod.sql
+## +++ file: Joomla/Input/joomla_4.0.0-2019-03-30_mod.sql
+
+ALTER TABLE menu CHANGE COLUMN checked_out_time checked_out_time datetime DEFAULT NULL; # was datetime NOT NULL DEFAULT '2023-01-01 00:00:00' COMMENT 'The time the menu item was checked out.'
+ALTER TABLE menu ADD COLUMN publish_up datetime DEFAULT NULL;
+ALTER TABLE menu ADD COLUMN publish_down datetime DEFAULT NULL;
+
+Diff between Joomla/Input/joomla_4.0.0-2019-03-30_mod.sql and Joomla/Input/joomla_4.0.0-2019-04-15_mod.sql:
+
+Diff between Joomla/Input/joomla_4.0.0-2019-04-15_mod.sql and Joomla/Input/joomla_4.0.0-2019-04-22_mod.sql:
+## mysqldiff 0.60
+## 
+## Run on Tue Feb 27 17:08:30 2024
+## Options: user=root, port=3306, host=localhost, password=, ignore_tables=(?^:^schema_migrations$)
+##
+## --- file: Joomla/Input/joomla_4.0.0-2019-04-15_mod.sql
+## +++ file: Joomla/Input/joomla_4.0.0-2019-04-22_mod.sql
+
+ALTER TABLE contact_details CHANGE COLUMN created created datetime NOT NULL; # was datetime NOT NULL DEFAULT '2023-01-01 00:00:00'
+ALTER TABLE contact_details CHANGE COLUMN checked_out_time checked_out_time datetime DEFAULT NULL; # was datetime NOT NULL DEFAULT '2023-01-01 00:00:00'
+ALTER TABLE contact_details CHANGE COLUMN publish_down publish_down datetime DEFAULT NULL; # was datetime NOT NULL DEFAULT '2023-01-01 00:00:00'
+ALTER TABLE contact_details CHANGE COLUMN publish_up publish_up datetime DEFAULT NULL; # was datetime NOT NULL DEFAULT '2023-01-01 00:00:00'
+ALTER TABLE contact_details CHANGE COLUMN modified modified datetime NOT NULL; # was datetime NOT NULL DEFAULT '2023-01-01 00:00:00'
+
+Diff between Joomla/Input/joomla_4.0.0-2019-04-22_mod.sql and Joomla/Input/joomla_4.0.0-2019-05-20_mod.sql:
+## mysqldiff 0.60
+## 
+## Run on Tue Feb 27 17:08:55 2024
+## Options: user=root, port=3306, host=localhost, password=, ignore_tables=(?^:^schema_migrations$)
+##
+## --- file: Joomla/Input/joomla_4.0.0-2019-04-22_mod.sql
+## +++ file: Joomla/Input/joomla_4.0.0-2019-05-20_mod.sql
+
+ALTER TABLE extensions ADD COLUMN note varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL;
+
+Diff between Joomla/Input/joomla_4.0.0-2019-05-20_mod.sql and Joomla/Input/joomla_4.0.0-2019-06-29_mod.sql:
+## mysqldiff 0.60
+## 
+## Run on Tue Feb 27 17:09:22 2024
+## Options: user=root, port=3306, host=localhost, password=, ignore_tables=(?^:^schema_migrations$)
+##
+## --- file: Joomla/Input/joomla_4.0.0-2019-05-20_mod.sql
+## +++ file: Joomla/Input/joomla_4.0.0-2019-06-29_mod.sql
+
+ALTER TABLE banner_clients CHANGE COLUMN checked_out_time checked_out_time datetime DEFAULT NULL; # was datetime NOT NULL DEFAULT '2023-01-01 00:00:00'
+ALTER TABLE banners CHANGE COLUMN created created datetime NOT NULL; # was datetime NOT NULL DEFAULT '2023-01-01 00:00:00'
+ALTER TABLE banners CHANGE COLUMN publish_up publish_up datetime DEFAULT NULL; # was datetime NOT NULL DEFAULT '2023-01-01 00:00:00'
+ALTER TABLE banners CHANGE COLUMN modified modified datetime NOT NULL; # was datetime NOT NULL DEFAULT '2023-01-01 00:00:00'
+ALTER TABLE banners CHANGE COLUMN checked_out_time checked_out_time datetime DEFAULT NULL; # was datetime NOT NULL DEFAULT '2023-01-01 00:00:00'
+ALTER TABLE banners CHANGE COLUMN publish_down publish_down datetime DEFAULT NULL; # was datetime NOT NULL DEFAULT '2023-01-01 00:00:00'
+ALTER TABLE banners CHANGE COLUMN reset reset datetime DEFAULT NULL; # was datetime NOT NULL DEFAULT '2023-01-01 00:00:00'
+ALTER TABLE newsfeeds CHANGE COLUMN modified modified datetime NOT NULL; # was datetime NOT NULL DEFAULT '2023-01-01 00:00:00'
+ALTER TABLE newsfeeds CHANGE COLUMN publish_up publish_up datetime DEFAULT NULL; # was datetime NOT NULL DEFAULT '2023-01-01 00:00:00'
+ALTER TABLE newsfeeds CHANGE COLUMN publish_down publish_down datetime DEFAULT NULL; # was datetime NOT NULL DEFAULT '2023-01-01 00:00:00'
+ALTER TABLE newsfeeds CHANGE COLUMN checked_out_time checked_out_time datetime DEFAULT NULL; # was datetime NOT NULL DEFAULT '2023-01-01 00:00:00'
+ALTER TABLE newsfeeds CHANGE COLUMN created created datetime NOT NULL; # was datetime NOT NULL DEFAULT '2023-01-01 00:00:00'
+
+Diff between Joomla/Input/joomla_4.0.0-2019-06-29_mod.sql and Joomla/Input/joomla_4.0.0-2019-07-13_mod.sql:
+## mysqldiff 0.60
+## 
+## Run on Tue Feb 27 17:09:49 2024
+## Options: user=root, port=3306, host=localhost, password=, ignore_tables=(?^:^schema_migrations$)
+##
+## --- file: Joomla/Input/joomla_4.0.0-2019-06-29_mod.sql
+## +++ file: Joomla/Input/joomla_4.0.0-2019-07-13_mod.sql
+
+CREATE TABLE webauthn_credentials (
+  id varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'Credential ID',
+  user_id varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'User handle',
+  label varchar(190) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'Human readable label',
+  credential mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'Credential source data, JSON format',
+  PRIMARY KEY (id(100)),
+  KEY user_id (user_id(60))
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+Use of uninitialized value in pattern match (m//) at /usr/local/share/perl/5.34.0/MySQL/Diff.pm line 434.
+Use of uninitialized value in pattern match (m//) at /usr/local/share/perl/5.34.0/MySQL/Diff.pm line 434.
+Use of uninitialized value in pattern match (m//) at /usr/local/share/perl/5.34.0/MySQL/Diff.pm line 434.
+Diff between Joomla/Input/joomla_4.0.0-2019-07-13_mod.sql and Joomla/Input/joomla_4.0.0-2019-09-13_mod.sql:
+## mysqldiff 0.60
+## 
+## Run on Tue Feb 27 17:10:16 2024
+## Options: user=root, port=3306, host=localhost, password=, ignore_tables=(?^:^schema_migrations$)
+##
+## --- file: Joomla/Input/joomla_4.0.0-2019-07-13_mod.sql
+## +++ file: Joomla/Input/joomla_4.0.0-2019-09-13_mod.sql
+
+ALTER TABLE contact_details DROP COLUMN xreference; # was varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT 'A reference to enable linkages to external data sets.'
+ALTER TABLE contact_details DROP INDEX idx_xreference; # was INDEX (xreference)
+ALTER TABLE content DROP COLUMN xreference; # was varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT 'A reference to enable linkages to external data sets.'
+ALTER TABLE content DROP INDEX idx_xreference; # was INDEX (xreference)
+ALTER TABLE content_frontpage ADD COLUMN featured_down datetime DEFAULT NULL;
+ALTER TABLE content_frontpage ADD COLUMN featured_up datetime DEFAULT NULL;
+ALTER TABLE newsfeeds DROP COLUMN xreference; # was varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT 'A reference to enable linkages to external data sets.'
+ALTER TABLE newsfeeds DROP INDEX idx_xreference; # was INDEX (xreference)
+ALTER TABLE update_sites ADD COLUMN checked_out int unsigned NOT NULL DEFAULT '0';
+ALTER TABLE update_sites ADD COLUMN checked_out_time datetime DEFAULT NULL;
+
+Diff between Joomla/Input/joomla_4.0.0-2019-09-13_mod.sql and Joomla/Input/joomla_4.0.0-2019-09-22_mod.sql:
+## mysqldiff 0.60
+## 
+## Run on Tue Feb 27 17:10:42 2024
+## Options: user=root, port=3306, host=localhost, password=, ignore_tables=(?^:^schema_migrations$)
+##
+## --- file: Joomla/Input/joomla_4.0.0-2019-09-13_mod.sql
+## +++ file: Joomla/Input/joomla_4.0.0-2019-09-22_mod.sql
+
+ALTER TABLE content CHANGE COLUMN created created datetime NOT NULL; # was datetime NOT NULL DEFAULT '2023-01-01 00:00:00'
+ALTER TABLE content CHANGE COLUMN checked_out_time checked_out_time datetime DEFAULT NULL; # was datetime NOT NULL DEFAULT '2023-01-01 00:00:00'
+ALTER TABLE content CHANGE COLUMN publish_down publish_down datetime DEFAULT NULL; # was datetime NOT NULL DEFAULT '2023-01-01 00:00:00'
+ALTER TABLE content CHANGE COLUMN publish_up publish_up datetime DEFAULT NULL; # was datetime NOT NULL DEFAULT '2023-01-01 00:00:00'
+ALTER TABLE content CHANGE COLUMN modified modified datetime NOT NULL; # was datetime NOT NULL DEFAULT '2023-01-01 00:00:00'
+ALTER TABLE messages CHANGE COLUMN date_time date_time datetime NOT NULL; # was datetime NOT NULL DEFAULT '2023-01-01 00:00:00'
+
+Diff between Joomla/Input/joomla_4.0.0-2019-09-22_mod.sql and Joomla/Input/joomla_4.0.0-2019-10-06_mod.sql:
+## mysqldiff 0.60
+## 
+## Run on Tue Feb 27 17:11:07 2024
+## Options: user=root, port=3306, host=localhost, password=, ignore_tables=(?^:^schema_migrations$)
+##
+## --- file: Joomla/Input/joomla_4.0.0-2019-09-22_mod.sql
+## +++ file: Joomla/Input/joomla_4.0.0-2019-10-06_mod.sql
+
+ALTER TABLE categories CHANGE COLUMN checked_out_time checked_out_time datetime DEFAULT NULL; # was datetime NOT NULL DEFAULT '2023-01-01 00:00:00'
+ALTER TABLE categories CHANGE COLUMN modified_time modified_time datetime NOT NULL; # was datetime NOT NULL DEFAULT '2023-01-01 00:00:00'
+ALTER TABLE categories CHANGE COLUMN created_time created_time datetime NOT NULL; # was datetime NOT NULL DEFAULT '2023-01-01 00:00:00'
+ALTER TABLE extensions CHANGE COLUMN checked_out_time checked_out_time datetime DEFAULT NULL; # was datetime NOT NULL DEFAULT '2023-01-01 00:00:00'
+ALTER TABLE fields CHANGE COLUMN created_time created_time datetime NOT NULL; # was datetime NOT NULL DEFAULT '2023-01-01 00:00:00'
+ALTER TABLE fields CHANGE COLUMN modified_time modified_time datetime NOT NULL; # was datetime NOT NULL DEFAULT '2023-01-01 00:00:00'
+ALTER TABLE fields CHANGE COLUMN checked_out_time checked_out_time datetime DEFAULT NULL; # was datetime NOT NULL DEFAULT '2023-01-01 00:00:00'
+ALTER TABLE fields_groups CHANGE COLUMN modified modified datetime NOT NULL; # was datetime NOT NULL DEFAULT '2023-01-01 00:00:00'
+ALTER TABLE fields_groups CHANGE COLUMN created created datetime NOT NULL; # was datetime NOT NULL DEFAULT '2023-01-01 00:00:00'
+ALTER TABLE fields_groups CHANGE COLUMN checked_out_time checked_out_time datetime DEFAULT NULL; # was datetime NOT NULL DEFAULT '2023-01-01 00:00:00'
+ALTER TABLE redirect_links CHANGE COLUMN modified_date modified_date datetime NOT NULL; # was datetime NOT NULL DEFAULT '2023-01-01 00:00:00'
+ALTER TABLE redirect_links CHANGE COLUMN created_date created_date datetime NOT NULL; # was datetime NOT NULL DEFAULT '2023-01-01 00:00:00'
+ALTER TABLE tags CHANGE COLUMN created_time created_time datetime NOT NULL; # was datetime NOT NULL DEFAULT '2023-01-01 00:00:00'
+ALTER TABLE tags CHANGE COLUMN modified_time modified_time datetime NOT NULL; # was datetime NOT NULL DEFAULT '2023-01-01 00:00:00'
+ALTER TABLE tags CHANGE COLUMN publish_up publish_up datetime DEFAULT NULL; # was datetime NOT NULL DEFAULT '2023-01-01 00:00:00'
+ALTER TABLE tags CHANGE COLUMN publish_down publish_down datetime DEFAULT NULL; # was datetime NOT NULL DEFAULT '2023-01-01 00:00:00'
+ALTER TABLE tags CHANGE COLUMN checked_out_time checked_out_time datetime DEFAULT NULL; # was datetime NOT NULL DEFAULT '2023-01-01 00:00:00'
+ALTER TABLE user_notes CHANGE COLUMN checked_out_time checked_out_time datetime DEFAULT NULL; # was datetime NOT NULL DEFAULT '2023-01-01 00:00:00'
+ALTER TABLE user_notes CHANGE COLUMN modified_time modified_time datetime NOT NULL; # was datetime NOT NULL DEFAULT '2023-01-01 00:00:00'
+ALTER TABLE user_notes CHANGE COLUMN publish_down publish_down datetime DEFAULT NULL; # was datetime NOT NULL DEFAULT '2023-01-01 00:00:00'
+ALTER TABLE user_notes CHANGE COLUMN review_time review_time datetime DEFAULT NULL; # was datetime NOT NULL DEFAULT '2023-01-01 00:00:00'
+ALTER TABLE user_notes CHANGE COLUMN publish_up publish_up datetime DEFAULT NULL; # was datetime NOT NULL DEFAULT '2023-01-01 00:00:00'
+ALTER TABLE user_notes CHANGE COLUMN created_time created_time datetime NOT NULL; # was datetime NOT NULL DEFAULT '2023-01-01 00:00:00'
+
+Diff between Joomla/Input/joomla_4.0.0-2019-10-06_mod.sql and Joomla/Input/joomla_4.0.0-2019-10-17_mod.sql:
+## mysqldiff 0.60
+## 
+## Run on Tue Feb 27 17:11:34 2024
+## Options: user=root, port=3306, host=localhost, password=, ignore_tables=(?^:^schema_migrations$)
+##
+## --- file: Joomla/Input/joomla_4.0.0-2019-10-06_mod.sql
+## +++ file: Joomla/Input/joomla_4.0.0-2019-10-17_mod.sql
+
+ALTER TABLE users CHANGE COLUMN registerDate registerDate datetime NOT NULL; # was datetime NOT NULL DEFAULT '2023-01-01 00:00:00'
+ALTER TABLE users CHANGE COLUMN lastvisitDate lastvisitDate datetime DEFAULT NULL; # was datetime NOT NULL DEFAULT '2023-01-01 00:00:00'
+ALTER TABLE users CHANGE COLUMN lastResetTime lastResetTime datetime DEFAULT NULL; # was datetime NOT NULL DEFAULT '2023-01-01 00:00:00' COMMENT 'Date of last password reset'
+
+Diff between Joomla/Input/joomla_4.0.0-2019-10-17_mod.sql and Joomla/Input/joomla_4.0.0-2020-02-02_mod.sql:
+
+Diff between Joomla/Input/joomla_4.0.0-2020-02-02_mod.sql and Joomla/Input/joomla_4.0.0-2020-03-10_mod.sql:
+## mysqldiff 0.60
+## 
+## Run on Tue Feb 27 17:12:33 2024
+## Options: user=root, port=3306, host=localhost, password=, ignore_tables=(?^:^schema_migrations$)
+##
+## --- file: Joomla/Input/joomla_4.0.0-2020-02-02_mod.sql
+## +++ file: Joomla/Input/joomla_4.0.0-2020-03-10_mod.sql
+
+ALTER TABLE banner_clients CHANGE COLUMN metakey metakey text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci; # was text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
+ALTER TABLE banners CHANGE COLUMN metakey metakey text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci; # was text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
+ALTER TABLE contact_details CHANGE COLUMN metakey metakey text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci; # was text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
+ALTER TABLE content CHANGE COLUMN metakey metakey text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci; # was text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
+ALTER TABLE content_types CHANGE COLUMN table table varchar(2048) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT ''; # was varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT ''
+ALTER TABLE languages CHANGE COLUMN metakey metakey text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci; # was text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
+ALTER TABLE newsfeeds CHANGE COLUMN metakey metakey text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci; # was text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
+ALTER TABLE tags CHANGE COLUMN metakey metakey varchar(1024) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT ''; # was varchar(1024) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'The meta keywords for the page.'
+
+Diff between Joomla/Input/joomla_4.0.0-2020-03-10_mod.sql and Joomla/Input/joomla_4.0.0-2020-03-25_mod.sql:
+## mysqldiff 0.60
+## 
+## Run on Tue Feb 27 17:13:13 2024
+## Options: user=root, port=3306, host=localhost, password=, ignore_tables=(?^:^schema_migrations$)
+##
+## --- file: Joomla/Input/joomla_4.0.0-2020-03-10_mod.sql
+## +++ file: Joomla/Input/joomla_4.0.0-2020-03-25_mod.sql
+
+ALTER TABLE extensions CHANGE COLUMN protected protected tinyint NOT NULL DEFAULT '0' COMMENT 'Flag to indicate if the extension is protected. Protected extensions cannot be disabled.'; # was tinyint NOT NULL DEFAULT '0'
+ALTER TABLE extensions ADD COLUMN locked tinyint NOT NULL DEFAULT '0' COMMENT 'Flag to indicate if the extension is locked. Locked extensions cannot be uninstalled.';
+
+Diff between Joomla/Input/joomla_4.0.0-2020-03-25_mod.sql and Joomla/Input/joomla_4.0.0-2020-05-29_mod.sql:
+## mysqldiff 0.60
+## 
+## Run on Tue Feb 27 17:14:00 2024
+## Options: user=root, port=3306, host=localhost, password=, ignore_tables=(?^:^schema_migrations$)
+##
+## --- file: Joomla/Input/joomla_4.0.0-2020-03-25_mod.sql
+## +++ file: Joomla/Input/joomla_4.0.0-2020-05-29_mod.sql
+
+ALTER TABLE banner_clients CHANGE COLUMN checked_out checked_out int unsigned DEFAULT NULL; # was int unsigned NOT NULL DEFAULT '0'
+ALTER TABLE banners CHANGE COLUMN checked_out checked_out int unsigned DEFAULT NULL; # was int unsigned NOT NULL DEFAULT '0'
+ALTER TABLE categories CHANGE COLUMN checked_out checked_out int unsigned DEFAULT NULL; # was int unsigned NOT NULL DEFAULT '0'
+ALTER TABLE contact_details CHANGE COLUMN checked_out checked_out int unsigned DEFAULT NULL; # was int unsigned NOT NULL DEFAULT '0'
+ALTER TABLE content CHANGE COLUMN checked_out checked_out int unsigned DEFAULT NULL; # was int unsigned NOT NULL DEFAULT '0'
+ALTER TABLE extensions CHANGE COLUMN checked_out checked_out int unsigned DEFAULT NULL; # was int unsigned NOT NULL DEFAULT '0'
+ALTER TABLE fields CHANGE COLUMN checked_out checked_out int unsigned DEFAULT NULL; # was int NOT NULL DEFAULT '0'
+ALTER TABLE fields_groups CHANGE COLUMN checked_out checked_out int unsigned DEFAULT NULL; # was int NOT NULL DEFAULT '0'
+ALTER TABLE finder_filters CHANGE COLUMN checked_out checked_out int unsigned DEFAULT NULL; # was int unsigned NOT NULL DEFAULT '0'
+ALTER TABLE menu CHANGE COLUMN checked_out checked_out int unsigned DEFAULT NULL; # was int unsigned NOT NULL DEFAULT '0' COMMENT 'FK to users.id'
+ALTER TABLE modules CHANGE COLUMN checked_out checked_out int unsigned DEFAULT NULL; # was int unsigned NOT NULL DEFAULT '0'
+ALTER TABLE newsfeeds CHANGE COLUMN checked_out checked_out int unsigned DEFAULT NULL; # was int unsigned NOT NULL DEFAULT '0'
+ALTER TABLE tags CHANGE COLUMN checked_out checked_out int unsigned DEFAULT NULL; # was int unsigned NOT NULL DEFAULT '0'
+ALTER TABLE ucm_content CHANGE COLUMN core_checked_out_user_id core_checked_out_user_id int unsigned DEFAULT NULL; # was int unsigned NOT NULL DEFAULT '0'
+DROP TABLE ucm_history;
+
+ALTER TABLE update_sites CHANGE COLUMN checked_out checked_out int unsigned DEFAULT NULL; # was int unsigned NOT NULL DEFAULT '0'
+ALTER TABLE user_notes CHANGE COLUMN checked_out checked_out int unsigned DEFAULT NULL; # was int unsigned NOT NULL DEFAULT '0'
+ALTER TABLE workflow_stages CHANGE COLUMN checked_out checked_out int unsigned DEFAULT NULL; # was int NOT NULL DEFAULT '0'
+ALTER TABLE workflow_transitions CHANGE COLUMN checked_out checked_out int unsigned DEFAULT NULL; # was int NOT NULL DEFAULT '0'
+ALTER TABLE workflows CHANGE COLUMN checked_out checked_out int unsigned DEFAULT NULL; # was int NOT NULL DEFAULT '0'
+CREATE TABLE history (
+  version_id int unsigned NOT NULL AUTO_INCREMENT,
+  item_id varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  version_note varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT 'Optional version name',
+  save_date datetime NOT NULL,
+  editor_user_id int unsigned NOT NULL DEFAULT '0',
+  character_count int unsigned NOT NULL DEFAULT '0' COMMENT 'Number of characters in this version.',
+  sha1_hash varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT 'SHA1 hash of the version_data column.',
+  version_data mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'json-encoded string of version data',
+  keep_forever tinyint NOT NULL DEFAULT '0' COMMENT '0=auto delete, 1=keep',
+  PRIMARY KEY (version_id),
+  KEY idx_ucm_item_id (item_id),
+  KEY idx_save_date (save_date)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+Diff between Joomla/Input/joomla_4.0.0-2020-05-29_mod.sql and Joomla/Input/joomla_4.0.0-2020-09-27_mod.sql:
+
+Diff between Joomla/Input/joomla_4.0.0-2020-09-27_mod.sql and Joomla/Input/joomla_4.0.0-2020-12-20_mod.sql:
+
+Diff between Joomla/Input/joomla_4.0.0-2020-12-20_mod.sql and Joomla/Input/joomla_4.0.0-2021-04-22_mod.sql:
+## mysqldiff 0.60
+## 
+## Run on Tue Feb 27 17:16:05 2024
+## Options: user=root, port=3306, host=localhost, password=, ignore_tables=(?^:^schema_migrations$)
+##
+## --- file: Joomla/Input/joomla_4.0.0-2020-12-20_mod.sql
+## +++ file: Joomla/Input/joomla_4.0.0-2021-04-22_mod.sql
+
+ALTER TABLE fields ADD COLUMN only_use_in_subform tinyint NOT NULL DEFAULT '0';
+ALTER TABLE mail_templates ADD COLUMN extension varchar(127) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '';
+
+Diff between Joomla/Input/joomla_4.0.0-2021-04-22_mod.sql and Joomla/Input/joomla_4.0.0-2021-04-27_mod.sql:
+
+Diff between Joomla/Input/joomla_4.0.0-2021-04-27_mod.sql and Joomla/Input/joomla_4.0.0-2021-05-30_mod.sql:
+## mysqldiff 0.60
+## 
+## Run on Tue Feb 27 17:17:10 2024
+## Options: user=root, port=3306, host=localhost, password=, ignore_tables=(?^:^schema_migrations$)
+##
+## --- file: Joomla/Input/joomla_4.0.0-2021-04-27_mod.sql
+## +++ file: Joomla/Input/joomla_4.0.0-2021-05-30_mod.sql
+
+ALTER TABLE finder_taxonomy ADD INDEX idx_level (level);
+
+Diff between Joomla/Input/joomla_4.0.0-2021-05-30_mod.sql and Joomla/Input/joomla_4.0.0-2021-06-04_mod.sql:
+
+Diff between Joomla/Input/joomla_4.0.0-2021-06-04_mod.sql and Joomla/Input/joomla_4.0.0-2021-08-13_mod.sql:
+
+Diff between Joomla/Input/joomla_4.0.0-2021-08-13_mod.sql and Joomla/Input/joomla_4.0.0-2021-08-17_mod.sql:
+
+Diff between Joomla/Input/joomla_4.0.0-2021-08-17_mod.sql and Joomla/Input/joomla_4.0.3-2021-09-04_mod.sql:
+
+Diff between Joomla/Input/joomla_4.0.3-2021-09-04_mod.sql and Joomla/Input/joomla_4.0.3-2021-09-05_mod.sql:
+
+Diff between Joomla/Input/joomla_4.0.3-2021-09-05_mod.sql and Joomla/Input/joomla_4.0.6-2021-12-23_mod.sql:
+
+Diff between Joomla/Input/joomla_4.0.6-2021-12-23_mod.sql and Joomla/Input/joomla_4.1.0-2021-11-20_mod.sql:
+## mysqldiff 0.60
+## 
+## Run on Tue Feb 27 17:20:56 2024
+## Options: user=root, port=3306, host=localhost, password=, ignore_tables=(?^:^schema_migrations$)
+##
+## --- file: Joomla/Input/joomla_4.0.6-2021-12-23_mod.sql
+## +++ file: Joomla/Input/joomla_4.1.0-2021-11-20_mod.sql
+
+CREATE TABLE scheduler_tasks (
+  id int unsigned NOT NULL AUTO_INCREMENT,
+  asset_id int unsigned NOT NULL DEFAULT '0' COMMENT 'FK to the assets table.',
+  title varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  type varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'unique identifier for job defined by plugin',
+  execution_rules text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci COMMENT 'Execution Rules, Unprocessed',
+  cron_rules text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci COMMENT 'Processed execution rules, crontab-like JSON form',
+  state tinyint NOT NULL DEFAULT '0',
+  last_exit_code int NOT NULL DEFAULT '0' COMMENT 'Exit code when job was last run',
+  last_execution datetime DEFAULT NULL COMMENT 'Timestamp of last run',
+  next_execution datetime DEFAULT NULL COMMENT 'Timestamp of next (planned) run, referred for execution on trigger',
+  times_executed int DEFAULT '0' COMMENT 'Count of successful triggers',
+  times_failed int DEFAULT '0' COMMENT 'Count of failures',
+  locked datetime DEFAULT NULL,
+  priority smallint NOT NULL DEFAULT '0',
+  ordering int NOT NULL DEFAULT '0' COMMENT 'Configurable list ordering',
+  cli_exclusive smallint NOT NULL DEFAULT '0' COMMENT 'If 1, the task is only accessible via CLI',
+  params text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  note text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  created datetime NOT NULL,
+  created_by int unsigned NOT NULL DEFAULT '0',
+  checked_out int unsigned DEFAULT NULL,
+  checked_out_time datetime DEFAULT NULL,
+  PRIMARY KEY (id),
+  KEY idx_type (type),
+  KEY idx_state (state),
+  KEY idx_last_exit (last_exit_code),
+  KEY idx_next_exec (next_execution),
+  KEY idx_locked (locked),
+  KEY idx_priority (priority),
+  KEY idx_cli_exclusive (cli_exclusive),
+  KEY idx_checked_out (checked_out)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+Diff between Joomla/Input/joomla_4.1.0-2021-11-20_mod.sql and Joomla/Input/joomla_4.1.0-2021-11-28_mod.sql:
+
+Diff between Joomla/Input/joomla_4.1.0-2021-11-28_mod.sql and Joomla/Input/joomla_4.1.0-2021-12-29_mod.sql:
+
+Diff between Joomla/Input/joomla_4.1.0-2021-12-29_mod.sql and Joomla/Input/joomla_4.1.0-2022-01-08_mod.sql:
+
+Diff between Joomla/Input/joomla_4.1.0-2022-01-08_mod.sql and Joomla/Input/joomla_4.1.0-2022-01-19_mod.sql:
+
+Diff between Joomla/Input/joomla_4.1.0-2022-01-19_mod.sql and Joomla/Input/joomla_4.1.0-2022-01-24_mod.sql:
+## mysqldiff 0.60
+## 
+## Run on Tue Feb 27 17:23:41 2024
+## Options: user=root, port=3306, host=localhost, password=, ignore_tables=(?^:^schema_migrations$)
+##
+## --- file: Joomla/Input/joomla_4.1.0-2022-01-19_mod.sql
+## +++ file: Joomla/Input/joomla_4.1.0-2022-01-24_mod.sql
+
+ALTER TABLE redirect_links DROP INDEX idx_link_modifed; # was INDEX (modified_date)
+ALTER TABLE redirect_links ADD INDEX idx_link_modified (modified_date);
+
+Diff between Joomla/Input/joomla_4.1.0-2022-01-24_mod.sql and Joomla/Input/joomla_4.1.1-2022-02-20_mod.sql:
+
+Diff between Joomla/Input/joomla_4.1.1-2022-02-20_mod.sql and Joomla/Input/joomla_4.1.3-2022-04-07_mod.sql:
+
+Diff between Joomla/Input/joomla_4.1.3-2022-04-07_mod.sql and Joomla/Input/joomla_4.1.3-2022-04-08_mod.sql:
+
+Diff between Joomla/Input/joomla_4.1.3-2022-04-08_mod.sql and Joomla/Input/joomla_4.2.0-2022-05-15_mod.sql:
+## mysqldiff 0.60
+## 
+## Run on Tue Feb 27 17:25:38 2024
+## Options: user=root, port=3306, host=localhost, password=, ignore_tables=(?^:^schema_migrations$)
+##
+## --- file: Joomla/Input/joomla_4.1.3-2022-04-08_mod.sql
+## +++ file: Joomla/Input/joomla_4.2.0-2022-05-15_mod.sql
+
+CREATE TABLE user_mfa (
+  id int NOT NULL AUTO_INCREMENT,
+  user_id int unsigned NOT NULL,
+  title varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  method varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  default tinyint NOT NULL DEFAULT '0',
+  options mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  created_on datetime NOT NULL,
+  last_used datetime DEFAULT NULL,
+  PRIMARY KEY (id),
+  KEY idx_user_id (user_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Multi-factor Authentication settings';
+
+
+Diff between Joomla/Input/joomla_4.2.0-2022-05-15_mod.sql and Joomla/Input/joomla_4.2.0-2022-06-15_mod.sql:
+## mysqldiff 0.60
+## 
+## Run on Tue Feb 27 17:26:10 2024
+## Options: user=root, port=3306, host=localhost, password=, ignore_tables=(?^:^schema_migrations$)
+##
+## --- file: Joomla/Input/joomla_4.2.0-2022-05-15_mod.sql
+## +++ file: Joomla/Input/joomla_4.2.0-2022-06-15_mod.sql
+
+ALTER TABLE mail_templates CHANGE COLUMN htmlbody htmlbody mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL; # was text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
+
+Diff between Joomla/Input/joomla_4.2.0-2022-06-15_mod.sql and Joomla/Input/joomla_4.2.0-2022-06-19_mod.sql:
+
+Diff between Joomla/Input/joomla_4.2.0-2022-06-19_mod.sql and Joomla/Input/joomla_4.2.0-2022-06-22_mod.sql:
+
+Diff between Joomla/Input/joomla_4.2.0-2022-06-22_mod.sql and Joomla/Input/joomla_4.2.0-2022-07-07_mod.sql:
+
+Diff between Joomla/Input/joomla_4.2.0-2022-07-07_mod.sql and Joomla/Input/joomla_4.2.1-2022-08-23_mod.sql:
+
+Diff between Joomla/Input/joomla_4.2.1-2022-08-23_mod.sql and Joomla/Input/joomla_4.2.3-2022-09-07_mod.sql:
+
+Diff between Joomla/Input/joomla_4.2.3-2022-09-07_mod.sql and Joomla/Input/joomla_4.2.7-2022-12-29_mod.sql:
+
+Diff between Joomla/Input/joomla_4.2.7-2022-12-29_mod.sql and Joomla/Input/joomla_4.2.9-2023-03-07_mod.sql:
+

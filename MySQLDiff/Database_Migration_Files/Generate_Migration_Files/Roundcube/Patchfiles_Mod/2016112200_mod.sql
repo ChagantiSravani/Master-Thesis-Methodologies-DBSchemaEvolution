@@ -1,0 +1,5 @@
+ALTER TABLE `dictionary` ADD COLUMN `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY FIRST;
+ALTER TABLE cache DROP COLUMN created;
+ALTER TABLE cache ADD PRIMARY KEY (user_id,cache_key);
+ALTER TABLE cache_shared DROP COLUMN created;
+ALTER TABLE cache_shared ADD PRIMARY KEY (cache_key);

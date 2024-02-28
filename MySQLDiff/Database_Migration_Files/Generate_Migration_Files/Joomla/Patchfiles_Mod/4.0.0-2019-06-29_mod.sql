@@ -1,0 +1,12 @@
+ALTER TABLE `#__banners` MODIFY `created` datetime NOT NULL;
+ALTER TABLE `#__banners` MODIFY `modified` datetime NOT NULL;
+ALTER TABLE `#__banners` MODIFY `reset` datetime NULL DEFAULT NULL;
+ALTER TABLE `#__banners` MODIFY `publish_up` datetime NULL DEFAULT NULL;
+ALTER TABLE `#__banners` MODIFY `publish_down` datetime NULL DEFAULT NULL;
+ALTER TABLE `#__banners` MODIFY `checked_out_time` datetime NULL DEFAULT NULL;
+ALTER TABLE `#__banner_clients` MODIFY `checked_out_time` datetime NULL DEFAULT NULL;
+ALTER TABLE `#__newsfeeds` MODIFY `created` datetime NOT NULL;
+ALTER TABLE `#__newsfeeds` MODIFY `modified` datetime NOT NULL;
+ALTER TABLE `#__newsfeeds` MODIFY `publish_up` datetime NULL DEFAULT NULL;
+ALTER TABLE `#__newsfeeds` MODIFY `publish_down` datetime NULL DEFAULT NULL;
+ALTER TABLE `#__newsfeeds` MODIFY `checked_out_time` datetime NULL DEFAULT NULL;
