@@ -6,9 +6,9 @@ This repository outlines an empirical study focused on methodologies for the evo
 *Note:* 
 - After cloning the [project repositories](#clone), we can proceed to build and run the Docker container(as described in the __Instructions to run the project in docker container__ section). The container will navigate to Jupyter Notebook, where all the required files for analysis are available (__Code, Datasets, MySQLDiff__). No other external resources are necessary.
 
-- After cloning the [project repositories](#clone), If we want to reproduce the database migration files and apply mysqldiff tool follow [Generate Database Migration Files and Apply mysqldiff Tool](#Generate_Database_Migration_Files) section.  
+- After cloning the [project repositories](#clone), If we want to reproduce the database migration files and apply mysqldiff tool follow [Generate Database Migration Files and Apply mysqldiff Tool](#generate-database-migration-files-and-apply-mysqldiff-tool) section.  
 
-## Clone the repository{#clone}
+## Clone the repository {#clone}
 
         git clone https://github.com/ChagantiSravani/Master-Thesis-Methodologies-DBSchemaEvolution.git
 
